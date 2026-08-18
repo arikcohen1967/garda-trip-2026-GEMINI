@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>איטליה 2026</title>
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="איטליה 2026">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body { 
+      font-family: 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .nav-bottom-safe {
+      padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 select-none antialiased">
+
+  <header class="bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 text-white p-4 sticky top-0 z-40 shadow-md">
+    <div class="max-w-md mx-auto flex justify-between items-center">
+      <div>
+        <h1 class="text-xl font-black tracking-tight flex items-center gap-1.5">
+          <span>🇮🇹</span> איטליה 2026
+        </h1>
+        <p class="text-xs text-blue-200">30.09.2026 – 07.10.2026</p>
+      </div>
+      <a href="https://waze.com/ul?q=Verona+Italy" target="_blank" class="flex items-center gap-1 bg-white/20 active:bg-white/30 px-3.5 py-1.5 rounded-full text-xs font-bold transition border border-white/20 shadow-sm">
+        <i data-lucide="home" class="w-3.5 h-3.5"></i>
+        <span>ניווט למלון</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-md mx-auto p-4">
+
+    <div id="tab-itinerary" class="tab-content space-y-4">
+      <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+        <button onclick="switchDay(1)" id="btn-day-1" class="day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-blue-600 text-white shadow-sm flex-shrink-0">יום 1 (30/09)</button>
+        <button onclick="switchDay(2)" id="btn-day-2" class="day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm flex-shrink-0">יום 2 (01/10)</button>
+        <button onclick="switchDay(3)" id="btn-day-3" class="day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm flex-shrink-0">יום 3 (02/10)</button>
+        <button onclick="switchDay(4)" id="btn-day-4" class="day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm flex-shrink-0">יום 4 (03/10)</button>
+        <button onclick="switchDay(5)" id="btn-day-5" class="day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm flex-shrink-0">יום 5 (04/10)</button>
+        <button onclick="switchDay(6)" id="btn-day-6" class="day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm flex-shrink-0">יום 6 (05/10)</button>
+        <button onclick="switchDay(7)" id="btn-day-7" class="day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm flex-shrink-0">יום 7 (06/10)</button>
+      </div>
+
+      <div id="day-content" class="space-y-3"></div>
+    </div>
+
+    <div id="tab-nearby" class="tab-content hidden space-y-4">
+      <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
+        <h2 class="font-black text-slate-800 text-base mb-1">מה נמצא סביבי עכשיו?</h2>
+        <p class="text-xs text-slate-500 mb-4">חיפוש בלחיצה אחת מול המיקום החי שלך</p>
+
+        <div class="grid grid-cols-2 gap-3">
+          <a href="https://maps.google.com/?q=supermarket" target="_blank" class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl font-bold text-xs flex flex-col items-center gap-2 text-center active:bg-emerald-100 transition shadow-sm">
+            <i data-lucide="shopping-bag" class="w-6 h-6 text-emerald-600"></i>
+            <span>סופרמרקטים ומזון</span>
+          </a>
+          <a href="https://maps.google.com/?q=restaurants" target="_blank" class="p-4 bg-amber-50 border border-amber-200 text-amber-800 rounded-2xl font-bold text-xs flex flex-col items-center gap-2 text-center active:bg-amber-100 transition shadow-sm">
+            <i data-lucide="utensils" class="w-6 h-6 text-amber-600"></i>
+            <span>מסעדות ופיצות</span>
+          </a>
+          <a href="https://maps.google.com/?q=gas+station" target="_blank" class="p-4 bg-blue-50 border border-blue-200 text-blue-800 rounded-2xl font-bold text-xs flex flex-col items-center gap-2 text-center active:bg-blue-100 transition shadow-sm">
+            <i data-lucide="fuel" class="w-6 h-6 text-blue-600"></i>
+            <span>תחנות דלק</span>
+          </a>
+          <a href="https://maps.google.com/?q=pharmacy" target="_blank" class="p-4 bg-rose-50 border border-rose-200 text-rose-800 rounded-2xl font-bold text-xs flex flex-col items-center gap-2 text-center active:bg-rose-100 transition shadow-sm">
+            <i data-lucide="cross" class="w-6 h-6 text-rose-600"></i>
+            <span>בית מרקחת / חירום</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-tickets" class="tab-content hidden space-y-4">
+      <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+          <span class="flex items-center gap-1.5 text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">
+            <i data-lucide="plane-takeoff" class="w-3.5 h-3.5"></i> טיסת הלוך
+          </span>
+          <span class="text-xs font-bold text-slate-500">תיק: 4623652</span>
+        </div>
+        <div class="text-sm font-black text-slate-800">ישראייר 6H 357 (טרמינל 1)</div>
+        <div class="mt-2 flex justify-between text-xs text-slate-600">
+          <div>
+            <span class="font-bold block text-slate-800">המראה (נתב"ג)</span>
+            <span>30.09.2026 | 13:15</span>
+          </div>
+          <div class="text-left">
+            <span class="font-bold block text-slate-800">נחיתה (ורונה VRN)</span>
+            <span>30.09.2026 | 16:05</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
+          <span class="flex items-center gap-1.5 text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full">
+            <i data-lucide="plane-landing" class="w-3.5 h-3.5"></i> טיסת חזור
+          </span>
+          <span class="text-xs font-bold text-slate-500">תיק: 4623652</span>
+        </div>
+        <div class="text-sm font-black text-slate-800">ישראייר 6H 352</div>
+        <div class="mt-2 flex justify-between text-xs text-slate-600">
+          <div>
+            <span class="font-bold block text-slate-800">המראה (ורונה VRN)</span>
+            <span>06.10.2026 | 21:35</span>
+          </div>
+          <div class="text-left">
+            <span class="font-bold block text-slate-800">נחיתה (נתב"ג)</span>
+            <span>07.10.2026 | 02:05</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm">
+        <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+          <i data-lucide="users" class="w-3.5 h-3.5"></i> נוסעים בכרטיס
+        </h3>
+        <div class="divide-y divide-slate-100 text-xs font-medium">
+          <div class="py-2 flex justify-between"><span>ARIK COHEN</span><span class="text-slate-400">28/12/1967</span></div>
+          <div class="py-2 flex justify-between"><span>HAREL VILNAI COHEN</span><span class="text-slate-400">04/09/1997</span></div>
+          <div class="py-2 flex justify-between"><span>AMIT COHEN</span><span class="text-slate-400">01/07/2014</span></div>
+          <div class="py-2 flex justify-between"><span>YULY COHEN</span><span class="text-slate-400">01/07/2014</span></div>
+          <div class="py-2 flex justify-between"><span>LIAN COHEN</span><span class="text-slate-400">14/10/2015</span></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 z-40 nav-bottom-safe pt-2">
+    <div class="max-w-md mx-auto flex justify-around items-center">
+      <button onclick="switchTab('itinerary')" id="nav-itinerary" class="nav-btn flex flex-col items-center gap-1 text-blue-600 font-bold text-xs">
+        <i data-lucide="calendar" class="w-5 h-5"></i>
+        <span>מסלול יומי</span>
+      </button>
+      <button onclick="switchTab('nearby')" id="nav-nearby" class="nav-btn flex flex-col items-center gap-1 text-slate-400 active:text-slate-600 font-semibold text-xs">
+        <i data-lucide="map-pin" class="w-5 h-5"></i>
+        <span>מה סביבי</span>
+      </button>
+      <button onclick="switchTab('tickets')" id="nav-tickets" class="nav-btn flex flex-col items-center gap-1 text-slate-400 active:text-slate-600 font-semibold text-xs">
+        <i data-lucide="ticket" class="w-5 h-5"></i>
+        <span>כרטיסים</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    const daysData = {
+      1: {
+        title: "יום 1: טיסה ונחיתה בורונה",
+        date: "יום רביעי, 30.09.2026",
+        items: [
+          { time: "10:15", title: "הגעה לנתב״ג טרמינל 1", desc: "בידוק ביטחוני וצ'ק אין לטיסה 6H 357", waze: "https://waze.com/ul?q=Ben+Gurion+Terminal+1" },
+          { time: "16:05", title: "נחיתה בנמל התעופה ורונה", desc: "איסוף כבודה ומעבר לדלפק השכרת הרכב", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" },
+          { time: "18:30", title: "צ'ק אין במלון והתמקמות", desc: "הגעה למקום הלינה והתארגנות לארוחת ערב", waze: "https://waze.com/ul?q=Verona" }
+        ]
+      },
+      2: { title: "יום 2: טיול ופעילויות", date: "יום חמישי, 01.10.2026", items: [] },
+      3: { title: "יום 3: טיול ופעילויות", date: "יום שישי, 02.10.2026", items: [] },
+      4: { title: "יום 4: טיול ופעילויות", date: "שבת, 03.10.2026", items: [] },
+      5: { title: "יום 5: טיול ופעילויות", date: "יום ראשון, 04.10.2026", items: [] },
+      6: { title: "יום 6: טיול ופעילויות", date: "יום שני, 05.10.2026", items: [] },
+      7: {
+        title: "יום 7: יום אחרון וטיסה חזרה",
+        date: "יום שלישי, 06.10.2026",
+        items: [
+          { time: "10:00", title: "צ'ק אאוט והמשך סיור אחרון", desc: "קניות אחרונות וסיבוב באזור", waze: "https://waze.com/ul?q=Verona" },
+          { time: "18:30", title: "הגעה לשדה התעופה ורונה", desc: "החזרת רכב, בידוק לטיסה 6H 352 (המראה ב-21:35)", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" }
+        ]
+      }
+    };
+
+    function renderDay(dayNum) {
+      const data = daysData[dayNum];
+      const container = document.getElementById('day-content');
+      
+      let html = `
+        <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm mb-3">
+          <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full">${data.date}</span>
+          <h2 class="text-base font-black text-slate-800 mt-2">${data.title}</h2>
+        </div>
+      `;
+
+      if (data.items.length === 0) {
+        html += `
+          <div class="bg-white p-8 rounded-3xl border border-dashed border-slate-300 text-center text-slate-400">
+            <i data-lucide="compass" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
+            <p class="text-xs font-semibold">טרם הוזנו אתרים ליום זה</p>
+          </div>
+        `;
+      } else {
+        data.items.forEach(item => {
+          html += `
+            <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-lg">${item.time}</span>
+              </div>
+              <h3 class="font-bold text-slate-800 text-sm">${item.title}</h3>
+              <p class="text-xs text-slate-500 leading-relaxed">${item.desc}</p>
+              <div class="pt-2 border-t border-slate-100 flex gap-2">
+                <a href="${item.waze}" target="_blank" class="flex-1 bg-sky-500 active:bg-sky-600 text-white font-bold text-xs py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition shadow-sm">
+                  <i data-lucide="navigation" class="w-3.5 h-3.5"></i> Waze
+                </a>
+                <a href="https://maps.google.com/?q=${encodeURIComponent(item.title)}" target="_blank" class="flex-1 bg-slate-100 active:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Maps
+                </a>
+              </div>
+            </div>
+          `;
+        });
+      }
+
+      container.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    function switchDay(dayNum) {
+      document.querySelectorAll('.day-btn').forEach(btn => {
+        btn.className = 'day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm flex-shrink-0';
+      });
+      const activeBtn = document.getElementById(`btn-day-${dayNum}`);
+      if (activeBtn) {
+        activeBtn.className = 'day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-blue-600 text-white shadow-sm flex-shrink-0';
+      }
+      renderDay(dayNum);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-blue-600', 'font-bold');
+        btn.classList.add('text-slate-400', 'font-semibold');
+      });
+      const activeNav = document.getElementById(`nav-${tabId}`);
+      activeNav.classList.remove('text-slate-400', 'font-semibold');
+      activeNav.classList.add('text-blue-600', 'font-bold');
+    }
+
+    renderDay(1);
+    lucide.createIcons();
+  </script>
+</body>
+</html>
