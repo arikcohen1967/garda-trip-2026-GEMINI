@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="איטליה 2026">
-  <meta name="theme-color" content="#041316">
+  <meta name="theme-color" content="#120409">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,21 +27,21 @@
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 0.75rem); }
 
-    /* זכוכית אגם גארדה */
-    .garda-glass {
-      background: rgba(4, 25, 30, 0.65);
+    /* זכוכית רוז גולד ויין */
+    .wine-glass {
+      background: rgba(22, 6, 12, 0.7);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(45, 212, 191, 0.12);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(251, 113, 133, 0.15);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
-    .garda-card {
-      background: rgba(6, 38, 45, 0.45);
+    .wine-card {
+      background: rgba(36, 10, 20, 0.45);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(45, 212, 191, 0.1);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(251, 113, 133, 0.12);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
     @keyframes fadeIn {
@@ -53,23 +53,23 @@
     }
   </style>
 </head>
-<body class="bg-[#020b0d] text-slate-100 min-h-screen selection:bg-teal-500 selection:text-white relative overflow-x-hidden">
+<body class="bg-[#0b0205] text-slate-100 min-h-screen selection:bg-rose-500 selection:text-white relative overflow-x-hidden">
 
-  <!-- זוהר רקע אטמוספרי של מימי גארדה והאלפים -->
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[380px] h-[380px] bg-teal-500/15 rounded-full blur-[110px] pointer-events-none -z-10"></div>
-  <div class="fixed bottom-10 right-0 w-[300px] h-[300px] bg-sky-600/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+  <!-- זוהר רקע אטמוספרי עמוק בגווני יין ורוז גולד -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[380px] h-[380px] bg-rose-600/15 rounded-full blur-[110px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-10 right-0 w-[300px] h-[300px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
 
   <!-- Header עליון -->
-  <header class="sticky top-0 z-40 garda-glass border-b border-teal-500/20 px-4 py-3.5 shadow-xl">
+  <header class="sticky top-0 z-40 wine-glass border-b border-rose-500/20 px-4 py-3.5 shadow-xl">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div>
         <div class="flex items-center gap-2">
           <span class="text-xl">🇮🇹</span>
-          <h1 class="font-extrabold text-base tracking-tight bg-gradient-to-r from-teal-300 via-cyan-200 to-white bg-clip-text text-transparent">
+          <h1 class="font-extrabold text-base tracking-tight bg-gradient-to-r from-rose-300 via-pink-200 to-white bg-clip-text text-transparent">
             גארדה וצפון איטליה
           </h1>
         </div>
-        <p class="text-[11px] text-teal-300/70 font-medium">30.09.2026 – 06.10.2026</p>
+        <p class="text-[11px] text-rose-300/70 font-medium">30.09.2026 – 06.10.2026</p>
       </div>
 
       <!-- כפתור חזרה למלון -->
@@ -86,15 +86,15 @@
     <!-- לשונית 1: מסלול יומי -->
     <section id="tab-itinerary" class="tab-pane space-y-4">
       
-      <!-- גלילת ימי השבוע אופקית (Garda Teal Pills) -->
+      <!-- גלילת ימי השבוע אופקית (Rose Gold Pills) -->
       <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 pt-1">
-        <button onclick="selectDay(1)" id="day-btn-1" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-teal-500 text-slate-950 shadow-lg shadow-teal-500/30 border border-teal-300 font-extrabold">יום רביעי (30/09)</button>
-        <button onclick="selectDay(2)" id="day-btn-2" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-teal-500/10 hover:text-white backdrop-blur-md">יום חמישי (01/10)</button>
-        <button onclick="selectDay(3)" id="day-btn-3" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-teal-500/10 hover:text-white backdrop-blur-md">יום שישי (02/10)</button>
-        <button onclick="selectDay(4)" id="day-btn-4" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-teal-500/10 hover:text-white backdrop-blur-md">שבת (03/10)</button>
-        <button onclick="selectDay(5)" id="day-btn-5" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-teal-500/10 hover:text-white backdrop-blur-md">יום ראשון (04/10)</button>
-        <button onclick="selectDay(6)" id="day-btn-6" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-teal-500/10 hover:text-white backdrop-blur-md">יום שני (05/10)</button>
-        <button onclick="selectDay(7)" id="day-btn-7" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-teal-500/10 hover:text-white backdrop-blur-md">יום שלישי (06/10)</button>
+        <button onclick="selectDay(1)" id="day-btn-1" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg shadow-rose-500/30 border border-rose-300 font-extrabold">יום רביעי (30/09)</button>
+        <button onclick="selectDay(2)" id="day-btn-2" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-rose-500/10 hover:text-white backdrop-blur-md">יום חמישי (01/10)</button>
+        <button onclick="selectDay(3)" id="day-btn-3" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-rose-500/10 hover:text-white backdrop-blur-md">יום שישי (02/10)</button>
+        <button onclick="selectDay(4)" id="day-btn-4" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-rose-500/10 hover:text-white backdrop-blur-md">שבת (03/10)</button>
+        <button onclick="selectDay(5)" id="day-btn-5" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-rose-500/10 hover:text-white backdrop-blur-md">יום ראשון (04/10)</button>
+        <button onclick="selectDay(6)" id="day-btn-6" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-rose-500/10 hover:text-white backdrop-blur-md">יום שני (05/10)</button>
+        <button onclick="selectDay(7)" id="day-btn-7" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-rose-500/10 hover:text-white backdrop-blur-md">יום שלישי (06/10)</button>
       </div>
 
       <!-- כרטיסי היום הנבחר -->
@@ -104,36 +104,36 @@
 
     <!-- לשונית 2: שירותים ומקומות סביבי -->
     <section id="tab-nearby" class="tab-pane hidden space-y-4">
-      <div class="garda-card rounded-3xl p-5 shadow-xl">
+      <div class="wine-card rounded-3xl p-5 shadow-xl">
         <h2 class="text-sm font-black text-slate-200 uppercase tracking-wider mb-1 flex items-center gap-2">
-          <i data-lucide="compass" class="w-4 h-4 text-teal-400"></i>
+          <i data-lucide="compass" class="w-4 h-4 text-rose-400"></i>
           שירותים ומקומות סביבי
         </h2>
         <p class="text-xs text-slate-400 mb-4">חיפוש ישיר במפות לפי המיקום הנוכחי בשטח</p>
 
         <div class="grid grid-cols-2 gap-3">
-          <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-4 bg-white/[0.03] hover:bg-white/[0.07] border border-teal-500/15 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
+          <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-4 bg-white/[0.03] hover:bg-white/[0.07] border border-rose-500/15 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
             <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-300 border border-emerald-400/20 flex items-center justify-center group-hover:scale-110 transition">
               <i data-lucide="shopping-cart" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-bold text-slate-200">סופרמרקטים</span>
           </a>
 
-          <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-4 bg-white/[0.03] hover:bg-white/[0.07] border border-teal-500/15 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
+          <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-4 bg-white/[0.03] hover:bg-white/[0.07] border border-rose-500/15 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
             <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-300 border border-amber-400/20 flex items-center justify-center group-hover:scale-110 transition">
               <i data-lucide="utensils" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-bold text-slate-200">מסעדות ופיצות</span>
           </a>
 
-          <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-4 bg-white/[0.03] hover:bg-white/[0.07] border border-teal-500/15 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
+          <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-4 bg-white/[0.03] hover:bg-white/[0.07] border border-rose-500/15 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
             <div class="w-10 h-10 rounded-xl bg-sky-500/15 text-sky-300 border border-sky-400/20 flex items-center justify-center group-hover:scale-110 transition">
               <i data-lucide="fuel" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-bold text-slate-200">תחנות דלק</span>
           </a>
 
-          <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-4 bg-white/[0.03] hover:bg-white/[0.07] border border-teal-500/15 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
+          <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-4 bg-white/[0.03] hover:bg-white/[0.07] border border-rose-500/15 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
             <div class="w-10 h-10 rounded-xl bg-rose-500/15 text-rose-300 border border-rose-400/20 flex items-center justify-center group-hover:scale-110 transition">
               <i data-lucide="cross" class="w-5 h-5"></i>
             </div>
@@ -147,7 +147,7 @@
     <section id="tab-wallet" class="tab-pane hidden space-y-4">
       
       <!-- כרטיס המלון זכוכיתי -->
-      <div class="garda-card border-emerald-500/25 rounded-3xl p-5 shadow-xl relative overflow-hidden">
+      <div class="wine-card border-emerald-500/25 rounded-3xl p-5 shadow-xl relative overflow-hidden">
         <div class="absolute -left-10 -bottom-10 w-28 h-28 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none"></div>
         <div class="flex items-center justify-between pb-3 border-b border-white/10">
           <div class="flex items-center gap-2.5">
@@ -195,7 +195,7 @@
           <a href="tel:+393792027060" class="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-400/30 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
             <i data-lucide="phone" class="w-3.5 h-3.5"></i> חיוג
           </a>
-          <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 border border-teal-400/30 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+          <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-400/30 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
             <i data-lucide="navigation" class="w-3.5 h-3.5"></i> Waze
           </a>
           <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-white/[0.05] hover:bg-white/[0.1] text-slate-200 border border-white/10 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
@@ -205,12 +205,12 @@
       </div>
 
       <!-- כרטיס אפליקציות שימושיות -->
-      <div class="garda-card rounded-3xl p-5 shadow-xl">
-        <h3 class="text-xs font-bold text-teal-300 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <i data-lucide="smartphone" class="w-4 h-4 text-teal-400"></i>
+      <div class="wine-card rounded-3xl p-5 shadow-xl">
+        <h3 class="text-xs font-bold text-rose-300 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <i data-lucide="smartphone" class="w-4 h-4 text-rose-400"></i>
           אפליקציות שימושיות לשטח
         </h3>
-        <div class="p-3.5 bg-white/[0.03] rounded-2xl border border-teal-500/15 flex items-center justify-between">
+        <div class="p-3.5 bg-white/[0.03] rounded-2xl border border-rose-500/15 flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-400/30 flex items-center justify-center">
               <i data-lucide="sparkles" class="w-5 h-5"></i>
@@ -220,70 +220,70 @@
               <p class="text-[10px] text-slate-400">זמני תורים חיים, מפה ומופעים</p>
             </div>
           </div>
-          <a href="https://apps.apple.com/il/app/gardaland-resort-app-ufficiale/id442647354" target="_blank" class="bg-teal-500 hover:bg-teal-400 text-slate-950 text-xs font-extrabold px-3.5 py-1.5 rounded-xl shadow-md transition active:scale-95 flex items-center gap-1">
+          <a href="https://apps.apple.com/il/app/gardaland-resort-app-ufficiale/id442647354" target="_blank" class="bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white text-xs font-extrabold px-3.5 py-1.5 rounded-xl shadow-md transition active:scale-95 flex items-center gap-1">
             <i data-lucide="download" class="w-3.5 h-3.5"></i> התקן
           </a>
         </div>
       </div>
 
       <!-- כרטיס טיסת הלוך -->
-      <div class="garda-card rounded-3xl p-5 shadow-xl relative overflow-hidden">
-        <div class="absolute -right-8 -top-8 w-24 h-24 bg-teal-500/20 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="wine-card rounded-3xl p-5 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-24 h-24 bg-rose-500/20 rounded-full blur-2xl pointer-events-none"></div>
         <div class="flex items-center justify-between pb-3 border-b border-white/10">
           <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-xl bg-teal-500/20 text-teal-300 border border-teal-400/30 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-400/30 flex items-center justify-center">
               <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
             </div>
             <span class="font-bold text-sm text-slate-200">טיסת הלוך (ישראייר 6H 357)</span>
           </div>
-          <span class="text-[10px] font-extrabold bg-teal-500/20 text-teal-300 border border-teal-400/30 px-2 py-0.5 rounded-full">תיק 4623652</span>
+          <span class="text-[10px] font-extrabold bg-rose-500/20 text-rose-300 border border-rose-400/30 px-2 py-0.5 rounded-full">תיק 4623652</span>
         </div>
 
         <div class="mt-4 flex items-center justify-between">
           <div>
             <span class="text-xs font-medium text-slate-400 block">המראה</span>
             <span class="text-base font-black text-slate-100">נתב"ג (T1)</span>
-            <span class="text-xs text-teal-300 font-bold block mt-0.5">30.09.26 | 13:15</span>
+            <span class="text-xs text-rose-300 font-bold block mt-0.5">30.09.26 | 13:15</span>
           </div>
           <i data-lucide="arrow-left" class="w-5 h-5 text-slate-500"></i>
           <div class="text-left">
             <span class="text-xs font-medium text-slate-400 block">נחיתה</span>
             <span class="text-base font-black text-slate-100">ורונה (VRN)</span>
-            <span class="text-xs text-teal-300 font-bold block mt-0.5">30.09.26 | 16:05</span>
+            <span class="text-xs text-rose-300 font-bold block mt-0.5">30.09.26 | 16:05</span>
           </div>
         </div>
       </div>
 
       <!-- כרטיס טיסת חזור -->
-      <div class="garda-card rounded-3xl p-5 shadow-xl relative overflow-hidden">
-        <div class="absolute -right-8 -top-8 w-24 h-24 bg-sky-500/20 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="wine-card rounded-3xl p-5 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-24 h-24 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
         <div class="flex items-center justify-between pb-3 border-b border-white/10">
           <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-300 border border-sky-400/30 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-300 border border-purple-400/30 flex items-center justify-center">
               <i data-lucide="plane-landing" class="w-4 h-4"></i>
             </div>
             <span class="font-bold text-sm text-slate-200">טיסת חזור (ישראייר 6H 352)</span>
           </div>
-          <span class="text-[10px] font-extrabold bg-sky-500/20 text-sky-300 border border-sky-400/30 px-2 py-0.5 rounded-full">תיק 4623652</span>
+          <span class="text-[10px] font-extrabold bg-purple-500/20 text-purple-300 border border-purple-400/30 px-2 py-0.5 rounded-full">תיק 4623652</span>
         </div>
 
         <div class="mt-4 flex items-center justify-between">
           <div>
             <span class="text-xs font-medium text-slate-400 block">המראה</span>
             <span class="text-base font-black text-slate-100">ורונה (VRN)</span>
-            <span class="text-xs text-sky-300 font-bold block mt-0.5">06.10.26 | 21:35</span>
+            <span class="text-xs text-purple-300 font-bold block mt-0.5">06.10.26 | 21:35</span>
           </div>
           <i data-lucide="arrow-left" class="w-5 h-5 text-slate-500"></i>
           <div class="text-left">
             <span class="text-xs font-medium text-slate-400 block">נחיתה</span>
             <span class="text-base font-black text-slate-100">נתב"ג</span>
-            <span class="text-xs text-sky-300 font-bold block mt-0.5">07.10.26 | 02:05</span>
+            <span class="text-xs text-purple-300 font-bold block mt-0.5">07.10.26 | 02:05</span>
           </div>
         </div>
       </div>
 
       <!-- רשימת הנוסעים -->
-      <div class="garda-card rounded-3xl p-5 shadow-xl">
+      <div class="wine-card rounded-3xl p-5 shadow-xl">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
           <i data-lucide="users" class="w-4 h-4 text-slate-400"></i>
           נוסעים בכרטיס
@@ -302,9 +302,9 @@
   </main>
 
   <!-- סרגל ניווט תחתון -->
-  <nav class="fixed bottom-0 left-0 right-0 garda-glass border-t border-teal-500/20 z-50 safe-bottom">
+  <nav class="fixed bottom-0 left-0 right-0 wine-glass border-t border-rose-500/20 z-50 safe-bottom">
     <div class="max-w-md mx-auto flex justify-around items-center pt-2">
-      <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center gap-1 text-teal-400 font-bold text-xs">
+      <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center gap-1 text-rose-400 font-bold text-xs">
         <i data-lucide="calendar" class="w-5 h-5"></i>
         <span>מסלול</span>
       </button>
@@ -321,7 +321,7 @@
     </div>
   </nav>
 
-  <!-- מסלולים מפורטים בסטייל Garda Deep Azure -->
+  <!-- מסלולים מפורטים בסטייל Velvet Wine & Rose Gold -->
   <script>
     const itinerary = {
       1: {
@@ -329,10 +329,10 @@
         title: "המראה, נחיתה וצ'ק-אין ב-Vojon",
         tip: "💡 טיפ לשטח: ודאו שכרטיס האשראי של הנהג הראשי תואם להזמנת הרכב השכור בשדה התעופה.",
         stops: [
-          { time: "10:15", name: "הגעה לנתב״ג טרמינל 1", hours: "טיסה 6H 357 (המראה: 13:15)", icon: "plane-takeoff", iconColor: "text-teal-300 bg-teal-500/15 border-teal-400/25", desc: "בידוק בטחוני, מסירת כבודה וצ'ק אין מסודר", waze: "https://waze.com/ul?q=Ben+Gurion+Airport+Terminal+1" },
-          { time: "16:05", name: "נחיתה בנמל התעופה ורונה (VRN)", hours: "שדה תעופה פתוח 24/7", icon: "plane-landing", iconColor: "text-sky-300 bg-sky-500/15 border-sky-400/25", desc: "איסוף כבודה ומעבר מהיר לדלפק השכרת הרכב", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" },
+          { time: "10:15", name: "הגעה לנתב״ג טרמינל 1", hours: "טיסה 6H 357 (המראה: 13:15)", icon: "plane-takeoff", iconColor: "text-rose-300 bg-rose-500/15 border-rose-400/25", desc: "בידוק בטחוני, מסירת כבודה וצ'ק אין מסודר", waze: "https://waze.com/ul?q=Ben+Gurion+Airport+Terminal+1" },
+          { time: "16:05", name: "נחיתה בנמל התעופה ורונה (VRN)", hours: "שדה תעופה פתוח 24/7", icon: "plane-landing", iconColor: "text-purple-300 bg-purple-500/15 border-purple-400/25", desc: "איסוף כבודה ומעבר מהיר לדלפק השכרת הרכב", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" },
           { time: "17:30", name: "צ'ק אין ב-Bio Agriturismo Vojon", hours: "צ'ק-אין: 15:00 – 18:00", icon: "hotel", iconColor: "text-emerald-300 bg-emerald-500/15 border-emerald-400/25", desc: "הגעה והתמקמות במלון הכפרי ב-Via Del Forte 6, Ponti sul Mincio", waze: "https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" },
-          { time: "19:30", name: "ארוחת ערב בפסקיירה דל גארדה", hours: "מסעדות: 19:00 – 23:00", icon: "utensils", iconColor: "text-orange-300 bg-orange-500/15 border-orange-400/25", desc: "סיבוב קל על גדות האגם וארוחת ערב איטלקית ראשונה", waze: "https://waze.com/ul?q=Peschiera+del+Garda" }
+          { time: "19:30", name: "ארוחת ערב בפסקיירה דל גארדה", hours: "מסעדות: 19:00 – 23:00", icon: "utensils", iconColor: "text-amber-300 bg-amber-500/15 border-amber-400/25", desc: "סיבוב קל על גדות האגם וארוחת ערב איטלקית ראשונה", waze: "https://waze.com/ul?q=Peschiera+del+Garda" }
         ]
       },
       2: {
@@ -340,9 +340,9 @@
         title: "יום של אקשן וחוויות ב-Gardaland",
         tip: "💡 טיפ לשטח: הורידו מראש את אפליקציית Gardaland לצפייה בזמני תורים חיים במתקנים.",
         stops: [
-          { time: "09:30", name: "יציאה לפארק Gardaland", hours: "נסיעה: ~12 דקות מהמלון", icon: "car", iconColor: "text-teal-300 bg-teal-500/15 border-teal-400/25", desc: "נסיעה נוחה והגעה מוקדמת לחניה הראשית", waze: "https://waze.com/ul?q=Gardaland+Resort" },
+          { time: "09:30", name: "יציאה לפארק Gardaland", hours: "נסיעה: ~12 דקות מהמלון", icon: "car", iconColor: "text-rose-300 bg-rose-500/15 border-rose-400/25", desc: "נסיעה נוחה והגעה מוקדמת לחניה הראשית", waze: "https://waze.com/ul?q=Gardaland+Resort" },
           { time: "10:00", name: "פארק השעשועים Gardaland", hours: "פתוח: 10:00 – 18:00 (באוקטובר)", icon: "sparkles", iconColor: "text-amber-300 bg-amber-500/15 border-amber-400/25", appLink: "https://apps.apple.com/il/app/gardaland-resort-app-ufficiale/id442647354", desc: "רכבות ההרים המובילות (Blue Tornado, Raptor, Oblivion), מתקני מים ומופעים לכל המשפחה", waze: "https://waze.com/ul?q=Gardaland+Resort" },
-          { time: "18:00", name: "Gardaland SEA LIFE Aquarium", hours: "פתוח: 10:00 – 18:00", icon: "fish", iconColor: "text-cyan-300 bg-cyan-500/15 border-cyan-400/25", desc: "מנהרת כרישים שקופה ועולם מים מרהיב צמוד לפארק", waze: "https://waze.com/ul?q=Gardaland+Sea+Life+Aquarium" }
+          { time: "18:00", name: "Gardaland SEA LIFE Aquarium", hours: "פתוח: 10:00 – 18:00", icon: "fish", iconColor: "text-pink-300 bg-pink-500/15 border-pink-400/25", desc: "מנהרת כרישים שקופה ועולם מים מרהיב צמוד לפארק", waze: "https://waze.com/ul?q=Gardaland+Sea+Life+Aquarium" }
         ]
       },
       3: {
@@ -350,8 +350,8 @@
         title: "יום חווייתי מלא בפארק הקולנוע Movieland",
         tip: "💡 טיפ לשטח: קחו בגדים להחלפה למתקני המים והסירות המהירות (Kitt SuperJet).",
         stops: [
-          { time: "09:45", name: "יציאה לפארק Movieland", hours: "נסיעה: ~12 דקות לעיירה Lazise", icon: "car", iconColor: "text-teal-300 bg-teal-500/15 border-teal-400/25", desc: "הגעה נוחה לקראת פתיחת השערים ב-10:00", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
-          { time: "10:00", name: "יום שלם ב-Movieland Park", hours: "פתוח: 10:00 – 18:00 (אירועי סתיו)", icon: "clapperboard", iconColor: "text-rose-300 bg-rose-500/15 border-rose-400/25", desc: "סירות המרוץ Kitt SuperJet, סימולטור Magma 2.1, מופע הפעלולים של ג'ון רמבו ורכבות הרים", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
+          { time: "09:45", name: "יציאה לפארק Movieland", hours: "נסיעה: ~12 דקות לעיירה Lazise", icon: "car", iconColor: "text-rose-300 bg-rose-500/15 border-rose-400/25", desc: "הגעה נוחה לקראת פתיחת השערים ב-10:00", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
+          { time: "10:00", name: "יום שלם ב-Movieland Park", hours: "פתוח: 10:00 – 18:00 (אירועי סתיו)", icon: "clapperboard", iconColor: "text-pink-300 bg-pink-500/15 border-pink-400/25", desc: "סירות המרוץ Kitt SuperJet, סימולטור Magma 2.1, מופע הפעלולים של ג'ון רמבו ורכבות הרים", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
           { time: "18:30", name: "בילוי ערב וטיילת ב-Lazise", hours: "סמטאות פתוחות | מסעדות עד 23:00", icon: "sunset", iconColor: "text-orange-300 bg-orange-500/15 border-orange-400/25", desc: "סמטאות העיירה הציורית לאציזה, גלידה מעולה וארוחת ערב ליד האגם", waze: "https://waze.com/ul?q=Lazise+Verona" }
         ]
       },
@@ -360,7 +360,7 @@
         title: "צפון האגם: רכבל מונטה בלדו וריבה דל גארדה",
         tip: "💡 טיפ לשטח: בפסגת מונטה בלדו קריר משמעותית – מומלץ להצטייד בעליונית/ג'קט חם.",
         stops: [
-          { time: "09:00", name: "נסיעה לעיירה מלצ'סינה (Malcesine)", hours: "נסיעה נופית: ~55 דקות", icon: "map", iconColor: "text-teal-300 bg-teal-500/15 border-teal-400/25", desc: "נסיעה יפהפייה לאורך החוף המזרחי של אגם גארדה", waze: "https://waze.com/ul?q=Funivia+Malcesine-Monte+Baldo" },
+          { time: "09:00", name: "נסיעה לעיירה מלצ'סינה (Malcesine)", hours: "נסיעה נופית: ~55 דקות", icon: "map", iconColor: "text-rose-300 bg-rose-500/15 border-rose-400/25", desc: "נסיעה יפהפייה לאורך החוף המזרחי של אגם גארדה", waze: "https://waze.com/ul?q=Funivia+Malcesine-Monte+Baldo" },
           { time: "10:30", name: "רכבל מונטה בלדו (Monte Baldo)", hours: "פתוח: 08:15 – 18:00 (ירידה אחרונה: 18:45)", icon: "mountain", iconColor: "text-emerald-300 bg-emerald-500/15 border-emerald-400/25", desc: "עלייה ברכבל המסתובב 360 מעלות לתצפית פנורמית מושלמת מעל כל האגם", waze: "https://waze.com/ul?q=Funivia+Malcesine-Monte+Baldo" },
           { time: "14:30", name: "מפלי ורונה (Cascata del Varone)", hours: "פתוח: 09:00 – 17:00 (באוקטובר)", icon: "droplets", iconColor: "text-cyan-300 bg-cyan-500/15 border-cyan-400/25", desc: "סיור מרהיב במערה ונקיק סלע שבו זורם מפל גועש ועוצמתי", waze: "https://waze.com/ul?q=Cascata+del+Varone" },
           { time: "16:30", name: "עיירת החוף Riva del Garda", hours: "טיילת וסמטאות פתוחות חופשי", icon: "coffee", iconColor: "text-amber-300 bg-amber-500/15 border-amber-400/25", desc: "סיור בנמל העתיק, תצפית על גולשי הרוח וקפה איטלקי מול המים", waze: "https://waze.com/ul?q=Riva+del+Garda" }
@@ -371,9 +371,9 @@
         title: "יום קסם בעיר התעלות - ונציה",
         tip: "💡 טיפ לשטח: קנו כרטיס יומי ל-Vaporetto (אוטובוס המים) כדי לשוט בחופשיות בתעלות.",
         stops: [
-          { time: "08:30", name: "נסיעה לחניון Tronchetto ונציה", hours: "חניון מקורה פתוח 24/7", icon: "car", iconColor: "text-teal-300 bg-teal-500/15 border-teal-400/25", desc: "נסיעה בכביש המהיר A4 (~שעה ורבע) היישר לחניון הכניסה לונציה", waze: "https://waze.com/ul?q=Tronchetto+Parking+Venice" },
+          { time: "08:30", name: "נסיעה לחניון Tronchetto ונציה", hours: "חניון מקורה פתוח 24/7", icon: "car", iconColor: "text-rose-300 bg-rose-500/15 border-rose-400/25", desc: "נסיעה בכביש המהיר A4 (~שעה ורבע) היישר לחניון הכניסה לונציה", waze: "https://waze.com/ul?q=Tronchetto+Parking+Venice" },
           { time: "10:30", name: "כיכר ובזיליקת סן מרקו", hours: "כיכר: פתוחה תמיד | בזיליקה: 09:30 – 17:00", icon: "landmark", iconColor: "text-amber-300 bg-amber-500/15 border-amber-400/25", desc: "שייט בואפורטו (קו 1/2) לאורך התעלה הגדולה עד לכיכר סן מרקו המפורסמת", waze: "https://waze.com/ul?q=Piazza+San+Marco+Venice" },
-          { time: "13:30", name: "גשר ריאלטו ושייט גונדולה", hours: "גונדולות פעילות כל היום", icon: "ship", iconColor: "text-sky-300 bg-sky-500/15 border-sky-400/25", desc: "שיטוט בין סמטאות המים, חנויות המסכות, גשר ריאלטו ושייט גונדולות", waze: "https://waze.com/ul?q=Ponte+di+Rialto+Venice" }
+          { time: "13:30", name: "גשר ריאלטו ושייט גונדולה", hours: "גונדולות פעילות כל היום", icon: "ship", iconColor: "text-purple-300 bg-purple-500/15 border-purple-400/25", desc: "שיטוט בין סמטאות המים, חנויות המסכות, גשר ריאלטו ושייט גונדולות", waze: "https://waze.com/ul?q=Ponte+di+Rialto+Venice" }
         ]
       },
       6: {
@@ -383,7 +383,7 @@
         stops: [
           { time: "09:30", name: "חצי האי סירמיונה (Sirmione)", hours: "טירת סקאליג'רו: 08:30 – 19:00", icon: "castle", iconColor: "text-purple-300 bg-purple-500/15 border-purple-400/25", desc: "סיור רגלי בעיירה, ביקור בטירה העתיקה ושייט סירה מהנה סביב המצודה", waze: "https://waze.com/ul?q=Castello+Scaligero+Sirmione" },
           { time: "13:00", name: "כפר הטחנות Borghetto sul Mincio", hours: "פתוח חופשי (5 דקות מהמלון!)", icon: "utensils", iconColor: "text-emerald-300 bg-emerald-500/15 border-emerald-400/25", desc: "כפר עתיק ויפהפה בנוי על המים עם טחנות קמח עתיקות ומסעדות מעולות", waze: "https://waze.com/ul?q=Borghetto+sul+Mincio" },
-          { time: "16:00", name: "ורונה: הארנה והמרפסת של יוליה", hours: "ארנה: 09:00 – 19:00 | מרפסת: 09:00 – 19:00", icon: "heart", iconColor: "text-rose-300 bg-rose-500/15 border-rose-400/25", desc: "האמפיתיאטרון הרומי המרשים, מדרחוב הקניות Via Mazzini ובית יוליה", waze: "https://waze.com/ul?q=Piazza+Bra+Verona" }
+          { time: "16:00", name: "ורונה: הארנה והמרפסת של יוליה", hours: "ארנה: 09:00 – 19:00 | מרפסת: 09:00 – 19:00", icon: "heart", iconColor: "text-pink-300 bg-pink-500/15 border-pink-400/25", desc: "האמפיתיאטרון הרומי המרשים, מדרחוב הקניות Via Mazzini ובית יוליה", waze: "https://waze.com/ul?q=Piazza+Bra+Verona" }
         ]
       },
       7: {
@@ -392,8 +392,8 @@
         tip: "💡 טיפ לשטח: זכרו לתדלק את הרכב השכור בתחנת דלק סמוכה לשדה לפני ההחזרה.",
         stops: [
           { time: "10:30", name: "צ'ק אאוט מ-Bio Agriturismo Vojon", hours: "צ'ק-אאוט: 07:00 – 11:00", icon: "hotel", iconColor: "text-emerald-300 bg-emerald-500/15 border-emerald-400/25", desc: "סיום שהות, פרידה מבעלי המקום והעמסת מזוודות", waze: "https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" },
-          { time: "11:30", name: "קניון Grand'Affi Shopping Center", hours: "פתוח: 09:00 – 21:00", icon: "shopping-bag", iconColor: "text-orange-300 bg-orange-500/15 border-orange-400/25", desc: "מרכז קניות גדול ומודרני, מותגים בינלאומיים וסופר ענק להצטיידות במטעמים איטלקיים", waze: "https://waze.com/ul?q=Grand+Affi+Shopping+Center" },
-          { time: "18:30", name: "נמל התעופה ורונה (VRN)", hours: "טיסה 6H 352 (המראה: 21:35)", icon: "plane-takeoff", iconColor: "text-teal-300 bg-teal-500/15 border-teal-400/25", desc: "החזרת רכב שכור, בידוק בטחוני, דיוטי פרי ועלייה למטוס", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" }
+          { time: "11:30", name: "קניון Grand'Affi Shopping Center", hours: "פתוח: 09:00 – 21:00", icon: "shopping-bag", iconColor: "text-amber-300 bg-amber-500/15 border-amber-400/25", desc: "מרכז קניות גדול ומודרני, מותגים בינלאומיים וסופר ענק להצטיידות במטעמים איטלקיים", waze: "https://waze.com/ul?q=Grand+Affi+Shopping+Center" },
+          { time: "18:30", name: "נמל התעופה ורונה (VRN)", hours: "טיסה 6H 352 (המראה: 21:35)", icon: "plane-takeoff", iconColor: "text-rose-300 bg-rose-500/15 border-rose-400/25", desc: "החזרת רכב שכור, בידוק בטחוני, דיוטי פרי ועלייה למטוס", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" }
         ]
       }
     };
@@ -404,22 +404,22 @@
 
       let html = `
         <div class="animate-fade-in space-y-3">
-          <div class="garda-card rounded-3xl p-4 shadow-lg border-teal-500/20">
-            <span class="text-[11px] font-black text-slate-950 bg-teal-400 px-2.5 py-1 rounded-full shadow-sm">${data.date}</span>
+          <div class="wine-card rounded-3xl p-4 shadow-lg border-rose-500/20">
+            <span class="text-[11px] font-black text-white bg-gradient-to-r from-rose-500 to-pink-500 px-2.5 py-1 rounded-full shadow-sm">${data.date}</span>
             <h2 class="text-base font-extrabold text-white mt-2">${data.title}</h2>
-            ${data.tip ? `<p class="text-[11px] text-teal-200/90 font-medium mt-2 bg-teal-950/40 border border-teal-500/20 p-2.5 rounded-2xl">${data.tip}</p>` : ''}
+            ${data.tip ? `<p class="text-[11px] text-rose-200/90 font-medium mt-2 bg-rose-950/40 border border-rose-500/20 p-2.5 rounded-2xl">${data.tip}</p>` : ''}
           </div>
       `;
 
       data.stops.forEach(s => {
         html += `
-          <div class="garda-card rounded-3xl p-4 shadow-md space-y-2.5 hover:border-teal-400/30 transition">
+          <div class="wine-card rounded-3xl p-4 shadow-md space-y-2.5 hover:border-rose-400/30 transition">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
                 <div class="w-7 h-7 rounded-lg flex items-center justify-center border ${s.iconColor}">
                   <i data-lucide="${s.icon}" class="w-3.5 h-3.5"></i>
                 </div>
-                <span class="text-xs font-mono font-bold bg-white/[0.05] border border-white/10 text-teal-300 px-2 py-0.5 rounded-lg">${s.time}</span>
+                <span class="text-xs font-mono font-bold bg-white/[0.05] border border-white/10 text-rose-300 px-2 py-0.5 rounded-lg">${s.time}</span>
               </div>
               ${s.hours ? `<span class="text-[11px] font-bold text-amber-300 bg-amber-500/15 border border-amber-400/20 px-2 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> ${s.hours}</span>` : ''}
             </div>
@@ -428,7 +428,7 @@
               <p class="text-xs text-slate-300/80 leading-relaxed mt-0.5">${s.desc}</p>
             </div>
             <div class="pt-2 border-t border-white/5 flex gap-2">
-              <a href="${s.waze}" target="_blank" class="flex-1 bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 border border-teal-400/30 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <a href="${s.waze}" target="_blank" class="flex-1 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-400/30 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
                 <i data-lucide="navigation" class="w-3.5 h-3.5"></i> Waze
               </a>
               <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 bg-white/[0.05] hover:bg-white/[0.1] text-slate-200 border border-white/10 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
@@ -451,11 +451,11 @@
 
     function selectDay(day) {
       document.querySelectorAll('.day-chip').forEach(btn => {
-        btn.className = 'day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-teal-500/10 hover:text-white backdrop-blur-md';
+        btn.className = 'day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/60 text-slate-400 border border-rose-500/10 hover:text-white backdrop-blur-md';
       });
       const active = document.getElementById(`day-btn-${day}`);
       if (active) {
-        active.className = 'day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-teal-500 text-slate-950 shadow-lg shadow-teal-500/30 border border-teal-300 font-extrabold';
+        active.className = 'day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-lg shadow-rose-500/30 border border-rose-300 font-extrabold';
       }
       renderDayView(day);
     }
@@ -465,12 +465,12 @@
       document.getElementById(`tab-${tab}`).classList.remove('hidden');
 
       document.querySelectorAll('.nav-button').forEach(btn => {
-        btn.classList.remove('text-teal-400', 'font-bold');
+        btn.classList.remove('text-rose-400', 'font-bold');
         btn.classList.add('text-slate-400', 'font-medium');
       });
       const active = document.getElementById(`nav-btn-${tab}`);
       active.classList.remove('text-slate-400', 'font-medium');
-      active.classList.add('text-teal-400', 'font-bold');
+      active.classList.add('text-rose-400', 'font-bold');
     }
 
     // הפעלה ראשונית
