@@ -147,7 +147,7 @@
           </div>
           <div class="flex items-center gap-2">
             <i data-lucide="calendar" class="w-4 h-4 text-emerald-400 shrink-0"></i>
-            <span><strong>תאריכים:</strong> 30.09.2026 (ד') – 06.10.2026 (ג') [6 לילות]</span>
+            <span><strong>תאריכים:</strong> 30.09.2026 – 06.10.2026 (6 לילות)</span>
           </div>
           <div class="grid grid-cols-2 gap-2 bg-slate-950/40 p-2.5 rounded-xl border border-slate-800/60">
             <div>
@@ -269,71 +269,72 @@
     </div>
   </nav>
 
-  <!-- מסלולים מפורטים לפי ימי השבוע -->
+  <!-- מסלולים מפורטים עם שעות פתיחה -->
   <script>
     const itinerary = {
       1: {
         date: "יום רביעי, 30.09.2026",
         title: "המראה, נחיתה וצ'ק-אין ב-Vojon",
         stops: [
-          { time: "10:15", name: "הגעה לנתב״ג טרמינל 1", desc: "בידוק וצ'ק אין לטיסה 6H 357 (המראה ב-13:15)", waze: "https://waze.com/ul?q=Ben+Gurion+Airport+Terminal+1" },
-          { time: "16:05", name: "נחיתה בנמל התעופה ורונה (VRN)", desc: "איסוף כבודה ומעבר לדלפק השכרת הרכב", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" },
-          { time: "17:30", name: "צ'ק אין ב-Bio Agriturismo Vojon", desc: "הגעה וצ'ק אין (חלון צ'ק-אין: 15:00-18:00) ב-Via Del Forte 6", waze: "https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" },
-          { time: "19:30", name: "ארוחת ערב בפסקיירה דל גארדה", desc: "סיבוב קל על גדות האגם וארוחת ערב איטלקית ראשונה", waze: "https://waze.com/ul?q=Peschiera+del+Garda" }
+          { time: "10:15", name: "הגעה לנתב״ג טרמינל 1", hours: "טיסה 6H 357 (המראה: 13:15)", desc: "בידוק בטחוני, מסירת כבודה וצ'ק אין מסודר", waze: "https://waze.com/ul?q=Ben+Gurion+Airport+Terminal+1" },
+          { time: "16:05", name: "נחיתה בנמל התעופה ורונה (VRN)", hours: "שדה תעופה פתוח 24/7", desc: "איסוף כבודה ומעבר לדלפק השכרת הרכב", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" },
+          { time: "17:30", name: "צ'ק אין ב-Bio Agriturismo Vojon", hours: "שעות צ'ק-אין: 15:00 – 18:00", desc: "הגעה והתמקמות במלון ב-Via Del Forte 6, Ponti sul Mincio", waze: "https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" },
+          { time: "19:30", name: "ארוחת ערב בפסקיירה דל גארדה", hours: "מסעדות: 19:00 – 23:00", desc: "סיבוב קל על גדות האגם וארוחת ערב איטלקית ראשונה", waze: "https://waze.com/ul?q=Peschiera+del+Garda" }
         ]
       },
       2: {
         date: "יום חמישי, 01.10.2026",
         title: "יום של אקשן וחוויות ב-Gardaland",
         stops: [
-          { time: "09:30", name: "יציאה לפארק Gardaland", desc: "נסיעה קצרה של כ-12 דקות בלבד מהמלון", waze: "https://waze.com/ul?q=Gardaland+Resort" },
-          { time: "10:00", name: "פארק השעשועים Gardaland", desc: "יום שלם של רכבות הרים, מופעים ומתקנים לכל המשפחה", waze: "https://waze.com/ul?q=Gardaland+Resort" },
-          { time: "18:30", name: "Gardaland SEA LIFE Aquarium", desc: "מנהרת כרישים ועולם מים מרהיב צמוד לפארק", waze: "https://waze.com/ul?q=Gardaland+Sea+Life+Aquarium" }
+          { time: "09:30", name: "יציאה לפארק Gardaland", hours: "נסיעה: ~12 דקות מהמלון", desc: "הגעה מוקדמת לחניה וכניסה עם פתיחת השערים", waze: "https://waze.com/ul?q=Gardaland+Resort" },
+          { time: "10:00", name: "פארק השעשועים Gardaland", hours: "פתוח: 10:00 – 18:00 (באוקטובר)", desc: "יום שלם של רכבות הרים מובילות (Blue Tornado, Raptor, Oblivion) ומתקנים לכל המשפחה", waze: "https://waze.com/ul?q=Gardaland+Resort" },
+          { time: "18:00", name: "Gardaland SEA LIFE Aquarium", hours: "פתוח: 10:00 – 18:00", desc: "עולם מים מרהיב ומנהרת כרישים שקופה צמוד למתחם הפארק", waze: "https://waze.com/ul?q=Gardaland+Sea+Life+Aquarium" }
         ]
       },
       3: {
         date: "יום שישי, 02.10.2026",
         title: "יום חווייתי מלא בפארק הקולנוע Movieland",
         stops: [
-          { time: "09:45", name: "יציאה לפארק Movieland", desc: "נסיעה של כ-12 דקות לעיירה Lazise", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
-          { time: "10:00", name: "יום שלם ב-Movieland Park", desc: "סירות המרוץ Kitt SuperJet, סימולטור Magma, מופע הפעלולים של ג'ון רמבו ורכבות הרים", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
-          { time: "18:30", name: "בילוי ערב וטיילת ב-Lazise", desc: "סמטאות העיירה הציורית לאציזה, גלידה מעולה וארוחת ערב ליד האגם", waze: "https://waze.com/ul?q=Lazise+Verona" }
+          { time: "09:45", name: "יציאה לפארק Movieland", hours: "נסיעה: ~12 דקות לעיירה Lazise", desc: "הגעה לפארק לקראת פתיחת השערים ב-10:00", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
+          { time: "10:00", name: "יום שלם ב-Movieland Park", hours: "פתוח: 10:00 – 18:00 (אירועי סתיו)", desc: "סירות המרוץ Kitt SuperJet, סימולטור Magma 2.1, מופע הפעלולים של ג'ון רמבו ורכבות הרים", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
+          { time: "18:30", name: "בילוי ערב וטיילת ב-Lazise", hours: "סמטאות פתוחות חופשי / מסעדות עד 23:00", desc: "סמטאות העיירה הציורית לאציזה, גלידה מעולה וארוחת ערב ליד האגם", waze: "https://waze.com/ul?q=Lazise+Verona" }
         ]
       },
       4: {
         date: "שבת, 03.10.2026",
         title: "צפון האגם: רכבל מונטה בלדו וריבה דל גארדה",
         stops: [
-          { time: "09:00", name: "נסיעה לעיירה מלצ'סינה (Malcesine)", desc: "נסיעה נופית יפהפייה לאורך החוף המזרחי של אגם גארדה", waze: "https://waze.com/ul?q=Funivia+Malcesine-Monte+Baldo" },
-          { time: "10:30", name: "רכבל מונטה בלדו (Monte Baldo)", desc: "עלייה ברכבל המסתובב 360 מעלות לפסגה עם תצפית פנורמית", waze: "https://waze.com/ul?q=Funivia+Malcesine-Monte+Baldo" },
-          { time: "14:00", name: "ריבה דל גארדה ומפלי ורונה", desc: "סיור בעיירה הצפונית וביקור בנקיק מפלי ורונה (Varone)", waze: "https://waze.com/ul?q=Cascata+del+Varone" }
+          { time: "09:00", name: "נסיעה לעיירה מלצ'סינה (Malcesine)", hours: "נסיעה נופית: ~55 דקות", desc: "נסיעה יפהפייה לאורך החוף המזרחי של אגם גארדה", waze: "https://waze.com/ul?q=Funivia+Malcesine-Monte+Baldo" },
+          { time: "10:30", name: "רכבל מונטה בלדו (Monte Baldo)", hours: "פתוח: 08:15 – 18:00 (ירידה אחרונה: 18:45)", desc: "עלייה ברכבל המסתובב 360 מעלות לתצפית פנורמית מושלמת מעל כל האגם", waze: "https://waze.com/ul?q=Funivia+Malcesine-Monte+Baldo" },
+          { time: "14:30", name: "מפלי ורונה (Cascata del Varone)", hours: "פתוח: 09:00 – 17:00 (באוקטובר)", desc: "סיור מרהיב במערה ונקיק סלע שבו זורם מפל גועש ועוצמתי", waze: "https://waze.com/ul?q=Cascata+del+Varone" },
+          { time: "16:30", name: "עיירת החוף Riva del Garda", hours: "טיילת וסמטאות פתוחות חופשי", desc: "סיור בנמל העתיק, תצפית על גולשי הרוח וקפה איטלקי מול המים", waze: "https://waze.com/ul?q=Riva+del+Garda" }
         ]
       },
       5: {
         date: "יום ראשון, 04.10.2026",
         title: "יום קסם בעיר התעלות - ונציה",
         stops: [
-          { time: "08:30", name: "יציאה לחניון Tronchetto ונציה", desc: "נסיעה בכביש המהיר A4 לעבר הכניסה לונציה", waze: "https://waze.com/ul?q=Tronchetto+Parking+Venice" },
-          { time: "10:30", name: "כיכר וקתדרלת סן מרקו", desc: "שייט בואפורטו (אוטובוס מים) לעבר הכיכר המרכזית", waze: "https://waze.com/ul?q=Piazza+San+Marco+Venice" },
-          { time: "13:30", name: "גשר ריאלטו ושייט גונדולה", desc: "שיטוט בין סמטאות המים, חנויות המסכות וגשר ריאלטו", waze: "https://waze.com/ul?q=Ponte+di+Rialto+Venice" }
+          { time: "08:30", name: "נסיעה לחניון Tronchetto ונציה", hours: "חניון מקורה פתוח 24/7", desc: "נסיעה בכביש המהיר A4 (~שעה ורבע) היישר לחניון הכניסה לונציה", waze: "https://waze.com/ul?q=Tronchetto+Parking+Venice" },
+          { time: "10:30", name: "כיכר ובזיליקת סן מרקו", hours: "כיכר: פתוחה תמיד | בזיליקה: 09:30 – 17:00", desc: "שייט בואפורטו (קו 1/2) לאורך התעלה הגדולה עד לכיכר סן מרקו המפורסמת", waze: "https://waze.com/ul?q=Piazza+San+Marco+Venice" },
+          { time: "13:30", name: "גשר ריאלטו ושייט גונדולה", hours: "גונדולות פעילות כל היום", desc: "שיטוט בין סמטאות המים, חנויות המסכות, גשר ריאלטו ותצפית על הגונדולות", waze: "https://waze.com/ul?q=Ponte+di+Rialto+Venice" }
         ]
       },
       6: {
         date: "יום שני, 05.10.2026",
         title: "סירמיונה, בורגטו sul Mincio וורונה",
         stops: [
-          { time: "09:30", name: "חצי האי סירמיונה (Sirmione)", desc: "סיור רגלי, טירת סקאליג'רו ושייט טורקיז סביב המצודה", waze: "https://waze.com/ul?q=Castello+Scaligero+Sirmione" },
-          { time: "13:00", name: "כפר הטחנות Borghetto sul Mincio", desc: "כפר עתיק ויפהפה על גבי המים, ומסעדות טורטליני מקומיות (5 דקות מהמלון!)", waze: "https://waze.com/ul?q=Borghetto+sul+Mincio" },
-          { time: "16:00", name: "ורונה: הארנה והמרפסת של יוליה", desc: "האמפיתיאטרון הרומי המרשים, מדרחוב הקניות Via Mazzini ובית יוליה", waze: "https://waze.com/ul?q=Piazza+Bra+Verona" }
+          { time: "09:30", name: "חצי האי סירמיונה (Sirmione)", hours: "טירת סקאליג'רו: 08:30 – 19:00", desc: "סיור רגלי בעיירה, ביקור בטירה העתיקה ושייט סירה מהנה סביב המצודה", waze: "https://waze.com/ul?q=Castello+Scaligero+Sirmione" },
+          { time: "13:00", name: "כפר הטחנות Borghetto sul Mincio", hours: "פתוח חופשי (5 דקות מהמלון!)", desc: "כפר עתיק שנבחר לאחד היפים באיטליה, בנוי על המים עם טחנות קמח עתיקות", waze: "https://waze.com/ul?q=Borghetto+sul+Mincio" },
+          { time: "16:00", name: "ורונה: הארנה והמרפסת של יוליה", hours: "ארנה: 09:00 – 19:00 | מרפסת יוליה: 09:00 – 19:00", desc: "האמפיתיאטרון הרומי המפורסם, מדרחוב הקניות היוקרתי Via Mazzini ובית יוליה", waze: "https://waze.com/ul?q=Piazza+Bra+Verona" }
         ]
       },
       7: {
         date: "יום שלישי, 06.10.2026",
         title: "צ'ק אאוט, קניות וטיסה לארץ",
         stops: [
-          { time: "10:30", name: "צ'ק אאוט מ-Bio Agriturismo Vojon", desc: "סיום צ'ק-אאוט (חלון צ'ק-אאוט: 07:00-11:00) ויציאה לקניות", waze: "https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" },
-          { time: "11:30", name: "קניון Grand'Affi Shopping Center", desc: "מרכז קניות גדול עם חנויות מותגים וסופר ענק לשוקולדים וגבינות", waze: "https://waze.com/ul?q=Grand+Affi+Shopping+Center" },
-          { time: "18:30", name: "הגעה לנמל התעופה ורונה (VRN)", desc: "החזרת רכב, בידוק וצ'ק אין לטיסה 6H 352 (המראה ב-21:35)", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" }
+          { time: "10:30", name: "צ'ק אאוט מ-Bio Agriturismo Vojon", hours: "שעות צ'ק-אאוט: 07:00 – 11:00", desc: "סיום שהות, פרידה מבעלי המקום והעמסת מזוודות", waze: "https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" },
+          { time: "11:30", name: "קניון Grand'Affi Shopping Center", hours: "פתוח: 09:00 – 21:00", desc: "מרכז קניות גדול ומודרני, מותגים בינלאומיים וסופר ענק (Iper Tosano / Grand'Affi) להצטיידות", waze: "https://waze.com/ul?q=Grand+Affi+Shopping+Center" },
+          { time: "18:30", name: "נמל התעופה ורונה (VRN)", hours: "טיסה 6H 352 (המראה: 21:35)", desc: "החזרת רכב שכור, צ'ק אין, בידוק בטחוני ועליה למטוס", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" }
         ]
       }
     };
@@ -351,9 +352,10 @@
 
       data.stops.forEach(s => {
         html += `
-          <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-4 shadow-md space-y-2">
+          <div class="bg-slate-900/90 border border-slate-800 rounded-3xl p-4 shadow-md space-y-2.5">
             <div class="flex items-center justify-between">
               <span class="text-xs font-mono font-bold bg-slate-800 text-blue-300 px-2 py-0.5 rounded-lg">${s.time}</span>
+              ${s.hours ? `<span class="text-[11px] font-bold text-amber-300 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i> ${s.hours}</span>` : ''}
             </div>
             <h3 class="font-bold text-sm text-slate-100">${s.name}</h3>
             <p class="text-xs text-slate-400 leading-relaxed">${s.desc}</p>
