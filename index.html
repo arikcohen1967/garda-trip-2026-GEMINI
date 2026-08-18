@@ -150,7 +150,90 @@
       </div>
     </section>
 
-    <!-- לשונית 3: ארנק כרטיסים ומסמכים -->
+    <!-- לשונית 3: גלריה משפחתית (חדש!) -->
+    <section id="tab-gallery" class="tab-pane hidden space-y-4">
+      <div class="app-card rounded-3xl p-5 space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
+              <i data-lucide="camera" class="w-5 h-5 text-indigo-600"></i>
+              גלריה וחוויות מהטיול
+            </h2>
+            <p class="text-xs text-slate-500 mt-0.5">אלבום משותף שמסתנכרן בזמן אמת לכולם</p>
+          </div>
+          <span id="gallery-count-badge" class="text-[11px] font-black bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-full">0 תמונות</span>
+        </div>
+
+        <!-- טופס העלאה מהיר -->
+        <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-3.5 space-y-3">
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="text-[10px] font-bold text-slate-600 block mb-1">מי מצלם/ת?</label>
+              <select id="photo-author" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-500">
+                <option value="אריק">אריק</option>
+                <option value="הראל">הראל</option>
+                <option value="עמית">עמית</option>
+                <option value="יולי">יולי</option>
+                <option value="ליאן">ליאן</option>
+                <option value="משפחה">כולנו יחד</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-[10px] font-bold text-slate-600 block mb-1">שיוך ליום במסלול</label>
+              <select id="photo-day-select" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-500">
+                <option value="1">יום 1 • 30/09 (הגעה)</option>
+                <option value="2">יום 2 • 01/10 (Gardaland)</option>
+                <option value="3">יום 3 • 02/10 (Movieland)</option>
+                <option value="4">יום 4 • 03/10 (מונטה בלדו)</option>
+                <option value="5">יום 5 • 04/10 (ונציה)</option>
+                <option value="6">יום 6 • 05/10 (סירמיונה וורונה)</option>
+                <option value="7">יום 7 • 06/10 (חזרה)</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-indigo-500">
+          </div>
+
+          <input type="file" id="gallery-camera-input" accept="image/*" capture="environment" class="hidden">
+          <input type="file" id="gallery-file-input" accept="image/*" class="hidden">
+
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button onclick="document.getElementById('gallery-camera-input').click()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
+              <i data-lucide="camera" class="w-4 h-4"></i> צלם תמונה
+            </button>
+            <button onclick="document.getElementById('gallery-file-input').click()" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
+              <i data-lucide="image-plus" class="w-4 h-4 text-indigo-600"></i> מהגלריה
+            </button>
+          </div>
+          <div id="upload-spinner" class="hidden text-center py-1">
+            <span class="text-xs text-indigo-600 font-bold animate-pulse">מעלה ומסנכרן לענן... ⏳</span>
+          </div>
+        </div>
+
+        <!-- סינון לפי ימים בגלריה -->
+        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs" id="gallery-filter-bar">
+          <button onclick="filterGallery('all')" id="gfilter-all" class="px-3 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0">הכל</button>
+          <button onclick="filterGallery('1')" id="gfilter-1" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 1</button>
+          <button onclick="filterGallery('2')" id="gfilter-2" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 2</button>
+          <button onclick="filterGallery('3')" id="gfilter-3" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 3</button>
+          <button onclick="filterGallery('4')" id="gfilter-4" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 4</button>
+          <button onclick="filterGallery('5')" id="gfilter-5" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 5</button>
+          <button onclick="filterGallery('6')" id="gfilter-6" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 6</button>
+          <button onclick="filterGallery('7')" id="gfilter-7" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 7</button>
+        </div>
+
+        <!-- רשת התמונות -->
+        <div id="gallery-grid" class="grid grid-cols-2 gap-3 pt-1"></div>
+        <div id="gallery-empty-state" class="hidden text-center py-8 text-slate-400 space-y-2">
+          <i data-lucide="image" class="w-10 h-10 mx-auto text-slate-300"></i>
+          <p class="text-xs font-semibold">עדיין לא הועלו תמונות ביום זה.<br>היו הראשונים להוסיף תמונה למזכרת!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- לשונית 4: ארנק כרטיסים ומסמכים -->
     <section id="tab-wallet" class="tab-pane hidden space-y-4">
 
       <!-- כרטיסי טיסה -->
@@ -260,12 +343,17 @@
 
   </main>
 
-  <!-- סרגל ניווט תחתון -->
+  <!-- סרגל ניווט תחתון עם 4 לשוניות -->
   <nav class="fixed bottom-0 left-0 right-0 app-glass border-t z-50 safe-bottom">
     <div class="max-w-md mx-auto flex justify-around items-center pt-2">
       <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center gap-1 text-blue-600 font-black text-xs">
         <i data-lucide="calendar" class="w-5 h-5"></i>
         <span>מסלול</span>
+      </button>
+
+      <button onclick="setTab('gallery')" id="nav-btn-gallery" class="nav-button flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 font-medium text-xs">
+        <i data-lucide="camera" class="w-5 h-5"></i>
+        <span>גלריה</span>
       </button>
 
       <button onclick="setTab('nearby')" id="nav-btn-nearby" class="nav-button flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 font-medium text-xs">
@@ -285,8 +373,10 @@
     let currentDay = 1;
     let activeSlotKey = null;
     let ticketMap = {};
+    let galleryPhotos = [];
+    let activeGalleryFilter = 'all';
 
-    // פרטי החיבור האישיים שלך ל-Firebase
+    // חיבור Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyAsiM-s0bwOuEzopyzHfY3g_cGqMsOFx8",
       authDomain: "garda-trip-2026-bef3f.firebaseapp.com",
@@ -312,7 +402,7 @@
       { key: 'verona_arena', title: 'ורונה: ארנה ובית יוליה', sub: 'יום שני • 05/10', icon: 'heart' }
     ];
 
-    // האזנה לסנכרון חי בזמן אמת מהענן
+    // האזנה לסנכרון כרטיסים בענן
     db.collection('tickets').onSnapshot((snapshot) => {
       ticketMap = {};
       snapshot.forEach(doc => {
@@ -320,7 +410,18 @@
       });
       renderAllTickets();
     }, (error) => {
-      console.warn("Offline or DB error, using local fallback", error);
+      console.warn("Tickets sync fallback", error);
+    });
+
+    // האזנה לסנכרון תמונות גלריה בענן
+    db.collection('gallery').orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
+      galleryPhotos = [];
+      snapshot.forEach(doc => {
+        galleryPhotos.push({ id: doc.id, ...doc.data() });
+      });
+      renderGallery();
+    }, (error) => {
+      console.warn("Gallery sync fallback", error);
     });
 
     function renderAllTickets() {
@@ -329,7 +430,6 @@
     }
 
     function renderFlightCards() {
-      // טיסת הלוך
       const outSaved = ticketMap['flight_outbound'];
       const outContainer = document.getElementById('flight-outbound-card');
       outContainer.innerHTML = `
@@ -384,7 +484,6 @@
         </div>
       `;
 
-      // טיסת חזור
       const inSaved = ticketMap['flight_inbound'];
       const inContainer = document.getElementById('flight-inbound-card');
       inContainer.innerHTML = `
@@ -510,9 +609,7 @@
       activeSlotKey = slotKey;
       const input = document.getElementById('slot-camera-input');
       input.onchange = function() {
-        if (input.files && input.files[0]) {
-          saveSlotFile(input.files[0]);
-        }
+        if (input.files && input.files[0]) saveSlotFile(input.files[0]);
       };
       input.click();
     }
@@ -521,9 +618,7 @@
       activeSlotKey = slotKey;
       const input = document.getElementById('slot-file-input');
       input.onchange = function() {
-        if (input.files && input.files[0]) {
-          saveSlotFile(input.files[0]);
-        }
+        if (input.files && input.files[0]) saveSlotFile(input.files[0]);
       };
       input.click();
     }
@@ -540,13 +635,12 @@
           savedAt: new Date().toLocaleDateString('he-IL')
         };
 
-        // שמירה ישירה בענן Firebase
         db.collection('tickets').doc(activeSlotKey).set(ticketData).then(() => {
           activeSlotKey = null;
           document.getElementById('slot-camera-input').value = '';
           document.getElementById('slot-file-input').value = '';
         }).catch(err => {
-          alert('שגיאה בשמירה לענן. ודא שהגדרת את מסד הנתונים ב-Firebase במצב Test mode.');
+          alert('שגיאה בשמירה לענן.');
         });
       };
       reader.readAsDataURL(file);
@@ -569,6 +663,159 @@
         `);
       }
     }
+
+    // --- לוגיקת גלריית התמונות ---
+
+    document.getElementById('gallery-camera-input').addEventListener('change', function(e) {
+      if (e.target.files && e.target.files[0]) handleUploadPhoto(e.target.files[0]);
+    });
+    document.getElementById('gallery-file-input').addEventListener('change', function(e) {
+      if (e.target.files && e.target.files[0]) handleUploadPhoto(e.target.files[0]);
+    });
+
+    function handleUploadPhoto(file) {
+      const author = document.getElementById('photo-author').value;
+      const day = document.getElementById('photo-day-select').value;
+      const caption = document.getElementById('photo-caption').value.trim();
+      const spinner = document.getElementById('upload-spinner');
+
+      spinner.classList.remove('hidden');
+
+      // כיווץ תמונה אוטומטי בדפדפן לפני העלאה לענן
+      const img = new Image();
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        img.src = e.target.result;
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          const maxDim = 1200;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height && width > maxDim) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else if (height > maxDim) {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.75);
+
+          const photoDoc = {
+            imageData: compressedDataUrl,
+            author: author,
+            day: day,
+            caption: caption,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            timeStr: new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })
+          };
+
+          db.collection('gallery').add(photoDoc).then(() => {
+            spinner.classList.add('hidden');
+            document.getElementById('photo-caption').value = '';
+            document.getElementById('gallery-camera-input').value = '';
+            document.getElementById('gallery-file-input').value = '';
+          }).catch(err => {
+            spinner.classList.add('hidden');
+            alert('שגיאה בהעלאת התמונה לענן.');
+          });
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function filterGallery(day) {
+      activeGalleryFilter = day;
+      for (let i = 1; i <= 7; i++) {
+        const btn = document.getElementById(`gfilter-${i}`);
+        if (day === String(i)) {
+          btn.className = 'px-3 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
+        }
+      }
+      const allBtn = document.getElementById('gfilter-all');
+      if (day === 'all') {
+        allBtn.className = 'px-3 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
+      } else {
+        allBtn.className = 'px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
+      }
+      renderGallery();
+    }
+
+    function renderGallery() {
+      const grid = document.getElementById('gallery-grid');
+      const empty = document.getElementById('gallery-empty-state');
+      const countBadge = document.getElementById('gallery-count-badge');
+
+      countBadge.innerText = `${galleryPhotos.length} תמונות`;
+
+      const filtered = activeGalleryFilter === 'all' 
+        ? galleryPhotos 
+        : galleryPhotos.filter(p => p.day === activeGalleryFilter);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        lucide.createIcons();
+        return;
+      }
+
+      empty.classList.add('hidden');
+      let html = '';
+
+      filtered.forEach(photo => {
+        html += `
+          <div class="app-card rounded-2xl overflow-hidden flex flex-col group relative">
+            <div class="relative bg-slate-100 aspect-square cursor-pointer overflow-hidden" onclick="openFullPhoto('${photo.imageData}', '${photo.caption || ''}', '${photo.author}')">
+              <img src="${photo.imageData}" alt="תמונה מהטיול" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <span class="absolute top-2 right-2 bg-black/60 backdrop-blur-md text-white text-[9px] font-black px-2 py-0.5 rounded-md">יום ${photo.day}</span>
+              <button onclick="event.stopPropagation(); deleteGalleryPhoto('${photo.id}')" class="absolute top-2 left-2 bg-rose-600/80 hover:bg-rose-600 text-white p-1 rounded-md backdrop-blur-sm active:scale-95 transition" title="מחק תמונה">
+                <i data-lucide="trash-2" class="w-3 h-3"></i>
+              </button>
+            </div>
+            <div class="p-2.5 space-y-1 bg-white flex-1 flex flex-col justify-between">
+              <p class="text-[11px] font-bold text-slate-800 line-clamp-2 leading-snug">${photo.caption || 'זיכרון מהטיול 📸'}</p>
+              <div class="flex items-center justify-between text-[10px] text-slate-500 font-semibold pt-1 border-t border-slate-100">
+                <span class="text-indigo-600 font-bold">${photo.author}</span>
+                <span>${photo.timeStr || ''}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    function deleteGalleryPhoto(photoId) {
+      if (!confirm('האם למחוק תמונה זו מהאלבום המשפחתי?')) return;
+      db.collection('gallery').doc(photoId).delete();
+    }
+
+    function openFullPhoto(imgData, caption, author) {
+      const win = window.open();
+      win.document.write(`
+        <body style="margin:0; background:#0F172A; color:#FFF; font-family:-apple-system, sans-serif; display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100vh; padding:16px; box-sizing:border-box;">
+          <img src="${imgData}" style="max-width:100%; max-height:80vh; object-fit:contain; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,0.5);" />
+          <div style="margin-top:16px; text-align:center;">
+            <p style="font-size:16px; font-weight:bold; margin:0 0 4px 0;">${caption || 'תמונה מהטיול'}</p>
+            <p style="font-size:12px; opacity:0.7; margin:0 0 12px 0;">צולם ע"י ${author}</p>
+            <a href="${imgData}" download="garda-photo.jpg" style="background:#4F46E5; color:#FFF; padding:8px 20px; border-radius:999px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">הורד תמונה למכשיר</a>
+          </div>
+        </body>
+      `);
+    }
+
+    // --- לוגיקת מסלול יומי ---
 
     const itinerary = {
       1: {
