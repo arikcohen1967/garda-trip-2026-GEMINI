@@ -27,7 +27,6 @@
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 0.75rem); }
 
-    /* אנימציית הופעה חלקה */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
@@ -39,7 +38,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-blue-600 selection:text-white">
 
-  <!-- Header עליון יוקרתי -->
+  <!-- Header עליון -->
   <header class="sticky top-0 z-40 bg-slate-900/85 backdrop-blur-xl border-b border-slate-800/80 px-4 py-3.5 shadow-lg">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div>
@@ -77,7 +76,7 @@
         <button onclick="selectDay(7)" id="day-btn-7" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום שלישי (06/10)</button>
       </div>
 
-      <!-- כרטיסי היום הנבחר עם אנימציה -->
+      <!-- כרטיסי היום הנבחר -->
       <div id="day-display" class="space-y-3"></div>
 
     </section>
@@ -183,6 +182,28 @@
         </div>
       </div>
 
+      <!-- כרטיס אפליקציות חובה לטיול -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 shadow-xl">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+          <i data-lucide="smartphone" class="w-4 h-4 text-blue-400"></i>
+          אפליקציות שימושיות לשטח
+        </h3>
+        <div class="p-3.5 bg-slate-950/60 rounded-2xl border border-slate-800/80 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-xs text-slate-100">Gardaland Resort App</h4>
+              <p class="text-[10px] text-slate-400">זמני תורים חיים, מפה ומופעים</p>
+            </div>
+          </div>
+          <a href="https://apps.apple.com/il/app/gardaland-resort-app-ufficiale/id442647354" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-md transition active:scale-95 flex items-center gap-1">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> התקן
+          </a>
+        </div>
+      </div>
+
       <!-- כרטיס טיסת הלוך -->
       <div class="bg-gradient-to-br from-slate-900 to-slate-900/90 border border-slate-800 rounded-3xl p-5 shadow-xl relative overflow-hidden">
         <div class="absolute -right-8 -top-8 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl"></div>
@@ -278,7 +299,7 @@
     </div>
   </nav>
 
-  <!-- מסלולים מפורטים עם אייקונים, טיפים ושעות פתיחה -->
+  <!-- מסלולים מפורטים -->
   <script>
     const itinerary = {
       1: {
@@ -295,10 +316,10 @@
       2: {
         date: "יום חמישי, 01.10.2026",
         title: "יום של אקשן וחוויות ב-Gardaland",
-        tip: "💡 טיפ לשטח: הורידו מראש את אפליקציית Gardaland App לצפייה בזמני תורים חיים במתקנים.",
+        tip: "💡 טיפ לשטח: הורידו מראש את אפליקציית Gardaland לצפייה בזמני תורים חיים במתקנים.",
         stops: [
           { time: "09:30", name: "יציאה לפארק Gardaland", hours: "נסיעה: ~12 דקות מהמלון", icon: "car", iconColor: "text-sky-400 bg-sky-500/10 border-sky-500/20", desc: "נסיעה נוחה והגעה מוקדמת לחניה הראשית", waze: "https://waze.com/ul?q=Gardaland+Resort" },
-          { time: "10:00", name: "פארק השעשועים Gardaland", hours: "פתוח: 10:00 – 18:00 (באוקטובר)", icon: "sparkles", iconColor: "text-amber-400 bg-amber-500/10 border-amber-500/20", desc: "רכבות ההרים המובילות (Blue Tornado, Raptor, Oblivion), מתקני מים ומופעים לכל המשפחה", waze: "https://waze.com/ul?q=Gardaland+Resort" },
+          { time: "10:00", name: "פארק השעשועים Gardaland", hours: "פתוח: 10:00 – 18:00 (באוקטובר)", icon: "sparkles", iconColor: "text-amber-400 bg-amber-500/10 border-amber-500/20", appLink: "https://apps.apple.com/il/app/gardaland-resort-app-ufficiale/id442647354", desc: "רכבות ההרים המובילות (Blue Tornado, Raptor, Oblivion), מתקני מים ומופעים לכל המשפחה", waze: "https://waze.com/ul?q=Gardaland+Resort" },
           { time: "18:00", name: "Gardaland SEA LIFE Aquarium", hours: "פתוח: 10:00 – 18:00", icon: "fish", iconColor: "text-teal-400 bg-teal-500/10 border-teal-500/20", desc: "מנהרת כרישים שקופה ועולם מים מרהיב צמוד לפארק", waze: "https://waze.com/ul?q=Gardaland+Sea+Life+Aquarium" }
         ]
       },
@@ -361,7 +382,6 @@
 
       let html = `
         <div class="animate-fade-in space-y-3">
-          <!-- כרטיס כותרת היום -->
           <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 shadow-lg">
             <span class="text-[11px] font-black text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-full">${data.date}</span>
             <h2 class="text-base font-extrabold text-slate-100 mt-2">${data.title}</h2>
@@ -392,6 +412,11 @@
               <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
                 <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> Maps
               </a>
+              ${s.appLink ? `
+              <a href="${s.appLink}" target="_blank" class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs font-bold px-3 py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95" title="אפליקציית Gardaland">
+                <i data-lucide="smartphone" class="w-3.5 h-3.5"></i> אפליקציה
+              </a>
+              ` : ''}
             </div>
           </div>
         `;
