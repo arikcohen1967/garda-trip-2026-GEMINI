@@ -57,15 +57,15 @@
     <!-- לשונית 1: מסלול יומי -->
     <section id="tab-itinerary" class="tab-pane space-y-4">
       
-      <!-- גלילת ימים אופקית -->
+      <!-- גלילת ימי השבוע אופקית -->
       <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 pt-1">
-        <button onclick="selectDay(1)" id="day-btn-1" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-blue-600 text-white shadow-lg shadow-blue-900/40 ring-2 ring-blue-400/50">יום 1 (30/09)</button>
-        <button onclick="selectDay(2)" id="day-btn-2" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום 2 (01/10)</button>
-        <button onclick="selectDay(3)" id="day-btn-3" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום 3 (02/10)</button>
-        <button onclick="selectDay(4)" id="day-btn-4" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום 4 (03/10)</button>
-        <button onclick="selectDay(5)" id="day-btn-5" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום 5 (04/10)</button>
-        <button onclick="selectDay(6)" id="day-btn-6" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום 6 (05/10)</button>
-        <button onclick="selectDay(7)" id="day-btn-7" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום 7 (06/10)</button>
+        <button onclick="selectDay(1)" id="day-btn-1" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-blue-600 text-white shadow-lg shadow-blue-900/40 ring-2 ring-blue-400/50">יום רביעי (30/09)</button>
+        <button onclick="selectDay(2)" id="day-btn-2" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום חמישי (01/10)</button>
+        <button onclick="selectDay(3)" id="day-btn-3" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום שישי (02/10)</button>
+        <button onclick="selectDay(4)" id="day-btn-4" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">שבת (03/10)</button>
+        <button onclick="selectDay(5)" id="day-btn-5" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום ראשון (04/10)</button>
+        <button onclick="selectDay(6)" id="day-btn-6" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום שני (05/10)</button>
+        <button onclick="selectDay(7)" id="day-btn-7" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900 text-slate-400 border border-slate-800 hover:text-white">יום שלישי (06/10)</button>
       </div>
 
       <!-- כרטיסי היום הנבחר -->
@@ -117,7 +117,7 @@
     <!-- לשונית 3: ארנק כרטיסים ומסמכים -->
     <section id="tab-wallet" class="tab-pane hidden space-y-4">
       
-      <!-- כרטיס המלון עם כל פרטי Booking -->
+      <!-- כרטיס המלון -->
       <div class="bg-gradient-to-br from-emerald-950/60 via-slate-900 to-slate-900 border border-emerald-800/50 rounded-3xl p-5 shadow-xl">
         <div class="flex items-center justify-between pb-3 border-b border-emerald-900/50">
           <div class="flex items-center gap-2">
@@ -147,7 +147,7 @@
           </div>
           <div class="flex items-center gap-2">
             <i data-lucide="calendar" class="w-4 h-4 text-emerald-400 shrink-0"></i>
-            <span><strong>תאריכים:</strong> 30.09.2026 – 06.10.2026 (6 לילות)</span>
+            <span><strong>תאריכים:</strong> 30.09.2026 (ד') – 06.10.2026 (ג') [6 לילות]</span>
           </div>
           <div class="grid grid-cols-2 gap-2 bg-slate-950/40 p-2.5 rounded-xl border border-slate-800/60">
             <div>
@@ -269,7 +269,7 @@
     </div>
   </nav>
 
-  <!-- מסלולים מפורטים -->
+  <!-- מסלולים מפורטים לפי ימי השבוע -->
   <script>
     const itinerary = {
       1: {
@@ -293,11 +293,11 @@
       },
       3: {
         date: "יום שישי, 02.10.2026",
-        title: "סירמיונה, מצודת סקאליג'רו ומובילנד",
+        title: "יום חווייתי מלא בפארק הקולנוע Movieland",
         stops: [
-          { time: "09:30", name: "חצי האי סירמיונה (Sirmione)", desc: "סיור רגלי בעיירה הקסומה, טירת סקאליג'רו וגלידה מפורסמת", waze: "https://waze.com/ul?q=Castello+Scaligero+Sirmione" },
-          { time: "12:30", name: "שייט סירה סביב סירמיונה", desc: "שייט טורקיז קצר ומרענן מסביב לחומות המבצר", waze: "https://waze.com/ul?q=Porto+di+Sirmione" },
-          { time: "14:30", name: "Movieland Park / קאנווה", desc: "פארק שעשועים מעולם הקולנוע עם פעלולים ואפקטים", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" }
+          { time: "09:45", name: "יציאה לפארק Movieland", desc: "נסיעה של כ-12 דקות לעיירה Lazise", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
+          { time: "10:00", name: "יום שלם ב-Movieland Park", desc: "סירות המרוץ Kitt SuperJet, סימולטור Magma, מופע הפעלולים של ג'ון רמבו ורכבות הרים", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
+          { time: "18:30", name: "בילוי ערב וטיילת ב-Lazise", desc: "סמטאות העיירה הציורית לאציזה, גלידה מעולה וארוחת ערב ליד האגם", waze: "https://waze.com/ul?q=Lazise+Verona" }
         ]
       },
       4: {
@@ -320,11 +320,11 @@
       },
       6: {
         date: "יום שני, 05.10.2026",
-        title: "גני סיגורטה, בורגטו sul Mincio וורונה",
+        title: "סירמיונה, בורגטו sul Mincio וורונה",
         stops: [
-          { time: "09:30", name: "פארק הגנים סיגורטה (Parco Sigurtà)", desc: "סיור בקלנועית או אופניים בפארק הטבע הענק (5 דקות מהמלון!)", waze: "https://waze.com/ul?q=Parco+Giardino+Sigurta" },
-          { time: "12:30", name: "כפר הטחנות Borghetto sul Mincio", desc: "כפר עתיק ויפהפה על גבי המים, ומסעדות טורטליני מקומיות", waze: "https://waze.com/ul?q=Borghetto+sul+Mincio" },
-          { time: "15:30", name: "ורונה: הארנה ומרפסת יוליה", desc: "האמפיתיאטרון הרומי המרשים, מדרחוב הקניות Via Mazzini ובית יוליה", waze: "https://waze.com/ul?q=Piazza+Bra+Verona" }
+          { time: "09:30", name: "חצי האי סירמיונה (Sirmione)", desc: "סיור רגלי, טירת סקאליג'רו ושייט טורקיז סביב המצודה", waze: "https://waze.com/ul?q=Castello+Scaligero+Sirmione" },
+          { time: "13:00", name: "כפר הטחנות Borghetto sul Mincio", desc: "כפר עתיק ויפהפה על גבי המים, ומסעדות טורטליני מקומיות (5 דקות מהמלון!)", waze: "https://waze.com/ul?q=Borghetto+sul+Mincio" },
+          { time: "16:00", name: "ורונה: הארנה והמרפסת של יוליה", desc: "האמפיתיאטרון הרומי המרשים, מדרחוב הקניות Via Mazzini ובית יוליה", waze: "https://waze.com/ul?q=Piazza+Bra+Verona" }
         ]
       },
       7: {
