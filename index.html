@@ -1,4 +1,4 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -47,6 +47,7 @@
   <main class="max-w-md mx-auto p-4">
 
     <div id="tab-itinerary" class="tab-content space-y-4">
+      
       <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
         <button onclick="switchDay(1)" id="btn-day-1" class="day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-blue-600 text-white shadow-sm flex-shrink-0">יום 1 (30/09)</button>
         <button onclick="switchDay(2)" id="btn-day-2" class="day-btn px-4 py-2.5 rounded-2xl text-xs font-bold bg-white text-slate-700 border border-slate-200 shadow-sm flex-shrink-0">יום 2 (01/10)</button>
@@ -58,12 +59,13 @@
       </div>
 
       <div id="day-content" class="space-y-3"></div>
+
     </div>
 
     <div id="tab-nearby" class="tab-content hidden space-y-4">
       <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-sm">
         <h2 class="font-black text-slate-800 text-base mb-1">מה נמצא סביבי עכשיו?</h2>
-        <p class="text-xs text-slate-500 mb-4">חיפוש בלחיצה אחת מול המיקום החי שלך</p>
+        <p class="text-xs text-slate-500 mb-4">חיפוש בלחיצה אחת מול המיקום החי של האייפון</p>
 
         <div class="grid grid-cols-2 gap-3">
           <a href="https://maps.google.com/?q=supermarket" target="_blank" class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl font-bold text-xs flex flex-col items-center gap-2 text-center active:bg-emerald-100 transition shadow-sm">
@@ -87,22 +89,23 @@
     </div>
 
     <div id="tab-tickets" class="tab-content hidden space-y-4">
+      
       <div class="bg-white p-4 rounded-3xl border border-slate-200 shadow-sm">
         <div class="flex items-center justify-between border-b border-slate-100 pb-2 mb-3">
           <span class="flex items-center gap-1.5 text-xs font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">
             <i data-lucide="plane-takeoff" class="w-3.5 h-3.5"></i> טיסת הלוך
           </span>
-          <span class="text-xs font-bold text-slate-500">תיק: 4623652</span>
+          <span class="text-xs font-bold text-slate-500">תיק: 4623652 [cite: 7]</span>
         </div>
-        <div class="text-sm font-black text-slate-800">ישראייר 6H 357 (טרמינל 1)</div>
+        <div class="text-sm font-black text-slate-800">ישראייר 6H 357 (טרמינל 1) [cite: 12]</div>
         <div class="mt-2 flex justify-between text-xs text-slate-600">
           <div>
-            <span class="font-bold block text-slate-800">המראה (נתב"ג)</span>
-            <span>30.09.2026 | 13:15</span>
+            <span class="font-bold block text-slate-800">המראה (נתב"ג) [cite: 12]</span>
+            <span>30.09.2026 | 13:15 [cite: 12]</span>
           </div>
           <div class="text-left">
-            <span class="font-bold block text-slate-800">נחיתה (ורונה VRN)</span>
-            <span>30.09.2026 | 16:05</span>
+            <span class="font-bold block text-slate-800">נחיתה (ורונה VRN) [cite: 12]</span>
+            <span>30.09.2026 | 16:05 [cite: 12]</span>
           </div>
         </div>
       </div>
@@ -112,17 +115,17 @@
           <span class="flex items-center gap-1.5 text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-full">
             <i data-lucide="plane-landing" class="w-3.5 h-3.5"></i> טיסת חזור
           </span>
-          <span class="text-xs font-bold text-slate-500">תיק: 4623652</span>
+          <span class="text-xs font-bold text-slate-500">תיק: 4623652 [cite: 7]</span>
         </div>
-        <div class="text-sm font-black text-slate-800">ישראייר 6H 352</div>
+        <div class="text-sm font-black text-slate-800">ישראייר 6H 352 [cite: 12]</div>
         <div class="mt-2 flex justify-between text-xs text-slate-600">
           <div>
-            <span class="font-bold block text-slate-800">המראה (ורונה VRN)</span>
-            <span>06.10.2026 | 21:35</span>
+            <span class="font-bold block text-slate-800">המראה (ורונה VRN) [cite: 12]</span>
+            <span>06.10.2026 | 21:35 [cite: 12]</span>
           </div>
           <div class="text-left">
-            <span class="font-bold block text-slate-800">נחיתה (נתב"ג)</span>
-            <span>07.10.2026 | 02:05</span>
+            <span class="font-bold block text-slate-800">נחיתה (נתב"ג) [cite: 12]</span>
+            <span>07.10.2026 | 02:05 [cite: 12]</span>
           </div>
         </div>
       </div>
@@ -132,13 +135,14 @@
           <i data-lucide="users" class="w-3.5 h-3.5"></i> נוסעים בכרטיס
         </h3>
         <div class="divide-y divide-slate-100 text-xs font-medium">
-          <div class="py-2 flex justify-between"><span>ARIK COHEN</span><span class="text-slate-400">28/12/1967</span></div>
-          <div class="py-2 flex justify-between"><span>HAREL VILNAI COHEN</span><span class="text-slate-400">04/09/1997</span></div>
-          <div class="py-2 flex justify-between"><span>AMIT COHEN</span><span class="text-slate-400">01/07/2014</span></div>
-          <div class="py-2 flex justify-between"><span>YULY COHEN</span><span class="text-slate-400">01/07/2014</span></div>
-          <div class="py-2 flex justify-between"><span>LIAN COHEN</span><span class="text-slate-400">14/10/2015</span></div>
+          <div class="py-2 flex justify-between"><span>ARIK COHEN</span><span class="text-slate-400">28/12/1967 [cite: 10]</span></div>
+          <div class="py-2 flex justify-between"><span>HAREL VILNAI COHEN</span><span class="text-slate-400">04/09/1997 [cite: 113]</span></div>
+          <div class="py-2 flex justify-between"><span>AMIT COHEN</span><span class="text-slate-400">01/07/2014 [cite: 61]</span></div>
+          <div class="py-2 flex justify-between"><span>YULY COHEN</span><span class="text-slate-400">01/07/2014 [cite: 61]</span></div>
+          <div class="py-2 flex justify-between"><span>LIAN COHEN</span><span class="text-slate-400">14/10/2015 [cite: 61]</span></div>
         </div>
       </div>
+
     </div>
 
   </main>
@@ -254,6 +258,7 @@
       activeNav.classList.add('text-blue-600', 'font-bold');
     }
 
+    // Initialize
     renderDay(1);
     lucide.createIcons();
   </script>
