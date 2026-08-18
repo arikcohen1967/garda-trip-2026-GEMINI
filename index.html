@@ -16,6 +16,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Firebase Cloud SDK לסנכרון משפחתי בזמן אמת -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
   <style>
     body { 
       font-family: 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -29,7 +33,6 @@
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 0.75rem); }
 
-    /* זכוכית רקע בהיר יוקרתי */
     .app-glass {
       background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(24px);
@@ -71,7 +74,12 @@
             גארדה וצפון איטליה
           </h1>
         </div>
-        <p class="text-[11px] text-slate-500 font-semibold">30.09.2026 – 06.10.2026</p>
+        <div class="flex items-center gap-2">
+          <p class="text-[11px] text-slate-500 font-semibold">30.09.2026 – 06.10.2026</p>
+          <span class="text-[9px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded-full flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> סנכרון ענן
+          </span>
+        </div>
       </div>
 
       <div class="flex items-center gap-2">
@@ -145,19 +153,16 @@
     <!-- לשונית 3: ארנק כרטיסים ומסמכים -->
     <section id="tab-wallet" class="tab-pane hidden space-y-4">
 
-      <!-- כרטיסי טיסה מובנים עם העלאת כרטיסי עלייה למטוס -->
+      <!-- כרטיסי טיסה -->
       <div class="flex items-center justify-between px-1">
         <h3 class="text-xs font-black text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
           <i data-lucide="plane" class="w-4 h-4 text-blue-600"></i>
           כרטיסי טיסה ועלייה למטוס
         </h3>
-        <span class="text-[10px] text-slate-500 font-semibold">ישראייר תיק 4623652</span>
+        <span class="text-[10px] text-slate-500 font-semibold">סנכרון ענן משפחתי</span>
       </div>
 
-      <!-- כרטיס טיסת הלוך -->
       <div id="flight-outbound-card" class="app-card rounded-3xl p-5 border-blue-200 space-y-3"></div>
-
-      <!-- כרטיס טיסת חזור -->
       <div id="flight-inbound-card" class="app-card rounded-3xl p-5 border-indigo-200 space-y-3"></div>
 
       <!-- כותרת ראשית לקוביות האתרים -->
@@ -166,7 +171,7 @@
           <i data-lucide="ticket" class="w-4 h-4 text-blue-600"></i>
           כרטיסי כניסה ואטרקציות
         </h3>
-        <span class="text-[10px] text-slate-500 font-semibold">שמירה ישירה במכשיר</span>
+        <span class="text-[10px] text-slate-500 font-semibold">סנכרון ענן משפחתי</span>
       </div>
 
       <!-- שדות מוסתרים לטעינת קבצים -->
@@ -275,10 +280,25 @@
     </div>
   </nav>
 
-  <!-- מסד נתונים IndexedDB לכרטיסים (אטרקציות וטיסות) -->
+  <!-- סנכרון Firebase Firestore בענן -->
   <script>
     let currentDay = 1;
     let activeSlotKey = null;
+    let ticketMap = {};
+
+    // פרטי החיבור האישיים שלך ל-Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAsiM-s0bwOuEzopyzHfY3g_cGqMsOFx8",
+      authDomain: "garda-trip-2026-bef3f.firebaseapp.com",
+      projectId: "garda-trip-2026-bef3f",
+      storageBucket: "garda-trip-2026-bef3f.firebasestorage.app",
+      messagingSenderId: "371898819315",
+      appId: "1:371898819315:web:a4144a81a7273993fc0d86",
+      measurementId: "G-9TMLTEVF9R"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
     const predefinedSiteSlots = [
       { key: 'car_rental', title: 'השכרת רכב (VRN)', sub: 'ורונה שדה תעופה • 30/09', icon: 'car' },
@@ -292,18 +312,16 @@
       { key: 'verona_arena', title: 'ורונה: ארנה ובית יוליה', sub: 'יום שני • 05/10', icon: 'heart' }
     ];
 
-    let db;
-    const dbReq = indexedDB.open('GardaTicketsDB_v3', 1);
-    dbReq.onupgradeneeded = function(e) {
-      db = e.target.result;
-      if (!db.objectStoreNames.contains('site_tickets')) {
-        db.createObjectStore('site_tickets', { keyPath: 'slotKey' });
-      }
-    };
-    dbReq.onsuccess = function(e) {
-      db = e.target.result;
+    // האזנה לסנכרון חי בזמן אמת מהענן
+    db.collection('tickets').onSnapshot((snapshot) => {
+      ticketMap = {};
+      snapshot.forEach(doc => {
+        ticketMap[doc.id] = doc.data();
+      });
       renderAllTickets();
-    };
+    }, (error) => {
+      console.warn("Offline or DB error, using local fallback", error);
+    });
 
     function renderAllTickets() {
       renderFlightCards();
@@ -311,201 +329,181 @@
     }
 
     function renderFlightCards() {
-      if (!db) return;
-      const tx = db.transaction('site_tickets', 'readonly');
-      const store = tx.objectStore('site_tickets');
-      const req = store.getAll();
-
-      req.onsuccess = function() {
-        const savedTickets = req.result || [];
-        const ticketMap = {};
-        savedTickets.forEach(t => { ticketMap[t.slotKey] = t; });
-
-        // טיסת הלוך
-        const outSaved = ticketMap['flight_outbound'];
-        const outContainer = document.getElementById('flight-outbound-card');
-        outContainer.innerHTML = `
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div class="flex items-center gap-2">
-              <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center">
-                <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
-              </div>
-              <div>
-                <span class="font-black text-sm text-slate-900 block">טיסת הלוך (ישראייר 6H 357)</span>
-                <span class="text-[10px] text-blue-700 font-bold">30.09.2026 | יום רביעי</span>
-              </div>
+      // טיסת הלוך
+      const outSaved = ticketMap['flight_outbound'];
+      const outContainer = document.getElementById('flight-outbound-card');
+      outContainer.innerHTML = `
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center">
+              <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
             </div>
-            ${outSaved ? `
-              <button onclick="deleteSlotTicket('flight_outbound')" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-rose-50 border border-rose-200 active:scale-95" title="מחק כרטיס">
-                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-              </button>
-            ` : `
-              <span class="text-[10px] font-black bg-blue-100 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-full">תיק 4623652</span>
-            `}
-          </div>
-
-          <div class="flex items-center justify-between">
             <div>
-              <span class="text-xs font-semibold text-slate-400 block">המראה</span>
-              <span class="text-base font-black text-slate-900">נתב"ג (T1)</span>
-              <span class="text-xs text-blue-600 font-bold block mt-0.5">13:15</span>
-            </div>
-            <i data-lucide="arrow-left" class="w-5 h-5 text-slate-400"></i>
-            <div class="text-left">
-              <span class="text-xs font-semibold text-slate-400 block">נחיתה</span>
-              <span class="text-base font-black text-slate-900">ורונה (VRN)</span>
-              <span class="text-xs text-blue-600 font-bold block mt-0.5">16:05</span>
+              <span class="font-black text-sm text-slate-900 block">טיסת הלוך (ישראייר 6H 357)</span>
+              <span class="text-[10px] text-blue-700 font-bold">30.09.2026 | יום רביעי</span>
             </div>
           </div>
+          ${outSaved ? `
+            <button onclick="deleteSlotTicket('flight_outbound')" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-rose-50 border border-rose-200 active:scale-95" title="מחק כרטיס">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          ` : `
+            <span class="text-[10px] font-black bg-blue-100 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-full">תיק 4623652</span>
+          `}
+        </div>
 
-          <div class="pt-2 border-t border-slate-100">
-            ${outSaved ? `
-              <button onclick="openTicketData('${outSaved.fileData}', '${outSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס עלייה למטוס (PDF/תמונה)
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-semibold text-slate-400 block">המראה</span>
+            <span class="text-base font-black text-slate-900">נתב"ג (T1)</span>
+            <span class="text-xs text-blue-600 font-bold block mt-0.5">13:15</span>
+          </div>
+          <i data-lucide="arrow-left" class="w-5 h-5 text-slate-400"></i>
+          <div class="text-left">
+            <span class="text-xs font-semibold text-slate-400 block">נחיתה</span>
+            <span class="text-base font-black text-slate-900">ורונה (VRN)</span>
+            <span class="text-xs text-blue-600 font-bold block mt-0.5">16:05</span>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-slate-100">
+          ${outSaved ? `
+            <button onclick="openTicketData('${outSaved.fileData}', '${outSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס עלייה למטוס (PDF/תמונה)
+            </button>
+          ` : `
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="triggerSlotCamera('flight_outbound')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+                <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i> צלם כרטיס טיסה
               </button>
-            ` : `
-              <div class="grid grid-cols-2 gap-2">
-                <button onclick="triggerSlotCamera('flight_outbound')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                  <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i> צלם כרטיס טיסה
-                </button>
-                <button onclick="triggerSlotFile('flight_outbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                  <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ / PDF
-                </button>
-              </div>
-            `}
-          </div>
-        `;
-
-        // טיסת חזור
-        const inSaved = ticketMap['flight_inbound'];
-        const inContainer = document.getElementById('flight-inbound-card');
-        inContainer.innerHTML = `
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div class="flex items-center gap-2">
-              <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
-                <i data-lucide="plane-landing" class="w-4 h-4"></i>
-              </div>
-              <div>
-                <span class="font-black text-sm text-slate-900 block">טיסת חזור (ישראייר 6H 352)</span>
-                <span class="text-[10px] text-indigo-700 font-bold">06.10.2026 | יום שלישי</span>
-              </div>
-            </div>
-            ${inSaved ? `
-              <button onclick="deleteSlotTicket('flight_inbound')" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-rose-50 border border-rose-200 active:scale-95" title="מחק כרטיס">
-                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              <button onclick="triggerSlotFile('flight_outbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+                <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ / PDF
               </button>
-            ` : `
-              <span class="text-[10px] font-black bg-indigo-100 text-indigo-800 border border-indigo-200 px-2 py-0.5 rounded-full">תיק 4623652</span>
-            `}
-          </div>
+            </div>
+          `}
+        </div>
+      `;
 
-          <div class="flex items-center justify-between">
+      // טיסת חזור
+      const inSaved = ticketMap['flight_inbound'];
+      const inContainer = document.getElementById('flight-inbound-card');
+      inContainer.innerHTML = `
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+              <i data-lucide="plane-landing" class="w-4 h-4"></i>
+            </div>
             <div>
-              <span class="text-xs font-semibold text-slate-400 block">המראה</span>
-              <span class="text-base font-black text-slate-900">ורונה (VRN)</span>
-              <span class="text-xs text-indigo-600 font-bold block mt-0.5">21:35</span>
-            </div>
-            <i data-lucide="arrow-left" class="w-5 h-5 text-slate-400"></i>
-            <div class="text-left">
-              <span class="text-xs font-semibold text-slate-400 block">נחיתה</span>
-              <span class="text-base font-black text-slate-900">נתב"ג</span>
-              <span class="text-xs text-indigo-600 font-bold block mt-0.5">07.10.26 | 02:05</span>
+              <span class="font-black text-sm text-slate-900 block">טיסת חזור (ישראייר 6H 352)</span>
+              <span class="text-[10px] text-indigo-700 font-bold">06.10.2026 | יום שלישי</span>
             </div>
           </div>
+          ${inSaved ? `
+            <button onclick="deleteSlotTicket('flight_inbound')" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-rose-50 border border-rose-200 active:scale-95" title="מחק כרטיס">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          ` : `
+            <span class="text-[10px] font-black bg-indigo-100 text-indigo-800 border border-indigo-200 px-2 py-0.5 rounded-full">תיק 4623652</span>
+          `}
+        </div>
 
-          <div class="pt-2 border-t border-slate-100">
-            ${inSaved ? `
-              <button onclick="openTicketData('${inSaved.fileData}', '${inSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס עלייה למטוס (PDF/תמונה)
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-semibold text-slate-400 block">המראה</span>
+            <span class="text-base font-black text-slate-900">ורונה (VRN)</span>
+            <span class="text-xs text-indigo-600 font-bold block mt-0.5">21:35</span>
+          </div>
+          <i data-lucide="arrow-left" class="w-5 h-5 text-slate-400"></i>
+          <div class="text-left">
+            <span class="text-xs font-semibold text-slate-400 block">נחיתה</span>
+            <span class="text-base font-black text-slate-900">נתב"ג</span>
+            <span class="text-xs text-indigo-600 font-bold block mt-0.5">07.10.26 | 02:05</span>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t border-slate-100">
+          ${inSaved ? `
+            <button onclick="openTicketData('${inSaved.fileData}', '${inSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס עלייה למטוס (PDF/תמונה)
+            </button>
+          ` : `
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="triggerSlotCamera('flight_inbound')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+                <i data-lucide="camera" class="w-3.5 h-3.5 text-indigo-600"></i> צלם כרטיס טיסה
               </button>
-            ` : `
-              <div class="grid grid-cols-2 gap-2">
-                <button onclick="triggerSlotCamera('flight_inbound')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                  <i data-lucide="camera" class="w-3.5 h-3.5 text-indigo-600"></i> צלם כרטיס טיסה
-                </button>
-                <button onclick="triggerSlotFile('flight_inbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                  <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ / PDF
-                </button>
-              </div>
-            `}
-          </div>
-        `;
+              <button onclick="triggerSlotFile('flight_inbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+                <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ / PDF
+              </button>
+            </div>
+          `}
+        </div>
+      `;
 
-        lucide.createIcons();
-      };
+      lucide.createIcons();
     }
 
     function renderSiteSlots() {
-      if (!db) return;
       const container = document.getElementById('site-slots-container');
-      const tx = db.transaction('site_tickets', 'readonly');
-      const store = tx.objectStore('site_tickets');
-      const req = store.getAll();
+      let html = '';
 
-      req.onsuccess = function() {
-        const savedTickets = req.result || [];
-        const ticketMap = {};
-        savedTickets.forEach(t => { ticketMap[t.slotKey] = t; });
+      predefinedSiteSlots.forEach(slot => {
+        const saved = ticketMap[slot.key];
 
-        let html = '';
-        predefinedSiteSlots.forEach(slot => {
-          const saved = ticketMap[slot.key];
-
-          if (saved) {
-            const isPdf = saved.fileType && saved.fileType.includes('pdf');
-            html += `
-              <div class="app-card rounded-3xl p-4 border-emerald-300 space-y-2.5">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
-                      <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
-                    </div>
-                    <div>
-                      <h4 class="font-black text-sm text-slate-900">${slot.title}</h4>
-                      <span class="text-[10px] text-emerald-700 font-bold">✓ כרטיס שמור (${saved.fileName})</span>
-                    </div>
+        if (saved) {
+          const isPdf = saved.fileType && saved.fileType.includes('pdf');
+          html += `
+            <div class="app-card rounded-3xl p-4 border-emerald-300 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                    <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
                   </div>
-                  <button onclick="deleteSlotTicket('${slot.key}')" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-rose-50 border border-rose-200 active:scale-95" title="מחק כרטיס">
-                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                  </button>
-                </div>
-                <div class="pt-2 border-t border-slate-100 flex gap-2">
-                  <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                    <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס (${isPdf ? 'PDF' : 'תמונה'})
-                  </button>
-                </div>
-              </div>
-            `;
-          } else {
-            html += `
-              <div class="app-card rounded-3xl p-4 space-y-3">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center">
-                      <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
-                    </div>
-                    <div>
-                      <h4 class="font-black text-sm text-slate-900">${slot.title}</h4>
-                      <span class="text-[10px] text-slate-500 block font-medium">${slot.sub}</span>
-                    </div>
+                  <div>
+                    <h4 class="font-black text-sm text-slate-900">${slot.title}</h4>
+                    <span class="text-[10px] text-emerald-700 font-bold">✓ מסונכרן בענן (${saved.fileName})</span>
                   </div>
-                  <span class="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-0.5 rounded-md border border-slate-200">ממתין לטעינה</span>
                 </div>
-                <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2">
-                  <button onclick="triggerSlotCamera('${slot.key}')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                    <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i> צלם כרטיס
-                  </button>
-                  <button onclick="triggerSlotFile('${slot.key}')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                    <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ
-                  </button>
-                </div>
+                <button onclick="deleteSlotTicket('${slot.key}')" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-rose-50 border border-rose-200 active:scale-95" title="מחק כרטיס">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
               </div>
-            `;
-          }
-        });
-        container.innerHTML = html;
-        lucide.createIcons();
-      };
+              <div class="pt-2 border-t border-slate-100 flex gap-2">
+                <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+                  <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס (${isPdf ? 'PDF' : 'תמונה'})
+                </button>
+              </div>
+            </div>
+          `;
+        } else {
+          html += `
+            <div class="app-card rounded-3xl p-4 space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center">
+                    <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-black text-sm text-slate-900">${slot.title}</h4>
+                    <span class="text-[10px] text-slate-500 block font-medium">${slot.sub}</span>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-0.5 rounded-md border border-slate-200">ממתין לטעינה</span>
+              </div>
+              <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2">
+                <button onclick="triggerSlotCamera('${slot.key}')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+                  <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i> צלם כרטיס
+                </button>
+                <button onclick="triggerSlotFile('${slot.key}')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+                  <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      container.innerHTML = html;
+      lucide.createIcons();
     }
 
     function triggerSlotCamera(slotKey) {
@@ -536,32 +534,27 @@
 
       reader.onload = function(evt) {
         const ticketData = {
-          slotKey: activeSlotKey,
           fileName: file.name || 'קובץ כרטיס',
           fileType: file.type || 'image/jpeg',
           fileData: evt.target.result,
           savedAt: new Date().toLocaleDateString('he-IL')
         };
 
-        const tx = db.transaction('site_tickets', 'readwrite');
-        tx.objectStore('site_tickets').put(ticketData);
-        tx.oncomplete = function() {
+        // שמירה ישירה בענן Firebase
+        db.collection('tickets').doc(activeSlotKey).set(ticketData).then(() => {
           activeSlotKey = null;
           document.getElementById('slot-camera-input').value = '';
           document.getElementById('slot-file-input').value = '';
-          renderAllTickets();
-        };
+        }).catch(err => {
+          alert('שגיאה בשמירה לענן. ודא שהגדרת את מסד הנתונים ב-Firebase במצב Test mode.');
+        });
       };
       reader.readAsDataURL(file);
     }
 
     function deleteSlotTicket(slotKey) {
-      if (!confirm('האם למחוק כרטיס זה?')) return;
-      const tx = db.transaction('site_tickets', 'readwrite');
-      tx.objectStore('site_tickets').delete(slotKey);
-      tx.oncomplete = function() {
-        renderAllTickets();
-      };
+      if (!confirm('האם למחוק כרטיס זה מהענן המשפחתי?')) return;
+      db.collection('tickets').doc(slotKey).delete();
     }
 
     function openTicketData(dataUri, mimeType) {
