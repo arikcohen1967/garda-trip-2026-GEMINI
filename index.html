@@ -46,39 +46,45 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Classic Styles (מסגרת צפה עדינה, רכה ויוקרתית) */
+    /* Classic Styles (עיצוב מקורי בהיר, נקי וצף) */
     .theme-classic {
-      background: #F1F5F9 !important;
+      background: #F8FAFC !important;
       color: #0F172A !important;
     }
     .theme-classic .app-card-style {
       background: #FFFFFF !important;
-      border: 1px solid rgba(203, 213, 225, 0.9) !important;
+      border: 1px solid rgba(226, 232, 240, 0.9) !important;
       color: #0F172A !important;
-      border-radius: 1.25rem;
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+      border-radius: 1.5rem;
+      box-shadow: 0 12px 35px -8px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
       overflow: hidden;
       width: 100%;
+      transition: all 0.2s ease;
     }
 
-    /* Modern Pro Styles (Silver Titanium, Pure White, Solid Black) */
+    /* Modern Pro Styles (Silver Titanium, Floating Glass Depth) */
     .theme-modern {
       background: radial-gradient(130% 130% at 50% 0%, #FFFFFF 0%, #E2E8F0 45%, #CBD5E1 100%) !important;
       color: #09090B !important;
     }
     .theme-modern .app-card-style {
-      background: #FFFFFF !important;
-      border: 1.5px solid #09090B !important;
+      background: rgba(255, 255, 255, 0.92) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
       color: #09090B !important;
-      border-radius: 1.25rem;
-      box-shadow: 0 10px 24px -4px rgba(9, 9, 11, 0.12), 0 2px 6px -1px rgba(9, 9, 11, 0.05);
+      border-radius: 1.5rem;
+      box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
       overflow: hidden;
       width: 100%;
+      transition: all 0.2s ease;
     }
 
     .pro-card-hover {
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
       cursor: pointer;
+    }
+    .pro-card-hover:hover {
+      transform: translateY(-2px);
     }
     .pro-card-hover:active {
       transform: scale(0.985);
@@ -88,8 +94,8 @@
     .weather-ios-card {
       background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 45%, #D97706 100%);
       border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 1.25rem;
-      box-shadow: 0 8px 20px -4px rgba(217, 119, 6, 0.3);
+      border-radius: 1.5rem;
+      box-shadow: 0 12px 30px -6px rgba(217, 119, 6, 0.35);
       color: #FFFFFF;
       overflow: hidden;
       min-height: 84px;
@@ -105,7 +111,7 @@
     }
   </style>
 </head>
-<body id="app-body" class="theme-modern relative transition-colors duration-300">
+<body id="app-body" class="theme-classic relative transition-colors duration-300">
 
   <!-- סרגל מעבר עליון: בחירת תצוגה -->
   <div id="top-switch-bar" class="px-3 py-2 transition-all w-full">
@@ -155,13 +161,13 @@
   </header>
 
   <!-- תוכן ראשי -->
-  <main class="max-w-md mx-auto px-4 pt-2 pb-4 space-y-3.5 w-full">
+  <main class="max-w-md mx-auto px-4 pt-2 pb-4 space-y-4 w-full">
 
     <!-- ווידג'ט מזג אוויר -->
     <section id="weather-widget" class="weather-ios-card p-4 flex items-center justify-between animate-fade-in shadow-md w-full"></section>
 
     <!-- לשונית 1: מסלול יומי -->
-    <section id="tab-itinerary" class="tab-pane space-y-3.5 w-full">
+    <section id="tab-itinerary" class="tab-pane space-y-4 w-full">
       <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 w-full" id="days-bar">
         <button onclick="selectDay(1)" id="day-btn-1" class="day-chip flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-black transition-all duration-200"></button>
         <button onclick="selectDay(2)" id="day-btn-2" class="day-chip flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-200"></button>
@@ -178,17 +184,17 @@
         </span>
       </div>
 
-      <div id="day-display" class="space-y-3 w-full"></div>
+      <div id="day-display" class="space-y-3.5 w-full"></div>
     </section>
 
     <!-- לשונית 2: שירותים ומקומות סביבי -->
-    <section id="tab-nearby" class="tab-pane hidden space-y-3 w-full">
+    <section id="tab-nearby" class="tab-pane hidden space-y-3.5 w-full">
       <div id="nearby-container" class="p-4 w-full"></div>
     </section>
 
     <!-- לשונית 3: גלריה משפחתית -->
-    <section id="tab-gallery" class="tab-pane hidden space-y-3 w-full">
-      <div id="gallery-container" class="p-4 space-y-3 w-full">
+    <section id="tab-gallery" class="tab-pane hidden space-y-3.5 w-full">
+      <div id="gallery-container" class="p-4 space-y-3.5 w-full">
         <div class="flex items-center justify-between">
           <div>
             <h2 id="gallery-title" class="text-sm font-black flex items-center gap-2">
@@ -201,11 +207,11 @@
         </div>
 
         <!-- טופס העלאה מהיר -->
-        <div id="gallery-upload-box" class="p-3 space-y-2.5 border rounded-xl w-full">
+        <div id="gallery-upload-box" class="p-3.5 space-y-2.5 border rounded-2xl w-full bg-white shadow-sm border-slate-200">
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[10px] font-bold opacity-70 block mb-1">מי מצלם/ת?</label>
-              <select id="photo-author" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
+              <select id="photo-author" class="w-full bg-white border border-slate-300 rounded-xl px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
                 <option value="אריק">אריק</option>
                 <option value="הראל">הראל</option>
                 <option value="עמית">עמית</option>
@@ -216,7 +222,7 @@
             </div>
             <div>
               <label class="text-[10px] font-bold opacity-70 block mb-1">שיוך ליום במסלול</label>
-              <select id="photo-day-select" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
+              <select id="photo-day-select" class="w-full bg-white border border-slate-300 rounded-xl px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
                 <option value="1">יום 1 • 30/09 (הגעה)</option>
                 <option value="2">יום 2 • 01/10 (Gardaland)</option>
                 <option value="3">יום 3 • 02/10 (Movieland)</option>
@@ -229,41 +235,41 @@
           </div>
 
           <div>
-            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none shadow-sm text-slate-950">
+            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs focus:outline-none shadow-sm text-slate-950">
           </div>
 
           <input type="file" id="gallery-camera-input" accept="image/*" capture="environment" class="hidden">
           <input type="file" id="gallery-file-input" accept="image/*" class="hidden">
 
           <div class="grid grid-cols-2 gap-2 pt-1">
-            <button onclick="document.getElementById('gallery-camera-input').click()" id="btn-gallery-cam" class="text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition">
-              <i data-lucide="camera" class="w-3.5 h-3.5"></i> צלם תמונה
+            <button onclick="document.getElementById('gallery-camera-input').click()" id="btn-gallery-cam" class="text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition">
+              <i data-lucide="camera" class="w-4 h-4"></i> צלם תמונה
             </button>
-            <button onclick="document.getElementById('gallery-file-input').click()" id="btn-gallery-file" class="text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
-              <i data-lucide="image-plus" class="w-3.5 h-3.5 opacity-70"></i> מהגלריה
+            <button onclick="document.getElementById('gallery-file-input').click()" id="btn-gallery-file" class="text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
+              <i data-lucide="image-plus" class="w-4 h-4 opacity-70"></i> מהגלריה
             </button>
           </div>
           <div id="upload-spinner" class="hidden text-center py-1">
             <span class="text-xs font-black animate-pulse flex items-center justify-center gap-1.5">
-              <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> מעבד ומסנכרן לענן...
+              <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> מעבד ומסנכרן לענן...
             </span>
           </div>
         </div>
 
         <!-- סינון לפי ימים -->
-        <div class="flex gap-1 overflow-x-auto no-scrollbar py-1 text-xs w-full" id="gallery-filter-bar">
-          <button onclick="filterGallery('all')" id="gfilter-all" class="px-3 py-1 rounded-lg font-black shadow-sm flex-shrink-0">הכל</button>
-          <button onclick="filterGallery('1')" id="gfilter-1" class="px-3 py-1 rounded-lg font-bold border flex-shrink-0">יום 1</button>
-          <button onclick="filterGallery('2')" id="gfilter-2" class="px-3 py-1 rounded-lg font-bold border flex-shrink-0">יום 2</button>
-          <button onclick="filterGallery('3')" id="gfilter-3" class="px-3 py-1 rounded-lg font-bold border flex-shrink-0">יום 3</button>
-          <button onclick="filterGallery('4')" id="gfilter-4" class="px-3 py-1 rounded-lg font-bold border flex-shrink-0">יום 4</button>
-          <button onclick="filterGallery('5')" id="gfilter-5" class="px-3 py-1 rounded-lg font-bold border flex-shrink-0">יום 5</button>
-          <button onclick="filterGallery('6')" id="gfilter-6" class="px-3 py-1 rounded-lg font-bold border flex-shrink-0">יום 6</button>
-          <button onclick="filterGallery('7')" id="gfilter-7" class="px-3 py-1 rounded-lg font-bold border flex-shrink-0">יום 7</button>
+        <div class="flex gap-1.5 overflow-x-auto no-scrollbar py-1 text-xs w-full" id="gallery-filter-bar">
+          <button onclick="filterGallery('all')" id="gfilter-all" class="px-3.5 py-1.5 rounded-xl font-black shadow-sm flex-shrink-0">הכל</button>
+          <button onclick="filterGallery('1')" id="gfilter-1" class="px-3.5 py-1.5 rounded-xl font-bold border flex-shrink-0">יום 1</button>
+          <button onclick="filterGallery('2')" id="gfilter-2" class="px-3.5 py-1.5 rounded-xl font-bold border flex-shrink-0">יום 2</button>
+          <button onclick="filterGallery('3')" id="gfilter-3" class="px-3.5 py-1.5 rounded-xl font-bold border flex-shrink-0">יום 3</button>
+          <button onclick="filterGallery('4')" id="gfilter-4" class="px-3.5 py-1.5 rounded-xl font-bold border flex-shrink-0">יום 4</button>
+          <button onclick="filterGallery('5')" id="gfilter-5" class="px-3.5 py-1.5 rounded-xl font-bold border flex-shrink-0">יום 5</button>
+          <button onclick="filterGallery('6')" id="gfilter-6" class="px-3.5 py-1.5 rounded-xl font-bold border flex-shrink-0">יום 6</button>
+          <button onclick="filterGallery('7')" id="gfilter-7" class="px-3.5 py-1.5 rounded-xl font-bold border flex-shrink-0">יום 7</button>
         </div>
 
         <!-- רשת התמונות -->
-        <div id="gallery-grid" class="grid grid-cols-2 gap-2.5 pt-1 w-full"></div>
+        <div id="gallery-grid" class="grid grid-cols-2 gap-3 pt-1 w-full"></div>
         <div id="gallery-empty-state" class="hidden text-center py-8 opacity-60 space-y-1.5">
           <i data-lucide="image" class="w-10 h-10 mx-auto"></i>
           <p class="text-xs font-semibold">עדיין לא הועלו תמונות.<br>צלמו תמונה והוסיפו מזכרת ראשונה!</p>
@@ -272,7 +278,7 @@
     </section>
 
     <!-- לשונית 4: ארנק כרטיסים ומסמכים -->
-    <section id="tab-wallet" class="tab-pane hidden space-y-3 w-full">
+    <section id="tab-wallet" class="tab-pane hidden space-y-3.5 w-full">
       <div class="flex items-center justify-between px-1">
         <h3 class="text-xs font-black opacity-60 uppercase tracking-wider flex items-center gap-1.5">
           <i data-lucide="plane" class="w-3.5 h-3.5"></i>
@@ -281,10 +287,10 @@
         <span class="text-[10px] opacity-60 font-semibold">אופליין + ענן</span>
       </div>
 
-      <div id="flight-outbound-card" class="p-4 space-y-2.5 w-full"></div>
-      <div id="flight-inbound-card" class="p-4 space-y-2.5 w-full"></div>
+      <div id="flight-outbound-card" class="p-4 space-y-3 w-full"></div>
+      <div id="flight-inbound-card" class="p-4 space-y-3 w-full"></div>
 
-      <div class="flex items-center justify-between px-1 pt-1.5">
+      <div class="flex items-center justify-between px-1 pt-2">
         <h3 class="text-xs font-black opacity-60 uppercase tracking-wider flex items-center gap-1.5">
           <i data-lucide="ticket" class="w-3.5 h-3.5"></i>
           כרטיסי כניסה ואטרקציות
@@ -295,7 +301,7 @@
       <input type="file" id="slot-camera-input" accept="image/*" capture="environment" class="hidden">
       <input type="file" id="slot-file-input" accept="application/pdf,image/*" class="hidden">
 
-      <div id="site-slots-container" class="space-y-3 w-full"></div>
+      <div id="site-slots-container" class="space-y-3.5 w-full"></div>
 
       <!-- כרטיס המלון -->
       <div id="hotel-card-container" class="p-4 w-full"></div>
@@ -893,7 +899,7 @@
           </div>
           <div class="flex items-center gap-1.5">
             <i data-lucide="bed-double" class="w-3.5 h-3.5 text-slate-500 shrink-0"></i>
-            <span><strong>סוג חדר:</strong> Large Double or Twin Room (כולל ארוחת בוקר 🥐)</span>
+            <span><strong>חדר:</strong> Large Double or Twin Room (כולל ארוחת בוקר 🥐)</span>
           </div>
           <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2 rounded-lg border border-slate-200 mt-1">
             <div>
