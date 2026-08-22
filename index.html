@@ -24,21 +24,17 @@
     :root {
       --font-main: 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif;
     }
+    html, body {
+      min-height: 100%;
+    }
     body { 
       font-family: var(--font-main);
       -webkit-tap-highlight-color: transparent;
       padding-top: env(safe-area-inset-top);
-      padding-bottom: 7.5rem; /* שטח גלילה מספק כדי שהסרגל לעולם לא יסתיר כפתורים */
-      min-height: 100vh;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-    /* עיגון בטוח לתחתית האייפון */
-    .safe-nav-bar {
-      padding-top: 0.6rem;
-      padding-bottom: max(env(safe-area-inset-bottom), 1.2rem);
-    }
 
     /* Classic Styles */
     .theme-classic {
@@ -96,7 +92,7 @@
   <div id="ambient-glow-2" class="fixed bottom-24 right-0 w-[360px] h-[360px] bg-zinc-700/[0.06] rounded-full blur-[130px] pointer-events-none -z-10"></div>
 
   <!-- סרגל מעבר עליון קבוע: מתג תצוגה -->
-  <div id="top-switch-bar" class="sticky top-0 z-50 px-3 py-2 transition-all">
+  <div id="top-switch-bar" class="sticky top-0 z-40 px-3 py-2 transition-all">
     <div class="max-w-md mx-auto flex items-center justify-between gap-2">
       <div class="flex items-center gap-1.5 text-xs font-black" id="theme-indicator-text">
         <i data-lucide="layout-template" class="w-3.5 h-3.5"></i>
@@ -187,7 +183,7 @@
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[10px] font-bold opacity-70 block mb-1">מי מצלם/ת?</label>
-              <select id="photo-author" class="w-full bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-xl px-2.5 py-2 text-xs font-semibold focus:outline-none shadow-sm">
+              <select id="photo-author" class="w-full bg-white border border-slate-300 rounded-xl px-2.5 py-2 text-xs font-semibold focus:outline-none shadow-sm">
                 <option value="אריק">אריק</option>
                 <option value="הראל">הראל</option>
                 <option value="עמית">עמית</option>
@@ -198,7 +194,7 @@
             </div>
             <div>
               <label class="text-[10px] font-bold opacity-70 block mb-1">שיוך ליום במסלול</label>
-              <select id="photo-day-select" class="w-full bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-xl px-2.5 py-2 text-xs font-semibold focus:outline-none shadow-sm">
+              <select id="photo-day-select" class="w-full bg-white border border-slate-300 rounded-xl px-2.5 py-2 text-xs font-semibold focus:outline-none shadow-sm">
                 <option value="1">יום 1 • 30/09 (הגעה)</option>
                 <option value="2">יום 2 • 01/10 (Gardaland)</option>
                 <option value="3">יום 3 • 02/10 (Movieland)</option>
@@ -211,22 +207,22 @@
           </div>
 
           <div>
-            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white dark:bg-zinc-900 border border-slate-300 dark:border-zinc-700 rounded-xl px-3 py-2 text-xs focus:outline-none shadow-sm">
+            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none shadow-sm">
           </div>
 
           <input type="file" id="gallery-camera-input" accept="image/*" capture="environment" class="hidden">
           <input type="file" id="gallery-file-input" accept="image/*" class="hidden">
 
           <div class="grid grid-cols-2 gap-2 pt-1">
-            <button onclick="document.getElementById('gallery-camera-input').click()" class="bg-slate-900 text-white dark:bg-zinc-100 dark:text-zinc-950 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition">
+            <button onclick="document.getElementById('gallery-camera-input').click()" class="bg-slate-900 text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition">
               <i data-lucide="camera" class="w-4 h-4"></i> צלם תמונה
             </button>
-            <button onclick="document.getElementById('gallery-file-input').click()" class="bg-slate-100 text-slate-800 dark:bg-zinc-800 dark:text-zinc-200 border border-slate-300 dark:border-zinc-700 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
+            <button onclick="document.getElementById('gallery-file-input').click()" class="bg-slate-100 text-slate-800 border border-slate-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
               <i data-lucide="image-plus" class="w-4 h-4 opacity-70"></i> מהגלריה
             </button>
           </div>
           <div id="upload-spinner" class="hidden text-center py-2">
-            <span class="text-xs text-blue-600 dark:text-zinc-300 font-black animate-pulse flex items-center justify-center gap-1.5">
+            <span class="text-xs text-blue-600 font-black animate-pulse flex items-center justify-center gap-1.5">
               <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> מעבד ומסנכרן לענן...
             </span>
           </div>
@@ -288,8 +284,8 @@
 
   </main>
 
-  <!-- סרגל ניווט תחתון קבוע עם רקע אטום ונראות מלאה לכל הלשוניות -->
-  <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 z-50 safe-nav-bar shadow-[0_-4px_25px_rgba(0,0,0,0.1)]">
+  <!-- סרגל ניווט תחתון קבוע עם מיקום bottom-0 מוחלט -->
+  <nav id="bottom-nav" class="fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] bg-white border-t border-slate-200 shadow-2xl">
     <div class="max-w-md mx-auto grid grid-cols-4 items-center">
       <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center justify-center gap-1 py-1">
         <i data-lucide="calendar" class="w-5 h-5"></i>
@@ -534,24 +530,24 @@
 
       if (theme === 'modern') {
         body.className = "theme-modern relative overflow-x-hidden transition-colors duration-300";
-        topSwitchBar.className = "sticky top-0 z-50 bg-[#09090B]/95 backdrop-blur-xl border-b border-zinc-800/80 px-3 py-2 text-white";
+        topSwitchBar.className = "sticky top-0 z-40 bg-[#09090B]/95 backdrop-blur-xl border-b border-zinc-800/80 px-3 py-2 text-white";
         themeIndicator.className = "flex items-center gap-1.5 text-xs font-black text-zinc-300";
         switchWrapper.className = "flex bg-zinc-900/90 p-1 rounded-xl border border-zinc-800 gap-1";
         
-        header.className = "sticky top-[41px] z-40 bg-[#09090B]/90 backdrop-blur-2xl border-b border-zinc-800/80 px-4 py-3.5 transition-all text-white";
-        bottomNav.className = "fixed bottom-0 left-0 right-0 bg-[#09090B] border-t border-zinc-800 z-50 safe-nav-bar text-zinc-400";
+        header.className = "sticky top-[41px] z-30 bg-[#09090B]/90 backdrop-blur-2xl border-b border-zinc-800/80 px-4 py-3.5 transition-all text-white";
+        bottomNav.className = "fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] bg-[#09090B] border-t border-zinc-800 text-zinc-400 shadow-2xl";
         
         btnToHotel.className = "flex items-center gap-1.5 bg-zinc-100 hover:bg-white text-zinc-950 font-black text-xs px-3.5 py-1.5 rounded-full shadow-md active:scale-95 transition";
         btnModern.className = "px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-zinc-100 text-zinc-950 shadow-md";
         btnClassic.className = "px-3 py-1 rounded-lg text-[11px] font-bold text-zinc-400 hover:text-zinc-200 transition-all flex items-center gap-1";
       } else {
         body.className = "theme-classic relative overflow-x-hidden transition-colors duration-300";
-        topSwitchBar.className = "sticky top-0 z-50 bg-slate-900 backdrop-blur-xl border-b border-slate-800 px-3 py-2 text-white";
+        topSwitchBar.className = "sticky top-0 z-40 bg-slate-900 backdrop-blur-xl border-b border-slate-800 px-3 py-2 text-white";
         themeIndicator.className = "flex items-center gap-1.5 text-xs font-black text-slate-200";
         switchWrapper.className = "flex bg-slate-800 p-1 rounded-xl border border-slate-700 gap-1";
         
-        header.className = "sticky top-[41px] z-40 bg-slate-900 text-white px-4 py-3.5 transition-all border-b border-slate-800";
-        bottomNav.className = "fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 safe-nav-bar text-slate-600 shadow-xl";
+        header.className = "sticky top-[41px] z-30 bg-slate-900 text-white px-4 py-3.5 transition-all border-b border-slate-800";
+        bottomNav.className = "fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] bg-white border-t border-slate-200 text-slate-600 shadow-2xl";
         
         btnToHotel.className = "flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-full shadow-md active:scale-95 transition";
         btnClassic.className = "px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-blue-600 text-white shadow-md";
@@ -1079,7 +1075,7 @@
         <div class="flex items-center justify-between">
           <div>
             <span class="text-xs font-semibold opacity-60 block">המראה</span>
-            <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">נתב"ג (T1)</span>
+            <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">נתב"ג</span>
             <span class="text-xs ${isModern ? 'text-zinc-300' : 'text-slate-800'} font-bold block mt-0.5">21:35</span>
           </div>
           <i data-lucide="arrow-left" class="w-5 h-5 opacity-40"></i>
