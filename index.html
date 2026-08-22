@@ -46,42 +46,42 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Classic Styles (העיצוב המקורי הבהיר והנקי) */
+    /* Classic Styles (העיצוב המקורי הכהה) */
     .theme-classic {
-      background: radial-gradient(120% 120% at 50% 0%, #1E293B 0%, #0F172A 40%, #F1F5F9 40.1%, #F8FAFC 100%);
-      color: #0F172A;
+      background: #0F172A;
+      color: #F8FAFC;
     }
-    .classic-card {
-      background: #FFFFFF;
-      border: 1.5px solid #CBD5E1;
+    .theme-classic .classic-card {
+      background: #1E293B;
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
       border-radius: 1.25rem;
-      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
       overflow: hidden;
       width: 100%;
-      color: #0F172A;
+      color: #F8FAFC;
     }
-    .classic-inner-box {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
+    .theme-classic .classic-inner-box {
+      background: #0F172A;
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 0.875rem;
-      color: #334155;
+      color: #CBD5E1;
     }
 
     /* Modern Pro Styles (Silver Titanium) */
     .theme-modern {
-      background: radial-gradient(130% 130% at 50% 0%, #FFFFFF 0%, #E2E8F0 45%, #CBD5E1 100%);
+      background: #F1F5F9;
       color: #09090B;
     }
-    .pro-glass {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(148, 163, 184, 0.45);
+    .theme-modern .pro-glass {
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
       border-radius: 1.25rem;
       box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
       overflow: hidden;
       width: 100%;
+      color: #09090B;
     }
+
     .pro-card-hover {
       transition: transform 0.15s ease, box-shadow 0.15s ease;
       cursor: pointer;
@@ -324,7 +324,7 @@
   </div>
 
   <!-- סרגל ניווט תחתון קבוע -->
-  <nav id="bottom-nav" class="fixed inset-x-0 bottom-0 z-40 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] shadow-2xl transition-all w-full">
+  <nav id="bottom-nav" class="fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] shadow-2xl transition-all w-full">
     <div class="max-w-md mx-auto grid grid-cols-4 items-center px-1">
       <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center justify-center gap-1 py-1">
         <i data-lucide="calendar" class="w-5 h-5"></i>
@@ -349,7 +349,7 @@
   </nav>
 
   <script>
-    let currentTheme = localStorage.getItem('garda_theme') || 'classic';
+    let currentTheme = localStorage.getItem('garda_theme') || 'modern';
     let currentDay = 1;
     let currentTab = 'itinerary';
     let activeSlotKey = null;
@@ -475,6 +475,14 @@
       { key: 'sirmione_castle', title: 'סירמיונה: טירת סקאליג\'רו ושייט', sub: 'יום שני • 05/10', icon: 'castle' },
       { key: 'verona_arena', title: 'ורונה: ארנה ובית יוליה', sub: 'יום שני • 05/10', icon: 'heart' }
     ];
+
+    const passportDetails = {
+      'ARIK COHEN': { number: '23662043', dob: '28/12/1967' },
+      'HAREL VILNAI COHEN': { number: '35168263', dob: '04/09/1997' },
+      'AMIT COHEN': { number: '36061996', dob: '01/07/2014' },
+      'YULY COHEN': { number: '36068815', dob: '01/07/2014' },
+      'LIAN COHEN': { number: '36062981', dob: '14/10/2015' }
+    };
 
     const firebaseConfig = {
       apiKey: "AIzaSyAsiM-s0bwOuEzopyzHfY3g_cGqMsOFx8",
@@ -723,13 +731,13 @@
             <div class="classic-card p-4 space-y-2.5 w-full">
               <div class="flex items-center justify-between gap-2">
                 <span class="text-[11px] font-black text-white bg-blue-600 px-3 py-1 rounded-full whitespace-nowrap shadow-sm">${data.date}</span>
-                <span class="text-[10px] text-slate-400 font-bold whitespace-nowrap">${data.stops.length} תחנות</span>
+                <span class="text-[10px] text-slate-300 font-bold whitespace-nowrap">${data.stops.length} תחנות</span>
               </div>
               <h2 class="text-sm font-black text-white tracking-tight pt-0.5">${data.title}</h2>
               ${data.tip ? `
                 <div class="flex items-start gap-2 classic-inner-box p-3 w-full">
                   <i data-lucide="info" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
-                  <p class="text-[11px] text-slate-300 font-semibold leading-relaxed">${data.tip.replace('💡 טיפ לשטח:', '').trim()}</p>
+                  <p class="text-[11px] text-slate-200 font-semibold leading-relaxed">${data.tip.replace('💡 טיפ לשטח:', '').trim()}</p>
                 </div>
               ` : ''}
             </div>
@@ -994,7 +1002,7 @@
         passengersCard.setAttribute('ondblclick', `openWalletCardModal('רשימת נוסעים', 'דרכונים וגילאים', \`
           <div class='space-y-2 text-xs text-slate-800'>
             <div><strong>ARIK COHEN:</strong> דרכון: 23662043 | 28/12/1967</div>
-            <div><strong>HAREL VILNAI COHEN:</strong> דרכון: לא צוין | 04/09/1997</div>
+            <div><strong>HAREL VILNAI COHEN:</strong> דרכון: 35168263 | 04/09/1997</div>
             <div><strong>AMIT COHEN:</strong> דרכון: 36061996 | 01/07/2014</div>
             <div><strong>YULY COHEN:</strong> דרכון: 36068815 | 01/07/2014</div>
             <div><strong>LIAN COHEN:</strong> דרכון: 36062981 | 14/10/2015</div>
@@ -1008,7 +1016,7 @@
           </h3>
           <div class="divide-y divide-slate-200 text-xs font-medium">
             <div class="py-2 flex justify-between text-slate-900"><span>ARIK COHEN</span><span class="text-slate-950 font-mono font-black">23662043</span></div>
-            <div class="py-2 flex justify-between text-slate-900"><span>HAREL VILNAI COHEN</span><span class="text-slate-950 font-mono font-black">לא צוין</span></div>
+            <div class="py-2 flex justify-between text-slate-900"><span>HAREL VILNAI COHEN</span><span class="text-slate-950 font-mono font-black">35168263</span></div>
             <div class="py-2 flex justify-between text-slate-900"><span>AMIT COHEN</span><span class="text-slate-950 font-mono font-black">36061996</span></div>
             <div class="py-2 flex justify-between text-slate-900"><span>YULY COHEN</span><span class="text-slate-950 font-mono font-black">36068815</span></div>
             <div class="py-2 flex justify-between text-slate-900"><span>LIAN COHEN</span><span class="text-slate-950 font-mono font-black">36062981</span></div>
@@ -1097,7 +1105,7 @@
             </div>
             <div class="flex items-center gap-1.5">
               <i data-lucide="bed-double" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
-              <span><strong>סוג חדר:</strong> Large Double or Twin Room (כולל ארוחת בוקר 🥐)</span>
+              <span><strong>חדר:</strong> Large Double / Twin Room (כולל ארוחת בוקר 🥐)</span>
             </div>
             <div class="grid grid-cols-2 gap-2 bg-slate-900/60 p-2 rounded-lg border border-slate-800 mt-1">
               <div>
@@ -1127,7 +1135,7 @@
         passengersCard.setAttribute('ondblclick', `openWalletCardModal('רשימת נוסעים', 'דרכונים וגילאים', \`
           <div class='space-y-2 text-xs text-slate-800'>
             <div><strong>ARIK COHEN:</strong> דרכון: 23662043 | 28/12/1967</div>
-            <div><strong>HAREL VILNAI COHEN:</strong> דרכון: לא צוין | 04/09/1997</div>
+            <div><strong>HAREL VILNAI COHEN:</strong> דרכון: 35168263 | 04/09/1997</div>
             <div><strong>AMIT COHEN:</strong> דרכון: 36061996 | 01/07/2014</div>
             <div><strong>YULY COHEN:</strong> דרכון: 36068815 | 01/07/2014</div>
             <div><strong>LIAN COHEN:</strong> דרכון: 36062981 | 14/10/2015</div>
@@ -1141,7 +1149,7 @@
           </h3>
           <div class="divide-y divide-slate-800 text-xs font-medium text-slate-200">
             <div class="py-2 flex justify-between"><span>ARIK COHEN</span><span class="text-slate-400 font-mono font-bold">23662043</span></div>
-            <div class="py-2.5 flex justify-between"><span>HAREL VILNAI COHEN</span><span class="text-slate-400 font-mono font-bold">לא צוין</span></div>
+            <div class="py-2.5 flex justify-between"><span>HAREL VILNAI COHEN</span><span class="text-slate-400 font-mono font-bold">35168263</span></div>
             <div class="py-2 flex justify-between"><span>AMIT COHEN</span><span class="text-slate-400 font-mono font-bold">36061996</span></div>
             <div class="py-2 flex justify-between"><span>YULY COHEN</span><span class="text-slate-400 font-mono font-bold">36068815</span></div>
             <div class="py-2 flex justify-between"><span>LIAN COHEN</span><span class="text-slate-400 font-mono font-bold">36062981</span></div>
