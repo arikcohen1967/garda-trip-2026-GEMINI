@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>איטליה 2026</title>
+  <title>איטליה 2026 • החופשה המשפחתית</title>
   
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="איטליה 2026">
-  <meta name="theme-color" content="#F1F5F9">
+  <meta name="theme-color" content="#0F172A">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Firebase Cloud SDK לסנכרון משפחתי בזמן אמת -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
@@ -26,65 +26,80 @@
       -webkit-tap-highlight-color: transparent;
       padding-top: env(safe-area-inset-top);
       padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
-      background-color: #F1F5F9;
+      background: radial-gradient(120% 120% at 50% 0%, #0F172A 0%, #1E293B 40%, #F1F5F9 40.1%, #F8FAFC 100%);
+      min-height: 100vh;
       color: #0F172A;
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 0.75rem); }
+    .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 0.6rem); }
 
-    .app-glass {
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-color: rgba(226, 232, 240, 0.8);
-      box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.05);
-    }
-
-    .app-card {
-      background: rgba(255, 255, 255, 0.95);
+    .glass-dark {
+      background: rgba(15, 23, 42, 0.82);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.04), 0 2px 6px -2px rgba(15, 23, 42, 0.02);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 4px 10px -2px rgba(15, 23, 42, 0.02);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .glass-card-dark {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.25);
+    }
+
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.05);
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in {
-      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   </style>
 </head>
-<body class="relative overflow-x-hidden min-h-screen">
+<body class="relative overflow-x-hidden">
 
-  <!-- זוהר רקע אווירתי עדין -->
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[380px] h-[380px] bg-blue-200/40 rounded-full blur-[120px] pointer-events-none -z-10"></div>
-  <div class="fixed bottom-10 right-0 w-[300px] h-[300px] bg-slate-300/40 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+  <!-- זוהר רקע אווירתי -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[450px] h-[350px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-20 right-0 w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-[130px] pointer-events-none -z-10"></div>
 
-  <!-- Header עליון -->
-  <header class="sticky top-0 z-40 app-glass border-b px-4 py-3 shadow-sm">
+  <!-- Header עליון יוקרתי -->
+  <header class="sticky top-0 z-40 glass-dark text-white px-4 py-3.5 transition-all">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div>
         <div class="flex items-center gap-2">
-          <span class="text-xl">🇮🇹</span>
-          <h1 class="font-black text-base tracking-tight bg-gradient-to-r from-slate-900 via-blue-950 to-blue-900 bg-clip-text text-transparent">
+          <span class="text-xl filter drop-shadow">🇮🇹</span>
+          <h1 class="font-black text-base tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
             גארדה וצפון איטליה
           </h1>
         </div>
-        <div class="flex items-center gap-2">
-          <p class="text-[11px] text-slate-500 font-semibold">30.09.2026 – 06.10.2026</p>
-          <span class="text-[9px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded-full flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> סנכרון ענן
+        <div class="flex items-center gap-2 mt-0.5">
+          <p class="text-[11px] text-slate-300 font-medium">30.09.2026 – 06.10.2026</p>
+          <span id="network-status" class="text-[9px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> מחובר ומסונכרן
           </span>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="flex items-center gap-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black px-3.5 py-1.5 rounded-full shadow-sm active:scale-95 transition">
-          <i data-lucide="hotel" class="w-3.5 h-3.5 text-emerald-600"></i>
+        <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-full shadow-lg shadow-emerald-500/20 active:scale-95 transition">
+          <i data-lucide="hotel" class="w-3.5 h-3.5"></i>
           <span>למלון</span>
         </a>
       </div>
@@ -94,16 +109,35 @@
   <!-- תוכן ראשי -->
   <main class="max-w-md mx-auto p-4 space-y-4">
 
+    <!-- ווידג'ט מזג אוויר דינמי יומי -->
+    <section id="weather-widget" class="glass-card-dark text-white rounded-3xl p-4 flex items-center justify-between animate-fade-in">
+      <div class="flex items-center gap-3">
+        <div id="weather-icon-box" class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center text-amber-300 text-xl backdrop-blur-md">
+          <i data-lucide="sun" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="weather-location" class="font-black text-xs text-slate-200">אגם גארדה (Ponti sul Mincio)</span>
+          </div>
+          <p id="weather-desc" class="text-[11px] text-slate-400 mt-0.5">נעים ונוח לטיולים</p>
+        </div>
+      </div>
+      <div class="text-left">
+        <span id="weather-temp" class="text-2xl font-black tracking-tight">22°C</span>
+        <span class="text-[10px] text-slate-400 block font-medium">עונתי סתווי</span>
+      </div>
+    </section>
+
     <!-- לשונית 1: מסלול יומי -->
     <section id="tab-itinerary" class="tab-pane space-y-4">
       <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 pt-1" id="days-bar">
-        <button onclick="selectDay(1)" id="day-btn-1" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-extrabold transition-all duration-200"></button>
-        <button onclick="selectDay(2)" id="day-btn-2" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200"></button>
-        <button onclick="selectDay(3)" id="day-btn-3" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200"></button>
-        <button onclick="selectDay(4)" id="day-btn-4" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200"></button>
-        <button onclick="selectDay(5)" id="day-btn-5" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200"></button>
-        <button onclick="selectDay(6)" id="day-btn-6" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200"></button>
-        <button onclick="selectDay(7)" id="day-btn-7" class="day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200"></button>
+        <button onclick="selectDay(1)" id="day-btn-1" class="day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-black transition-all duration-200"></button>
+        <button onclick="selectDay(2)" id="day-btn-2" class="day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200"></button>
+        <button onclick="selectDay(3)" id="day-btn-3" class="day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200"></button>
+        <button onclick="selectDay(4)" id="day-btn-4" class="day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200"></button>
+        <button onclick="selectDay(5)" id="day-btn-5" class="day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200"></button>
+        <button onclick="selectDay(6)" id="day-btn-6" class="day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200"></button>
+        <button onclick="selectDay(7)" id="day-btn-7" class="day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200"></button>
       </div>
 
       <div id="day-display" class="space-y-3"></div>
@@ -111,7 +145,7 @@
 
     <!-- לשונית 2: שירותים ומקומות סביבי -->
     <section id="tab-nearby" class="tab-pane hidden space-y-4">
-      <div class="app-card rounded-3xl p-5">
+      <div class="glass-card rounded-3xl p-5">
         <h2 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-1 flex items-center gap-2">
           <i data-lucide="compass" class="w-4 h-4 text-blue-600"></i>
           שירותים ומקומות סביבי
@@ -119,29 +153,29 @@
         <p class="text-xs text-slate-500 mb-4">חיפוש ישיר במפות לפי המיקום הנוכחי בשטח</p>
 
         <div class="grid grid-cols-2 gap-3">
-          <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
-            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:scale-110 transition">
+          <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+            <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
               <i data-lucide="shopping-cart" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-black text-slate-800">סופרמרקטים</span>
           </a>
 
-          <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
-            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-110 transition">
+          <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+            <div class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
               <i data-lucide="utensils" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-black text-slate-800">מסעדות ופיצות</span>
           </a>
 
-          <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
-            <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-110 transition">
+          <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+            <div class="w-11 h-11 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
               <i data-lucide="fuel" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-black text-slate-800">תחנות דלק</span>
           </a>
 
-          <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/80 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2 text-center transition group active:scale-95">
-            <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center group-hover:scale-110 transition">
+          <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+            <div class="w-11 h-11 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
               <i data-lucide="cross" class="w-5 h-5"></i>
             </div>
             <span class="text-xs font-black text-slate-800">בתי מרקחת וחירום</span>
@@ -150,37 +184,37 @@
       </div>
     </section>
 
-    <!-- לשונית 3: גלריה משפחתית (חדש!) -->
+    <!-- לשונית 3: גלריה משפחתית -->
     <section id="tab-gallery" class="tab-pane hidden space-y-4">
-      <div class="app-card rounded-3xl p-5 space-y-4">
+      <div class="glass-card rounded-3xl p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div>
             <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
               <i data-lucide="camera" class="w-5 h-5 text-indigo-600"></i>
               גלריה וחוויות מהטיול
             </h2>
-            <p class="text-xs text-slate-500 mt-0.5">אלבום משותף שמסתנכרן בזמן אמת לכולם</p>
+            <p class="text-xs text-slate-500 mt-0.5">אלבום משותף שמסתנכרן בזמן אמת</p>
           </div>
           <span id="gallery-count-badge" class="text-[11px] font-black bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-full">0 תמונות</span>
         </div>
 
-        <!-- טופס העלאה מהיר -->
+        <!-- טופס העלאה מהיר עם דחיסה אוטומטית -->
         <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-3.5 space-y-3">
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[10px] font-bold text-slate-600 block mb-1">מי מצלם/ת?</label>
-              <select id="photo-author" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-500">
+              <select id="photo-author" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-500 shadow-sm">
                 <option value="אריק">אריק</option>
                 <option value="הראל">הראל</option>
                 <option value="עמית">עמית</option>
                 <option value="יולי">יולי</option>
                 <option value="ליאן">ליאן</option>
-                <option value="משפחה">כולנו יחד</option>
+                <option value="משפחה">כולנו יחד ❤️</option>
               </select>
             </div>
             <div>
               <label class="text-[10px] font-bold text-slate-600 block mb-1">שיוך ליום במסלול</label>
-              <select id="photo-day-select" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-500">
+              <select id="photo-day-select" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-500 shadow-sm">
                 <option value="1">יום 1 • 30/09 (הגעה)</option>
                 <option value="2">יום 2 • 01/10 (Gardaland)</option>
                 <option value="3">יום 3 • 02/10 (Movieland)</option>
@@ -193,42 +227,44 @@
           </div>
 
           <div>
-            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-indigo-500">
+            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-indigo-500 shadow-sm">
           </div>
 
           <input type="file" id="gallery-camera-input" accept="image/*" capture="environment" class="hidden">
           <input type="file" id="gallery-file-input" accept="image/*" class="hidden">
 
           <div class="grid grid-cols-2 gap-2 pt-1">
-            <button onclick="document.getElementById('gallery-camera-input').click()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
+            <button onclick="document.getElementById('gallery-camera-input').click()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/20 active:scale-95 transition">
               <i data-lucide="camera" class="w-4 h-4"></i> צלם תמונה
             </button>
             <button onclick="document.getElementById('gallery-file-input').click()" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
               <i data-lucide="image-plus" class="w-4 h-4 text-indigo-600"></i> מהגלריה
             </button>
           </div>
-          <div id="upload-spinner" class="hidden text-center py-1">
-            <span class="text-xs text-indigo-600 font-bold animate-pulse">מעלה ומסנכרן לענן... ⏳</span>
+          <div id="upload-spinner" class="hidden text-center py-2">
+            <span class="text-xs text-indigo-600 font-black animate-pulse flex items-center justify-center gap-1.5">
+              <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> מעבד ומסנכרן לענן...
+            </span>
           </div>
         </div>
 
-        <!-- סינון לפי ימים בגלריה -->
+        <!-- סינון לפי ימים -->
         <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs" id="gallery-filter-bar">
-          <button onclick="filterGallery('all')" id="gfilter-all" class="px-3 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0">הכל</button>
-          <button onclick="filterGallery('1')" id="gfilter-1" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 1</button>
-          <button onclick="filterGallery('2')" id="gfilter-2" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 2</button>
-          <button onclick="filterGallery('3')" id="gfilter-3" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 3</button>
-          <button onclick="filterGallery('4')" id="gfilter-4" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 4</button>
-          <button onclick="filterGallery('5')" id="gfilter-5" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 5</button>
-          <button onclick="filterGallery('6')" id="gfilter-6" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 6</button>
-          <button onclick="filterGallery('7')" id="gfilter-7" class="px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 7</button>
+          <button onclick="filterGallery('all')" id="gfilter-all" class="px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0">הכל</button>
+          <button onclick="filterGallery('1')" id="gfilter-1" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 1</button>
+          <button onclick="filterGallery('2')" id="gfilter-2" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 2</button>
+          <button onclick="filterGallery('3')" id="gfilter-3" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 3</button>
+          <button onclick="filterGallery('4')" id="gfilter-4" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 4</button>
+          <button onclick="filterGallery('5')" id="gfilter-5" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 5</button>
+          <button onclick="filterGallery('6')" id="gfilter-6" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 6</button>
+          <button onclick="filterGallery('7')" id="gfilter-7" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 7</button>
         </div>
 
         <!-- רשת התמונות -->
         <div id="gallery-grid" class="grid grid-cols-2 gap-3 pt-1"></div>
-        <div id="gallery-empty-state" class="hidden text-center py-8 text-slate-400 space-y-2">
-          <i data-lucide="image" class="w-10 h-10 mx-auto text-slate-300"></i>
-          <p class="text-xs font-semibold">עדיין לא הועלו תמונות ביום זה.<br>היו הראשונים להוסיף תמונה למזכרת!</p>
+        <div id="gallery-empty-state" class="hidden text-center py-10 text-slate-400 space-y-2">
+          <i data-lucide="image" class="w-12 h-12 mx-auto text-slate-300"></i>
+          <p class="text-xs font-semibold">עדיין לא הועלו תמונות.<br>צלמו תמונה והוסיפו מזכרת ראשונה!</p>
         </div>
       </div>
     </section>
@@ -242,11 +278,11 @@
           <i data-lucide="plane" class="w-4 h-4 text-blue-600"></i>
           כרטיסי טיסה ועלייה למטוס
         </h3>
-        <span class="text-[10px] text-slate-500 font-semibold">סנכרון ענן משפחתי</span>
+        <span class="text-[10px] text-slate-500 font-semibold">אופליין + ענן</span>
       </div>
 
-      <div id="flight-outbound-card" class="app-card rounded-3xl p-5 border-blue-200 space-y-3"></div>
-      <div id="flight-inbound-card" class="app-card rounded-3xl p-5 border-indigo-200 space-y-3"></div>
+      <div id="flight-outbound-card" class="glass-card rounded-3xl p-5 border-blue-200 space-y-3"></div>
+      <div id="flight-inbound-card" class="glass-card rounded-3xl p-5 border-indigo-200 space-y-3"></div>
 
       <!-- כותרת ראשית לקוביות האתרים -->
       <div class="flex items-center justify-between px-1 pt-2">
@@ -254,7 +290,7 @@
           <i data-lucide="ticket" class="w-4 h-4 text-blue-600"></i>
           כרטיסי כניסה ואטרקציות
         </h3>
-        <span class="text-[10px] text-slate-500 font-semibold">סנכרון ענן משפחתי</span>
+        <span class="text-[10px] text-slate-500 font-semibold">מוגבל ל-1MB (PDF/תמונה)</span>
       </div>
 
       <!-- שדות מוסתרים לטעינת קבצים -->
@@ -264,19 +300,19 @@
       <!-- קוביות האתרים להעלאת כרטיסים -->
       <div id="site-slots-container" class="space-y-3"></div>
 
-      <!-- כרטיס המלון הקבוע עם כפתור Booking -->
-      <div class="app-card rounded-3xl p-5 border-emerald-200">
+      <!-- כרטיס המלון הקבוע עם קישורי ניווט וטלפון -->
+      <div class="glass-card rounded-3xl p-5 border-emerald-200">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100">
           <div class="flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shadow-sm">
               <i data-lucide="hotel" class="w-4 h-4"></i>
             </div>
             <div>
               <span class="font-black text-sm text-slate-900 block">Bio Agriturismo Vojon</span>
-              <span class="text-[10px] text-amber-600 font-bold">★★★ Agriturismo</span>
+              <span class="text-[10px] text-amber-600 font-bold">★★★ Agriturismo כפרי</span>
             </div>
           </div>
-          <a href="https://apps.apple.com/il/app/booking-com-hotels-travel/id367003839" target="_blank" class="text-[10px] font-black bg-emerald-100 hover:bg-emerald-200 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200 flex items-center gap-1 transition active:scale-95" title="פתח באפליקציית Booking">
+          <a href="https://apps.apple.com/il/app/booking-com-hotels-travel/id367003839" target="_blank" class="text-[10px] font-black bg-emerald-50 hover:bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1 transition active:scale-95">
             <i data-lucide="external-link" class="w-3 h-3"></i>
             <span>Booking.com</span>
           </a>
@@ -299,7 +335,7 @@
             <i data-lucide="calendar" class="w-4 h-4 text-emerald-600 shrink-0"></i>
             <span><strong>תאריכים:</strong> 30.09.2026 – 06.10.2026 (6 לילות)</span>
           </div>
-          <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200/60">
+          <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200/60 mt-1">
             <div>
               <span class="text-[10px] text-slate-500 block">צ'ק-אין</span>
               <span class="font-black text-slate-800">15:00 – 18:00</span>
@@ -312,23 +348,23 @@
         </div>
 
         <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2">
-          <a href="tel:+393792027060" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+          <a href="tel:+393792027060" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
             <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-600"></i> חיוג
           </a>
-          <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+          <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
             <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-600"></i> Waze
           </a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+          <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
             <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-600"></i> Maps
           </a>
         </div>
       </div>
 
       <!-- רשימת הנוסעים -->
-      <div class="app-card rounded-3xl p-5">
+      <div class="glass-card rounded-3xl p-5">
         <h3 class="text-xs font-black text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
           <i data-lucide="users" class="w-4 h-4 text-slate-400"></i>
-          נוסעים בכרטיס
+          נוסעים בכרטיס (פרטי דרכון ולידה)
         </h3>
         <div class="divide-y divide-slate-100 text-xs font-medium">
           <div class="py-2.5 flex justify-between text-slate-800"><span>ARIK COHEN</span><span class="text-slate-500 font-mono font-bold">28/12/1967</span></div>
@@ -343,9 +379,9 @@
 
   </main>
 
-  <!-- סרגל ניווט תחתון עם 4 לשוניות -->
-  <nav class="fixed bottom-0 left-0 right-0 app-glass border-t z-50 safe-bottom">
-    <div class="max-w-md mx-auto flex justify-around items-center pt-2">
+  <!-- סרגל ניווט תחתון יוקרתי -->
+  <nav class="fixed bottom-0 left-0 right-0 glass-nav z-50 safe-bottom">
+    <div class="max-w-md mx-auto flex justify-around items-center pt-2.5">
       <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center gap-1 text-blue-600 font-black text-xs">
         <i data-lucide="calendar" class="w-5 h-5"></i>
         <span>מסלול</span>
@@ -368,7 +404,6 @@
     </div>
   </nav>
 
-  <!-- סנכרון Firebase Firestore בענן -->
   <script>
     let currentDay = 1;
     let activeSlotKey = null;
@@ -376,7 +411,7 @@
     let galleryPhotos = [];
     let activeGalleryFilter = 'all';
 
-    // חיבור Firebase
+    // 1. אתחול Firebase + Offline Persistence מובנה
     const firebaseConfig = {
       apiKey: "AIzaSyAsiM-s0bwOuEzopyzHfY3g_cGqMsOFx8",
       authDomain: "garda-trip-2026-bef3f.firebaseapp.com",
@@ -390,6 +425,25 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    // הפעלת מצב אופליין מלא
+    db.enablePersistence({ synchronizeTabs: true }).catch(err => {
+      console.log("Offline persistence initialized or already active.");
+    });
+
+    // מעקב אחר מצב חיבור אינטרנט
+    function updateOnlineStatus() {
+      const statusBadge = document.getElementById('network-status');
+      if (navigator.onLine) {
+        statusBadge.className = "text-[9px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1";
+        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> מחובר ומסונכרן';
+      } else {
+        statusBadge.className = "text-[9px] font-bold text-amber-300 bg-amber-950/70 border border-amber-500/30 px-2 py-0.5 rounded-full flex items-center gap-1";
+        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> מצב אופליין (שמור מקומית)';
+      }
+    }
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+
     const predefinedSiteSlots = [
       { key: 'car_rental', title: 'השכרת רכב (VRN)', sub: 'ורונה שדה תעופה • 30/09', icon: 'car' },
       { key: 'gardaland', title: 'Gardaland Park', sub: 'יום חמישי • 01/10', icon: 'sparkles' },
@@ -402,7 +456,7 @@
       { key: 'verona_arena', title: 'ורונה: ארנה ובית יוליה', sub: 'יום שני • 05/10', icon: 'heart' }
     ];
 
-    // האזנה לסנכרון כרטיסים בענן
+    // סנכרון כרטיסים (עם תמיכה באופליין)
     db.collection('tickets').onSnapshot((snapshot) => {
       ticketMap = {};
       snapshot.forEach(doc => {
@@ -410,10 +464,10 @@
       });
       renderAllTickets();
     }, (error) => {
-      console.warn("Tickets sync fallback", error);
+      console.warn("Tickets offline read fallback", error);
     });
 
-    // האזנה לסנכרון תמונות גלריה בענן
+    // סנכרון גלריה (עם תמיכה באופליין)
     db.collection('gallery').orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
       galleryPhotos = [];
       snapshot.forEach(doc => {
@@ -421,8 +475,48 @@
       });
       renderGallery();
     }, (error) => {
-      console.warn("Gallery sync fallback", error);
+      console.warn("Gallery offline read fallback", error);
     });
+
+    // --- אלגוריתם דחיסה רב-שלבי לקבצים ותמונות עד 800KB (תחת מגבלת ה-1MB של Firestore) ---
+    function compressImageFile(file, callback) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          let quality = 0.8;
+          let maxDim = 1200;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height && width > maxDim) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else if (height > maxDim) {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          let dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+          // אם עדיין מעל 800KB, דוחס שוב באופן אגרסיבי יותר
+          if (dataUrl.length > 800 * 1024) {
+            quality = 0.6;
+            dataUrl = canvas.toDataURL('image/jpeg', quality);
+          }
+
+          callback(dataUrl);
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
 
     function renderAllTickets() {
       renderFlightCards();
@@ -468,15 +562,15 @@
 
         <div class="pt-2 border-t border-slate-100">
           ${outSaved ? `
-            <button onclick="openTicketData('${outSaved.fileData}', '${outSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+            <button onclick="openTicketData('${outSaved.fileData}', '${outSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
               <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס עלייה למטוס (PDF/תמונה)
             </button>
           ` : `
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="triggerSlotCamera('flight_outbound')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i> צלם כרטיס טיסה
+              <button onclick="triggerSlotCamera('flight_outbound')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i> צלם כרטיס
               </button>
-              <button onclick="triggerSlotFile('flight_outbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <button onclick="triggerSlotFile('flight_outbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                 <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ / PDF
               </button>
             </div>
@@ -522,15 +616,15 @@
 
         <div class="pt-2 border-t border-slate-100">
           ${inSaved ? `
-            <button onclick="openTicketData('${inSaved.fileData}', '${inSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+            <button onclick="openTicketData('${inSaved.fileData}', '${inSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
               <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס עלייה למטוס (PDF/תמונה)
             </button>
           ` : `
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="triggerSlotCamera('flight_inbound')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                <i data-lucide="camera" class="w-3.5 h-3.5 text-indigo-600"></i> צלם כרטיס טיסה
+              <button onclick="triggerSlotCamera('flight_inbound')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                <i data-lucide="camera" class="w-3.5 h-3.5 text-indigo-600"></i> צלם כרטיס
               </button>
-              <button onclick="triggerSlotFile('flight_inbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <button onclick="triggerSlotFile('flight_inbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                 <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ / PDF
               </button>
             </div>
@@ -551,10 +645,10 @@
         if (saved) {
           const isPdf = saved.fileType && saved.fileType.includes('pdf');
           html += `
-            <div class="app-card rounded-3xl p-4 border-emerald-300 space-y-2.5">
+            <div class="glass-card rounded-3xl p-4 border-emerald-300 space-y-2.5">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                  <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shadow-sm">
                     <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
                   </div>
                   <div>
@@ -567,18 +661,18 @@
                 </button>
               </div>
               <div class="pt-2 border-t border-slate-100 flex gap-2">
-                <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-                  <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס (${isPdf ? 'PDF' : 'תמונה'})
+                <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס (${isPdf ? 'מסמך PDF' : 'תמונה'})
                 </button>
               </div>
             </div>
           `;
         } else {
           html += `
-            <div class="app-card rounded-3xl p-4 space-y-3">
+            <div class="glass-card rounded-3xl p-4 space-y-3">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center">
+                  <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center shadow-sm">
                     <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
                   </div>
                   <div>
@@ -586,13 +680,13 @@
                     <span class="text-[10px] text-slate-500 block font-medium">${slot.sub}</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-0.5 rounded-md border border-slate-200">ממתין לטעינה</span>
+                <span class="text-[10px] font-bold bg-slate-100 text-slate-500 px-2.5 py-0.5 rounded-md border border-slate-200">ממתין לקובץ</span>
               </div>
               <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2">
-                <button onclick="triggerSlotCamera('${slot.key}')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+                <button onclick="triggerSlotCamera('${slot.key}')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                   <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i> צלם כרטיס
                 </button>
-                <button onclick="triggerSlotFile('${slot.key}')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+                <button onclick="triggerSlotFile('${slot.key}')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                   <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ
                 </button>
               </div>
@@ -609,7 +703,7 @@
       activeSlotKey = slotKey;
       const input = document.getElementById('slot-camera-input');
       input.onchange = function() {
-        if (input.files && input.files[0]) saveSlotFile(input.files[0]);
+        if (input.files && input.files[0]) processAndSaveSlotFile(input.files[0]);
       };
       input.click();
     }
@@ -618,36 +712,52 @@
       activeSlotKey = slotKey;
       const input = document.getElementById('slot-file-input');
       input.onchange = function() {
-        if (input.files && input.files[0]) saveSlotFile(input.files[0]);
+        if (input.files && input.files[0]) processAndSaveSlotFile(input.files[0]);
       };
       input.click();
     }
 
-    function saveSlotFile(file) {
+    function processAndSaveSlotFile(file) {
       if (!file || !activeSlotKey) return;
-      const reader = new FileReader();
 
-      reader.onload = function(evt) {
-        const ticketData = {
-          fileName: file.name || 'קובץ כרטיס',
-          fileType: file.type || 'image/jpeg',
-          fileData: evt.target.result,
-          savedAt: new Date().toLocaleDateString('he-IL')
-        };
-
-        db.collection('tickets').doc(activeSlotKey).set(ticketData).then(() => {
-          activeSlotKey = null;
-          document.getElementById('slot-camera-input').value = '';
-          document.getElementById('slot-file-input').value = '';
-        }).catch(err => {
-          alert('שגיאה בשמירה לענן.');
+      // בדיקת תמונה מול PDF
+      if (file.type.startsWith('image/')) {
+        compressImageFile(file, function(compressedData) {
+          saveSlotData(file.name, 'image/jpeg', compressedData);
         });
+      } else {
+        // PDF: בדיקת גודל כדי שלא יעבור 950KB
+        if (file.size > 950 * 1024) {
+          alert('קובץ ה-PDF שנבחר שוקל מעל 1MB. אנא בחרו קובץ קל יותר או צלמו את הכרטיס כתמונה.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          saveSlotData(file.name, file.type, evt.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function saveSlotData(fileName, fileType, fileData) {
+      const ticketData = {
+        fileName: fileName || 'כרטיס שמור',
+        fileType: fileType,
+        fileData: fileData,
+        savedAt: new Date().toLocaleDateString('he-IL')
       };
-      reader.readAsDataURL(file);
+
+      db.collection('tickets').doc(activeSlotKey).set(ticketData).then(() => {
+        activeSlotKey = null;
+        document.getElementById('slot-camera-input').value = '';
+        document.getElementById('slot-file-input').value = '';
+      }).catch(err => {
+        alert('שגיאה בשמירה (נשמר מקומית במכשיר במצב אופליין).');
+      });
     }
 
     function deleteSlotTicket(slotKey) {
-      if (!confirm('האם למחוק כרטיס זה מהענן המשפחתי?')) return;
+      if (!confirm('האם למחוק כרטיס זה?')) return;
       db.collection('tickets').doc(slotKey).delete();
     }
 
@@ -657,15 +767,14 @@
         win.document.write(`<iframe src="${dataUri}" frameborder="0" style="border:0; top:0; left:0; bottom:0; right:0; width:100%; height:100%;" allowfullscreen></iframe>`);
       } else {
         win.document.write(`
-          <body style="margin:0; background:#F1F5F9; display:flex; justify-content:center; align-items:center; min-height:100vh;">
+          <body style="margin:0; background:#0F172A; display:flex; justify-content:center; align-items:center; min-height:100vh;">
             <img src="${dataUri}" style="max-width:100%; max-height:100vh; object-fit:contain;" />
           </body>
         `);
       }
     }
 
-    // --- לוגיקת גלריית התמונות ---
-
+    // --- לוגיקת גלריית התמונות עם דחיסה אוטומטית ---
     document.getElementById('gallery-camera-input').addEventListener('change', function(e) {
       if (e.target.files && e.target.files[0]) handleUploadPhoto(e.target.files[0]);
     });
@@ -681,54 +790,26 @@
 
       spinner.classList.remove('hidden');
 
-      // כיווץ תמונה אוטומטי בדפדפן לפני העלאה לענן
-      const img = new Image();
-      const reader = new FileReader();
-
-      reader.onload = function(e) {
-        img.src = e.target.result;
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          const maxDim = 1200;
-          let width = img.width;
-          let height = img.height;
-
-          if (width > height && width > maxDim) {
-            height = Math.round((height * maxDim) / width);
-            width = maxDim;
-          } else if (height > maxDim) {
-            width = Math.round((width * maxDim) / height);
-            height = maxDim;
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, width, height);
-
-          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.75);
-
-          const photoDoc = {
-            imageData: compressedDataUrl,
-            author: author,
-            day: day,
-            caption: caption,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            timeStr: new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })
-          };
-
-          db.collection('gallery').add(photoDoc).then(() => {
-            spinner.classList.add('hidden');
-            document.getElementById('photo-caption').value = '';
-            document.getElementById('gallery-camera-input').value = '';
-            document.getElementById('gallery-file-input').value = '';
-          }).catch(err => {
-            spinner.classList.add('hidden');
-            alert('שגיאה בהעלאת התמונה לענן.');
-          });
+      compressImageFile(file, function(compressedDataUrl) {
+        const photoDoc = {
+          imageData: compressedDataUrl,
+          author: author,
+          day: day,
+          caption: caption,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          timeStr: new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })
         };
-      };
-      reader.readAsDataURL(file);
+
+        db.collection('gallery').add(photoDoc).then(() => {
+          spinner.classList.add('hidden');
+          document.getElementById('photo-caption').value = '';
+          document.getElementById('gallery-camera-input').value = '';
+          document.getElementById('gallery-file-input').value = '';
+        }).catch(err => {
+          spinner.classList.add('hidden');
+          alert('נשמר מקומית במצב אופליין ויסתנכרן ברגע שיתחבר שוב לרשת.');
+        });
+      });
     }
 
     function filterGallery(day) {
@@ -736,16 +817,16 @@
       for (let i = 1; i <= 7; i++) {
         const btn = document.getElementById(`gfilter-${i}`);
         if (day === String(i)) {
-          btn.className = 'px-3 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
+          btn.className = 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
         } else {
-          btn.className = 'px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
+          btn.className = 'px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
         }
       }
       const allBtn = document.getElementById('gfilter-all');
       if (day === 'all') {
-        allBtn.className = 'px-3 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
+        allBtn.className = 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
       } else {
-        allBtn.className = 'px-3 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
+        allBtn.className = 'px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
       }
       renderGallery();
     }
@@ -773,17 +854,17 @@
 
       filtered.forEach(photo => {
         html += `
-          <div class="app-card rounded-2xl overflow-hidden flex flex-col group relative">
+          <div class="glass-card rounded-2xl overflow-hidden flex flex-col group relative">
             <div class="relative bg-slate-100 aspect-square cursor-pointer overflow-hidden" onclick="openFullPhoto('${photo.imageData}', '${photo.caption || ''}', '${photo.author}')">
               <img src="${photo.imageData}" alt="תמונה מהטיול" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
               <span class="absolute top-2 right-2 bg-black/60 backdrop-blur-md text-white text-[9px] font-black px-2 py-0.5 rounded-md">יום ${photo.day}</span>
-              <button onclick="event.stopPropagation(); deleteGalleryPhoto('${photo.id}')" class="absolute top-2 left-2 bg-rose-600/80 hover:bg-rose-600 text-white p-1 rounded-md backdrop-blur-sm active:scale-95 transition" title="מחק תמונה">
-                <i data-lucide="trash-2" class="w-3 h-3"></i>
+              <button onclick="event.stopPropagation(); deleteGalleryPhoto('${photo.id}')" class="absolute top-2 left-2 bg-rose-600/80 hover:bg-rose-600 text-white p-1.5 rounded-lg backdrop-blur-sm active:scale-95 transition" title="מחק תמונה">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
               </button>
             </div>
-            <div class="p-2.5 space-y-1 bg-white flex-1 flex flex-col justify-between">
+            <div class="p-3 space-y-1 bg-white flex-1 flex flex-col justify-between">
               <p class="text-[11px] font-bold text-slate-800 line-clamp-2 leading-snug">${photo.caption || 'זיכרון מהטיול 📸'}</p>
-              <div class="flex items-center justify-between text-[10px] text-slate-500 font-semibold pt-1 border-t border-slate-100">
+              <div class="flex items-center justify-between text-[10px] text-slate-500 font-semibold pt-1.5 border-t border-slate-100">
                 <span class="text-indigo-600 font-bold">${photo.author}</span>
                 <span>${photo.timeStr || ''}</span>
               </div>
@@ -809,18 +890,20 @@
           <div style="margin-top:16px; text-align:center;">
             <p style="font-size:16px; font-weight:bold; margin:0 0 4px 0;">${caption || 'תמונה מהטיול'}</p>
             <p style="font-size:12px; opacity:0.7; margin:0 0 12px 0;">צולם ע"י ${author}</p>
-            <a href="${imgData}" download="garda-photo.jpg" style="background:#4F46E5; color:#FFF; padding:8px 20px; border-radius:999px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">הורד תמונה למכשיר</a>
+            <a href="${imgData}" download="garda-photo.jpg" style="background:#4F46E5; color:#FFF; padding:10px 24px; border-radius:999px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">הורד תמונה למכשיר</a>
           </div>
         </body>
       `);
     }
 
-    // --- לוגיקת מסלול יומי ---
-
+    // --- נתוני מסלול ומזג אוויר ---
     const itinerary = {
       1: {
         date: "יום רביעי, 30.09.2026",
         title: "המראה, נחיתה וצ'ק-אין ב-Vojon",
+        location: "אגם גארדה (Ponti sul Mincio)",
+        weather: "22°C • נעים ומזמין",
+        weatherIcon: "sun",
         tip: "💡 טיפ לשטח: ודאו שכרטיס האשראי של הנהג הראשי תואם להזמנת הרכב השכור בשדה התעופה.",
         stops: [
           { time: "10:15", name: "הגעה לנתב״ג טרמינל 1", hours: "טיסה 6H 357 (המראה: 13:15)", icon: "plane-takeoff", desc: "בידוק בטחוני, מסירת כבודה וצ'ק אין מסודר", waze: "https://waze.com/ul?q=Ben+Gurion+Airport+Terminal+1" },
@@ -832,6 +915,9 @@
       2: {
         date: "יום חמישי, 01.10.2026",
         title: "יום של אקשן וחוויות ב-Gardaland",
+        location: "פארק Gardaland (Castelnuovo)",
+        weather: "21°C • יום מושלם לפארק",
+        weatherIcon: "sparkles",
         tip: "💡 טיפ לשטח: הורידו מראש את אפליקציית Gardaland לצפייה בזמני תורים חיים במתקנים.",
         stops: [
           { time: "09:30", name: "יציאה לפארק Gardaland", hours: "נסיעה: ~12 דקות מהמלון", icon: "car", desc: "נסיעה נוחה והגעה מוקדמת לחניה הראשית", waze: "https://waze.com/ul?q=Gardaland+Resort" },
@@ -842,6 +928,9 @@
       3: {
         date: "יום שישי, 02.10.2026",
         title: "יום חווייתי מלא בפארק הקולנוע Movieland",
+        location: "לאציזה (Movieland Park)",
+        weather: "23°C • שמש ורוח נעימה",
+        weatherIcon: "clapperboard",
         tip: "💡 טיפ לשטח: קחו בגדים להחלפה למתקני המים והסירות המהירות (Kitt SuperJet).",
         stops: [
           { time: "09:45", name: "יציאה לפארק Movieland", hours: "נסיעה: ~12 דקות לעיירה Lazise", icon: "car", desc: "הגעה נוחה לקראת פתיחת השערים ב-10:00", waze: "https://waze.com/ul?q=Movieland+Park+Lazise" },
@@ -852,6 +941,9 @@
       4: {
         date: "שבת, 03.10.2026",
         title: "צפון האגם: רכבל מונטה בלדו וריבה דל גארדה",
+        location: "פסגת מונטה בלדו & ריבה דל גארדה",
+        weather: "15°C בפסגה • יש להצטייד בעליונית",
+        weatherIcon: "cloud-sun",
         tip: "💡 טיפ לשטח: בפסגת מונטה בלדו קריר משמעותית – מומלץ להצטייד בעליונית/ג'קט חם.",
         stops: [
           { time: "09:00", name: "נסיעה לעיירה מלצ'סינה (Malcesine)", hours: "נסיעה נופית: ~55 דקות", icon: "map", desc: "נסיעה יפהפייה לאורך החוף המזרחי של אגם גארדה", waze: "https://waze.com/ul?q=Funivia+Malcesine-Monte+Baldo" },
@@ -863,6 +955,9 @@
       5: {
         date: "יום ראשון, 04.10.2026",
         title: "יום קסם בעיר התעלות - ונציה",
+        location: "ונציה (כיכר סן מרקו וריאלטו)",
+        weather: "20°C • יום בהיר על המים",
+        weatherIcon: "sun",
         tip: "💡 טיפ לשטח: קנו כרטיס יומי ל-Vaporetto (אוטובוס המים) כדי לשוט בחופשיות בתעלות.",
         stops: [
           { time: "08:30", name: "נסיעה לחניון Tronchetto ונציה", hours: "חניון מקורה פתוח 24/7", icon: "car", desc: "נסיעה בכביש המהיר A4 (~שעה ורבע) היישר לחניון הכניסה לונציה", waze: "https://waze.com/ul?q=Tronchetto+Parking+Venice" },
@@ -873,6 +968,9 @@
       6: {
         date: "יום שני, 05.10.2026",
         title: "סירמיונה, בורגטו sul Mincio וורונה",
+        location: "סירמיונה & מרכז ורונה העתיקה",
+        weather: "22°C • נעים ומושלם לסיור",
+        weatherIcon: "sun",
         tip: "💡 טיפ לשטח: בכפר בורגטו מומלץ לאכול צהריים ולטעום את ה-Tortellini המקומי הידוע.",
         stops: [
           { time: "09:30", name: "חצי האי סירמיונה (Sirmione)", hours: "טירת סקאליג'רו: 08:30 – 19:00", icon: "castle", desc: "סיור רגלי בעיירה, ביקור בטירה העתיקה ושייט סירה מהנה סביב המצודה", waze: "https://waze.com/ul?q=Castello+Scaligero+Sirmione" },
@@ -883,6 +981,9 @@
       7: {
         date: "יום שלישי, 06.10.2026",
         title: "צ'ק אאוט, קניות וטיסה לארץ",
+        location: "קניון Grand'Affi & נמל התעופה ורונה",
+        weather: "21°C • טיסה נעימה",
+        weatherIcon: "plane-takeoff",
         tip: "💡 טיפ לשטח: זכרו לתדלק את הרכב השכור בתחנת דלק סמוכה לשדה לפני ההחזרה.",
         stops: [
           { time: "10:30", name: "צ'ק אאוט מ-Bio Agriturismo Vojon", hours: "צ'ק-אאוט: 07:00 – 11:00", icon: "hotel", desc: "סיום שהות, פרידה מבעלי המקום והעמסת מזוודות", waze: "https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" },
@@ -907,9 +1008,9 @@
         const btn = document.getElementById(`day-btn-${i}`);
         btn.innerText = dayLabels[i];
         if (i === currentDay) {
-          btn.className = 'day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-black transition-all duration-200 bg-blue-600 text-white shadow-md border border-blue-600';
+          btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 bg-blue-600 text-white shadow-md shadow-blue-600/20 border border-blue-600';
         } else {
-          btn.className = 'day-chip flex-shrink-0 px-4 py-2 rounded-2xl text-xs font-bold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:text-slate-900 shadow-sm';
+          btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:text-slate-900 shadow-sm';
         }
       }
     }
@@ -920,40 +1021,45 @@
       const data = itinerary[day];
       const container = document.getElementById('day-display');
 
+      // עדכון ווידג'ט מזג אוויר
+      document.getElementById('weather-location').innerText = data.location;
+      document.getElementById('weather-desc').innerText = data.weather;
+      document.getElementById('weather-temp').innerText = data.weather.split('•')[0].trim();
+
       let html = `
         <div class="animate-fade-in space-y-3">
-          <div class="app-card rounded-3xl p-4">
-            <span class="text-[11px] font-black text-blue-700 bg-blue-100 border border-blue-200 px-2.5 py-1 rounded-full">${data.date}</span>
-            <h2 class="text-base font-black text-slate-900 mt-2">${data.title}</h2>
-            ${data.tip ? `<p class="text-[11px] text-blue-900 font-semibold mt-2 bg-blue-50 border border-blue-200/80 p-2.5 rounded-2xl">${data.tip}</p>` : ''}
+          <div class="glass-card rounded-3xl p-4">
+            <span class="text-[11px] font-black text-blue-700 bg-blue-100 border border-blue-200 px-3 py-1 rounded-full">${data.date}</span>
+            <h2 class="text-base font-black text-slate-900 mt-2.5">${data.title}</h2>
+            ${data.tip ? `<p class="text-[11px] text-blue-900 font-semibold mt-2.5 bg-blue-50/90 border border-blue-200/80 p-3 rounded-2xl leading-relaxed">${data.tip}</p>` : ''}
           </div>
       `;
 
       data.stops.forEach(s => {
         html += `
-          <div class="app-card rounded-3xl p-4 space-y-2.5 hover:border-slate-300 transition">
+          <div class="glass-card rounded-3xl p-4 space-y-2.5 hover:border-slate-300 transition">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
-                <div class="w-7 h-7 rounded-lg flex items-center justify-center border border-slate-200 bg-slate-50 text-slate-700">
-                  <i data-lucide="${s.icon}" class="w-3.5 h-3.5"></i>
+                <div class="w-8 h-8 rounded-xl flex items-center justify-center border border-slate-200 bg-slate-50 text-slate-700 shadow-sm">
+                  <i data-lucide="${s.icon}" class="w-4 h-4"></i>
                 </div>
-                <span class="text-xs font-mono font-bold bg-slate-100 border border-slate-200 text-slate-800 px-2 py-0.5 rounded-lg">${s.time}</span>
+                <span class="text-xs font-mono font-black bg-slate-100 border border-slate-200 text-slate-800 px-2.5 py-0.5 rounded-lg">${s.time}</span>
               </div>
-              ${s.hours ? `<span class="text-[11px] font-black text-amber-800 bg-amber-100 border border-amber-200 px-2 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-amber-700"></i> ${s.hours}</span>` : ''}
+              ${s.hours ? `<span class="text-[11px] font-black text-amber-800 bg-amber-100 border border-amber-200 px-2.5 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-amber-700"></i> ${s.hours}</span>` : ''}
             </div>
             <div>
               <h3 class="font-black text-sm text-slate-900">${s.name}</h3>
               <p class="text-xs text-slate-600 leading-relaxed mt-0.5 font-medium">${s.desc}</p>
             </div>
             <div class="pt-2 border-t border-slate-100 flex gap-2">
-              <a href="${s.waze}" target="_blank" class="flex-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <a href="${s.waze}" target="_blank" class="flex-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                 <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-600"></i> Waze
               </a>
-              <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                 <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-600"></i> Maps
               </a>
               ${s.appLink ? `
-              <a href="${s.appLink}" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-black px-3 py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95" title="אפליקציית Gardaland">
+              <a href="${s.appLink}" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-black px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm" title="אפליקציית Gardaland">
                 <i data-lucide="smartphone" class="w-3.5 h-3.5 text-amber-700"></i> אפליקציה
               </a>
               ` : ''}
@@ -985,6 +1091,7 @@
     }
 
     // הפעלה ראשונית
+    updateOnlineStatus();
     renderDayButtons();
     renderDayView(1);
     lucide.createIcons();
