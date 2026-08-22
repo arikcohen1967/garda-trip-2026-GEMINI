@@ -13,7 +13,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Firebase SDK -->
@@ -21,26 +21,31 @@
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
   <style>
+    :root {
+      --font-main: 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
     body { 
-      font-family: 'Rubik', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-main);
       -webkit-tap-highlight-color: transparent;
       padding-top: env(safe-area-inset-top);
       padding-bottom: calc(env(safe-area-inset-bottom) + 5.5rem);
-      background: radial-gradient(120% 120% at 50% 0%, #0F172A 0%, #1E293B 40%, #F1F5F9 40.1%, #F8FAFC 100%);
       min-height: 100vh;
-      color: #0F172A;
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 0.6rem); }
 
+    /* Classic Styles */
+    .theme-classic {
+      background: radial-gradient(120% 120% at 50% 0%, #0F172A 0%, #1E293B 40%, #F1F5F9 40.1%, #F8FAFC 100%);
+      color: #0F172A;
+    }
     .glass-dark {
       background: rgba(15, 23, 42, 0.82);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-
     .glass-card {
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(20px);
@@ -49,13 +54,11 @@
       box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 4px 10px -2px rgba(15, 23, 42, 0.02);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
     .glass-card-dark {
       background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.25);
     }
-
     .glass-nav {
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(24px);
@@ -64,33 +67,81 @@
       box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.05);
     }
 
+    /* Modern Pro Styles */
+    .theme-modern {
+      background: #090D16;
+      color: #F8FAFC;
+    }
+    .pro-glass {
+      background: rgba(18, 24, 38, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+    .pro-glass-accent {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(14, 165, 233, 0.05) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+    .pro-card-hover {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .pro-card-hover:active {
+      transform: scale(0.98);
+    }
+    .modern-gradient-text {
+      background: linear-gradient(135deg, #60A5FA 0%, #A855F7 50%, #EC4899 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in {
-      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   </style>
 </head>
-<body class="relative overflow-x-hidden">
+<body id="app-body" class="theme-modern relative overflow-x-hidden transition-colors duration-300">
 
-  <!-- זוהר רקע אווירתי -->
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[450px] h-[350px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none -z-10"></div>
-  <div class="fixed bottom-20 right-0 w-[350px] h-[350px] bg-indigo-500/10 rounded-full blur-[130px] pointer-events-none -z-10"></div>
+  <!-- רקע זוהר מודרני -->
+  <div id="ambient-glow-1" class="fixed top-0 left-1/2 -translate-x-1/2 w-[450px] h-[350px] bg-blue-600/20 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <div id="ambient-glow-2" class="fixed bottom-20 right-0 w-[350px] h-[350px] bg-purple-600/15 rounded-full blur-[130px] pointer-events-none -z-10"></div>
 
-  <!-- Header עליון יוקרתי -->
-  <header class="sticky top-0 z-40 glass-dark text-white px-4 py-3.5 transition-all">
+  <!-- סרגל מעבר עליון קבוע: בחירת סגנון (מודרני מקצועי / קלאסי מקורי) -->
+  <div class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 px-3 py-2">
+    <div class="max-w-md mx-auto flex items-center justify-between gap-2">
+      <div class="flex items-center gap-1.5 text-xs font-black text-slate-300">
+        <i data-lucide="layout-template" class="w-3.5 h-3.5 text-blue-400"></i>
+        <span>עיצוב תצוגה:</span>
+      </div>
+      <div class="flex bg-slate-900/90 p-1 rounded-xl border border-white/10 gap-1">
+        <button id="theme-btn-modern" onclick="switchTheme('modern')" class="px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md">
+          <i data-lucide="sparkles" class="w-3 h-3"></i>
+          <span>Modern Pro</span>
+        </button>
+        <button id="theme-btn-classic" onclick="switchTheme('classic')" class="px-3 py-1 rounded-lg text-[11px] font-bold text-slate-400 hover:text-slate-200 transition-all flex items-center gap-1">
+          <i data-lucide="layout" class="w-3 h-3"></i>
+          <span>עיצוב מקורי</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header ראשי -->
+  <header id="main-header" class="px-4 py-3.5 transition-all">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div>
         <div class="flex items-center gap-2">
           <span class="text-xl filter drop-shadow">🇮🇹</span>
-          <h1 class="font-black text-base tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
+          <h1 id="header-title" class="font-black text-base tracking-tight text-white">
             גארדה וצפון איטליה
           </h1>
         </div>
         <div class="flex items-center gap-2 mt-0.5">
-          <p class="text-[11px] text-slate-300 font-medium">30.09.2026 – 06.10.2026</p>
+          <p class="text-[11px] text-slate-400 font-medium">30.09.2026 – 06.10.2026</p>
           <span id="network-status" class="text-[9px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> מחובר ומסונכרן
           </span>
@@ -109,24 +160,8 @@
   <!-- תוכן ראשי -->
   <main class="max-w-md mx-auto p-4 space-y-4">
 
-    <!-- ווידג'ט מזג אוויר דינמי יומי -->
-    <section id="weather-widget" class="glass-card-dark text-white rounded-3xl p-4 flex items-center justify-between animate-fade-in">
-      <div class="flex items-center gap-3">
-        <div id="weather-icon-box" class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center text-amber-300 text-xl backdrop-blur-md">
-          <i data-lucide="sun" class="w-6 h-6"></i>
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span id="weather-location" class="font-black text-xs text-slate-200">אגם גארדה (Ponti sul Mincio)</span>
-          </div>
-          <p id="weather-desc" class="text-[11px] text-slate-400 mt-0.5">נעים ונוח לטיולים</p>
-        </div>
-      </div>
-      <div class="text-left">
-        <span id="weather-temp" class="text-2xl font-black tracking-tight">22°C</span>
-        <span class="text-[10px] text-slate-400 block font-medium">עונתי סתווי</span>
-      </div>
-    </section>
+    <!-- ווידג'ט מזג אוויר -->
+    <section id="weather-widget" class="rounded-3xl p-4 flex items-center justify-between animate-fade-in"></section>
 
     <!-- לשונית 1: מסלול יומי -->
     <section id="tab-itinerary" class="tab-pane space-y-4">
@@ -145,65 +180,29 @@
 
     <!-- לשונית 2: שירותים ומקומות סביבי -->
     <section id="tab-nearby" class="tab-pane hidden space-y-4">
-      <div class="glass-card rounded-3xl p-5">
-        <h2 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-1 flex items-center gap-2">
-          <i data-lucide="compass" class="w-4 h-4 text-blue-600"></i>
-          שירותים ומקומות סביבי
-        </h2>
-        <p class="text-xs text-slate-500 mb-4">חיפוש ישיר במפות לפי המיקום הנוכחי בשטח</p>
-
-        <div class="grid grid-cols-2 gap-3">
-          <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
-            <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
-              <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-            </div>
-            <span class="text-xs font-black text-slate-800">סופרמרקטים</span>
-          </a>
-
-          <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
-            <div class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
-              <i data-lucide="utensils" class="w-5 h-5"></i>
-            </div>
-            <span class="text-xs font-black text-slate-800">מסעדות ופיצות</span>
-          </a>
-
-          <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
-            <div class="w-11 h-11 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
-              <i data-lucide="fuel" class="w-5 h-5"></i>
-            </div>
-            <span class="text-xs font-black text-slate-800">תחנות דלק</span>
-          </a>
-
-          <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
-            <div class="w-11 h-11 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
-              <i data-lucide="cross" class="w-5 h-5"></i>
-            </div>
-            <span class="text-xs font-black text-slate-800">בתי מרקחת וחירום</span>
-          </a>
-        </div>
-      </div>
+      <div id="nearby-container" class="rounded-3xl p-5"></div>
     </section>
 
     <!-- לשונית 3: גלריה משפחתית -->
     <section id="tab-gallery" class="tab-pane hidden space-y-4">
-      <div class="glass-card rounded-3xl p-5 space-y-4">
+      <div id="gallery-container" class="rounded-3xl p-5 space-y-4">
         <div class="flex items-center justify-between">
           <div>
-            <h2 class="text-base font-black text-slate-900 flex items-center gap-2">
-              <i data-lucide="camera" class="w-5 h-5 text-indigo-600"></i>
+            <h2 id="gallery-title" class="text-base font-black flex items-center gap-2">
+              <i data-lucide="camera" class="w-5 h-5 text-indigo-400"></i>
               גלריה וחוויות מהטיול
             </h2>
-            <p class="text-xs text-slate-500 mt-0.5">אלבום משותף שמסתנכרן בזמן אמת</p>
+            <p class="text-xs text-slate-400 mt-0.5">אלבום משותף שמסתנכרן בזמן אמת</p>
           </div>
-          <span id="gallery-count-badge" class="text-[11px] font-black bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-full">0 תמונות</span>
+          <span id="gallery-count-badge" class="text-[11px] font-black px-2.5 py-1 rounded-full">0 תמונות</span>
         </div>
 
-        <!-- טופס העלאה מהיר עם דחיסה אוטומטית -->
-        <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-3.5 space-y-3">
+        <!-- טופס העלאה מהיר -->
+        <div id="gallery-upload-box" class="rounded-2xl p-3.5 space-y-3 border">
           <div class="grid grid-cols-2 gap-2">
             <div>
-              <label class="text-[10px] font-bold text-slate-600 block mb-1">מי מצלם/ת?</label>
-              <select id="photo-author" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-500 shadow-sm">
+              <label class="text-[10px] font-bold text-slate-400 block mb-1">מי מצלם/ת?</label>
+              <select id="photo-author" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-200 focus:outline-none focus:border-indigo-500 shadow-sm">
                 <option value="אריק">אריק</option>
                 <option value="הראל">הראל</option>
                 <option value="עמית">עמית</option>
@@ -213,8 +212,8 @@
               </select>
             </div>
             <div>
-              <label class="text-[10px] font-bold text-slate-600 block mb-1">שיוך ליום במסלול</label>
-              <select id="photo-day-select" class="w-full bg-white border border-slate-200 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:border-indigo-500 shadow-sm">
+              <label class="text-[10px] font-bold text-slate-400 block mb-1">שיוך ליום במסלול</label>
+              <select id="photo-day-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-200 focus:outline-none focus:border-indigo-500 shadow-sm">
                 <option value="1">יום 1 • 30/09 (הגעה)</option>
                 <option value="2">יום 2 • 01/10 (Gardaland)</option>
                 <option value="3">יום 3 • 02/10 (Movieland)</option>
@@ -227,7 +226,7 @@
           </div>
 
           <div>
-            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-indigo-500 shadow-sm">
+            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 shadow-sm">
           </div>
 
           <input type="file" id="gallery-camera-input" accept="image/*" capture="environment" class="hidden">
@@ -237,12 +236,12 @@
             <button onclick="document.getElementById('gallery-camera-input').click()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/20 active:scale-95 transition">
               <i data-lucide="camera" class="w-4 h-4"></i> צלם תמונה
             </button>
-            <button onclick="document.getElementById('gallery-file-input').click()" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
-              <i data-lucide="image-plus" class="w-4 h-4 text-indigo-600"></i> מהגלריה
+            <button onclick="document.getElementById('gallery-file-input').click()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
+              <i data-lucide="image-plus" class="w-4 h-4 text-indigo-400"></i> מהגלריה
             </button>
           </div>
           <div id="upload-spinner" class="hidden text-center py-2">
-            <span class="text-xs text-indigo-600 font-black animate-pulse flex items-center justify-center gap-1.5">
+            <span class="text-xs text-indigo-400 font-black animate-pulse flex items-center justify-center gap-1.5">
               <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> מעבד ומסנכרן לענן...
             </span>
           </div>
@@ -251,19 +250,19 @@
         <!-- סינון לפי ימים -->
         <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs" id="gallery-filter-bar">
           <button onclick="filterGallery('all')" id="gfilter-all" class="px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0">הכל</button>
-          <button onclick="filterGallery('1')" id="gfilter-1" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 1</button>
-          <button onclick="filterGallery('2')" id="gfilter-2" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 2</button>
-          <button onclick="filterGallery('3')" id="gfilter-3" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 3</button>
-          <button onclick="filterGallery('4')" id="gfilter-4" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 4</button>
-          <button onclick="filterGallery('5')" id="gfilter-5" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 5</button>
-          <button onclick="filterGallery('6')" id="gfilter-6" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 6</button>
-          <button onclick="filterGallery('7')" id="gfilter-7" class="px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0">יום 7</button>
+          <button onclick="filterGallery('1')" id="gfilter-1" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 1</button>
+          <button onclick="filterGallery('2')" id="gfilter-2" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 2</button>
+          <button onclick="filterGallery('3')" id="gfilter-3" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 3</button>
+          <button onclick="filterGallery('4')" id="gfilter-4" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 4</button>
+          <button onclick="filterGallery('5')" id="gfilter-5" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 5</button>
+          <button onclick="filterGallery('6')" id="gfilter-6" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 6</button>
+          <button onclick="filterGallery('7')" id="gfilter-7" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 7</button>
         </div>
 
         <!-- רשת התמונות -->
         <div id="gallery-grid" class="grid grid-cols-2 gap-3 pt-1"></div>
-        <div id="gallery-empty-state" class="hidden text-center py-10 text-slate-400 space-y-2">
-          <i data-lucide="image" class="w-12 h-12 mx-auto text-slate-300"></i>
+        <div id="gallery-empty-state" class="hidden text-center py-10 text-slate-500 space-y-2">
+          <i data-lucide="image" class="w-12 h-12 mx-auto text-slate-600"></i>
           <p class="text-xs font-semibold">עדיין לא הועלו תמונות.<br>צלמו תמונה והוסיפו מזכרת ראשונה!</p>
         </div>
       </div>
@@ -271,133 +270,58 @@
 
     <!-- לשונית 4: ארנק כרטיסים ומסמכים -->
     <section id="tab-wallet" class="tab-pane hidden space-y-4">
-
-      <!-- כרטיסי טיסה -->
       <div class="flex items-center justify-between px-1">
-        <h3 class="text-xs font-black text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-          <i data-lucide="plane" class="w-4 h-4 text-blue-600"></i>
+        <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+          <i data-lucide="plane" class="w-4 h-4 text-blue-400"></i>
           כרטיסי טיסה ועלייה למטוס
         </h3>
-        <span class="text-[10px] text-slate-500 font-semibold">אופליין + ענן</span>
+        <span class="text-[10px] text-slate-400 font-semibold">אופליין + ענן</span>
       </div>
 
-      <div id="flight-outbound-card" class="glass-card rounded-3xl p-5 border-blue-200 space-y-3"></div>
-      <div id="flight-inbound-card" class="glass-card rounded-3xl p-5 border-indigo-200 space-y-3"></div>
+      <div id="flight-outbound-card" class="rounded-3xl p-5 space-y-3"></div>
+      <div id="flight-inbound-card" class="rounded-3xl p-5 space-y-3"></div>
 
-      <!-- כותרת ראשית לקוביות האתרים -->
       <div class="flex items-center justify-between px-1 pt-2">
-        <h3 class="text-xs font-black text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-          <i data-lucide="ticket" class="w-4 h-4 text-blue-600"></i>
+        <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+          <i data-lucide="ticket" class="w-4 h-4 text-blue-400"></i>
           כרטיסי כניסה ואטרקציות
         </h3>
-        <span class="text-[10px] text-slate-500 font-semibold">מוגבל ל-1MB (PDF/תמונה)</span>
+        <span class="text-[10px] text-slate-400 font-semibold">מוגבל ל-1MB (PDF/תמונה)</span>
       </div>
 
-      <!-- שדות מוסתרים לטעינת קבצים -->
       <input type="file" id="slot-camera-input" accept="image/*" capture="environment" class="hidden">
       <input type="file" id="slot-file-input" accept="application/pdf,image/*" class="hidden">
 
-      <!-- קוביות האתרים להעלאת כרטיסים -->
       <div id="site-slots-container" class="space-y-3"></div>
 
-      <!-- כרטיס המלון הקבוע עם קישורי ניווט וטלפון -->
-      <div class="glass-card rounded-3xl p-5 border-emerald-200">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-          <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shadow-sm">
-              <i data-lucide="hotel" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <span class="font-black text-sm text-slate-900 block">Bio Agriturismo Vojon</span>
-              <span class="text-[10px] text-amber-600 font-bold">★★★ Agriturismo כפרי</span>
-            </div>
-          </div>
-          <a href="https://apps.apple.com/il/app/booking-com-hotels-travel/id367003839" target="_blank" class="text-[10px] font-black bg-emerald-50 hover:bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1 transition active:scale-95">
-            <i data-lucide="external-link" class="w-3 h-3"></i>
-            <span>Booking.com</span>
-          </a>
-        </div>
-
-        <div class="mt-3 space-y-2 text-xs text-slate-600">
-          <div class="flex items-start gap-2">
-            <i data-lucide="map-pin" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
-            <span><strong>כתובת:</strong> Via Del Forte 6, 46040 Ponti Sul Mincio, Italy</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <i data-lucide="user" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-            <span><strong>שם המזמין:</strong> Cohen Arik</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <i data-lucide="bed-double" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-            <span><strong>סוג חדר:</strong> Large Double or Twin Room (כולל ארוחת בוקר 🥐)</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <i data-lucide="calendar" class="w-4 h-4 text-emerald-600 shrink-0"></i>
-            <span><strong>תאריכים:</strong> 30.09.2026 – 06.10.2026 (6 לילות)</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200/60 mt-1">
-            <div>
-              <span class="text-[10px] text-slate-500 block">צ'ק-אין</span>
-              <span class="font-black text-slate-800">15:00 – 18:00</span>
-            </div>
-            <div>
-              <span class="text-[10px] text-slate-500 block">צ'ק-אאוט</span>
-              <span class="font-black text-slate-800">07:00 – 11:00</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2">
-          <a href="tel:+393792027060" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-            <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-600"></i> חיוג
-          </a>
-          <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-            <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-600"></i> Waze
-          </a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-600"></i> Maps
-          </a>
-        </div>
-      </div>
+      <!-- כרטיס המלון -->
+      <div id="hotel-card-container" class="rounded-3xl p-5"></div>
 
       <!-- רשימת הנוסעים -->
-      <div class="glass-card rounded-3xl p-5">
-        <h3 class="text-xs font-black text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
-          <i data-lucide="users" class="w-4 h-4 text-slate-400"></i>
-          נוסעים בכרטיס (פרטי דרכון ולידה)
-        </h3>
-        <div class="divide-y divide-slate-100 text-xs font-medium">
-          <div class="py-2.5 flex justify-between text-slate-800"><span>ARIK COHEN</span><span class="text-slate-500 font-mono font-bold">28/12/1967</span></div>
-          <div class="py-2.5 flex justify-between text-slate-800"><span>HAREL VILNAI COHEN</span><span class="text-slate-500 font-mono font-bold">04/09/1997</span></div>
-          <div class="py-2.5 flex justify-between text-slate-800"><span>AMIT COHEN</span><span class="text-slate-500 font-mono font-bold">01/07/2014</span></div>
-          <div class="py-2.5 flex justify-between text-slate-800"><span>YULY COHEN</span><span class="text-slate-500 font-mono font-bold">01/07/2014</span></div>
-          <div class="py-2.5 flex justify-between text-slate-800"><span>LIAN COHEN</span><span class="text-slate-500 font-mono font-bold">14/10/2015</span></div>
-        </div>
-      </div>
-
+      <div id="passengers-container" class="rounded-3xl p-5"></div>
     </section>
 
   </main>
 
-  <!-- סרגל ניווט תחתון יוקרתי -->
-  <nav class="fixed bottom-0 left-0 right-0 glass-nav z-50 safe-bottom">
+  <!-- סרגל ניווט תחתון -->
+  <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 z-50 safe-bottom">
     <div class="max-w-md mx-auto flex justify-around items-center pt-2.5">
-      <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center gap-1 text-blue-600 font-black text-xs">
+      <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center gap-1 text-blue-500 font-black text-xs">
         <i data-lucide="calendar" class="w-5 h-5"></i>
         <span>מסלול</span>
       </button>
 
-      <button onclick="setTab('gallery')" id="nav-btn-gallery" class="nav-button flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 font-medium text-xs">
+      <button onclick="setTab('gallery')" id="nav-btn-gallery" class="nav-button flex flex-col items-center gap-1 text-slate-500 hover:text-slate-400 font-medium text-xs">
         <i data-lucide="camera" class="w-5 h-5"></i>
         <span>גלריה</span>
       </button>
 
-      <button onclick="setTab('nearby')" id="nav-btn-nearby" class="nav-button flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 font-medium text-xs">
+      <button onclick="setTab('nearby')" id="nav-btn-nearby" class="nav-button flex flex-col items-center gap-1 text-slate-500 hover:text-slate-400 font-medium text-xs">
         <i data-lucide="map-pin" class="w-5 h-5"></i>
         <span>סביבי</span>
       </button>
 
-      <button onclick="setTab('wallet')" id="nav-btn-wallet" class="nav-button flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600 font-medium text-xs">
+      <button onclick="setTab('wallet')" id="nav-btn-wallet" class="nav-button flex flex-col items-center gap-1 text-slate-500 hover:text-slate-400 font-medium text-xs">
         <i data-lucide="ticket" class="w-5 h-5"></i>
         <span>כרטיסים</span>
       </button>
@@ -405,13 +329,14 @@
   </nav>
 
   <script>
+    let currentTheme = localStorage.getItem('garda_theme') || 'modern';
     let currentDay = 1;
     let activeSlotKey = null;
     let ticketMap = {};
     let galleryPhotos = [];
     let activeGalleryFilter = 'all';
 
-    // 1. אתחול Firebase + Offline Persistence מובנה
+    // אתחול Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyAsiM-s0bwOuEzopyzHfY3g_cGqMsOFx8",
       authDomain: "garda-trip-2026-bef3f.firebaseapp.com",
@@ -425,12 +350,8 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // הפעלת מצב אופליין מלא
-    db.enablePersistence({ synchronizeTabs: true }).catch(err => {
-      console.log("Offline persistence initialized or already active.");
-    });
+    db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
 
-    // מעקב אחר מצב חיבור אינטרנט
     function updateOnlineStatus() {
       const statusBadge = document.getElementById('network-status');
       if (navigator.onLine) {
@@ -438,7 +359,7 @@
         statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> מחובר ומסונכרן';
       } else {
         statusBadge.className = "text-[9px] font-bold text-amber-300 bg-amber-950/70 border border-amber-500/30 px-2 py-0.5 rounded-full flex items-center gap-1";
-        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> מצב אופליין (שמור מקומית)';
+        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> מצב אופליין (שמור)';
       }
     }
     window.addEventListener('online', updateOnlineStatus);
@@ -456,29 +377,19 @@
       { key: 'verona_arena', title: 'ורונה: ארנה ובית יוליה', sub: 'יום שני • 05/10', icon: 'heart' }
     ];
 
-    // סנכרון כרטיסים (עם תמיכה באופליין)
+    // סנכרון נתונים
     db.collection('tickets').onSnapshot((snapshot) => {
       ticketMap = {};
-      snapshot.forEach(doc => {
-        ticketMap[doc.id] = doc.data();
-      });
+      snapshot.forEach(doc => { ticketMap[doc.id] = doc.data(); });
       renderAllTickets();
-    }, (error) => {
-      console.warn("Tickets offline read fallback", error);
-    });
+    }, () => {});
 
-    // סנכרון גלריה (עם תמיכה באופליין)
     db.collection('gallery').orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
       galleryPhotos = [];
-      snapshot.forEach(doc => {
-        galleryPhotos.push({ id: doc.id, ...doc.data() });
-      });
+      snapshot.forEach(doc => { galleryPhotos.push({ id: doc.id, ...doc.data() }); });
       renderGallery();
-    }, (error) => {
-      console.warn("Gallery offline read fallback", error);
-    });
+    }, () => {});
 
-    // --- אלגוריתם דחיסה רב-שלבי לקבצים ותמונות עד 800KB (תחת מגבלת ה-1MB של Firestore) ---
     function compressImageFile(file, callback) {
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -488,7 +399,6 @@
           let maxDim = 1200;
           let width = img.width;
           let height = img.height;
-
           if (width > height && width > maxDim) {
             height = Math.round((height * maxDim) / width);
             width = maxDim;
@@ -496,21 +406,16 @@
             width = Math.round((width * maxDim) / height);
             height = maxDim;
           }
-
           const canvas = document.createElement('canvas');
           canvas.width = width;
           canvas.height = height;
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
-
           let dataUrl = canvas.toDataURL('image/jpeg', quality);
-
-          // אם עדיין מעל 800KB, דוחס שוב באופן אגרסיבי יותר
           if (dataUrl.length > 800 * 1024) {
             quality = 0.6;
             dataUrl = canvas.toDataURL('image/jpeg', quality);
           }
-
           callback(dataUrl);
         };
         img.src = e.target.result;
@@ -518,385 +423,6 @@
       reader.readAsDataURL(file);
     }
 
-    function renderAllTickets() {
-      renderFlightCards();
-      renderSiteSlots();
-    }
-
-    function renderFlightCards() {
-      const outSaved = ticketMap['flight_outbound'];
-      const outContainer = document.getElementById('flight-outbound-card');
-      outContainer.innerHTML = `
-        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center">
-              <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <span class="font-black text-sm text-slate-900 block">טיסת הלוך (ישראייר 6H 357)</span>
-              <span class="text-[10px] text-blue-700 font-bold">30.09.2026 | יום רביעי</span>
-            </div>
-          </div>
-          ${outSaved ? `
-            <button onclick="deleteSlotTicket('flight_outbound')" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-rose-50 border border-rose-200 active:scale-95" title="מחק כרטיס">
-              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-            </button>
-          ` : `
-            <span class="text-[10px] font-black bg-blue-100 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-full">תיק 4623652</span>
-          `}
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div>
-            <span class="text-xs font-semibold text-slate-400 block">המראה</span>
-            <span class="text-base font-black text-slate-900">נתב"ג (T1)</span>
-            <span class="text-xs text-blue-600 font-bold block mt-0.5">13:15</span>
-          </div>
-          <i data-lucide="arrow-left" class="w-5 h-5 text-slate-400"></i>
-          <div class="text-left">
-            <span class="text-xs font-semibold text-slate-400 block">נחיתה</span>
-            <span class="text-base font-black text-slate-900">ורונה (VRN)</span>
-            <span class="text-xs text-blue-600 font-bold block mt-0.5">16:05</span>
-          </div>
-        </div>
-
-        <div class="pt-2 border-t border-slate-100">
-          ${outSaved ? `
-            <button onclick="openTicketData('${outSaved.fileData}', '${outSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-              <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס עלייה למטוס (PDF/תמונה)
-            </button>
-          ` : `
-            <div class="grid grid-cols-2 gap-2">
-              <button onclick="triggerSlotCamera('flight_outbound')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i> צלם כרטיס
-              </button>
-              <button onclick="triggerSlotFile('flight_outbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ / PDF
-              </button>
-            </div>
-          `}
-        </div>
-      `;
-
-      const inSaved = ticketMap['flight_inbound'];
-      const inContainer = document.getElementById('flight-inbound-card');
-      inContainer.innerHTML = `
-        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
-              <i data-lucide="plane-landing" class="w-4 h-4"></i>
-            </div>
-            <div>
-              <span class="font-black text-sm text-slate-900 block">טיסת חזור (ישראייר 6H 352)</span>
-              <span class="text-[10px] text-indigo-700 font-bold">06.10.2026 | יום שלישי</span>
-            </div>
-          </div>
-          ${inSaved ? `
-            <button onclick="deleteSlotTicket('flight_inbound')" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-rose-50 border border-rose-200 active:scale-95" title="מחק כרטיס">
-              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-            </button>
-          ` : `
-            <span class="text-[10px] font-black bg-indigo-100 text-indigo-800 border border-indigo-200 px-2 py-0.5 rounded-full">תיק 4623652</span>
-          `}
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div>
-            <span class="text-xs font-semibold text-slate-400 block">המראה</span>
-            <span class="text-base font-black text-slate-900">ורונה (VRN)</span>
-            <span class="text-xs text-indigo-600 font-bold block mt-0.5">21:35</span>
-          </div>
-          <i data-lucide="arrow-left" class="w-5 h-5 text-slate-400"></i>
-          <div class="text-left">
-            <span class="text-xs font-semibold text-slate-400 block">נחיתה</span>
-            <span class="text-base font-black text-slate-900">נתב"ג</span>
-            <span class="text-xs text-indigo-600 font-bold block mt-0.5">07.10.26 | 02:05</span>
-          </div>
-        </div>
-
-        <div class="pt-2 border-t border-slate-100">
-          ${inSaved ? `
-            <button onclick="openTicketData('${inSaved.fileData}', '${inSaved.fileType}')" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-              <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס עלייה למטוס (PDF/תמונה)
-            </button>
-          ` : `
-            <div class="grid grid-cols-2 gap-2">
-              <button onclick="triggerSlotCamera('flight_inbound')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                <i data-lucide="camera" class="w-3.5 h-3.5 text-indigo-600"></i> צלם כרטיס
-              </button>
-              <button onclick="triggerSlotFile('flight_inbound')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ / PDF
-              </button>
-            </div>
-          `}
-        </div>
-      `;
-
-      lucide.createIcons();
-    }
-
-    function renderSiteSlots() {
-      const container = document.getElementById('site-slots-container');
-      let html = '';
-
-      predefinedSiteSlots.forEach(slot => {
-        const saved = ticketMap[slot.key];
-
-        if (saved) {
-          const isPdf = saved.fileType && saved.fileType.includes('pdf');
-          html += `
-            <div class="glass-card rounded-3xl p-4 border-emerald-300 space-y-2.5">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shadow-sm">
-                    <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-black text-sm text-slate-900">${slot.title}</h4>
-                    <span class="text-[10px] text-emerald-700 font-bold">✓ מסונכרן בענן (${saved.fileName})</span>
-                  </div>
-                </div>
-                <button onclick="deleteSlotTicket('${slot.key}')" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-rose-50 border border-rose-200 active:scale-95" title="מחק כרטיס">
-                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                </button>
-              </div>
-              <div class="pt-2 border-t border-slate-100 flex gap-2">
-                <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                  <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-600"></i> הצג כרטיס (${isPdf ? 'מסמך PDF' : 'תמונה'})
-                </button>
-              </div>
-            </div>
-          `;
-        } else {
-          html += `
-            <div class="glass-card rounded-3xl p-4 space-y-3">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center shadow-sm">
-                    <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-black text-sm text-slate-900">${slot.title}</h4>
-                    <span class="text-[10px] text-slate-500 block font-medium">${slot.sub}</span>
-                  </div>
-                </div>
-                <span class="text-[10px] font-bold bg-slate-100 text-slate-500 px-2.5 py-0.5 rounded-md border border-slate-200">ממתין לקובץ</span>
-              </div>
-              <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2">
-                <button onclick="triggerSlotCamera('${slot.key}')" class="bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                  <i data-lucide="camera" class="w-3.5 h-3.5 text-blue-600"></i> צלם כרטיס
-                </button>
-                <button onclick="triggerSlotFile('${slot.key}')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                  <i data-lucide="folder-open" class="w-3.5 h-3.5 text-slate-600"></i> העלה קובץ
-                </button>
-              </div>
-            </div>
-          `;
-        }
-      });
-
-      container.innerHTML = html;
-      lucide.createIcons();
-    }
-
-    function triggerSlotCamera(slotKey) {
-      activeSlotKey = slotKey;
-      const input = document.getElementById('slot-camera-input');
-      input.onchange = function() {
-        if (input.files && input.files[0]) processAndSaveSlotFile(input.files[0]);
-      };
-      input.click();
-    }
-
-    function triggerSlotFile(slotKey) {
-      activeSlotKey = slotKey;
-      const input = document.getElementById('slot-file-input');
-      input.onchange = function() {
-        if (input.files && input.files[0]) processAndSaveSlotFile(input.files[0]);
-      };
-      input.click();
-    }
-
-    function processAndSaveSlotFile(file) {
-      if (!file || !activeSlotKey) return;
-
-      // בדיקת תמונה מול PDF
-      if (file.type.startsWith('image/')) {
-        compressImageFile(file, function(compressedData) {
-          saveSlotData(file.name, 'image/jpeg', compressedData);
-        });
-      } else {
-        // PDF: בדיקת גודל כדי שלא יעבור 950KB
-        if (file.size > 950 * 1024) {
-          alert('קובץ ה-PDF שנבחר שוקל מעל 1MB. אנא בחרו קובץ קל יותר או צלמו את הכרטיס כתמונה.');
-          return;
-        }
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          saveSlotData(file.name, file.type, evt.target.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function saveSlotData(fileName, fileType, fileData) {
-      const ticketData = {
-        fileName: fileName || 'כרטיס שמור',
-        fileType: fileType,
-        fileData: fileData,
-        savedAt: new Date().toLocaleDateString('he-IL')
-      };
-
-      db.collection('tickets').doc(activeSlotKey).set(ticketData).then(() => {
-        activeSlotKey = null;
-        document.getElementById('slot-camera-input').value = '';
-        document.getElementById('slot-file-input').value = '';
-      }).catch(err => {
-        alert('שגיאה בשמירה (נשמר מקומית במכשיר במצב אופליין).');
-      });
-    }
-
-    function deleteSlotTicket(slotKey) {
-      if (!confirm('האם למחוק כרטיס זה?')) return;
-      db.collection('tickets').doc(slotKey).delete();
-    }
-
-    function openTicketData(dataUri, mimeType) {
-      const win = window.open();
-      if (mimeType && mimeType.includes('pdf')) {
-        win.document.write(`<iframe src="${dataUri}" frameborder="0" style="border:0; top:0; left:0; bottom:0; right:0; width:100%; height:100%;" allowfullscreen></iframe>`);
-      } else {
-        win.document.write(`
-          <body style="margin:0; background:#0F172A; display:flex; justify-content:center; align-items:center; min-height:100vh;">
-            <img src="${dataUri}" style="max-width:100%; max-height:100vh; object-fit:contain;" />
-          </body>
-        `);
-      }
-    }
-
-    // --- לוגיקת גלריית התמונות עם דחיסה אוטומטית ---
-    document.getElementById('gallery-camera-input').addEventListener('change', function(e) {
-      if (e.target.files && e.target.files[0]) handleUploadPhoto(e.target.files[0]);
-    });
-    document.getElementById('gallery-file-input').addEventListener('change', function(e) {
-      if (e.target.files && e.target.files[0]) handleUploadPhoto(e.target.files[0]);
-    });
-
-    function handleUploadPhoto(file) {
-      const author = document.getElementById('photo-author').value;
-      const day = document.getElementById('photo-day-select').value;
-      const caption = document.getElementById('photo-caption').value.trim();
-      const spinner = document.getElementById('upload-spinner');
-
-      spinner.classList.remove('hidden');
-
-      compressImageFile(file, function(compressedDataUrl) {
-        const photoDoc = {
-          imageData: compressedDataUrl,
-          author: author,
-          day: day,
-          caption: caption,
-          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-          timeStr: new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })
-        };
-
-        db.collection('gallery').add(photoDoc).then(() => {
-          spinner.classList.add('hidden');
-          document.getElementById('photo-caption').value = '';
-          document.getElementById('gallery-camera-input').value = '';
-          document.getElementById('gallery-file-input').value = '';
-        }).catch(err => {
-          spinner.classList.add('hidden');
-          alert('נשמר מקומית במצב אופליין ויסתנכרן ברגע שיתחבר שוב לרשת.');
-        });
-      });
-    }
-
-    function filterGallery(day) {
-      activeGalleryFilter = day;
-      for (let i = 1; i <= 7; i++) {
-        const btn = document.getElementById(`gfilter-${i}`);
-        if (day === String(i)) {
-          btn.className = 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
-        } else {
-          btn.className = 'px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
-        }
-      }
-      const allBtn = document.getElementById('gfilter-all');
-      if (day === 'all') {
-        allBtn.className = 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
-      } else {
-        allBtn.className = 'px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
-      }
-      renderGallery();
-    }
-
-    function renderGallery() {
-      const grid = document.getElementById('gallery-grid');
-      const empty = document.getElementById('gallery-empty-state');
-      const countBadge = document.getElementById('gallery-count-badge');
-
-      countBadge.innerText = `${galleryPhotos.length} תמונות`;
-
-      const filtered = activeGalleryFilter === 'all' 
-        ? galleryPhotos 
-        : galleryPhotos.filter(p => p.day === activeGalleryFilter);
-
-      if (filtered.length === 0) {
-        grid.innerHTML = '';
-        empty.classList.remove('hidden');
-        lucide.createIcons();
-        return;
-      }
-
-      empty.classList.add('hidden');
-      let html = '';
-
-      filtered.forEach(photo => {
-        html += `
-          <div class="glass-card rounded-2xl overflow-hidden flex flex-col group relative">
-            <div class="relative bg-slate-100 aspect-square cursor-pointer overflow-hidden" onclick="openFullPhoto('${photo.imageData}', '${photo.caption || ''}', '${photo.author}')">
-              <img src="${photo.imageData}" alt="תמונה מהטיול" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-              <span class="absolute top-2 right-2 bg-black/60 backdrop-blur-md text-white text-[9px] font-black px-2 py-0.5 rounded-md">יום ${photo.day}</span>
-              <button onclick="event.stopPropagation(); deleteGalleryPhoto('${photo.id}')" class="absolute top-2 left-2 bg-rose-600/80 hover:bg-rose-600 text-white p-1.5 rounded-lg backdrop-blur-sm active:scale-95 transition" title="מחק תמונה">
-                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-              </button>
-            </div>
-            <div class="p-3 space-y-1 bg-white flex-1 flex flex-col justify-between">
-              <p class="text-[11px] font-bold text-slate-800 line-clamp-2 leading-snug">${photo.caption || 'זיכרון מהטיול 📸'}</p>
-              <div class="flex items-center justify-between text-[10px] text-slate-500 font-semibold pt-1.5 border-t border-slate-100">
-                <span class="text-indigo-600 font-bold">${photo.author}</span>
-                <span>${photo.timeStr || ''}</span>
-              </div>
-            </div>
-          </div>
-        `;
-      });
-
-      grid.innerHTML = html;
-      lucide.createIcons();
-    }
-
-    function deleteGalleryPhoto(photoId) {
-      if (!confirm('האם למחוק תמונה זו מהאלבום המשפחתי?')) return;
-      db.collection('gallery').doc(photoId).delete();
-    }
-
-    function openFullPhoto(imgData, caption, author) {
-      const win = window.open();
-      win.document.write(`
-        <body style="margin:0; background:#0F172A; color:#FFF; font-family:-apple-system, sans-serif; display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100vh; padding:16px; box-sizing:border-box;">
-          <img src="${imgData}" style="max-width:100%; max-height:80vh; object-fit:contain; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,0.5);" />
-          <div style="margin-top:16px; text-align:center;">
-            <p style="font-size:16px; font-weight:bold; margin:0 0 4px 0;">${caption || 'תמונה מהטיול'}</p>
-            <p style="font-size:12px; opacity:0.7; margin:0 0 12px 0;">צולם ע"י ${author}</p>
-            <a href="${imgData}" download="garda-photo.jpg" style="background:#4F46E5; color:#FFF; padding:10px 24px; border-radius:999px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">הורד תמונה למכשיר</a>
-          </div>
-        </body>
-      `);
-    }
-
-    // --- נתוני מסלול ומזג אוויר ---
     const itinerary = {
       1: {
         date: "יום רביעי, 30.09.2026",
@@ -904,7 +430,7 @@
         location: "אגם גארדה (Ponti sul Mincio)",
         weather: "22°C • נעים ומזמין",
         weatherIcon: "sun",
-        tip: "💡 טיפ לשטח: ודאו שכרטיס האשראי של הנהג הראשי תואם להזמנת הרכב השכור בשדה התעופה.",
+        tip: "💡 טיפ לשטח: ודאו שכרטיס האשראי של הנהג הראשי תואם בדיוק להזמנת הרכב השכור בשדה התעופה.",
         stops: [
           { time: "10:15", name: "הגעה לנתב״ג טרמינל 1", hours: "טיסה 6H 357 (המראה: 13:15)", icon: "plane-takeoff", desc: "בידוק בטחוני, מסירת כבודה וצ'ק אין מסודר", waze: "https://waze.com/ul?q=Ben+Gurion+Airport+Terminal+1" },
           { time: "16:05", name: "נחיתה בנמל התעופה ורונה (VRN)", hours: "שדה תעופה פתוח 24/7", icon: "plane-landing", desc: "איסוף כבודה ומעבר מהיר לדלפק השכרת הרכב", waze: "https://waze.com/ul?q=Aeroporto+di+Verona" },
@@ -1003,14 +529,56 @@
       7: "יום שלישי (06/10)"
     };
 
+    function switchTheme(theme) {
+      currentTheme = theme;
+      localStorage.setItem('garda_theme', theme);
+      
+      const body = document.getElementById('app-body');
+      const header = document.getElementById('main-header');
+      const bottomNav = document.getElementById('bottom-nav');
+      const btnModern = document.getElementById('theme-btn-modern');
+      const btnClassic = document.getElementById('theme-btn-classic');
+
+      if (theme === 'modern') {
+        body.className = "theme-modern relative overflow-x-hidden transition-colors duration-300";
+        header.className = "sticky top-[41px] z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/10 px-4 py-3.5 transition-all text-white";
+        bottomNav.className = "fixed bottom-0 left-0 right-0 bg-slate-950/85 backdrop-blur-2xl border-t border-white/10 z-50 safe-bottom";
+        
+        btnModern.className = "px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md";
+        btnClassic.className = "px-3 py-1 rounded-lg text-[11px] font-bold text-slate-400 hover:text-slate-200 transition-all flex items-center gap-1";
+      } else {
+        body.className = "theme-classic relative overflow-x-hidden transition-colors duration-300";
+        header.className = "sticky top-[41px] z-40 glass-dark text-white px-4 py-3.5 transition-all";
+        bottomNav.className = "fixed bottom-0 left-0 right-0 glass-nav z-50 safe-bottom";
+        
+        btnClassic.className = "px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-blue-600 text-white shadow-md";
+        btnModern.className = "px-3 py-1 rounded-lg text-[11px] font-bold text-slate-400 hover:text-slate-200 transition-all flex items-center gap-1";
+      }
+
+      renderDayButtons();
+      renderDayView(currentDay);
+      renderStaticSections();
+      renderAllTickets();
+      renderGallery();
+      lucide.createIcons();
+    }
+
     function renderDayButtons() {
       for (let i = 1; i <= 7; i++) {
         const btn = document.getElementById(`day-btn-${i}`);
         btn.innerText = dayLabels[i];
-        if (i === currentDay) {
-          btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 bg-blue-600 text-white shadow-md shadow-blue-600/20 border border-blue-600';
+        if (currentTheme === 'modern') {
+          if (i === currentDay) {
+            btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25 border border-blue-400/30';
+          } else {
+            btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/80 text-slate-300 border border-white/5 hover:border-white/20 shadow-sm';
+          }
         } else {
-          btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:text-slate-900 shadow-sm';
+          if (i === currentDay) {
+            btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 bg-blue-600 text-white shadow-md shadow-blue-600/20 border border-blue-600';
+          } else {
+            btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 bg-white text-slate-600 border border-slate-200 hover:text-slate-900 shadow-sm';
+          }
         }
       }
     }
@@ -1020,57 +588,771 @@
       renderDayButtons();
       const data = itinerary[day];
       const container = document.getElementById('day-display');
+      const weatherWidget = document.getElementById('weather-widget');
 
-      // עדכון ווידג'ט מזג אוויר
-      document.getElementById('weather-location').innerText = data.location;
-      document.getElementById('weather-desc').innerText = data.weather;
-      document.getElementById('weather-temp').innerText = data.weather.split('•')[0].trim();
-
-      let html = `
-        <div class="animate-fade-in space-y-3">
-          <div class="glass-card rounded-3xl p-4">
-            <span class="text-[11px] font-black text-blue-700 bg-blue-100 border border-blue-200 px-3 py-1 rounded-full">${data.date}</span>
-            <h2 class="text-base font-black text-slate-900 mt-2.5">${data.title}</h2>
-            ${data.tip ? `<p class="text-[11px] text-blue-900 font-semibold mt-2.5 bg-blue-50/90 border border-blue-200/80 p-3 rounded-2xl leading-relaxed">${data.tip}</p>` : ''}
-          </div>
-      `;
-
-      data.stops.forEach(s => {
-        html += `
-          <div class="glass-card rounded-3xl p-4 space-y-2.5 hover:border-slate-300 transition">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-xl flex items-center justify-center border border-slate-200 bg-slate-50 text-slate-700 shadow-sm">
-                  <i data-lucide="${s.icon}" class="w-4 h-4"></i>
-                </div>
-                <span class="text-xs font-mono font-black bg-slate-100 border border-slate-200 text-slate-800 px-2.5 py-0.5 rounded-lg">${s.time}</span>
-              </div>
-              ${s.hours ? `<span class="text-[11px] font-black text-amber-800 bg-amber-100 border border-amber-200 px-2.5 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-amber-700"></i> ${s.hours}</span>` : ''}
+      // עדכון ווידג'ט מזג אוויר לפי תמה
+      if (currentTheme === 'modern') {
+        weatherWidget.className = "pro-glass pro-glass-accent text-white rounded-3xl p-4 flex items-center justify-between animate-fade-in";
+        weatherWidget.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-amber-300 text-2xl backdrop-blur-md shadow-inner">
+              <i data-lucide="${data.weatherIcon || 'sun'}" class="w-6 h-6"></i>
             </div>
             <div>
-              <h3 class="font-black text-sm text-slate-900">${s.name}</h3>
-              <p class="text-xs text-slate-600 leading-relaxed mt-0.5 font-medium">${s.desc}</p>
+              <div class="flex items-center gap-1.5">
+                <span class="font-black text-xs text-white">${data.location}</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+              </div>
+              <p class="text-[11px] text-slate-300 mt-0.5">${data.weather.split('•')[1] || data.weather}</p>
             </div>
-            <div class="pt-2 border-t border-slate-100 flex gap-2">
-              <a href="${s.waze}" target="_blank" class="flex-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-600"></i> Waze
-              </a>
-              <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-600"></i> Maps
-              </a>
-              ${s.appLink ? `
-              <a href="${s.appLink}" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-black px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm" title="אפליקציית Gardaland">
-                <i data-lucide="smartphone" class="w-3.5 h-3.5 text-amber-700"></i> אפליקציה
-              </a>
+          </div>
+          <div class="text-left">
+            <span class="text-2xl font-black tracking-tight text-white">${data.weather.split('•')[0].trim()}</span>
+            <span class="text-[10px] text-blue-300 block font-bold uppercase tracking-wider">עונתי סתווי</span>
+          </div>
+        `;
+      } else {
+        weatherWidget.className = "glass-card-dark text-white rounded-3xl p-4 flex items-center justify-between animate-fade-in";
+        weatherWidget.innerHTML = `
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center text-amber-300 text-xl backdrop-blur-md">
+              <i data-lucide="${data.weatherIcon || 'sun'}" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-black text-xs text-slate-200">${data.location}</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">${data.weather}</p>
+            </div>
+          </div>
+          <div class="text-left">
+            <span class="text-2xl font-black tracking-tight">${data.weather.split('•')[0].trim()}</span>
+            <span class="text-[10px] text-slate-400 block font-medium">עונתי סתווי</span>
+          </div>
+        `;
+      }
+
+      // רינדור כרטיסי מסלול
+      let html = '';
+      if (currentTheme === 'modern') {
+        html += `
+          <div class="animate-fade-in space-y-3.5">
+            <div class="pro-glass rounded-3xl p-4 border-l-4 border-blue-500">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-black text-blue-300 bg-blue-950/80 border border-blue-800 px-3 py-1 rounded-full">${data.date}</span>
+                <span class="text-[10px] text-slate-400 font-bold">${data.stops.length} תחנות מתוכננות</span>
+              </div>
+              <h2 class="text-base font-black text-white mt-2 tracking-tight">${data.title}</h2>
+              ${data.tip ? `
+                <div class="mt-3 flex items-start gap-2.5 bg-blue-950/40 border border-blue-500/20 p-3 rounded-2xl">
+                  <i data-lucide="info" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+                  <p class="text-[11px] text-blue-200 font-medium leading-relaxed">${data.tip.replace('💡 טיפ לשטח:', '').trim()}</p>
+                </div>
               ` : ''}
+            </div>
+        `;
+
+        data.stops.forEach((s, idx) => {
+          html += `
+            <div class="pro-glass pro-card-hover rounded-3xl p-4.5 space-y-3 border border-white/5 relative overflow-hidden">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border border-blue-400/20 flex items-center justify-center text-blue-400">
+                    <i data-lucide="${s.icon}" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <span class="text-xs font-mono font-black text-blue-400 bg-blue-950/60 px-2.5 py-0.5 rounded-lg border border-blue-900/50">${s.time}</span>
+                  </div>
+                </div>
+                ${s.hours ? `
+                  <span class="text-[10px] font-black text-amber-300 bg-amber-950/60 border border-amber-500/30 px-2.5 py-0.5 rounded-full flex items-center gap-1">
+                    <i data-lucide="clock" class="w-3 h-3 text-amber-400"></i> ${s.hours}
+                  </span>
+                ` : ''}
+              </div>
+
+              <div>
+                <h3 class="font-black text-sm text-white">${s.name}</h3>
+                <p class="text-xs text-slate-300 leading-relaxed mt-1 font-medium">${s.desc}</p>
+              </div>
+
+              <div class="pt-2 border-t border-white/5 flex gap-2">
+                <a href="${s.waze}" target="_blank" class="flex-1 bg-gradient-to-r from-sky-500/20 to-blue-500/20 hover:from-sky-500/30 hover:to-blue-500/30 border border-sky-400/30 text-sky-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-400"></i> ניווט Waze
+                </a>
+                <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i> Maps
+                </a>
+                ${s.appLink ? `
+                  <a href="${s.appLink}" target="_blank" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/30 text-amber-300 text-xs font-black px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm">
+                    <i data-lucide="smartphone" class="w-3.5 h-3.5 text-amber-400"></i> אפליקציה
+                  </a>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      } else {
+        html += `
+          <div class="animate-fade-in space-y-3">
+            <div class="glass-card rounded-3xl p-4">
+              <span class="text-[11px] font-black text-blue-700 bg-blue-100 border border-blue-200 px-3 py-1 rounded-full">${data.date}</span>
+              <h2 class="text-base font-black text-slate-900 mt-2.5">${data.title}</h2>
+              ${data.tip ? `<p class="text-[11px] text-blue-900 font-semibold mt-2.5 bg-blue-50/90 border border-blue-200/80 p-3 rounded-2xl leading-relaxed">${data.tip}</p>` : ''}
+            </div>
+        `;
+
+        data.stops.forEach(s => {
+          html += `
+            <div class="glass-card rounded-3xl p-4 space-y-2.5 hover:border-slate-300 transition">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-8 h-8 rounded-xl flex items-center justify-center border border-slate-200 bg-slate-50 text-slate-700 shadow-sm">
+                    <i data-lucide="${s.icon}" class="w-4 h-4"></i>
+                  </div>
+                  <span class="text-xs font-mono font-black bg-slate-100 border border-slate-200 text-slate-800 px-2.5 py-0.5 rounded-lg">${s.time}</span>
+                </div>
+                ${s.hours ? `<span class="text-[11px] font-black text-amber-800 bg-amber-100 border border-amber-200 px-2.5 py-0.5 rounded-md flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3 text-amber-700"></i> ${s.hours}</span>` : ''}
+              </div>
+              <div>
+                <h3 class="font-black text-sm text-slate-900">${s.name}</h3>
+                <p class="text-xs text-slate-600 leading-relaxed mt-0.5 font-medium">${s.desc}</p>
+              </div>
+              <div class="pt-2 border-t border-slate-100 flex gap-2">
+                <a href="${s.waze}" target="_blank" class="flex-1 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-600"></i> Waze
+                </a>
+                <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-600"></i> Maps
+                </a>
+                ${s.appLink ? `
+                <a href="${s.appLink}" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-black px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm" title="אפליקציית Gardaland">
+                  <i data-lucide="smartphone" class="w-3.5 h-3.5 text-amber-700"></i> אפליקציה
+                </a>
+                ` : ''}
+              </div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      }
+
+      container.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    function renderStaticSections() {
+      const nearby = document.getElementById('nearby-container');
+      const galleryBox = document.getElementById('gallery-container');
+      const uploadBox = document.getElementById('gallery-upload-box');
+      const countBadge = document.getElementById('gallery-count-badge');
+      const hotelCard = document.getElementById('hotel-card-container');
+      const passengersCard = document.getElementById('passengers-container');
+
+      if (currentTheme === 'modern') {
+        nearby.className = "pro-glass rounded-3xl p-5 border border-white/10";
+        nearby.innerHTML = `
+          <h2 class="text-sm font-black text-white uppercase tracking-wider mb-1 flex items-center gap-2">
+            <i data-lucide="compass" class="w-4 h-4 text-blue-400"></i>
+            שירותים ומקומות סביבי
+          </h2>
+          <p class="text-xs text-slate-400 mb-4">חיפוש ישיר במפות לפי המיקום הנוכחי בשטח</p>
+          <div class="grid grid-cols-2 gap-3">
+            <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-emerald-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-black text-slate-200">סופרמרקטים</span>
+            </a>
+            <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-amber-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+                <i data-lucide="utensils" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-black text-slate-200">מסעדות ופיצות</span>
+            </a>
+            <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-sky-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-sky-500/20 text-sky-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+                <i data-lucide="fuel" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-black text-slate-200">תחנות דלק</span>
+            </a>
+            <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-rose-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-rose-500/20 text-rose-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+                <i data-lucide="cross" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-black text-slate-200">בתי מרקחת וחירום</span>
+            </a>
+          </div>
+        `;
+
+        galleryBox.className = "pro-glass rounded-3xl p-5 space-y-4 border border-white/10";
+        uploadBox.className = "bg-slate-900/80 border border-white/10 rounded-2xl p-3.5 space-y-3";
+        countBadge.className = "text-[11px] font-black bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2.5 py-1 rounded-full";
+
+        hotelCard.className = "pro-glass rounded-3xl p-5 border border-emerald-500/30 space-y-3";
+        hotelCard.innerHTML = `
+          <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30 shadow-inner">
+                <i data-lucide="hotel" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <span class="font-black text-sm text-white block">Bio Agriturismo Vojon</span>
+                <span class="text-[10px] text-amber-400 font-bold">★★★ Agriturismo כפרי</span>
+              </div>
+            </div>
+            <a href="https://apps.apple.com/il/app/booking-com-hotels-travel/id367003839" target="_blank" class="text-[10px] font-black bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 px-3 py-1.5 rounded-full border border-emerald-500/40 flex items-center gap-1 transition active:scale-95">
+              <i data-lucide="external-link" class="w-3 h-3"></i>
+              <span>Booking</span>
+            </a>
+          </div>
+          <div class="space-y-2 text-xs text-slate-300">
+            <div class="flex items-start gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+              <span><strong>כתובת:</strong> Via Del Forte 6, 46040 Ponti Sul Mincio, Italy</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="user" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <span><strong>שם המזמין:</strong> Cohen Arik</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="bed-double" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <span><strong>חדר:</strong> Large Double / Twin Room (כולל ארוחת בוקר 🥐)</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 bg-slate-900/60 p-2.5 rounded-xl border border-white/5 mt-1">
+              <div>
+                <span class="text-[10px] text-slate-400 block">צ'ק-אין</span>
+                <span class="font-black text-white">15:00 – 18:00</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block">צ'ק-אאוט</span>
+                <span class="font-black text-white">07:00 – 11:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-3 border-t border-white/10 grid grid-cols-3 gap-2">
+            <a href="tel:+393792027060" class="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-400"></i> חיוג
+            </a>
+            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-500/30 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-400"></i> Waze
+            </a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i> Maps
+            </a>
+          </div>
+        `;
+
+        passengersCard.className = "pro-glass rounded-3xl p-5 border border-white/10";
+        passengersCard.innerHTML = `
+          <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <i data-lucide="users" class="w-4 h-4 text-slate-400"></i>
+            נוסעים בכרטיס (פרטי דרכון ולידה)
+          </h3>
+          <div class="divide-y divide-white/5 text-xs font-medium">
+            <div class="py-2.5 flex justify-between text-slate-200"><span>ARIK COHEN</span><span class="text-blue-400 font-mono font-bold">28/12/1967</span></div>
+            <div class="py-2.5 flex justify-between text-slate-200"><span>HAREL VILNAI COHEN</span><span class="text-blue-400 font-mono font-bold">04/09/1997</span></div>
+            <div class="py-2.5 flex justify-between text-slate-200"><span>AMIT COHEN</span><span class="text-blue-400 font-mono font-bold">01/07/2014</span></div>
+            <div class="py-2.5 flex justify-between text-slate-200"><span>YULY COHEN</span><span class="text-blue-400 font-mono font-bold">01/07/2014</span></div>
+            <div class="py-2.5 flex justify-between text-slate-200"><span>LIAN COHEN</span><span class="text-blue-400 font-mono font-bold">14/10/2015</span></div>
+          </div>
+        `;
+      } else {
+        nearby.className = "glass-card rounded-3xl p-5";
+        nearby.innerHTML = `
+          <h2 class="text-sm font-black text-slate-900 uppercase tracking-wider mb-1 flex items-center gap-2">
+            <i data-lucide="compass" class="w-4 h-4 text-blue-600"></i>
+            שירותים ומקומות סביבי
+          </h2>
+          <p class="text-xs text-slate-500 mb-4">חיפוש ישיר במפות לפי המיקום הנוכחי בשטח</p>
+          <div class="grid grid-cols-2 gap-3">
+            <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
+                <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-black text-slate-800">סופרמרקטים</span>
+            </a>
+            <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
+                <i data-lucide="utensils" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-black text-slate-800">מסעדות ופיצות</span>
+            </a>
+            <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
+                <i data-lucide="fuel" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-black text-slate-800">תחנות דלק</span>
+            </a>
+            <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-4 bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center group-hover:scale-110 transition shadow-sm">
+                <i data-lucide="cross" class="w-5 h-5"></i>
+              </div>
+              <span class="text-xs font-black text-slate-800">בתי מרקחת וחירום</span>
+            </a>
+          </div>
+        `;
+
+        galleryBox.className = "glass-card rounded-3xl p-5 space-y-4";
+        uploadBox.className = "bg-slate-50 border border-slate-200/80 rounded-2xl p-3.5 space-y-3";
+        countBadge.className = "text-[11px] font-black bg-indigo-50 text-indigo-700 border border-indigo-200 px-2.5 py-1 rounded-full";
+
+        hotelCard.className = "glass-card rounded-3xl p-5 border-emerald-200";
+        hotelCard.innerHTML = `
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shadow-sm">
+                <i data-lucide="hotel" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <span class="font-black text-sm text-slate-900 block">Bio Agriturismo Vojon</span>
+                <span class="text-[10px] text-amber-600 font-bold">★★★ Agriturismo כפרי</span>
+              </div>
+            </div>
+            <a href="https://apps.apple.com/il/app/booking-com-hotels-travel/id367003839" target="_blank" class="text-[10px] font-black bg-emerald-50 hover:bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1 transition active:scale-95">
+              <i data-lucide="external-link" class="w-3 h-3"></i>
+              <span>Booking.com</span>
+            </a>
+          </div>
+          <div class="mt-3 space-y-2 text-xs text-slate-600">
+            <div class="flex items-start gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+              <span><strong>כתובת:</strong> Via Del Forte 6, 46040 Ponti Sul Mincio, Italy</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="user" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+              <span><strong>שם המזמין:</strong> Cohen Arik</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i data-lucide="bed-double" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+              <span><strong>סוג חדר:</strong> Large Double or Twin Room (כולל ארוחת בוקר 🥐)</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2.5 rounded-xl border border-slate-200/60 mt-1">
+              <div>
+                <span class="text-[10px] text-slate-500 block">צ'ק-אין</span>
+                <span class="font-black text-slate-800">15:00 – 18:00</span>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-500 block">צ'ק-אאוט</span>
+                <span class="font-black text-slate-800">07:00 – 11:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2">
+            <a href="tel:+393792027060" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-600"></i> חיוג
+            </a>
+            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-600"></i> Waze
+            </a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-600"></i> Maps
+            </a>
+          </div>
+        `;
+
+        passengersCard.className = "glass-card rounded-3xl p-5";
+        passengersCard.innerHTML = `
+          <h3 class="text-xs font-black text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <i data-lucide="users" class="w-4 h-4 text-slate-400"></i>
+            נוסעים בכרטיס (פרטי דרכון ולידה)
+          </h3>
+          <div class="divide-y divide-slate-100 text-xs font-medium">
+            <div class="py-2.5 flex justify-between text-slate-800"><span>ARIK COHEN</span><span class="text-slate-500 font-mono font-bold">28/12/1967</span></div>
+            <div class="py-2.5 flex justify-between text-slate-800"><span>HAREL VILNAI COHEN</span><span class="text-slate-500 font-mono font-bold">04/09/1997</span></div>
+            <div class="py-2.5 flex justify-between text-slate-800"><span>AMIT COHEN</span><span class="text-slate-500 font-mono font-bold">01/07/2014</span></div>
+            <div class="py-2.5 flex justify-between text-slate-800"><span>YULY COHEN</span><span class="text-slate-500 font-mono font-bold">01/07/2014</span></div>
+            <div class="py-2.5 flex justify-between text-slate-800"><span>LIAN COHEN</span><span class="text-slate-500 font-mono font-bold">14/10/2015</span></div>
+          </div>
+        `;
+      }
+    }
+
+    function renderAllTickets() {
+      renderFlightCards();
+      renderSiteSlots();
+    }
+
+    function renderFlightCards() {
+      const isModern = currentTheme === 'modern';
+      const outSaved = ticketMap['flight_outbound'];
+      const outContainer = document.getElementById('flight-outbound-card');
+      
+      outContainer.className = isModern ? "pro-glass rounded-3xl p-5 border-l-4 border-blue-500 space-y-3" : "glass-card rounded-3xl p-5 border-blue-200 space-y-3";
+      outContainer.innerHTML = `
+        <div class="flex items-center justify-between pb-3 border-b ${isModern ? 'border-white/10' : 'border-slate-100'}">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-blue-500/20 text-blue-400' : 'bg-blue-100 text-blue-700'} flex items-center justify-center">
+              <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <span class="font-black text-sm ${isModern ? 'text-white' : 'text-slate-900'} block">טיסת הלוך (ישראייר 6H 357)</span>
+              <span class="text-[10px] ${isModern ? 'text-blue-300' : 'text-blue-700'} font-bold">30.09.2026 | יום רביעי</span>
+            </div>
+          </div>
+          ${outSaved ? `
+            <button onclick="deleteSlotTicket('flight_outbound')" class="text-rose-400 hover:text-rose-300 p-1.5 rounded-lg bg-rose-500/10 border border-rose-500/30 active:scale-95" title="מחק כרטיס">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          ` : `
+            <span class="text-[10px] font-black ${isModern ? 'bg-blue-950 text-blue-300 border border-blue-800' : 'bg-blue-100 text-blue-800 border border-blue-200'} px-2 py-0.5 rounded-full">תיק 4623652</span>
+          `}
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-semibold ${isModern ? 'text-slate-400' : 'text-slate-400'} block">המראה</span>
+            <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">נתב"ג (T1)</span>
+            <span class="text-xs ${isModern ? 'text-blue-400' : 'text-blue-600'} font-bold block mt-0.5">13:15</span>
+          </div>
+          <i data-lucide="arrow-left" class="w-5 h-5 ${isModern ? 'text-slate-600' : 'text-slate-400'}"></i>
+          <div class="text-left">
+            <span class="text-xs font-semibold ${isModern ? 'text-slate-400' : 'text-slate-400'} block">נחיתה</span>
+            <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">ורונה (VRN)</span>
+            <span class="text-xs ${isModern ? 'text-blue-400' : 'text-blue-600'} font-bold block mt-0.5">16:05</span>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t ${isModern ? 'border-white/10' : 'border-slate-100'}">
+          ${outSaved ? `
+            <button onclick="openTicketData('${outSaved.fileData}', '${outSaved.fileType}')" class="w-full ${isModern ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300'} text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> הצג כרטיס עלייה למטוס
+            </button>
+          ` : `
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="triggerSlotCamera('flight_outbound')" class="${isModern ? 'bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30' : 'bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                <i data-lucide="camera" class="w-3.5 h-3.5"></i> צלם כרטיס
+              </button>
+              <button onclick="triggerSlotFile('flight_outbound')" class="${isModern ? 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                <i data-lucide="folder-open" class="w-3.5 h-3.5"></i> העלה קובץ / PDF
+              </button>
+            </div>
+          `}
+        </div>
+      `;
+
+      const inSaved = ticketMap['flight_inbound'];
+      const inContainer = document.getElementById('flight-inbound-card');
+      inContainer.className = isModern ? "pro-glass rounded-3xl p-5 border-l-4 border-indigo-500 space-y-3" : "glass-card rounded-3xl p-5 border-indigo-200 space-y-3";
+      inContainer.innerHTML = `
+        <div class="flex items-center justify-between pb-3 border-b ${isModern ? 'border-white/10' : 'border-slate-100'}">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-indigo-500/20 text-indigo-400' : 'bg-indigo-100 text-indigo-700'} flex items-center justify-center">
+              <i data-lucide="plane-landing" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <span class="font-black text-sm ${isModern ? 'text-white' : 'text-slate-900'} block">טיסת חזור (ישראייר 6H 352)</span>
+              <span class="text-[10px] ${isModern ? 'text-indigo-300' : 'text-indigo-700'} font-bold">06.10.2026 | יום שלישי</span>
+            </div>
+          </div>
+          ${inSaved ? `
+            <button onclick="deleteSlotTicket('flight_inbound')" class="text-rose-400 hover:text-rose-300 p-1.5 rounded-lg bg-rose-500/10 border border-rose-500/30 active:scale-95" title="מחק כרטיס">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+            </button>
+          ` : `
+            <span class="text-[10px] font-black ${isModern ? 'bg-indigo-950 text-indigo-300 border border-indigo-800' : 'bg-indigo-100 text-indigo-800 border border-indigo-200'} px-2 py-0.5 rounded-full">תיק 4623652</span>
+          `}
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div>
+            <span class="text-xs font-semibold ${isModern ? 'text-slate-400' : 'text-slate-400'} block">המראה</span>
+            <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">ורונה (VRN)</span>
+            <span class="text-xs ${isModern ? 'text-indigo-400' : 'text-indigo-600'} font-bold block mt-0.5">21:35</span>
+          </div>
+          <i data-lucide="arrow-left" class="w-5 h-5 ${isModern ? 'text-slate-600' : 'text-slate-400'}"></i>
+          <div class="text-left">
+            <span class="text-xs font-semibold ${isModern ? 'text-slate-400' : 'text-slate-400'} block">נחיתה</span>
+            <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">נתב"ג</span>
+            <span class="text-xs ${isModern ? 'text-indigo-400' : 'text-indigo-600'} font-bold block mt-0.5">07.10.26 | 02:05</span>
+          </div>
+        </div>
+
+        <div class="pt-2 border-t ${isModern ? 'border-white/10' : 'border-slate-100'}">
+          ${inSaved ? `
+            <button onclick="openTicketData('${inSaved.fileData}', '${inSaved.fileType}')" class="w-full ${isModern ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300'} text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> הצג כרטיס עלייה למטוס
+            </button>
+          ` : `
+            <div class="grid grid-cols-2 gap-2">
+              <button onclick="triggerSlotCamera('flight_inbound')" class="${isModern ? 'bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/30' : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                <i data-lucide="camera" class="w-3.5 h-3.5"></i> צלם כרטיס
+              </button>
+              <button onclick="triggerSlotFile('flight_inbound')" class="${isModern ? 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                <i data-lucide="folder-open" class="w-3.5 h-3.5"></i> העלה קובץ / PDF
+              </button>
+            </div>
+          `}
+        </div>
+      `;
+
+      lucide.createIcons();
+    }
+
+    function renderSiteSlots() {
+      const isModern = currentTheme === 'modern';
+      const container = document.getElementById('site-slots-container');
+      let html = '';
+
+      predefinedSiteSlots.forEach(slot => {
+        const saved = ticketMap[slot.key];
+
+        if (saved) {
+          const isPdf = saved.fileType && saved.fileType.includes('pdf');
+          html += `
+            <div class="${isModern ? 'pro-glass rounded-3xl p-4 border border-emerald-500/30' : 'glass-card rounded-3xl p-4 border-emerald-300'} space-y-2.5">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-700'} flex items-center justify-center shadow-sm">
+                    <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-black text-sm ${isModern ? 'text-white' : 'text-slate-900'}">${slot.title}</h4>
+                    <span class="text-[10px] ${isModern ? 'text-emerald-400' : 'text-emerald-700'} font-bold">✓ מסונכרן בענן (${saved.fileName})</span>
+                  </div>
+                </div>
+                <button onclick="deleteSlotTicket('${slot.key}')" class="text-rose-400 hover:text-rose-300 p-1.5 rounded-lg bg-rose-500/10 border border-rose-500/30 active:scale-95" title="מחק כרטיס">
+                  <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+              <div class="pt-2 border-t ${isModern ? 'border-white/10' : 'border-slate-100'} flex gap-2">
+                <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 ${isModern ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> הצג כרטיס (${isPdf ? 'מסמך PDF' : 'תמונה'})
+                </button>
+              </div>
+            </div>
+          `;
+        } else {
+          html += `
+            <div class="${isModern ? 'pro-glass rounded-3xl p-4 border border-white/5' : 'glass-card rounded-3xl p-4'} space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-slate-800 text-slate-400' : 'bg-slate-100 text-slate-600'} flex items-center justify-center shadow-sm">
+                    <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-black text-sm ${isModern ? 'text-white' : 'text-slate-900'}">${slot.title}</h4>
+                    <span class="text-[10px] text-slate-400 block font-medium">${slot.sub}</span>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold ${isModern ? 'bg-slate-800 text-slate-400 border border-slate-700' : 'bg-slate-100 text-slate-500 border border-slate-200'} px-2.5 py-0.5 rounded-md">ממתין לקובץ</span>
+              </div>
+              <div class="pt-2 border-t ${isModern ? 'border-white/10' : 'border-slate-100'} grid grid-cols-2 gap-2">
+                <button onclick="triggerSlotCamera('${slot.key}')" class="${isModern ? 'bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30' : 'bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="camera" class="w-3.5 h-3.5"></i> צלם כרטיס
+                </button>
+                <button onclick="triggerSlotFile('${slot.key}')" class="${isModern ? 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="folder-open" class="w-3.5 h-3.5"></i> העלה קובץ
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      container.innerHTML = html;
+      lucide.createIcons();
+    }
+
+    function triggerSlotCamera(slotKey) {
+      activeSlotKey = slotKey;
+      const input = document.getElementById('slot-camera-input');
+      input.onchange = function() {
+        if (input.files && input.files[0]) processAndSaveSlotFile(input.files[0]);
+      };
+      input.click();
+    }
+
+    function triggerSlotFile(slotKey) {
+      activeSlotKey = slotKey;
+      const input = document.getElementById('slot-file-input');
+      input.onchange = function() {
+        if (input.files && input.files[0]) processAndSaveSlotFile(input.files[0]);
+      };
+      input.click();
+    }
+
+    function processAndSaveSlotFile(file) {
+      if (!file || !activeSlotKey) return;
+      if (file.type.startsWith('image/')) {
+        compressImageFile(file, function(compressedData) {
+          saveSlotData(file.name, 'image/jpeg', compressedData);
+        });
+      } else {
+        if (file.size > 950 * 1024) {
+          alert('קובץ ה-PDF שוקל מעל 1MB. יש לבחור קובץ קל יותר.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          saveSlotData(file.name, file.type, evt.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function saveSlotData(fileName, fileType, fileData) {
+      const ticketData = {
+        fileName: fileName || 'כרטיס שמור',
+        fileType: fileType,
+        fileData: fileData,
+        savedAt: new Date().toLocaleDateString('he-IL')
+      };
+
+      db.collection('tickets').doc(activeSlotKey).set(ticketData).then(() => {
+        activeSlotKey = null;
+        document.getElementById('slot-camera-input').value = '';
+        document.getElementById('slot-file-input').value = '';
+      }).catch(() => {
+        alert('נשמר מקומית במכשיר במצב אופליין.');
+      });
+    }
+
+    function deleteSlotTicket(slotKey) {
+      if (!confirm('האם למחוק כרטיס זה?')) return;
+      db.collection('tickets').doc(slotKey).delete();
+    }
+
+    function openTicketData(dataUri, mimeType) {
+      const win = window.open();
+      if (mimeType && mimeType.includes('pdf')) {
+        win.document.write(`<iframe src="${dataUri}" frameborder="0" style="border:0; top:0; left:0; bottom:0; right:0; width:100%; height:100%;" allowfullscreen></iframe>`);
+      } else {
+        win.document.write(`
+          <body style="margin:0; background:#0F172A; display:flex; justify-content:center; align-items:center; min-height:100vh;">
+            <img src="${dataUri}" style="max-width:100%; max-height:100vh; object-fit:contain;" />
+          </body>
+        `);
+      }
+    }
+
+    // גלריה
+    document.getElementById('gallery-camera-input').addEventListener('change', function(e) {
+      if (e.target.files && e.target.files[0]) handleUploadPhoto(e.target.files[0]);
+    });
+    document.getElementById('gallery-file-input').addEventListener('change', function(e) {
+      if (e.target.files && e.target.files[0]) handleUploadPhoto(e.target.files[0]);
+    });
+
+    function handleUploadPhoto(file) {
+      const author = document.getElementById('photo-author').value;
+      const day = document.getElementById('photo-day-select').value;
+      const caption = document.getElementById('photo-caption').value.trim();
+      const spinner = document.getElementById('upload-spinner');
+
+      spinner.classList.remove('hidden');
+
+      compressImageFile(file, function(compressedDataUrl) {
+        const photoDoc = {
+          imageData: compressedDataUrl,
+          author: author,
+          day: day,
+          caption: caption,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          timeStr: new Date().toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })
+        };
+
+        db.collection('gallery').add(photoDoc).then(() => {
+          spinner.classList.add('hidden');
+          document.getElementById('photo-caption').value = '';
+          document.getElementById('gallery-camera-input').value = '';
+          document.getElementById('gallery-file-input').value = '';
+        }).catch(() => {
+          spinner.classList.add('hidden');
+          alert('נשמר מקומית במצב אופליין.');
+        });
+      });
+    }
+
+    function filterGallery(day) {
+      activeGalleryFilter = day;
+      const isModern = currentTheme === 'modern';
+      for (let i = 1; i <= 7; i++) {
+        const btn = document.getElementById(`gfilter-${i}`);
+        if (day === String(i)) {
+          btn.className = 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
+        } else {
+          btn.className = isModern 
+            ? 'px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0'
+            : 'px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
+        }
+      }
+      const allBtn = document.getElementById('gfilter-all');
+      if (day === 'all') {
+        allBtn.className = 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
+      } else {
+        allBtn.className = isModern 
+          ? 'px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0'
+          : 'px-3.5 py-1.5 rounded-xl font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
+      }
+      renderGallery();
+    }
+
+    function renderGallery() {
+      const grid = document.getElementById('gallery-grid');
+      const empty = document.getElementById('gallery-empty-state');
+      const countBadge = document.getElementById('gallery-count-badge');
+      const isModern = currentTheme === 'modern';
+
+      countBadge.innerText = `${galleryPhotos.length} תמונות`;
+
+      const filtered = activeGalleryFilter === 'all' 
+        ? galleryPhotos 
+        : galleryPhotos.filter(p => p.day === activeGalleryFilter);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        empty.classList.remove('hidden');
+        lucide.createIcons();
+        return;
+      }
+
+      empty.classList.add('hidden');
+      let html = '';
+
+      filtered.forEach(photo => {
+        html += `
+          <div class="${isModern ? 'pro-glass rounded-2xl border border-white/10' : 'glass-card rounded-2xl'} overflow-hidden flex flex-col group relative">
+            <div class="relative bg-slate-800 aspect-square cursor-pointer overflow-hidden" onclick="openFullPhoto('${photo.imageData}', '${photo.caption || ''}', '${photo.author}')">
+              <img src="${photo.imageData}" alt="תמונה מהטיול" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <span class="absolute top-2 right-2 bg-black/60 backdrop-blur-md text-white text-[9px] font-black px-2 py-0.5 rounded-md">יום ${photo.day}</span>
+              <button onclick="event.stopPropagation(); deleteGalleryPhoto('${photo.id}')" class="absolute top-2 left-2 bg-rose-600/80 hover:bg-rose-600 text-white p-1.5 rounded-lg backdrop-blur-sm active:scale-95 transition" title="מחק תמונה">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+            <div class="p-3 space-y-1 ${isModern ? 'bg-slate-900/90 text-slate-200' : 'bg-white text-slate-800'} flex-1 flex flex-col justify-between">
+              <p class="text-[11px] font-bold line-clamp-2 leading-snug">${photo.caption || 'זיכרון מהטיול 📸'}</p>
+              <div class="flex items-center justify-between text-[10px] ${isModern ? 'text-slate-400 border-white/5' : 'text-slate-500 border-slate-100'} font-semibold pt-1.5 border-t">
+                <span class="${isModern ? 'text-indigo-400' : 'text-indigo-600'} font-bold">${photo.author}</span>
+                <span>${photo.timeStr || ''}</span>
+              </div>
             </div>
           </div>
         `;
       });
 
-      html += `</div>`;
-      container.innerHTML = html;
+      grid.innerHTML = html;
       lucide.createIcons();
+    }
+
+    function deleteGalleryPhoto(photoId) {
+      if (!confirm('האם למחוק תמונה זו מהאלבום?')) return;
+      db.collection('gallery').doc(photoId).delete();
+    }
+
+    function openFullPhoto(imgData, caption, author) {
+      const win = window.open();
+      win.document.write(`
+        <body style="margin:0; background:#090D16; color:#FFF; font-family:-apple-system, sans-serif; display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100vh; padding:16px; box-sizing:border-box;">
+          <img src="${imgData}" style="max-width:100%; max-height:80vh; object-fit:contain; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.6);" />
+          <div style="margin-top:16px; text-align:center;">
+            <p style="font-size:16px; font-weight:bold; margin:0 0 4px 0;">${caption || 'תמונה מהטיול'}</p>
+            <p style="font-size:12px; opacity:0.7; margin:0 0 12px 0;">צולם ע"י ${author}</p>
+            <a href="${imgData}" download="garda-photo.jpg" style="background:#4F46E5; color:#FFF; padding:10px 24px; border-radius:999px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">הורד תמונה למכשיר</a>
+          </div>
+        </body>
+      `);
     }
 
     function selectDay(day) {
@@ -1081,20 +1363,19 @@
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
       document.getElementById(`tab-${tab}`).classList.remove('hidden');
 
+      const isModern = currentTheme === 'modern';
       document.querySelectorAll('.nav-button').forEach(btn => {
-        btn.classList.remove('text-blue-600', 'font-black');
-        btn.classList.add('text-slate-400', 'font-medium');
+        btn.classList.remove('text-blue-500', 'text-blue-600', 'font-black');
+        btn.classList.add(isModern ? 'text-slate-500' : 'text-slate-400', 'font-medium');
       });
       const active = document.getElementById(`nav-btn-${tab}`);
-      active.classList.remove('text-slate-400', 'font-medium');
-      active.classList.add('text-blue-600', 'font-black');
+      active.classList.remove(isModern ? 'text-slate-500' : 'text-slate-400', 'font-medium');
+      active.classList.add(isModern ? 'text-blue-500' : 'text-blue-600', 'font-black');
     }
 
     // הפעלה ראשונית
     updateOnlineStatus();
-    renderDayButtons();
-    renderDayView(1);
-    lucide.createIcons();
+    switchTheme(currentTheme);
   </script>
 </body>
 </html>
