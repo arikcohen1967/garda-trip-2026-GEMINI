@@ -46,7 +46,7 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Classic Styles (העיצוב המקורי הכהה המקורי) */
+    /* Classic Styles (העיצוב המקורי הכהה) */
     .theme-classic {
       background: radial-gradient(120% 120% at 50% 0%, #0F172A 0%, #1E293B 40%, #090D16 100%);
       color: #F8FAFC;
@@ -349,7 +349,7 @@
   </nav>
 
   <script>
-    let currentTheme = localStorage.getItem('garda_theme') || 'classic';
+    let currentTheme = localStorage.getItem('garda_theme') || 'modern';
     let currentDay = 1;
     let currentTab = 'itinerary';
     let activeSlotKey = null;
@@ -475,6 +475,14 @@
       { key: 'sirmione_castle', title: 'סירמיונה: טירת סקאליג\'רו ושייט', sub: 'יום שני • 05/10', icon: 'castle' },
       { key: 'verona_arena', title: 'ורונה: ארנה ובית יוליה', sub: 'יום שני • 05/10', icon: 'heart' }
     ];
+
+    const passportDetails = {
+      'ARIK COHEN': { number: '23662043', dob: '28/12/1967' },
+      'HAREL VILNAI COHEN': { number: 'לא צוין', dob: '04/09/1997' },
+      'AMIT COHEN': { number: '36061996', dob: '01/07/2014' },
+      'YULY COHEN': { number: '36068815', dob: '01/07/2014' },
+      'LIAN COHEN': { number: '36062981', dob: '14/10/2015' }
+    };
 
     const firebaseConfig = {
       apiKey: "AIzaSyAsiM-s0bwOuEzopyzHfY3g_cGqMsOFx8",
@@ -993,11 +1001,11 @@
         passengersCard.className = "pro-glass p-4 border border-slate-300/80 shadow-md w-full pro-card-hover select-none";
         passengersCard.setAttribute('ondblclick', `openWalletCardModal('רשימת נוסעים', 'דרכונים וגילאים', \`
           <div class='space-y-2 text-xs text-slate-800'>
-            <div><strong>ARIK COHEN:</strong> 28/12/1967</div>
-            <div><strong>HAREL VILNAI COHEN:</strong> 04/09/1997</div>
-            <div><strong>AMIT COHEN:</strong> 01/07/2014</div>
-            <div><strong>YULY COHEN:</strong> 01/07/2014</div>
-            <div><strong>LIAN COHEN:</strong> 14/10/2015</div>
+            <div><strong>ARIK COHEN:</strong> דרכון: 23662043 | 28/12/1967</div>
+            <div><strong>HAREL VILNAI COHEN:</strong> דרכון: לא צוין | 04/09/1997</div>
+            <div><strong>AMIT COHEN:</strong> דרכון: 36061996 | 01/07/2014</div>
+            <div><strong>YULY COHEN:</strong> דרכון: 36068815 | 01/07/2014</div>
+            <div><strong>LIAN COHEN:</strong> דרכון: 36062981 | 14/10/2015</div>
           </div>
         \`)`);
 
@@ -1007,11 +1015,11 @@
             <i data-lucide="expand" class="w-3.5 h-3.5 text-slate-400 opacity-60"></i>
           </h3>
           <div class="divide-y divide-slate-200 text-xs font-medium">
-            <div class="py-2 flex justify-between text-slate-900"><span>ARIK COHEN</span><span class="text-slate-950 font-mono font-black">28/12/1967</span></div>
-            <div class="py-2 flex justify-between text-slate-900"><span>HAREL VILNAI COHEN</span><span class="text-slate-950 font-mono font-black">04/09/1997</span></div>
-            <div class="py-2 flex justify-between text-slate-900"><span>AMIT COHEN</span><span class="text-slate-950 font-mono font-black">01/07/2014</span></div>
-            <div class="py-2 flex justify-between text-slate-900"><span>YULY COHEN</span><span class="text-slate-950 font-mono font-black">01/07/2014</span></div>
-            <div class="py-2 flex justify-between text-slate-900"><span>LIAN COHEN</span><span class="text-slate-950 font-mono font-black">14/10/2015</span></div>
+            <div class="py-2 flex justify-between text-slate-900"><span>ARIK COHEN</span><span class="text-slate-950 font-mono font-black">23662043</span></div>
+            <div class="py-2 flex justify-between text-slate-900"><span>HAREL VILNAI COHEN</span><span class="text-slate-950 font-mono font-black">לא צוין</span></div>
+            <div class="py-2 flex justify-between text-slate-900"><span>AMIT COHEN</span><span class="text-slate-950 font-mono font-black">36061996</span></div>
+            <div class="py-2 flex justify-between text-slate-900"><span>YULY COHEN</span><span class="text-slate-950 font-mono font-black">36068815</span></div>
+            <div class="py-2 flex justify-between text-slate-900"><span>LIAN COHEN</span><span class="text-slate-950 font-mono font-black">36062981</span></div>
           </div>
         `;
       } else {
@@ -1126,11 +1134,11 @@
         passengersCard.className = "classic-card p-4 w-full pro-card-hover select-none";
         passengersCard.setAttribute('ondblclick', `openWalletCardModal('רשימת נוסעים', 'דרכונים וגילאים', \`
           <div class='space-y-2 text-xs text-slate-800'>
-            <div><strong>ARIK COHEN:</strong> 28/12/1967</div>
-            <div><strong>HAREL VILNAI COHEN:</strong> 04/09/1997</div>
-            <div><strong>AMIT COHEN:</strong> 01/07/2014</div>
-            <div><strong>YULY COHEN:</strong> 01/07/2014</div>
-            <div><strong>LIAN COHEN:</strong> 14/10/2015</div>
+            <div><strong>ARIK COHEN:</strong> דרכון: 23662043 | 28/12/1967</div>
+            <div><strong>HAREL VILNAI COHEN:</strong> דרכון: לא צוין | 04/09/1997</div>
+            <div><strong>AMIT COHEN:</strong> דרכון: 36061996 | 01/07/2014</div>
+            <div><strong>YULY COHEN:</strong> דרכון: 36068815 | 01/07/2014</div>
+            <div><strong>LIAN COHEN:</strong> דרכון: 36062981 | 14/10/2015</div>
           </div>
         \`)`);
 
@@ -1140,11 +1148,11 @@
             <i data-lucide="expand" class="w-3.5 h-3.5 text-slate-400 opacity-60"></i>
           </h3>
           <div class="divide-y divide-slate-800 text-xs font-medium text-slate-200">
-            <div class="py-2 flex justify-between"><span>ARIK COHEN</span><span class="text-slate-400 font-mono font-bold">28/12/1967</span></div>
-            <div class="py-2.5 flex justify-between"><span>HAREL VILNAI COHEN</span><span class="text-slate-400 font-mono font-bold">04/09/1997</span></div>
-            <div class="py-2 flex justify-between"><span>AMIT COHEN</span><span class="text-slate-400 font-mono font-bold">01/07/2014</span></div>
-            <div class="py-2 flex justify-between"><span>YULY COHEN</span><span class="text-slate-400 font-mono font-bold">01/07/2014</span></div>
-            <div class="py-2 flex justify-between"><span>LIAN COHEN</span><span class="text-slate-400 font-mono font-bold">14/10/2015</span></div>
+            <div class="py-2 flex justify-between"><span>ARIK COHEN</span><span class="text-slate-400 font-mono font-bold">23662043</span></div>
+            <div class="py-2.5 flex justify-between"><span>HAREL VILNAI COHEN</span><span class="text-slate-400 font-mono font-bold">לא צוין</span></div>
+            <div class="py-2 flex justify-between"><span>AMIT COHEN</span><span class="text-slate-400 font-mono font-bold">36061996</span></div>
+            <div class="py-2 flex justify-between"><span>YULY COHEN</span><span class="text-slate-400 font-mono font-bold">36068815</span></div>
+            <div class="py-2 flex justify-between"><span>LIAN COHEN</span><span class="text-slate-400 font-mono font-bold">36062981</span></div>
           </div>
         `;
       }
