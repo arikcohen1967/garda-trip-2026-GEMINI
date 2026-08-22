@@ -48,40 +48,40 @@
 
     /* Classic Styles (העיצוב המקורי הכהה) */
     .theme-classic {
-      background: radial-gradient(120% 120% at 50% 0%, #1E293B 0%, #0F172A 40%, #090D16 100%);
-      color: #F8FAFC;
+      background: #0F172A !important;
+      color: #F8FAFC !important;
     }
-    .classic-card {
-      background: rgba(30, 41, 59, 0.95);
-      border: 1.5px solid rgba(255, 255, 255, 0.15);
+    .theme-classic .classic-card {
+      background: #1E293B !important;
+      border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
       border-radius: 1.25rem;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
       overflow: hidden;
       width: 100%;
-      color: #F8FAFC;
+      color: #F8FAFC !important;
     }
-    .classic-inner-box {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    .theme-classic .classic-inner-box {
+      background: #0F172A !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
       border-radius: 0.875rem;
-      color: #CBD5E1;
+      color: #CBD5E1 !important;
     }
 
     /* Modern Pro Styles (Silver Titanium) */
     .theme-modern {
-      background: radial-gradient(130% 130% at 50% 0%, #FFFFFF 0%, #E2E8F0 45%, #CBD5E1 100%);
-      color: #09090B;
+      background: #F1F5F9 !important;
+      color: #09090B !important;
     }
-    .pro-glass {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(148, 163, 184, 0.45);
+    .theme-modern .pro-glass {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
       border-radius: 1.25rem;
       box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
       overflow: hidden;
       width: 100%;
+      color: #09090B !important;
     }
+
     .pro-card-hover {
       transition: transform 0.15s ease, box-shadow 0.15s ease;
       cursor: pointer;
@@ -111,7 +111,7 @@
     }
   </style>
 </head>
-<body id="app-body" class="theme-modern relative transition-colors duration-300">
+<body id="app-body" class="theme-classic relative transition-colors duration-300">
 
   <!-- סרגל מעבר עליון: בחירת תצוגה -->
   <div id="top-switch-bar" class="px-3 py-2 transition-all w-full">
@@ -277,8 +277,8 @@
       </div>
     </section>
 
-    <!-- לשונית 4: ארנק כרטיסים ומסמכים (בסגנון Booking נקי ומרווח) -->
-    <section id="tab-wallet" class="tab-pane hidden space-y-3.5 w-full">
+    <!-- לשונית 4: ארנק כרטיסים ומסמכים -->
+    <section id="tab-wallet" class="tab-pane hidden space-y-3 w-full">
       <div class="flex items-center justify-between px-1">
         <h3 class="text-xs font-black opacity-60 uppercase tracking-wider flex items-center gap-1.5">
           <i data-lucide="plane" class="w-3.5 h-3.5"></i>
@@ -287,10 +287,10 @@
         <span class="text-[10px] opacity-60 font-semibold">אופליין + ענן</span>
       </div>
 
-      <div id="flight-outbound-card" class="w-full"></div>
-      <div id="flight-inbound-card" class="w-full"></div>
+      <div id="flight-outbound-card" class="p-4 space-y-2.5 w-full"></div>
+      <div id="flight-inbound-card" class="p-4 space-y-2.5 w-full"></div>
 
-      <div class="flex items-center justify-between px-1 pt-2">
+      <div class="flex items-center justify-between px-1 pt-1.5">
         <h3 class="text-xs font-black opacity-60 uppercase tracking-wider flex items-center gap-1.5">
           <i data-lucide="ticket" class="w-3.5 h-3.5"></i>
           כרטיסי כניסה ואטרקציות
@@ -304,10 +304,10 @@
       <div id="site-slots-container" class="space-y-3 w-full"></div>
 
       <!-- כרטיס המלון -->
-      <div id="hotel-card-container" class="w-full"></div>
+      <div id="hotel-card-container" class="p-4 w-full"></div>
 
-      <!-- רשימת הנוסעים בסגנון Booking -->
-      <div id="passengers-container" class="w-full"></div>
+      <!-- רשימת הנוסעים -->
+      <div id="passengers-container" class="p-4 w-full"></div>
     </section>
 
   </main>
