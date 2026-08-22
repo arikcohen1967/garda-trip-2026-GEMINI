@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="איטליה 2026">
-  <meta name="theme-color" content="#E2E8F0">
+  <meta name="theme-color" content="#FBF9F5">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,22 +46,22 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* 1. Classic Styles */
+    /* 1. Classic Styles (רקע שמנת עדין ומסגרת מובלטת נקייה) */
     .theme-classic {
-      background: radial-gradient(130% 130% at 50% 0%, #FFFFFF 0%, #E2E8F0 45%, #CBD5E1 100%) !important;
-      color: #0F172A !important;
+      background: #FBF9F5 !important;
+      color: #1E293B !important;
     }
     .theme-classic .app-card-style {
       background: #FFFFFF !important;
-      border: 1px solid rgba(203, 213, 225, 0.9) !important;
-      color: #0F172A !important;
+      border: 1.5px solid #CBD5E1 !important;
+      color: #1E293B !important;
       border-radius: 1.25rem;
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06);
       overflow: hidden;
       width: 100%;
     }
 
-    /* 2. Modern Pro Styles */
+    /* 2. Modern Pro Styles (Silver Titanium, Pure White, Solid Black) */
     .theme-modern {
       background: radial-gradient(130% 130% at 50% 0%, #FFFFFF 0%, #E2E8F0 45%, #CBD5E1 100%) !important;
       color: #09090B !important;
@@ -355,7 +355,7 @@
     </div>
   </div>
 
-  <!-- סרגל ניווט תחתון קבוע (כולל כפתור חירום) -->
+  <!-- סרגל ניווט תחתון קבוע -->
   <nav id="bottom-nav" class="fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] shadow-2xl transition-all w-full bg-white border-t border-slate-200">
     <div class="max-w-md mx-auto grid grid-cols-5 items-center px-1">
       <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center justify-center gap-1 py-1">
@@ -1375,14 +1375,20 @@
         initGalleryListenerOnce();
       }
 
-      const allButtons = ['itinerary', 'gallery', 'nearby', 'wallet'];
+      const allButtons = ['itinerary', 'gallery', 'nearby', 'wallet', 'emergency'];
 
       allButtons.forEach(t => {
         const btn = document.getElementById(`nav-btn-${t}`);
-        if (t === tab) {
-          btn.className = "nav-button flex flex-col items-center justify-center gap-1 py-1 text-blue-600 font-black";
-        } else {
-          btn.className = "nav-button flex flex-col items-center justify-center gap-1 py-1 text-slate-400 font-medium hover:text-slate-700";
+        if (btn) {
+          if (t === tab) {
+            btn.className = t === 'emergency' 
+              ? "nav-button flex flex-col items-center justify-center gap-1 py-1 text-rose-600 font-black"
+              : "nav-button flex flex-col items-center justify-center gap-1 py-1 text-blue-600 font-black";
+          } else {
+            btn.className = t === 'emergency'
+              ? "nav-button flex flex-col items-center justify-center gap-1 py-1 text-rose-500/70 font-medium hover:text-rose-600"
+              : "nav-button flex flex-col items-center justify-center gap-1 py-1 text-slate-400 font-medium hover:text-slate-700";
+          }
         }
       });
       lucide.createIcons();
