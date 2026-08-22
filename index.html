@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl" class="h-full">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -85,7 +85,7 @@
       transform: scale(0.985);
     }
 
-    /* iOS Weather Style Card */
+    /* iOS Weather Style Card - יציב ומרווח ללא חיתוך */
     .weather-ios-card {
       background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 45%, #D97706 100%);
       border: 1px solid rgba(255, 255, 255, 0.4);
@@ -93,6 +93,7 @@
       box-shadow: 0 8px 20px -4px rgba(217, 119, 6, 0.3);
       color: #FFFFFF;
       overflow: hidden;
+      min-height: 84px;
     }
 
     @keyframes fadeIn {
@@ -110,8 +111,8 @@
   <div id="ambient-glow-1" class="fixed top-0 left-1/2 -translate-x-1/2 w-[480px] h-[360px] bg-white/60 rounded-full blur-[120px] pointer-events-none -z-10"></div>
   <div id="ambient-glow-2" class="fixed bottom-24 right-0 w-[360px] h-[360px] bg-slate-400/20 rounded-full blur-[130px] pointer-events-none -z-10"></div>
 
-  <!-- סרגל מעבר עליון קבוע: מתג תצוגה -->
-  <div id="top-switch-bar" class="sticky top-0 z-40 px-3 py-2 transition-all w-full">
+  <!-- סרגל מעבר עליון: בחירת תצוגה -->
+  <div id="top-switch-bar" class="px-3 py-2 transition-all w-full">
     <div class="max-w-md mx-auto flex items-center justify-between gap-2">
       <div class="flex items-center gap-1.5 text-xs font-black" id="theme-indicator-text">
         <i data-lucide="layout-template" class="w-3.5 h-3.5"></i>
@@ -131,7 +132,7 @@
   </div>
 
   <!-- Header ראשי -->
-  <header id="main-header" class="px-4 py-3 transition-all w-full">
+  <header id="main-header" class="px-4 py-2.5 transition-all w-full">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div>
         <div class="flex items-center gap-2">
@@ -158,7 +159,7 @@
   </header>
 
   <!-- תוכן ראשי -->
-  <main class="max-w-md mx-auto px-4 py-3 space-y-3.5 w-full">
+  <main class="max-w-md mx-auto px-4 pt-2 pb-4 space-y-3.5 w-full">
 
     <!-- ווידג'ט מזג אוויר -->
     <section id="weather-widget" class="weather-ios-card p-4 flex items-center justify-between animate-fade-in shadow-md w-full"></section>
@@ -551,11 +552,11 @@
 
       if (theme === 'modern') {
         body.className = "theme-modern relative transition-colors duration-300";
-        topSwitchBar.className = "sticky top-0 z-40 bg-slate-200/90 backdrop-blur-xl border-b border-slate-300 px-3 py-2 text-slate-900 shadow-sm w-full";
+        topSwitchBar.className = "bg-slate-200/90 border-b border-slate-300 px-3 py-2 text-slate-900 shadow-sm w-full";
         themeIndicator.className = "flex items-center gap-1.5 text-xs font-black text-slate-900";
         switchWrapper.className = "flex bg-slate-300/80 p-1 rounded-xl border border-slate-400/50 gap-1";
         
-        header.className = "bg-transparent px-4 py-3 transition-all text-slate-950 w-full";
+        header.className = "bg-transparent px-4 py-2.5 transition-all text-slate-950 w-full";
         bottomNav.className = "fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] bg-white/95 backdrop-blur-xl border-t border-slate-300 text-slate-600 shadow-[0_-4px_25px_rgba(0,0,0,0.06)] w-full";
         
         btnToHotel.className = "flex items-center gap-1.5 bg-slate-950 hover:bg-slate-800 text-white font-black text-xs px-3.5 py-1.5 rounded-full shadow-md active:scale-95 transition";
@@ -563,11 +564,11 @@
         btnClassic.className = "px-3 py-1 rounded-lg text-[11px] font-bold text-slate-700 hover:text-slate-950 transition-all flex items-center gap-1";
       } else {
         body.className = "theme-classic relative transition-colors duration-300";
-        topSwitchBar.className = "sticky top-0 z-40 bg-slate-900 backdrop-blur-xl border-b border-slate-800 px-3 py-2 text-white w-full";
+        topSwitchBar.className = "bg-slate-900 border-b border-slate-800 px-3 py-2 text-white w-full";
         themeIndicator.className = "flex items-center gap-1.5 text-xs font-black text-slate-200";
         switchWrapper.className = "flex bg-slate-800 p-1 rounded-xl border border-slate-700 gap-1";
         
-        header.className = "bg-slate-900 text-white px-4 py-3 transition-all border-b border-slate-800 w-full";
+        header.className = "bg-slate-900 text-white px-4 py-2.5 transition-all border-b border-slate-800 w-full";
         bottomNav.className = "fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] bg-white border-t border-slate-200 text-slate-600 shadow-2xl w-full";
         
         btnToHotel.className = "flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-full shadow-md active:scale-95 transition";
@@ -612,7 +613,7 @@
       const container = document.getElementById('day-display');
       const weatherWidget = document.getElementById('weather-widget');
 
-      // ווידג'ט מזג אוויר
+      // ווידג'ט מזג אוויר iOS מרווח ומוגן מחיתוכים
       weatherWidget.className = "weather-ios-card p-4 flex items-center justify-between shadow-md animate-fade-in w-full";
       weatherWidget.innerHTML = `
         <div class="flex items-center gap-3">
@@ -854,7 +855,7 @@
             <a href="tel:+393792027060" class="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm">
               <i data-lucide="phone" class="w-3.5 h-3.5 text-slate-900"></i> חיוג
             </a>
-            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-slate-950 hover:bg-slate-800 text-white text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm">
+            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-slate-950 hover:bg-slate-800 text-white text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-md">
               <i data-lucide="navigation" class="w-3.5 h-3.5 text-white"></i> Waze
             </a>
             <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm">
