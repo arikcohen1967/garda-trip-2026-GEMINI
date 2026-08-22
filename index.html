@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="איטליה 2026">
-  <meta name="theme-color" content="#E2E8F0">
+  <meta name="theme-color" content="#0F172A">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,22 +46,21 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* 1. Classic Styles (מעודכן עם הרקע העשיר והיוקרתי של Modern Pro) */
+    /* 1. Classic Styles */
     .theme-classic {
-      background: radial-gradient(130% 130% at 50% 0%, #FFFFFF 0%, #E2E8F0 45%, #CBD5E1 100%) !important;
+      background: #F1F5F9 !important;
       color: #0F172A !important;
     }
     .theme-classic .app-card-style {
       background: #FFFFFF !important;
-      border: 1px solid rgba(203, 213, 225, 0.9) !important;
-      color: #0F172A !important;
+      border: 1px solid #CBD5E1 !important;
       border-radius: 1.25rem;
-      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+      box-shadow: 0 4px 15px -2px rgba(15, 23, 42, 0.05);
       overflow: hidden;
       width: 100%;
     }
 
-    /* 2. Modern Pro Styles (Silver Titanium) */
+    /* 2. Modern Pro Styles */
     .theme-modern {
       background: radial-gradient(130% 130% at 50% 0%, #FFFFFF 0%, #E2E8F0 45%, #CBD5E1 100%) !important;
       color: #09090B !important;
@@ -69,24 +68,23 @@
     .theme-modern .app-card-style {
       background: #FFFFFF !important;
       border: 1.5px solid #09090B !important;
-      color: #09090B !important;
       border-radius: 1.25rem;
-      box-shadow: 0 10px 24px -4px rgba(9, 9, 11, 0.12), 0 2px 6px -1px rgba(9, 9, 11, 0.05);
+      box-shadow: 0 10px 24px -4px rgba(9, 9, 11, 0.12);
       overflow: hidden;
       width: 100%;
     }
 
-    /* 3. Booking Clean Style */
-    .theme-booking-clean {
-      background: radial-gradient(130% 130% at 50% 0%, #FFFFFF 0%, #E2E8F0 45%, #CBD5E1 100%) !important;
-      color: #111827 !important;
+    /* 3. Booking Platform Style (אוצומטי יום/לילה) */
+    .theme-booking-app {
+      background: #1A1A1A !important;
+      color: #F8FAFC !important;
     }
-    .theme-booking-clean .app-card-style {
-      background: #FFFFFF !important;
-      border: 1px solid #D1D5DB !important;
-      color: #111827 !important;
+    .theme-booking-app .app-card-style {
+      background: #242424 !important;
+      border: 1px solid #333333 !important;
+      color: #F8FAFC !important;
       border-radius: 1rem;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
       overflow: hidden;
       width: 100%;
     }
@@ -99,15 +97,14 @@
       transform: scale(0.985);
     }
 
-    /* iOS Weather Style Card */
     .weather-ios-card {
       background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 45%, #D97706 100%);
       border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 1.5rem;
-      box-shadow: 0 12px 30px -6px rgba(217, 119, 6, 0.35);
+      border-radius: 1.25rem;
+      box-shadow: 0 8px 20px -4px rgba(217, 119, 6, 0.3);
       color: #FFFFFF;
       overflow: hidden;
-      min-height: 80px;
+      min-height: 84px;
       width: 100%;
     }
 
@@ -120,46 +117,48 @@
     }
   </style>
 </head>
-<body id="app-body" class="theme-classic relative transition-colors duration-300">
+<body id="app-body" class="theme-booking-app relative transition-colors duration-300">
 
-  <!-- סרגל מעבר עליון: בחירת תצוגה בין 3 העיצובים -->
-  <div id="top-switch-bar" class="px-3 py-2 transition-all w-full bg-white/90 backdrop-blur-md border-b border-slate-200">
+  <!-- סרגל מעבר עליון: בחירת תצוגה -->
+  <div id="top-switch-bar" class="px-3 py-2 transition-all w-full">
     <div class="max-w-md mx-auto flex items-center justify-between gap-1">
-      <div class="flex items-center gap-1 text-[11px] font-black text-slate-800">
+      <div class="flex items-center gap-1 text-[11px] font-black" id="theme-indicator-text">
         <i data-lucide="layout-template" class="w-3.5 h-3.5"></i>
         <span>תצוגה:</span>
       </div>
-      <div class="flex p-0.5 rounded-xl gap-1 bg-slate-100 border border-slate-200" id="theme-switch-wrapper">
-        <button id="theme-btn-classic" onclick="switchTheme('classic')" class="px-2 py-1 rounded-lg text-[10px] font-bold transition-all">מקורי</button>
-        <button id="theme-btn-modern" onclick="switchTheme('modern')" class="px-2 py-1 rounded-lg text-[10px] font-bold transition-all">Modern Pro</button>
-        <button id="theme-btn-booking" onclick="switchTheme('booking')" class="px-2 py-1 rounded-lg text-[10px] font-bold transition-all">Booking Clean</button>
+      <div class="flex p-0.5 rounded-xl gap-1 border" id="theme-switch-wrapper">
+        <button id="theme-btn-classic" onclick="switchTheme('classic')" class="px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all">עיצוב מקורי</button>
+        <button id="theme-btn-modern" onclick="switchTheme('modern')" class="px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all">Modern Pro</button>
+        <button id="theme-btn-booking" onclick="switchTheme('booking')" class="px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all">Booking App</button>
       </div>
     </div>
   </div>
 
   <!-- Header ראשי -->
-  <header id="main-header" class="px-4 py-3 transition-all w-full bg-white border-b border-slate-200 shadow-sm">
-    <div class="max-w-md mx-auto flex items-center justify-between">
-      <div>
+  <header id="main-header" class="px-4 py-3 transition-all w-full shadow-md">
+    <div class="max-w-md mx-auto flex flex-col gap-3">
+      <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="text-xl filter drop-shadow">🇮🇹</span>
-          <h1 id="header-title" class="font-black text-base tracking-tight text-slate-900">
+          <h1 id="header-title" class="font-black text-lg tracking-tight">
             גארדה וצפון איטליה
           </h1>
         </div>
-        <div class="flex items-center gap-2 mt-0.5">
-          <p id="header-dates" class="text-[11px] font-medium text-slate-500">30.09.2026 – 06.10.2026</p>
-          <span id="network-status" class="text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 bg-slate-100 text-slate-700 border border-slate-200">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> מחובר ומסונכרן
-          </span>
+        <div class="flex items-center gap-2">
+          <a id="btn-to-hotel" href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="flex items-center gap-1 font-black text-xs px-3 py-1.5 rounded-full shadow transition">
+            <i data-lucide="hotel" class="w-3.5 h-3.5"></i>
+            <span>למלון</span>
+          </a>
         </div>
       </div>
-
-      <div class="flex items-center gap-2">
-        <a id="btn-to-hotel" href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="flex items-center gap-1.5 font-black text-xs px-3.5 py-1.5 rounded-full shadow-sm active:scale-95 transition bg-blue-600 text-white">
-          <i data-lucide="hotel" class="w-3.5 h-3.5"></i>
-          <span>למלון</span>
-        </a>
+      <div id="booking-search-bar" class="p-2.5 rounded-xl border flex items-center justify-between text-xs font-bold shadow-inner">
+        <div class="flex items-center gap-2">
+          <i data-lucide="search" class="w-4 h-4 text-blue-500"></i>
+          <span>30 ספט - 6 אוקט • 5 נוסעים (אוטומטי יום/לילה)</span>
+        </div>
+        <span id="network-status" class="text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> מחובר
+        </span>
       </div>
     </div>
   </header>
@@ -183,7 +182,7 @@
       </div>
 
       <div class="text-center w-full">
-        <span id="hint-box" class="text-[10px] font-semibold px-3 py-1 rounded-full border shadow-sm inline-flex items-center gap-1 bg-white text-slate-600 border-slate-200">
+        <span id="hint-box" class="text-[10px] font-semibold px-3 py-1 rounded-full border shadow-sm inline-flex items-center gap-1">
           <i data-lucide="maximize-2" class="w-3 h-3"></i> לחיצה כפולה על כל פעילות או כרטיס תפתח אותם במסך מלא
         </span>
       </div>
@@ -207,15 +206,15 @@
             </h2>
             <p class="text-[11px] opacity-70 mt-0.5">אלבום משותף שמסתנכרן בזמן אמת</p>
           </div>
-          <span id="gallery-count-badge" class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800">0 תמונות</span>
+          <span id="gallery-count-badge" class="text-[10px] font-black px-2.5 py-0.5 rounded-full">0 תמונות</span>
         </div>
 
         <!-- טופס העלאה מהיר -->
-        <div id="gallery-upload-box" class="p-3.5 space-y-2.5 border rounded-xl w-full bg-white shadow-sm border-slate-200">
+        <div id="gallery-upload-box" class="p-3.5 space-y-2.5 border rounded-xl w-full shadow-sm">
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[10px] font-bold opacity-70 block mb-1">מי מצלם/ת?</label>
-              <select id="photo-author" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
+              <select id="photo-author" class="w-full border rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
                 <option value="אריק">אריק</option>
                 <option value="הראל">הראל</option>
                 <option value="עמית">עמית</option>
@@ -226,7 +225,7 @@
             </div>
             <div>
               <label class="text-[10px] font-bold opacity-70 block mb-1">שיוך ליום במסלול</label>
-              <select id="photo-day-select" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
+              <select id="photo-day-select" class="w-full border rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
                 <option value="1">יום 1 • 30/09 (הגעה)</option>
                 <option value="2">יום 2 • 01/10 (Gardaland)</option>
                 <option value="3">יום 3 • 02/10 (Movieland)</option>
@@ -239,22 +238,22 @@
           </div>
 
           <div>
-            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none shadow-sm text-slate-950">
+            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full border rounded-lg px-3 py-1.5 text-xs focus:outline-none shadow-sm text-slate-950">
           </div>
 
           <input type="file" id="gallery-camera-input" accept="image/*" capture="environment" class="hidden">
           <input type="file" id="gallery-file-input" accept="image/*" class="hidden">
 
           <div class="grid grid-cols-2 gap-2 pt-1">
-            <button onclick="document.getElementById('gallery-camera-input').click()" id="btn-gallery-cam" class="text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition bg-blue-600 text-white">
+            <button onclick="document.getElementById('gallery-camera-input').click()" id="btn-gallery-cam" class="text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition">
               <i data-lucide="camera" class="w-3.5 h-3.5"></i> צלם תמונה
             </button>
-            <button onclick="document.getElementById('gallery-file-input').click()" id="btn-gallery-file" class="text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition bg-slate-100 text-slate-800 border border-slate-300">
+            <button onclick="document.getElementById('gallery-file-input').click()" id="btn-gallery-file" class="text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition border">
               <i data-lucide="image-plus" class="w-3.5 h-3.5 opacity-70"></i> מהגלריה
             </button>
           </div>
           <div id="upload-spinner" class="hidden text-center py-1">
-            <span class="text-xs font-black animate-pulse flex items-center justify-center gap-1.5 text-blue-600">
+            <span class="text-xs font-black animate-pulse flex items-center justify-center gap-1.5">
               <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> מעבד ומסנכרן לענן...
             </span>
           </div>
@@ -318,7 +317,7 @@
 
   <!-- חלונית מסך מלא לפעילות / כרטיסים (Double Tap Modal) -->
   <div id="activity-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all animate-fade-in">
-    <div class="bg-white text-slate-900 rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl relative border border-slate-200">
+    <div class="bg-white text-slate-900 rounded-2xl max-w-sm w-full p-5 space-y-4 shadow-2xl relative border border-slate-200">
       <button onclick="closeActivityModal()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition active:scale-95">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
@@ -353,7 +352,7 @@
   </nav>
 
   <script>
-    let currentTheme = localStorage.getItem('garda_theme') || 'classic';
+    let currentTheme = localStorage.getItem('garda_theme') || 'booking';
     let currentDay = 1;
     let currentTab = 'itinerary';
     let activeSlotKey = null;
@@ -361,6 +360,13 @@
     let galleryPhotos = [];
     let activeGalleryFilter = 'all';
     let isGalleryLoaded = false;
+
+    // בדיקה אוטומטית של שעה ביום (Day/Night Mode)
+    function getAutoTheme() {
+      const hour = new Date().getHours();
+      // בין 06:00 ל-20:00 בהיר, שאר הזמן כהה (Booking App style)
+      return (hour >= 6 && hour < 20) ? 'booking' : 'booking-night';
+    }
 
     const dayLabels = {
       1: "יום רביעי (30/09)",
@@ -588,8 +594,8 @@
       if (theme === 'modern') {
         body.className = "theme-modern relative transition-colors duration-300";
         btnModern.className = "px-2.5 py-1 rounded-lg text-[10px] font-black transition-all bg-slate-950 text-white shadow-sm";
-      } else if (theme === 'booking') {
-        body.className = "theme-booking-clean relative transition-colors duration-300";
+      } else if (theme === 'booking' || theme === 'booking-night') {
+        body.className = "theme-booking-app relative transition-colors duration-300";
         btnBooking.className = "px-2.5 py-1 rounded-lg text-[10px] font-black transition-all bg-blue-600 text-white shadow-sm";
       } else {
         body.className = "theme-classic relative transition-colors duration-300";
@@ -598,7 +604,7 @@
 
       topSwitchBar.className = "px-3 py-2 transition-all w-full bg-white border-b border-slate-200 shadow-sm";
       header.className = "px-4 py-3 transition-all w-full bg-white border-b border-slate-200 shadow-sm";
-      bottomNav.className = "fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] shadow-lg transition-all w-full bg-white border-t border-slate-200";
+      bottomNav.className = "fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] shadow-2xl transition-all w-full bg-white border-t border-slate-200";
       btnToHotel.className = "flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-black text-xs px-3.5 py-1.5 rounded-full shadow-sm active:scale-95 transition";
       if(hintBox) hintBox.className = "text-[10px] font-semibold px-3 py-1 rounded-full border shadow-sm inline-flex items-center gap-1 bg-white text-slate-600 border-slate-200";
 
@@ -727,7 +733,7 @@
       content.innerHTML = `
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <div class="flex items-center gap-2.5">
-            <span class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
+            <span class="w-10 h-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
               <i data-lucide="${stop.icon}" class="w-5 h-5"></i>
             </span>
             <div>
@@ -738,7 +744,7 @@
         </div>
 
         ${stop.hours ? `
-          <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 p-3 rounded-xl text-amber-900 text-xs font-semibold w-full">
+          <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 p-3 rounded-2xl text-amber-900 text-xs font-semibold w-full">
             <i data-lucide="clock" class="w-4 h-4 text-amber-600 shrink-0"></i>
             <span>שעות פעילות: ${stop.hours}</span>
           </div>
@@ -757,7 +763,7 @@
             <i data-lucide="map-pin" class="w-4 h-4 text-slate-600"></i> פתח ב-Google Maps
           </a>
           ${stop.appLink ? `
-            <a href="${stop.appLink}" target="_blank" class="w-full bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 text-xs font-semibold py-3 rounded-xl flex items-center justify-center gap-2 shadow-sm active:scale-95 transition">
+            <a href="${stop.appLink}" target="_blank" class="w-full bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-semibold py-3 rounded-xl flex items-center justify-center gap-2 shadow-sm active:scale-95 transition">
               <i data-lucide="smartphone" class="w-4 h-4 text-amber-600"></i> אפליקציה רשמית למתקנים
             </a>
           ` : ''}
@@ -776,7 +782,7 @@
       content.innerHTML = `
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
           <div class="flex items-center gap-2.5">
-            <span class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
+            <span class="w-10 h-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-sm flex-shrink-0">
               <i data-lucide="ticket" class="w-5 h-5"></i>
             </span>
             <div>
@@ -850,9 +856,9 @@
 
       galleryBox.className = "app-card-style p-4 space-y-3 w-full";
       uploadBox.className = "bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2.5 w-full";
-      countBadge.className = "text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200 px-2 py-0.5 rounded-md";
-      btnGalCam.className = "bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition min-w-0";
-      btnGalFile.className = "bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition min-w-0";
+      countBadge.className = "text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200 px-2.5 py-0.5 rounded-md";
+      btnGalCam.className = "bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition min-w-0";
+      btnGalFile.className = "bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-semibold py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition min-w-0";
 
       hotelCard.className = "app-card-style p-4 space-y-2.5 w-full pro-card-hover select-none";
       hotelCard.setAttribute('ondblclick', `openWalletCardModal('Bio Agriturismo Vojon', 'מלון כפרי • 30/09 – 06/10', \`
@@ -898,7 +904,7 @@
             <span class="font-semibold text-slate-800">Double / Twin (כולל ארוחת בוקר 🥐)</span>
           </div>
         </div>
-        <div class="pt-2 border-t border-slate-100 flex gap-2 w-full" onclick="event.stopPropagation()">
+        <div class="pt-2.5 border-t border-slate-100 flex gap-2 w-full" onclick="event.stopPropagation()">
           <a href="tel:+393792027060" class="flex-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1.5 transition active:scale-95">
             <i data-lucide="phone" class="w-3.5 h-3.5 flex-shrink-0"></i> <span>חיוג</span>
           </a>
@@ -968,7 +974,7 @@
               <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
             </button>
           ` : `
-            <span class="text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200 px-2 py-0.5 rounded-md flex-shrink-0">תיק 4623652</span>
+            <span class="text-[10px] font-black bg-slate-100 text-slate-800 border border-slate-300 px-2 py-0.5 rounded-full flex-shrink-0">תיק 4623652</span>
           `}
         </div>
 
@@ -1034,7 +1040,7 @@
               <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
             </button>
           ` : `
-            <span class="text-[10px] font-black bg-slate-100 text-slate-800 border border-slate-200 px-2 py-0.5 rounded-md flex-shrink-0">תיק 4623652</span>
+            <span class="text-[10px] font-black bg-slate-100 text-slate-800 border border-slate-300 px-2 py-0.5 rounded-full flex-shrink-0">תיק 4623652</span>
           `}
         </div>
 
@@ -1094,7 +1100,7 @@
                   </div>
                   <div class="min-w-0">
                     <h4 class="font-bold text-sm text-slate-900 truncate">${slot.title}</h4>
-                    <span class="text-[10px] text-emerald-600 font-semibold truncate block">✓ Confirmed (${saved.fileName})</span>
+                    <span class="text-[10px] text-emerald-600 font-semibold truncate block">✓ Confirmed (${saved.fileName}) (לחיצה כפולה להגדלה)</span>
                   </div>
                 </div>
                 <button onclick="deleteSlotTicket('${slot.key}'); event.stopPropagation();" class="text-rose-600 hover:text-rose-700 p-1.5 rounded-lg bg-slate-50 border border-slate-200 active:scale-95 flex-shrink-0" title="מחק כרטיס">
@@ -1118,7 +1124,7 @@
                   </div>
                   <div class="min-w-0">
                     <h4 class="font-bold text-sm text-slate-900 truncate">${slot.title}</h4>
-                    <span class="text-[10px] opacity-60 block font-medium truncate">${slot.sub}</span>
+                    <span class="text-[10px] opacity-60 block font-medium truncate">${slot.sub} (לחיצה כפולה לפרטים)</span>
                   </div>
                 </div>
                 <span class="text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-md flex-shrink-0">ממתין להעלאה</span>
@@ -1360,8 +1366,8 @@
       lucide.createIcons();
     }
 
-    // הפעלה ראשונית
-    switchTheme(currentTheme);
+    // הפעלה ראשונית עם בדיקת שעה אוטומטית (יום/לילה)
+    switchTheme(getAutoTheme());
   </script>
 </body>
 </html>
