@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="איטליה 2026">
-  <meta name="theme-color" content="#0F172A">
+  <meta name="theme-color" content="#0B0F19">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,16 +41,16 @@
       color: #0F172A;
     }
     .glass-dark {
-      background: rgba(15, 23, 42, 0.82);
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     .glass-card {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(226, 232, 240, 0.85);
+      border: 1px solid rgba(226, 232, 240, 0.9);
       box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 4px 10px -2px rgba(15, 23, 42, 0.02);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -60,65 +60,60 @@
       box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.25);
     }
     .glass-nav {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border-top: 1px solid rgba(226, 232, 240, 0.9);
       box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.05);
     }
 
-    /* Modern Pro Styles */
+    /* Modern Pro Premium Palette (Dark Slate / Deep Navy / Teal Glow) */
     .theme-modern {
-      background: #090D16;
+      background: #0B0F19;
       color: #F8FAFC;
     }
     .pro-glass {
-      background: rgba(18, 24, 38, 0.75);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      background: rgba(17, 24, 39, 0.72);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 18px 36px -15px rgba(0, 0, 0, 0.6);
     }
     .pro-glass-accent {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(14, 165, 233, 0.05) 100%);
-      border: 1px solid rgba(59, 130, 246, 0.25);
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.12) 0%, rgba(20, 184, 166, 0.06) 100%);
+      border: 1px solid rgba(45, 212, 191, 0.22);
     }
     .pro-card-hover {
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .pro-card-hover:active {
-      transform: scale(0.98);
-    }
-    .modern-gradient-text {
-      background: linear-gradient(135deg, #60A5FA 0%, #A855F7 50%, #EC4899 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      transform: scale(0.985);
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
+      from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in {
-      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   </style>
 </head>
 <body id="app-body" class="theme-modern relative overflow-x-hidden transition-colors duration-300">
 
-  <!-- רקע זוהר מודרני -->
-  <div id="ambient-glow-1" class="fixed top-0 left-1/2 -translate-x-1/2 w-[450px] h-[350px] bg-blue-600/20 rounded-full blur-[140px] pointer-events-none -z-10"></div>
-  <div id="ambient-glow-2" class="fixed bottom-20 right-0 w-[350px] h-[350px] bg-purple-600/15 rounded-full blur-[130px] pointer-events-none -z-10"></div>
+  <!-- רקע הילה מעודן (Atmospheric Lighting) -->
+  <div id="ambient-glow-1" class="fixed top-0 left-1/2 -translate-x-1/2 w-[480px] h-[360px] bg-cyan-600/12 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+  <div id="ambient-glow-2" class="fixed bottom-24 right-0 w-[360px] h-[360px] bg-teal-600/10 rounded-full blur-[130px] pointer-events-none -z-10"></div>
 
-  <!-- סרגל מעבר עליון קבוע: בחירת סגנון (מודרני מקצועי / קלאסי מקורי) -->
-  <div class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-xl border-b border-white/10 px-3 py-2">
+  <!-- סרגל מעבר עליון קבוע: מתג תצוגה -->
+  <div class="sticky top-0 z-50 bg-[#0B0F19]/90 backdrop-blur-xl border-b border-white/10 px-3 py-2">
     <div class="max-w-md mx-auto flex items-center justify-between gap-2">
       <div class="flex items-center gap-1.5 text-xs font-black text-slate-300">
-        <i data-lucide="layout-template" class="w-3.5 h-3.5 text-blue-400"></i>
+        <i data-lucide="layout-template" class="w-3.5 h-3.5 text-cyan-400"></i>
         <span>עיצוב תצוגה:</span>
       </div>
       <div class="flex bg-slate-900/90 p-1 rounded-xl border border-white/10 gap-1">
-        <button id="theme-btn-modern" onclick="switchTheme('modern')" class="px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md">
+        <button id="theme-btn-modern" onclick="switchTheme('modern')" class="px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-gradient-to-r from-cyan-600 to-teal-600 text-white shadow-md">
           <i data-lucide="sparkles" class="w-3 h-3"></i>
           <span>Modern Pro</span>
         </button>
@@ -142,14 +137,14 @@
         </div>
         <div class="flex items-center gap-2 mt-0.5">
           <p class="text-[11px] text-slate-400 font-medium">30.09.2026 – 06.10.2026</p>
-          <span id="network-status" class="text-[9px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> מחובר ומסונכרן
+          <span id="network-status" class="text-[9px] font-bold text-teal-300 bg-teal-950/70 border border-teal-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span> מחובר ומסונכרן
           </span>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-full shadow-lg shadow-emerald-500/20 active:scale-95 transition">
+        <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="flex items-center gap-1.5 bg-teal-500 hover:bg-teal-600 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-full shadow-lg shadow-teal-500/20 active:scale-95 transition">
           <i data-lucide="hotel" class="w-3.5 h-3.5"></i>
           <span>למלון</span>
         </a>
@@ -189,7 +184,7 @@
         <div class="flex items-center justify-between">
           <div>
             <h2 id="gallery-title" class="text-base font-black flex items-center gap-2">
-              <i data-lucide="camera" class="w-5 h-5 text-indigo-400"></i>
+              <i data-lucide="camera" class="w-5 h-5 text-teal-400"></i>
               גלריה וחוויות מהטיול
             </h2>
             <p class="text-xs text-slate-400 mt-0.5">אלבום משותף שמסתנכרן בזמן אמת</p>
@@ -202,7 +197,7 @@
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[10px] font-bold text-slate-400 block mb-1">מי מצלם/ת?</label>
-              <select id="photo-author" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-200 focus:outline-none focus:border-indigo-500 shadow-sm">
+              <select id="photo-author" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-200 focus:outline-none focus:border-teal-500 shadow-sm">
                 <option value="אריק">אריק</option>
                 <option value="הראל">הראל</option>
                 <option value="עמית">עמית</option>
@@ -213,7 +208,7 @@
             </div>
             <div>
               <label class="text-[10px] font-bold text-slate-400 block mb-1">שיוך ליום במסלול</label>
-              <select id="photo-day-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-200 focus:outline-none focus:border-indigo-500 shadow-sm">
+              <select id="photo-day-select" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-2.5 py-2 text-xs font-semibold text-slate-200 focus:outline-none focus:border-teal-500 shadow-sm">
                 <option value="1">יום 1 • 30/09 (הגעה)</option>
                 <option value="2">יום 2 • 01/10 (Gardaland)</option>
                 <option value="3">יום 3 • 02/10 (Movieland)</option>
@@ -226,22 +221,22 @@
           </div>
 
           <div>
-            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-indigo-500 shadow-sm">
+            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-teal-500 shadow-sm">
           </div>
 
           <input type="file" id="gallery-camera-input" accept="image/*" capture="environment" class="hidden">
           <input type="file" id="gallery-file-input" accept="image/*" class="hidden">
 
           <div class="grid grid-cols-2 gap-2 pt-1">
-            <button onclick="document.getElementById('gallery-camera-input').click()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/20 active:scale-95 transition">
+            <button onclick="document.getElementById('gallery-camera-input').click()" class="bg-teal-600 hover:bg-teal-700 text-white text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-teal-600/20 active:scale-95 transition">
               <i data-lucide="camera" class="w-4 h-4"></i> צלם תמונה
             </button>
             <button onclick="document.getElementById('gallery-file-input').click()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition">
-              <i data-lucide="image-plus" class="w-4 h-4 text-indigo-400"></i> מהגלריה
+              <i data-lucide="image-plus" class="w-4 h-4 text-teal-400"></i> מהגלריה
             </button>
           </div>
           <div id="upload-spinner" class="hidden text-center py-2">
-            <span class="text-xs text-indigo-400 font-black animate-pulse flex items-center justify-center gap-1.5">
+            <span class="text-xs text-teal-400 font-black animate-pulse flex items-center justify-center gap-1.5">
               <i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> מעבד ומסנכרן לענן...
             </span>
           </div>
@@ -249,7 +244,7 @@
 
         <!-- סינון לפי ימים -->
         <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs" id="gallery-filter-bar">
-          <button onclick="filterGallery('all')" id="gfilter-all" class="px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0">הכל</button>
+          <button onclick="filterGallery('all')" id="gfilter-all" class="px-3.5 py-1.5 rounded-xl font-black bg-teal-600 text-white shadow-sm flex-shrink-0">הכל</button>
           <button onclick="filterGallery('1')" id="gfilter-1" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 1</button>
           <button onclick="filterGallery('2')" id="gfilter-2" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 2</button>
           <button onclick="filterGallery('3')" id="gfilter-3" class="px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0">יום 3</button>
@@ -272,7 +267,7 @@
     <section id="tab-wallet" class="tab-pane hidden space-y-4">
       <div class="flex items-center justify-between px-1">
         <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-          <i data-lucide="plane" class="w-4 h-4 text-blue-400"></i>
+          <i data-lucide="plane" class="w-4 h-4 text-cyan-400"></i>
           כרטיסי טיסה ועלייה למטוס
         </h3>
         <span class="text-[10px] text-slate-400 font-semibold">אופליין + ענן</span>
@@ -283,7 +278,7 @@
 
       <div class="flex items-center justify-between px-1 pt-2">
         <h3 class="text-xs font-black text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-          <i data-lucide="ticket" class="w-4 h-4 text-blue-400"></i>
+          <i data-lucide="ticket" class="w-4 h-4 text-cyan-400"></i>
           כרטיסי כניסה ואטרקציות
         </h3>
         <span class="text-[10px] text-slate-400 font-semibold">מוגבל ל-1MB (PDF/תמונה)</span>
@@ -306,7 +301,7 @@
   <!-- סרגל ניווט תחתון -->
   <nav id="bottom-nav" class="fixed bottom-0 left-0 right-0 z-50 safe-bottom">
     <div class="max-w-md mx-auto flex justify-around items-center pt-2.5">
-      <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center gap-1 text-blue-500 font-black text-xs">
+      <button onclick="setTab('itinerary')" id="nav-btn-itinerary" class="nav-button flex flex-col items-center gap-1 text-cyan-400 font-black text-xs">
         <i data-lucide="calendar" class="w-5 h-5"></i>
         <span>מסלול</span>
       </button>
@@ -355,8 +350,8 @@
     function updateOnlineStatus() {
       const statusBadge = document.getElementById('network-status');
       if (navigator.onLine) {
-        statusBadge.className = "text-[9px] font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1";
-        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> מחובר ומסונכרן';
+        statusBadge.className = "text-[9px] font-bold text-teal-300 bg-teal-950/70 border border-teal-500/30 px-2 py-0.5 rounded-full flex items-center gap-1";
+        statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span> מחובר ומסונכרן';
       } else {
         statusBadge.className = "text-[9px] font-bold text-amber-300 bg-amber-950/70 border border-amber-500/30 px-2 py-0.5 rounded-full flex items-center gap-1";
         statusBadge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> מצב אופליין (שמור)';
@@ -541,10 +536,10 @@
 
       if (theme === 'modern') {
         body.className = "theme-modern relative overflow-x-hidden transition-colors duration-300";
-        header.className = "sticky top-[41px] z-40 bg-slate-950/70 backdrop-blur-2xl border-b border-white/10 px-4 py-3.5 transition-all text-white";
-        bottomNav.className = "fixed bottom-0 left-0 right-0 bg-slate-950/85 backdrop-blur-2xl border-t border-white/10 z-50 safe-bottom";
+        header.className = "sticky top-[41px] z-40 bg-[#0B0F19]/80 backdrop-blur-2xl border-b border-white/10 px-4 py-3.5 transition-all text-white";
+        bottomNav.className = "fixed bottom-0 left-0 right-0 bg-[#0B0F19]/90 backdrop-blur-2xl border-t border-white/10 z-50 safe-bottom";
         
-        btnModern.className = "px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md";
+        btnModern.className = "px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-gradient-to-r from-cyan-600 to-teal-600 text-white shadow-md";
         btnClassic.className = "px-3 py-1 rounded-lg text-[11px] font-bold text-slate-400 hover:text-slate-200 transition-all flex items-center gap-1";
       } else {
         body.className = "theme-classic relative overflow-x-hidden transition-colors duration-300";
@@ -569,9 +564,9 @@
         btn.innerText = dayLabels[i];
         if (currentTheme === 'modern') {
           if (i === currentDay) {
-            btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25 border border-blue-400/30';
+            btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 bg-gradient-to-r from-teal-500 to-cyan-600 text-slate-950 font-black shadow-lg shadow-teal-500/20 border border-teal-300/40';
           } else {
-            btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/80 text-slate-300 border border-white/5 hover:border-white/20 shadow-sm';
+            btn.className = 'day-chip flex-shrink-0 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-200 bg-slate-900/90 text-slate-300 border border-white/5 hover:border-white/20 shadow-sm';
           }
         } else {
           if (i === currentDay) {
@@ -590,25 +585,25 @@
       const container = document.getElementById('day-display');
       const weatherWidget = document.getElementById('weather-widget');
 
-      // עדכון ווידג'ט מזג אוויר לפי תמה
+      // עדכון ווידג'ט מזג אוויר
       if (currentTheme === 'modern') {
         weatherWidget.className = "pro-glass pro-glass-accent text-white rounded-3xl p-4 flex items-center justify-between animate-fade-in";
         weatherWidget.innerHTML = `
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-amber-300 text-2xl backdrop-blur-md shadow-inner">
+            <div class="w-12 h-12 rounded-2xl bg-teal-500/15 border border-teal-400/30 flex items-center justify-center text-amber-300 text-2xl backdrop-blur-md shadow-inner">
               <i data-lucide="${data.weatherIcon || 'sun'}" class="w-6 h-6"></i>
             </div>
             <div>
               <div class="flex items-center gap-1.5">
                 <span class="font-black text-xs text-white">${data.location}</span>
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span>
               </div>
               <p class="text-[11px] text-slate-300 mt-0.5">${data.weather.split('•')[1] || data.weather}</p>
             </div>
           </div>
           <div class="text-left">
             <span class="text-2xl font-black tracking-tight text-white">${data.weather.split('•')[0].trim()}</span>
-            <span class="text-[10px] text-blue-300 block font-bold uppercase tracking-wider">עונתי סתווי</span>
+            <span class="text-[10px] text-teal-300 block font-bold uppercase tracking-wider">עונתי סתווי</span>
           </div>
         `;
       } else {
@@ -637,31 +632,31 @@
       if (currentTheme === 'modern') {
         html += `
           <div class="animate-fade-in space-y-3.5">
-            <div class="pro-glass rounded-3xl p-4 border-l-4 border-blue-500">
+            <div class="pro-glass rounded-3xl p-4 border-l-4 border-teal-500">
               <div class="flex items-center justify-between">
-                <span class="text-[11px] font-black text-blue-300 bg-blue-950/80 border border-blue-800 px-3 py-1 rounded-full">${data.date}</span>
+                <span class="text-[11px] font-black text-teal-300 bg-teal-950/80 border border-teal-800 px-3 py-1 rounded-full">${data.date}</span>
                 <span class="text-[10px] text-slate-400 font-bold">${data.stops.length} תחנות מתוכננות</span>
               </div>
               <h2 class="text-base font-black text-white mt-2 tracking-tight">${data.title}</h2>
               ${data.tip ? `
-                <div class="mt-3 flex items-start gap-2.5 bg-blue-950/40 border border-blue-500/20 p-3 rounded-2xl">
-                  <i data-lucide="info" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
-                  <p class="text-[11px] text-blue-200 font-medium leading-relaxed">${data.tip.replace('💡 טיפ לשטח:', '').trim()}</p>
+                <div class="mt-3 flex items-start gap-2.5 bg-teal-950/30 border border-teal-500/20 p-3 rounded-2xl">
+                  <i data-lucide="info" class="w-4 h-4 text-teal-400 shrink-0 mt-0.5"></i>
+                  <p class="text-[11px] text-teal-200 font-medium leading-relaxed">${data.tip.replace('💡 טיפ לשטח:', '').trim()}</p>
                 </div>
               ` : ''}
             </div>
         `;
 
-        data.stops.forEach((s, idx) => {
+        data.stops.forEach((s) => {
           html += `
             <div class="pro-glass pro-card-hover rounded-3xl p-4.5 space-y-3 border border-white/5 relative overflow-hidden">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
-                  <div class="w-9 h-9 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 border border-blue-400/20 flex items-center justify-center text-blue-400">
+                  <div class="w-9 h-9 rounded-2xl bg-cyan-500/15 border border-cyan-400/20 flex items-center justify-center text-cyan-300">
                     <i data-lucide="${s.icon}" class="w-4 h-4"></i>
                   </div>
                   <div>
-                    <span class="text-xs font-mono font-black text-blue-400 bg-blue-950/60 px-2.5 py-0.5 rounded-lg border border-blue-900/50">${s.time}</span>
+                    <span class="text-xs font-mono font-black text-cyan-300 bg-cyan-950/70 px-2.5 py-0.5 rounded-lg border border-cyan-800/50">${s.time}</span>
                   </div>
                 </div>
                 ${s.hours ? `
@@ -677,14 +672,14 @@
               </div>
 
               <div class="pt-2 border-t border-white/5 flex gap-2">
-                <a href="${s.waze}" target="_blank" class="flex-1 bg-gradient-to-r from-sky-500/20 to-blue-500/20 hover:from-sky-500/30 hover:to-blue-500/30 border border-sky-400/30 text-sky-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                  <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-400"></i> ניווט Waze
+                <a href="${s.waze}" target="_blank" class="flex-1 bg-teal-500/15 hover:bg-teal-500/25 border border-teal-400/30 text-teal-300 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="navigation" class="w-3.5 h-3.5 text-teal-400"></i> ניווט Waze
                 </a>
                 <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 bg-slate-800/80 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                   <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i> Maps
                 </a>
                 ${s.appLink ? `
-                  <a href="${s.appLink}" target="_blank" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-400/30 text-amber-300 text-xs font-black px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm">
+                  <a href="${s.appLink}" target="_blank" class="bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/30 text-amber-300 text-xs font-black px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm">
                     <i data-lucide="smartphone" class="w-3.5 h-3.5 text-amber-400"></i> אפליקציה
                   </a>
                 ` : ''}
@@ -754,31 +749,31 @@
         nearby.className = "pro-glass rounded-3xl p-5 border border-white/10";
         nearby.innerHTML = `
           <h2 class="text-sm font-black text-white uppercase tracking-wider mb-1 flex items-center gap-2">
-            <i data-lucide="compass" class="w-4 h-4 text-blue-400"></i>
+            <i data-lucide="compass" class="w-4 h-4 text-cyan-400"></i>
             שירותים ומקומות סביבי
           </h2>
           <p class="text-xs text-slate-400 mb-4">חיפוש ישיר במפות לפי המיקום הנוכחי בשטח</p>
           <div class="grid grid-cols-2 gap-3">
-            <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-emerald-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
-              <div class="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-teal-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-teal-500/15 text-teal-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
                 <i data-lucide="shopping-cart" class="w-5 h-5"></i>
               </div>
               <span class="text-xs font-black text-slate-200">סופרמרקטים</span>
             </a>
             <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-amber-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
-              <div class="w-11 h-11 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+              <div class="w-11 h-11 rounded-2xl bg-amber-500/15 text-amber-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
                 <i data-lucide="utensils" class="w-5 h-5"></i>
               </div>
               <span class="text-xs font-black text-slate-200">מסעדות ופיצות</span>
             </a>
-            <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-sky-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
-              <div class="w-11 h-11 rounded-2xl bg-sky-500/20 text-sky-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-cyan-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
+              <div class="w-11 h-11 rounded-2xl bg-cyan-500/15 text-cyan-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
                 <i data-lucide="fuel" class="w-5 h-5"></i>
               </div>
               <span class="text-xs font-black text-slate-200">תחנות דלק</span>
             </a>
             <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-4 bg-slate-900/90 hover:bg-slate-800/90 border border-rose-500/20 rounded-2xl flex flex-col items-center gap-2.5 text-center transition group active:scale-95">
-              <div class="w-11 h-11 rounded-2xl bg-rose-500/20 text-rose-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+              <div class="w-11 h-11 rounded-2xl bg-rose-500/15 text-rose-300 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
                 <i data-lucide="cross" class="w-5 h-5"></i>
               </div>
               <span class="text-xs font-black text-slate-200">בתי מרקחת וחירום</span>
@@ -788,13 +783,13 @@
 
         galleryBox.className = "pro-glass rounded-3xl p-5 space-y-4 border border-white/10";
         uploadBox.className = "bg-slate-900/80 border border-white/10 rounded-2xl p-3.5 space-y-3";
-        countBadge.className = "text-[11px] font-black bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2.5 py-1 rounded-full";
+        countBadge.className = "text-[11px] font-black bg-teal-500/15 text-teal-300 border border-teal-500/30 px-2.5 py-1 rounded-full";
 
-        hotelCard.className = "pro-glass rounded-3xl p-5 border border-emerald-500/30 space-y-3";
+        hotelCard.className = "pro-glass rounded-3xl p-5 border border-teal-500/30 space-y-3";
         hotelCard.innerHTML = `
           <div class="flex items-center justify-between pb-3 border-b border-white/10">
             <div class="flex items-center gap-2.5">
-              <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30 shadow-inner">
+              <div class="w-10 h-10 rounded-2xl bg-teal-500/15 text-teal-400 flex items-center justify-center border border-teal-500/30 shadow-inner">
                 <i data-lucide="hotel" class="w-5 h-5"></i>
               </div>
               <div>
@@ -802,22 +797,22 @@
                 <span class="text-[10px] text-amber-400 font-bold">★★★ Agriturismo כפרי</span>
               </div>
             </div>
-            <a href="https://apps.apple.com/il/app/booking-com-hotels-travel/id367003839" target="_blank" class="text-[10px] font-black bg-emerald-950/80 hover:bg-emerald-900 text-emerald-300 px-3 py-1.5 rounded-full border border-emerald-500/40 flex items-center gap-1 transition active:scale-95">
+            <a href="https://apps.apple.com/il/app/booking-com-hotels-travel/id367003839" target="_blank" class="text-[10px] font-black bg-teal-950/80 hover:bg-teal-900 text-teal-300 px-3 py-1.5 rounded-full border border-teal-500/40 flex items-center gap-1 transition active:scale-95">
               <i data-lucide="external-link" class="w-3 h-3"></i>
               <span>Booking</span>
             </a>
           </div>
           <div class="space-y-2 text-xs text-slate-300">
             <div class="flex items-start gap-2">
-              <i data-lucide="map-pin" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+              <i data-lucide="map-pin" class="w-4 h-4 text-teal-400 shrink-0 mt-0.5"></i>
               <span><strong>כתובת:</strong> Via Del Forte 6, 46040 Ponti Sul Mincio, Italy</span>
             </div>
             <div class="flex items-center gap-2">
-              <i data-lucide="user" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <i data-lucide="user" class="w-4 h-4 text-teal-400 shrink-0"></i>
               <span><strong>שם המזמין:</strong> Cohen Arik</span>
             </div>
             <div class="flex items-center gap-2">
-              <i data-lucide="bed-double" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+              <i data-lucide="bed-double" class="w-4 h-4 text-teal-400 shrink-0"></i>
               <span><strong>חדר:</strong> Large Double / Twin Room (כולל ארוחת בוקר 🥐)</span>
             </div>
             <div class="grid grid-cols-2 gap-2 bg-slate-900/60 p-2.5 rounded-xl border border-white/5 mt-1">
@@ -832,11 +827,11 @@
             </div>
           </div>
           <div class="pt-3 border-t border-white/10 grid grid-cols-3 gap-2">
-            <a href="tel:+393792027060" class="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-              <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-400"></i> חיוג
+            <a href="tel:+393792027060" class="bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/30 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-teal-400"></i> חיוג
             </a>
-            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-500/30 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
-              <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-400"></i> Waze
+            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
+              <i data-lucide="navigation" class="w-3.5 h-3.5 text-cyan-400"></i> Waze
             </a>
             <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95">
               <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i> Maps
@@ -851,11 +846,11 @@
             נוסעים בכרטיס (פרטי דרכון ולידה)
           </h3>
           <div class="divide-y divide-white/5 text-xs font-medium">
-            <div class="py-2.5 flex justify-between text-slate-200"><span>ARIK COHEN</span><span class="text-blue-400 font-mono font-bold">28/12/1967</span></div>
-            <div class="py-2.5 flex justify-between text-slate-200"><span>HAREL VILNAI COHEN</span><span class="text-blue-400 font-mono font-bold">04/09/1997</span></div>
-            <div class="py-2.5 flex justify-between text-slate-200"><span>AMIT COHEN</span><span class="text-blue-400 font-mono font-bold">01/07/2014</span></div>
-            <div class="py-2.5 flex justify-between text-slate-200"><span>YULY COHEN</span><span class="text-blue-400 font-mono font-bold">01/07/2014</span></div>
-            <div class="py-2.5 flex justify-between text-slate-200"><span>LIAN COHEN</span><span class="text-blue-400 font-mono font-bold">14/10/2015</span></div>
+            <div class="py-2.5 flex justify-between text-slate-200"><span>ARIK COHEN</span><span class="text-teal-300 font-mono font-bold">28/12/1967</span></div>
+            <div class="py-2.5 flex justify-between text-slate-200"><span>HAREL VILNAI COHEN</span><span class="text-teal-300 font-mono font-bold">04/09/1997</span></div>
+            <div class="py-2.5 flex justify-between text-slate-200"><span>AMIT COHEN</span><span class="text-teal-300 font-mono font-bold">01/07/2014</span></div>
+            <div class="py-2.5 flex justify-between text-slate-200"><span>YULY COHEN</span><span class="text-teal-300 font-mono font-bold">01/07/2014</span></div>
+            <div class="py-2.5 flex justify-between text-slate-200"><span>LIAN COHEN</span><span class="text-teal-300 font-mono font-bold">14/10/2015</span></div>
           </div>
         `;
       } else {
@@ -979,16 +974,16 @@
       const outSaved = ticketMap['flight_outbound'];
       const outContainer = document.getElementById('flight-outbound-card');
       
-      outContainer.className = isModern ? "pro-glass rounded-3xl p-5 border-l-4 border-blue-500 space-y-3" : "glass-card rounded-3xl p-5 border-blue-200 space-y-3";
+      outContainer.className = isModern ? "pro-glass rounded-3xl p-5 border-l-4 border-teal-500 space-y-3" : "glass-card rounded-3xl p-5 border-blue-200 space-y-3";
       outContainer.innerHTML = `
         <div class="flex items-center justify-between pb-3 border-b ${isModern ? 'border-white/10' : 'border-slate-100'}">
           <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-blue-500/20 text-blue-400' : 'bg-blue-100 text-blue-700'} flex items-center justify-center">
+            <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-teal-500/15 text-teal-300' : 'bg-blue-100 text-blue-700'} flex items-center justify-center">
               <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
             </div>
             <div>
               <span class="font-black text-sm ${isModern ? 'text-white' : 'text-slate-900'} block">טיסת הלוך (ישראייר 6H 357)</span>
-              <span class="text-[10px] ${isModern ? 'text-blue-300' : 'text-blue-700'} font-bold">30.09.2026 | יום רביעי</span>
+              <span class="text-[10px] ${isModern ? 'text-teal-300' : 'text-blue-700'} font-bold">30.09.2026 | יום רביעי</span>
             </div>
           </div>
           ${outSaved ? `
@@ -996,7 +991,7 @@
               <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
             </button>
           ` : `
-            <span class="text-[10px] font-black ${isModern ? 'bg-blue-950 text-blue-300 border border-blue-800' : 'bg-blue-100 text-blue-800 border border-blue-200'} px-2 py-0.5 rounded-full">תיק 4623652</span>
+            <span class="text-[10px] font-black ${isModern ? 'bg-teal-950 text-teal-300 border border-teal-800' : 'bg-blue-100 text-blue-800 border border-blue-200'} px-2 py-0.5 rounded-full">תיק 4623652</span>
           `}
         </div>
 
@@ -1004,24 +999,24 @@
           <div>
             <span class="text-xs font-semibold ${isModern ? 'text-slate-400' : 'text-slate-400'} block">המראה</span>
             <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">נתב"ג (T1)</span>
-            <span class="text-xs ${isModern ? 'text-blue-400' : 'text-blue-600'} font-bold block mt-0.5">13:15</span>
+            <span class="text-xs ${isModern ? 'text-teal-300' : 'text-blue-600'} font-bold block mt-0.5">13:15</span>
           </div>
           <i data-lucide="arrow-left" class="w-5 h-5 ${isModern ? 'text-slate-600' : 'text-slate-400'}"></i>
           <div class="text-left">
             <span class="text-xs font-semibold ${isModern ? 'text-slate-400' : 'text-slate-400'} block">נחיתה</span>
             <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">ורונה (VRN)</span>
-            <span class="text-xs ${isModern ? 'text-blue-400' : 'text-blue-600'} font-bold block mt-0.5">16:05</span>
+            <span class="text-xs ${isModern ? 'text-teal-300' : 'text-blue-600'} font-bold block mt-0.5">16:05</span>
           </div>
         </div>
 
         <div class="pt-2 border-t ${isModern ? 'border-white/10' : 'border-slate-100'}">
           ${outSaved ? `
-            <button onclick="openTicketData('${outSaved.fileData}', '${outSaved.fileType}')" class="w-full ${isModern ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300'} text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-              <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> הצג כרטיס עלייה למטוס
+            <button onclick="openTicketData('${outSaved.fileData}', '${outSaved.fileType}')" class="w-full ${isModern ? 'bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/30' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300'} text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-teal-400"></i> הצג כרטיס עלייה למטוס
             </button>
           ` : `
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="triggerSlotCamera('flight_outbound')" class="${isModern ? 'bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30' : 'bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <button onclick="triggerSlotCamera('flight_outbound')" class="${isModern ? 'bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30' : 'bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                 <i data-lucide="camera" class="w-3.5 h-3.5"></i> צלם כרטיס
               </button>
               <button onclick="triggerSlotFile('flight_outbound')" class="${isModern ? 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
@@ -1034,16 +1029,16 @@
 
       const inSaved = ticketMap['flight_inbound'];
       const inContainer = document.getElementById('flight-inbound-card');
-      inContainer.className = isModern ? "pro-glass rounded-3xl p-5 border-l-4 border-indigo-500 space-y-3" : "glass-card rounded-3xl p-5 border-indigo-200 space-y-3";
+      inContainer.className = isModern ? "pro-glass rounded-3xl p-5 border-l-4 border-cyan-500 space-y-3" : "glass-card rounded-3xl p-5 border-indigo-200 space-y-3";
       inContainer.innerHTML = `
         <div class="flex items-center justify-between pb-3 border-b ${isModern ? 'border-white/10' : 'border-slate-100'}">
           <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-indigo-500/20 text-indigo-400' : 'bg-indigo-100 text-indigo-700'} flex items-center justify-center">
+            <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-cyan-500/15 text-cyan-300' : 'bg-indigo-100 text-indigo-700'} flex items-center justify-center">
               <i data-lucide="plane-landing" class="w-4 h-4"></i>
             </div>
             <div>
               <span class="font-black text-sm ${isModern ? 'text-white' : 'text-slate-900'} block">טיסת חזור (ישראייר 6H 352)</span>
-              <span class="text-[10px] ${isModern ? 'text-indigo-300' : 'text-indigo-700'} font-bold">06.10.2026 | יום שלישי</span>
+              <span class="text-[10px] ${isModern ? 'text-cyan-300' : 'text-indigo-700'} font-bold">06.10.2026 | יום שלישי</span>
             </div>
           </div>
           ${inSaved ? `
@@ -1051,7 +1046,7 @@
               <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
             </button>
           ` : `
-            <span class="text-[10px] font-black ${isModern ? 'bg-indigo-950 text-indigo-300 border border-indigo-800' : 'bg-indigo-100 text-indigo-800 border border-indigo-200'} px-2 py-0.5 rounded-full">תיק 4623652</span>
+            <span class="text-[10px] font-black ${isModern ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' : 'bg-indigo-100 text-indigo-800 border border-indigo-200'} px-2 py-0.5 rounded-full">תיק 4623652</span>
           `}
         </div>
 
@@ -1059,24 +1054,24 @@
           <div>
             <span class="text-xs font-semibold ${isModern ? 'text-slate-400' : 'text-slate-400'} block">המראה</span>
             <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">ורונה (VRN)</span>
-            <span class="text-xs ${isModern ? 'text-indigo-400' : 'text-indigo-600'} font-bold block mt-0.5">21:35</span>
+            <span class="text-xs ${isModern ? 'text-cyan-300' : 'text-indigo-600'} font-bold block mt-0.5">21:35</span>
           </div>
           <i data-lucide="arrow-left" class="w-5 h-5 ${isModern ? 'text-slate-600' : 'text-slate-400'}"></i>
           <div class="text-left">
             <span class="text-xs font-semibold ${isModern ? 'text-slate-400' : 'text-slate-400'} block">נחיתה</span>
             <span class="text-base font-black ${isModern ? 'text-white' : 'text-slate-900'}">נתב"ג</span>
-            <span class="text-xs ${isModern ? 'text-indigo-400' : 'text-indigo-600'} font-bold block mt-0.5">07.10.26 | 02:05</span>
+            <span class="text-xs ${isModern ? 'text-cyan-300' : 'text-indigo-600'} font-bold block mt-0.5">07.10.26 | 02:05</span>
           </div>
         </div>
 
         <div class="pt-2 border-t ${isModern ? 'border-white/10' : 'border-slate-100'}">
           ${inSaved ? `
-            <button onclick="openTicketData('${inSaved.fileData}', '${inSaved.fileType}')" class="w-full ${isModern ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300'} text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-              <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> הצג כרטיס עלייה למטוס
+            <button onclick="openTicketData('${inSaved.fileData}', '${inSaved.fileType}')" class="w-full ${isModern ? 'bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/30' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300'} text-xs font-black py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-teal-400"></i> הצג כרטיס עלייה למטוס
             </button>
           ` : `
             <div class="grid grid-cols-2 gap-2">
-              <button onclick="triggerSlotCamera('flight_inbound')" class="${isModern ? 'bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/30' : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <button onclick="triggerSlotCamera('flight_inbound')" class="${isModern ? 'bg-cyan-500/15 hover:bg-cyan-500/25 text-cyan-300 border border-cyan-500/30' : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                 <i data-lucide="camera" class="w-3.5 h-3.5"></i> צלם כרטיס
               </button>
               <button onclick="triggerSlotFile('flight_inbound')" class="${isModern ? 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
@@ -1101,15 +1096,15 @@
         if (saved) {
           const isPdf = saved.fileType && saved.fileType.includes('pdf');
           html += `
-            <div class="${isModern ? 'pro-glass rounded-3xl p-4 border border-emerald-500/30' : 'glass-card rounded-3xl p-4 border-emerald-300'} space-y-2.5">
+            <div class="${isModern ? 'pro-glass rounded-3xl p-4 border border-teal-500/30' : 'glass-card rounded-3xl p-4 border-emerald-300'} space-y-2.5">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-emerald-500/20 text-emerald-400' : 'bg-emerald-100 text-emerald-700'} flex items-center justify-center shadow-sm">
+                  <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-teal-500/15 text-teal-300' : 'bg-emerald-100 text-emerald-700'} flex items-center justify-center shadow-sm">
                     <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
                   </div>
                   <div>
                     <h4 class="font-black text-sm ${isModern ? 'text-white' : 'text-slate-900'}">${slot.title}</h4>
-                    <span class="text-[10px] ${isModern ? 'text-emerald-400' : 'text-emerald-700'} font-bold">✓ מסונכרן בענן (${saved.fileName})</span>
+                    <span class="text-[10px] ${isModern ? 'text-teal-300' : 'text-emerald-700'} font-bold">✓ מסונכרן בענן (${saved.fileName})</span>
                   </div>
                 </div>
                 <button onclick="deleteSlotTicket('${slot.key}')" class="text-rose-400 hover:text-rose-300 p-1.5 rounded-lg bg-rose-500/10 border border-rose-500/30 active:scale-95" title="מחק כרטיס">
@@ -1117,8 +1112,8 @@
                 </button>
               </div>
               <div class="pt-2 border-t ${isModern ? 'border-white/10' : 'border-slate-100'} flex gap-2">
-                <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 ${isModern ? 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
-                  <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> הצג כרטיס (${isPdf ? 'מסמך PDF' : 'תמונה'})
+                <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 ${isModern ? 'bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/30' : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                  <i data-lucide="eye" class="w-3.5 h-3.5 text-teal-400"></i> הצג כרטיס (${isPdf ? 'מסמך PDF' : 'תמונה'})
                 </button>
               </div>
             </div>
@@ -1139,7 +1134,7 @@
                 <span class="text-[10px] font-bold ${isModern ? 'bg-slate-800 text-slate-400 border border-slate-700' : 'bg-slate-100 text-slate-500 border border-slate-200'} px-2.5 py-0.5 rounded-md">ממתין לקובץ</span>
               </div>
               <div class="pt-2 border-t ${isModern ? 'border-white/10' : 'border-slate-100'} grid grid-cols-2 gap-2">
-                <button onclick="triggerSlotCamera('${slot.key}')" class="${isModern ? 'bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30' : 'bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                <button onclick="triggerSlotCamera('${slot.key}')" class="${isModern ? 'bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-500/30' : 'bg-blue-50 hover:bg-blue-100 text-blue-800 border border-blue-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                   <i data-lucide="camera" class="w-3.5 h-3.5"></i> צלם כרטיס
                 </button>
                 <button onclick="triggerSlotFile('${slot.key}')" class="${isModern ? 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
@@ -1220,7 +1215,7 @@
         win.document.write(`<iframe src="${dataUri}" frameborder="0" style="border:0; top:0; left:0; bottom:0; right:0; width:100%; height:100%;" allowfullscreen></iframe>`);
       } else {
         win.document.write(`
-          <body style="margin:0; background:#0F172A; display:flex; justify-content:center; align-items:center; min-height:100vh;">
+          <body style="margin:0; background:#0B0F19; display:flex; justify-content:center; align-items:center; min-height:100vh;">
             <img src="${dataUri}" style="max-width:100%; max-height:100vh; object-fit:contain;" />
           </body>
         `);
@@ -1271,7 +1266,9 @@
       for (let i = 1; i <= 7; i++) {
         const btn = document.getElementById(`gfilter-${i}`);
         if (day === String(i)) {
-          btn.className = 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
+          btn.className = isModern
+            ? 'px-3.5 py-1.5 rounded-xl font-black bg-teal-600 text-white shadow-sm flex-shrink-0'
+            : 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
         } else {
           btn.className = isModern 
             ? 'px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0'
@@ -1280,7 +1277,9 @@
       }
       const allBtn = document.getElementById('gfilter-all');
       if (day === 'all') {
-        allBtn.className = 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
+        allBtn.className = isModern
+          ? 'px-3.5 py-1.5 rounded-xl font-black bg-teal-600 text-white shadow-sm flex-shrink-0'
+          : 'px-3.5 py-1.5 rounded-xl font-black bg-indigo-600 text-white shadow-sm flex-shrink-0';
       } else {
         allBtn.className = isModern 
           ? 'px-3.5 py-1.5 rounded-xl font-bold bg-slate-800 text-slate-300 border border-slate-700 flex-shrink-0'
@@ -1324,7 +1323,7 @@
             <div class="p-3 space-y-1 ${isModern ? 'bg-slate-900/90 text-slate-200' : 'bg-white text-slate-800'} flex-1 flex flex-col justify-between">
               <p class="text-[11px] font-bold line-clamp-2 leading-snug">${photo.caption || 'זיכרון מהטיול 📸'}</p>
               <div class="flex items-center justify-between text-[10px] ${isModern ? 'text-slate-400 border-white/5' : 'text-slate-500 border-slate-100'} font-semibold pt-1.5 border-t">
-                <span class="${isModern ? 'text-indigo-400' : 'text-indigo-600'} font-bold">${photo.author}</span>
+                <span class="${isModern ? 'text-teal-300' : 'text-indigo-600'} font-bold">${photo.author}</span>
                 <span>${photo.timeStr || ''}</span>
               </div>
             </div>
@@ -1344,12 +1343,12 @@
     function openFullPhoto(imgData, caption, author) {
       const win = window.open();
       win.document.write(`
-        <body style="margin:0; background:#090D16; color:#FFF; font-family:-apple-system, sans-serif; display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100vh; padding:16px; box-sizing:border-box;">
+        <body style="margin:0; background:#0B0F19; color:#FFF; font-family:-apple-system, sans-serif; display:flex; flex-direction:column; justify-content:center; align-items:center; min-height:100vh; padding:16px; box-sizing:border-box;">
           <img src="${imgData}" style="max-width:100%; max-height:80vh; object-fit:contain; border-radius:20px; box-shadow:0 20px 40px rgba(0,0,0,0.6);" />
           <div style="margin-top:16px; text-align:center;">
             <p style="font-size:16px; font-weight:bold; margin:0 0 4px 0;">${caption || 'תמונה מהטיול'}</p>
             <p style="font-size:12px; opacity:0.7; margin:0 0 12px 0;">צולם ע"י ${author}</p>
-            <a href="${imgData}" download="garda-photo.jpg" style="background:#4F46E5; color:#FFF; padding:10px 24px; border-radius:999px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">הורד תמונה למכשיר</a>
+            <a href="${imgData}" download="garda-photo.jpg" style="background:#0D9488; color:#FFF; padding:10px 24px; border-radius:999px; text-decoration:none; font-weight:bold; font-size:13px; display:inline-block;">הורד תמונה למכשיר</a>
           </div>
         </body>
       `);
@@ -1365,12 +1364,12 @@
 
       const isModern = currentTheme === 'modern';
       document.querySelectorAll('.nav-button').forEach(btn => {
-        btn.classList.remove('text-blue-500', 'text-blue-600', 'font-black');
+        btn.classList.remove('text-cyan-400', 'text-blue-600', 'font-black');
         btn.classList.add(isModern ? 'text-slate-500' : 'text-slate-400', 'font-medium');
       });
       const active = document.getElementById(`nav-btn-${tab}`);
       active.classList.remove(isModern ? 'text-slate-500' : 'text-slate-400', 'font-medium');
-      active.classList.add(isModern ? 'text-blue-500' : 'text-blue-600', 'font-black');
+      active.classList.add(isModern ? 'text-cyan-400' : 'text-blue-600', 'font-black');
     }
 
     // הפעלה ראשונית
