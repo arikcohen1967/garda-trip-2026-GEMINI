@@ -46,25 +46,25 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Classic Styles (העיצוב המקורי הכהה) */
+    /* Classic Styles (העיצוב המקורי הבהיר והנקי) */
     .theme-classic {
-      background: radial-gradient(120% 120% at 50% 0%, #0F172A 0%, #1E293B 40%, #090D16 100%);
-      color: #F8FAFC;
+      background: radial-gradient(120% 120% at 50% 0%, #1E293B 0%, #0F172A 40%, #F1F5F9 40.1%, #F8FAFC 100%);
+      color: #0F172A;
     }
     .classic-card {
-      background: rgba(30, 41, 59, 0.95);
-      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      background: #FFFFFF;
+      border: 1.5px solid #CBD5E1;
       border-radius: 1.25rem;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
       overflow: hidden;
       width: 100%;
-      color: #F8FAFC;
+      color: #0F172A;
     }
     .classic-inner-box {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
       border-radius: 0.875rem;
-      color: #CBD5E1;
+      color: #334155;
     }
 
     /* Modern Pro Styles (Silver Titanium) */
@@ -349,7 +349,7 @@
   </nav>
 
   <script>
-    let currentTheme = localStorage.getItem('garda_theme') || 'modern';
+    let currentTheme = localStorage.getItem('garda_theme') || 'classic';
     let currentDay = 1;
     let currentTab = 'itinerary';
     let activeSlotKey = null;
@@ -475,14 +475,6 @@
       { key: 'sirmione_castle', title: 'סירמיונה: טירת סקאליג\'רו ושייט', sub: 'יום שני • 05/10', icon: 'castle' },
       { key: 'verona_arena', title: 'ורונה: ארנה ובית יוליה', sub: 'יום שני • 05/10', icon: 'heart' }
     ];
-
-    const passportDetails = {
-      'ARIK COHEN': { number: '23662043', dob: '28/12/1967' },
-      'HAREL VILNAI COHEN': { number: 'לא צוין', dob: '04/09/1997' },
-      'AMIT COHEN': { number: '36061996', dob: '01/07/2014' },
-      'YULY COHEN': { number: '36068815', dob: '01/07/2014' },
-      'LIAN COHEN': { number: '36062981', dob: '14/10/2015' }
-    };
 
     const firebaseConfig = {
       apiKey: "AIzaSyAsiM-s0bwOuEzopyzHfY3g_cGqMsOFx8",
