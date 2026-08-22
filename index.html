@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="איטליה 2026">
-  <meta name="theme-color" content="#E2E8F0">
+  <meta name="theme-color" content="#0F172A">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,17 +46,18 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Classic Styles */
+    /* Classic Styles - מודגש וברור כמו Modern Pro */
     .theme-classic {
-      background: #F1F5F9;
+      background: radial-gradient(120% 120% at 50% 0%, #0F172A 0%, #1E293B 40%, #F1F5F9 40.1%, #F8FAFC 100%);
       color: #0F172A;
     }
     .classic-card {
       background: #FFFFFF;
       border: 1.5px solid #CBD5E1;
       border-radius: 1.25rem;
-      box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
       overflow: hidden;
+      width: 100%;
     }
     .classic-inner-box {
       background: #F8FAFC;
@@ -64,7 +65,7 @@
       border-radius: 0.875rem;
     }
 
-    /* Modern Pro Styles (Silver Titanium with crisp contrasted borders) */
+    /* Modern Pro Styles (Silver Titanium) */
     .theme-modern {
       background: radial-gradient(130% 130% at 50% 0%, #FFFFFF 0%, #E2E8F0 45%, #CBD5E1 100%);
       color: #09090B;
@@ -77,6 +78,7 @@
       border-radius: 1.25rem;
       box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.08), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
       overflow: hidden;
+      width: 100%;
     }
     .pro-card-hover {
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -95,6 +97,7 @@
       color: #FFFFFF;
       overflow: hidden;
       min-height: 84px;
+      width: 100%;
     }
 
     @keyframes fadeIn {
@@ -177,8 +180,8 @@
         <button onclick="selectDay(7)" id="day-btn-7" class="day-chip flex-shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition-all duration-200"></button>
       </div>
 
-      <div class="text-center">
-        <span class="text-[10px] text-slate-500 font-semibold bg-white/70 dark:bg-slate-800/60 px-3 py-1 rounded-full border border-slate-300/60 shadow-sm inline-flex items-center gap-1">
+      <div class="text-center w-full">
+        <span class="text-[10px] opacity-75 font-semibold px-3 py-1 rounded-full border shadow-sm inline-flex items-center gap-1">
           <i data-lucide="maximize-2" class="w-3 h-3"></i> לחיצה כפולה על פעילות תפתח אותה במסך מלא
         </span>
       </div>
@@ -210,7 +213,7 @@
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[10px] font-bold opacity-70 block mb-1">מי מצלם/ת?</label>
-              <select id="photo-author" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm">
+              <select id="photo-author" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
                 <option value="אריק">אריק</option>
                 <option value="הראל">הראל</option>
                 <option value="עמית">עמית</option>
@@ -221,7 +224,7 @@
             </div>
             <div>
               <label class="text-[10px] font-bold opacity-70 block mb-1">שיוך ליום במסלול</label>
-              <select id="photo-day-select" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm">
+              <select id="photo-day-select" class="w-full bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-semibold focus:outline-none shadow-sm text-slate-950">
                 <option value="1">יום 1 • 30/09 (הגעה)</option>
                 <option value="2">יום 2 • 01/10 (Gardaland)</option>
                 <option value="3">יום 3 • 02/10 (Movieland)</option>
@@ -234,7 +237,7 @@
           </div>
 
           <div>
-            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none shadow-sm">
+            <input type="text" id="photo-caption" placeholder="תיאור קצר או חוויה (אופציונלי)..." class="w-full bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs focus:outline-none shadow-sm text-slate-950">
           </div>
 
           <input type="file" id="gallery-camera-input" accept="image/*" capture="environment" class="hidden">
@@ -249,7 +252,7 @@
             </button>
           </div>
           <div id="upload-spinner" class="hidden text-center py-1">
-            <span class="text-xs text-slate-900 font-black animate-pulse flex items-center justify-center gap-1.5">
+            <span class="text-xs font-black animate-pulse flex items-center justify-center gap-1.5">
               <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> מעבד ומסנכרן לענן...
             </span>
           </div>
@@ -311,14 +314,14 @@
 
   </main>
 
-  <!-- חלונית מסך מלא לפעילות שנפתחת בלחיצה כפולה (Full Screen Focus View) -->
+  <!-- חלונית מסך מלא לפעילות (Double Tap Modal) -->
   <div id="activity-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-md hidden flex items-center justify-center p-4 transition-all animate-fade-in">
-    <div class="bg-white text-slate-900 rounded-3xl max-w-sm w-full p-6 space-y-4 shadow-2xl relative border border-slate-200">
+    <div class="bg-white text-slate-900 rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl relative border border-slate-200">
       <button onclick="closeActivityModal()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition active:scale-95">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
       
-      <div id="modal-content" class="space-y-4"></div>
+      <div id="modal-content" class="space-y-3.5 pt-1"></div>
     </div>
   </div>
 
@@ -575,7 +578,7 @@
         switchWrapper.className = "flex bg-slate-300/80 p-1 rounded-xl border border-slate-400/50 gap-1";
         
         header.className = "bg-transparent px-4 py-2.5 transition-all text-slate-950 w-full";
-        bottomNav.className = "fixed inset-x-0 bottom-0 z-40 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] bg-white/95 backdrop-blur-xl border-t border-slate-300 text-slate-600 shadow-[0_-4px_25px_rgba(0,0,0,0.06)] w-full";
+        bottomNav.className = "fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] bg-white/95 backdrop-blur-xl border-t border-slate-300 text-slate-600 shadow-[0_-4px_25px_rgba(0,0,0,0.06)] w-full";
         
         btnToHotel.className = "flex items-center gap-1.5 bg-slate-950 hover:bg-slate-800 text-white font-black text-xs px-3.5 py-1.5 rounded-full shadow-md active:scale-95 transition";
         btnModern.className = "px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-slate-950 text-white shadow-md";
@@ -587,7 +590,7 @@
         switchWrapper.className = "flex bg-slate-800 p-1 rounded-xl border border-slate-700 gap-1";
         
         header.className = "bg-slate-900 text-white px-4 py-2.5 transition-all border-b border-slate-800 w-full";
-        bottomNav.className = "fixed inset-x-0 bottom-0 z-40 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] bg-white border-t border-slate-200 text-slate-600 shadow-2xl w-full";
+        bottomNav.className = "fixed inset-x-0 bottom-0 z-50 pt-2 pb-[calc(env(safe-area-inset-bottom)+0.6rem)] bg-white border-t border-slate-200 text-slate-600 shadow-2xl w-full";
         
         btnToHotel.className = "flex items-center gap-1.5 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-full shadow-md active:scale-95 transition";
         btnClassic.className = "px-3 py-1 rounded-lg text-[11px] font-black transition-all flex items-center gap-1 bg-blue-600 text-white shadow-md";
@@ -737,15 +740,15 @@
             <div ondblclick="openActivityModal(${day}, ${idx})" class="classic-card p-4 space-y-2.5 w-full pro-card-hover select-none" title="לחיצה כפולה למסך מלא">
               <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2">
-                  <div class="w-8 h-8 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 flex-shrink-0">
+                  <div class="w-8 h-8 rounded-xl bg-slate-100 border border-slate-300 flex items-center justify-center text-slate-800 flex-shrink-0 shadow-sm">
                     <i data-lucide="${s.icon}" class="w-4 h-4"></i>
                   </div>
                   <div>
-                    <span class="text-xs font-mono font-black bg-slate-100 border border-slate-200 text-slate-800 px-2 py-0.5 rounded-lg">${s.time}</span>
+                    <span class="text-xs font-mono font-black bg-slate-100 border border-slate-300 text-slate-800 px-2.5 py-0.5 rounded-lg">${s.time}</span>
                   </div>
                 </div>
                 ${s.hours ? `
-                  <span class="text-[10px] font-black text-slate-700 bg-slate-100 border border-slate-200 px-2.5 py-0.5 rounded-full flex items-center gap-1 flex-shrink-0">
+                  <span class="text-[10px] font-black text-slate-700 bg-slate-100 border border-slate-300 px-2.5 py-0.5 rounded-full flex items-center gap-1 flex-shrink-0">
                     <i data-lucide="clock" class="w-3 h-3 text-slate-500"></i> ${s.hours}
                   </span>
                 ` : ''}
@@ -759,15 +762,15 @@
                 <p class="text-xs text-slate-600 leading-relaxed mt-0.5 font-medium">${s.desc}</p>
               </div>
 
-              <div class="pt-2 border-t border-slate-100 flex gap-2 w-full" onclick="event.stopPropagation()">
-                <a href="${s.waze}" target="_blank" class="flex-1 min-w-0 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+              <div class="pt-2 border-t border-slate-200 flex gap-2 w-full" onclick="event.stopPropagation()">
+                <a href="${s.waze}" target="_blank" class="flex-1 min-w-0 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                   <i data-lucide="navigation" class="w-3.5 h-3.5 text-blue-600 flex-shrink-0"></i> <span>ניווט Waze</span>
                 </a>
-                <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 min-w-0 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
+                <a href="https://www.google.com/maps/search/${encodeURIComponent(s.name)}" target="_blank" class="flex-1 min-w-0 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                   <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-600 flex-shrink-0"></i> <span>Maps</span>
                 </a>
                 ${s.appLink ? `
-                  <a href="${s.appLink}" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-black px-3 py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm flex-shrink-0" title="אפליקציית Gardaland">
+                  <a href="${s.appLink}" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 text-xs font-black px-3 py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm flex-shrink-0" title="אפליקציית Gardaland">
                     <i data-lucide="smartphone" class="w-3.5 h-3.5 text-amber-700"></i>
                   </a>
                 ` : ''}
@@ -791,30 +794,30 @@
 
       content.innerHTML = `
         <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-          <div class="flex items-center gap-2">
-            <span class="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center">
+          <div class="flex items-center gap-2.5">
+            <span class="w-10 h-10 rounded-2xl bg-slate-950 text-white flex items-center justify-center shadow-sm flex-shrink-0">
               <i data-lucide="${stop.icon}" class="w-5 h-5"></i>
             </span>
             <div>
-              <span class="text-[11px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200">${dayData.date.split(',')[0]} • ${stop.time}</span>
+              <span class="text-[11px] font-black text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200">${dayData.date.split(',')[0]} • ${stop.time}</span>
               <h3 class="font-black text-base text-slate-950 mt-1">${stop.name}</h3>
             </div>
           </div>
         </div>
 
         ${stop.hours ? `
-          <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 p-3 rounded-2xl text-amber-900 text-xs font-bold">
+          <div class="flex items-center gap-2 bg-amber-50 border border-amber-200 p-3 rounded-2xl text-amber-900 text-xs font-bold w-full">
             <i data-lucide="clock" class="w-4 h-4 text-amber-600 shrink-0"></i>
             <span>שעות פעילות: ${stop.hours}</span>
           </div>
         ` : ''}
 
-        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1.5 w-full">
           <span class="text-[11px] font-black text-slate-400 block uppercase tracking-wider">תיאור והנחיות</span>
           <p class="text-sm text-slate-800 leading-relaxed font-medium">${stop.desc}</p>
         </div>
 
-        <div class="space-y-2 pt-2">
+        <div class="space-y-2 pt-1 w-full">
           <a href="${stop.waze}" target="_blank" class="w-full bg-slate-950 hover:bg-slate-800 text-white text-xs font-black py-3 rounded-2xl flex items-center justify-center gap-2 shadow-md active:scale-95 transition">
             <i data-lucide="navigation" class="w-4 h-4 text-white"></i> ניווט ישיר ב-Waze
           </a>
@@ -837,7 +840,6 @@
       document.getElementById('activity-modal').classList.add('hidden');
     }
 
-    // סגירה בלחיצה על הרקע
     document.getElementById('activity-modal').addEventListener('click', function(e) {
       if (e.target === this) closeActivityModal();
     });
@@ -861,29 +863,29 @@
           </h2>
           <p class="text-xs text-slate-600 mb-3">חיפוש ישיר במפות לפי המיקום הנוכחי בשטח</p>
           <div class="grid grid-cols-2 gap-2.5 w-full">
-            <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-3 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm">
-              <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-3 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center group-hover:scale-110 transition shadow-inner flex-shrink-0">
                 <i data-lucide="shopping-cart" class="w-4 h-4"></i>
               </div>
-              <span class="text-xs font-black text-slate-900">סופרמרקטים</span>
+              <span class="text-xs font-black text-slate-900 truncate">סופרמרקטים</span>
             </a>
-            <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-3 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm">
-              <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-3 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center group-hover:scale-110 transition shadow-inner flex-shrink-0">
                 <i data-lucide="utensils" class="w-4 h-4"></i>
               </div>
-              <span class="text-xs font-black text-slate-900">מסעדות ופיצות</span>
+              <span class="text-xs font-black text-slate-900 truncate">מסעדות ופיצות</span>
             </a>
-            <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-3 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm">
-              <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-3 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center group-hover:scale-110 transition shadow-inner flex-shrink-0">
                 <i data-lucide="fuel" class="w-4 h-4"></i>
               </div>
-              <span class="text-xs font-black text-slate-900">תחנות דלק</span>
+              <span class="text-xs font-black text-slate-900 truncate">תחנות דלק</span>
             </a>
-            <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-3 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm">
-              <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-3 bg-white hover:bg-slate-50 border border-slate-300 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center group-hover:scale-110 transition shadow-inner flex-shrink-0">
                 <i data-lucide="cross" class="w-4 h-4"></i>
               </div>
-              <span class="text-xs font-black text-slate-900">בתי מרקחת וחירום</span>
+              <span class="text-xs font-black text-slate-900 truncate">בתי מרקחת וחירום</span>
             </a>
           </div>
         `;
@@ -891,19 +893,19 @@
         galleryBox.className = "pro-glass p-4 space-y-3 border border-slate-300/80 shadow-md w-full";
         uploadBox.className = "bg-white border border-slate-300 rounded-xl p-3 space-y-2.5 shadow-sm w-full";
         countBadge.className = "text-[10px] font-black bg-slate-950 text-white px-2.5 py-0.5 rounded-full shadow-sm";
-        btnGalCam.className = "bg-slate-950 hover:bg-slate-800 text-white text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition";
-        btnGalFile.className = "bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition";
+        btnGalCam.className = "bg-slate-950 hover:bg-slate-800 text-white text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition min-w-0";
+        btnGalFile.className = "bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition min-w-0";
 
         hotelCard.className = "pro-glass p-4 border border-slate-300/80 space-y-2.5 shadow-md w-full";
         hotelCard.innerHTML = `
-          <div class="flex items-center justify-between pb-2.5 border-b border-slate-200">
-            <div class="flex items-center gap-2">
+          <div class="flex items-center justify-between pb-2.5 border-b border-slate-200 gap-2">
+            <div class="flex items-center gap-2 min-w-0">
               <div class="w-9 h-9 rounded-xl bg-white text-slate-950 flex items-center justify-center border border-slate-300 shadow-sm flex-shrink-0">
                 <i data-lucide="hotel" class="w-4 h-4"></i>
               </div>
-              <div>
-                <span class="font-black text-sm text-slate-950 block">Bio Agriturismo Vojon</span>
-                <span class="text-[10px] text-slate-600 font-bold">★★★ Agriturismo כפרי</span>
+              <div class="min-w-0">
+                <span class="font-black text-sm text-slate-950 block truncate">Bio Agriturismo Vojon</span>
+                <span class="text-[10px] text-slate-600 font-bold block truncate">★★★ Agriturismo כפרי</span>
               </div>
             </div>
             <a href="https://apps.apple.com/il/app/booking-com-hotels-travel/id367003839" target="_blank" class="text-[10px] font-black bg-slate-950 hover:bg-slate-800 text-white px-3 py-1 rounded-full shadow-sm flex items-center gap-1 transition active:scale-95 flex-shrink-0">
@@ -924,7 +926,7 @@
               <i data-lucide="bed-double" class="w-3.5 h-3.5 text-slate-900 shrink-0"></i>
               <span><strong>חדר:</strong> Large Double / Twin Room (כולל ארוחת בוקר 🥐)</span>
             </div>
-            <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2 rounded-lg border border-slate-200 mt-1 shadow-sm">
+            <div class="grid grid-cols-2 gap-2 bg-slate-50 p-2 rounded-lg border border-slate-200 mt-1 shadow-sm w-full">
               <div>
                 <span class="text-[10px] text-slate-500 block">צ'ק-אין</span>
                 <span class="font-black text-slate-950 text-xs">15:00 – 18:00</span>
@@ -936,14 +938,14 @@
             </div>
           </div>
           <div class="pt-2 border-t border-slate-200 grid grid-cols-3 gap-2 w-full">
-            <a href="tel:+393792027060" class="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm">
-              <i data-lucide="phone" class="w-3.5 h-3.5 text-slate-900"></i> חיוג
+            <a href="tel:+393792027060" class="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm min-w-0">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-slate-900 flex-shrink-0"></i> <span class="truncate">חיוג</span>
             </a>
-            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-slate-950 hover:bg-slate-800 text-white text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-md">
-              <i data-lucide="navigation" class="w-3.5 h-3.5 text-white"></i> Waze
+            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-slate-950 hover:bg-slate-800 text-white text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-md min-w-0">
+              <i data-lucide="navigation" class="w-3.5 h-3.5 text-white flex-shrink-0"></i> <span class="truncate">Waze</span>
             </a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-900"></i> Maps
+            <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 shadow-sm min-w-0">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-900 flex-shrink-0"></i> <span class="truncate">Maps</span>
             </a>
           </div>
         `;
@@ -971,29 +973,29 @@
           </h2>
           <p class="text-xs text-slate-500 mb-3">חיפוש ישיר במפות לפי המיקום הנוכחי בשטח</p>
           <div class="grid grid-cols-2 gap-2.5 w-full">
-            <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm">
-              <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/supermarket+grocery/@" target="_blank" class="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center group-hover:scale-110 transition shadow-inner flex-shrink-0">
                 <i data-lucide="shopping-cart" class="w-4 h-4"></i>
               </div>
-              <span class="text-xs font-black text-slate-800">סופרמרקטים</span>
+              <span class="text-xs font-black text-slate-800 truncate">סופרמרקטים</span>
             </a>
-            <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm">
-              <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/restaurants+pizza/@" target="_blank" class="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center group-hover:scale-110 transition shadow-inner flex-shrink-0">
                 <i data-lucide="utensils" class="w-4 h-4"></i>
               </div>
-              <span class="text-xs font-black text-slate-800">מסעדות ופיצות</span>
+              <span class="text-xs font-black text-slate-800 truncate">מסעדות ופיצות</span>
             </a>
-            <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm">
-              <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/gas+station/@" target="_blank" class="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-110 transition shadow-inner flex-shrink-0">
                 <i data-lucide="fuel" class="w-4 h-4"></i>
               </div>
-              <span class="text-xs font-black text-slate-800">תחנות דלק</span>
+              <span class="text-xs font-black text-slate-800 truncate">תחנות דלק</span>
             </a>
-            <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm">
-              <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center group-hover:scale-110 transition shadow-inner">
+            <a href="https://www.google.com/maps/search/pharmacy+hospital/@" target="_blank" class="p-3 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex flex-col items-center gap-2 text-center transition group active:scale-95 shadow-sm min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center group-hover:scale-110 transition shadow-inner flex-shrink-0">
                 <i data-lucide="cross" class="w-4 h-4"></i>
               </div>
-              <span class="text-xs font-black text-slate-800">בתי מרקחת וחירום</span>
+              <span class="text-xs font-black text-slate-800 truncate">בתי מרקחת וחירום</span>
             </a>
           </div>
         `;
@@ -1001,19 +1003,19 @@
         galleryBox.className = "classic-card p-4 space-y-3 w-full";
         uploadBox.className = "bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2.5 w-full";
         countBadge.className = "text-[10px] font-black bg-slate-100 text-slate-700 border border-slate-300 px-2.5 py-0.5 rounded-full";
-        btnGalCam.className = "bg-slate-900 text-white text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition";
-        btnGalFile.className = "bg-slate-100 text-slate-800 border border-slate-300 text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition";
+        btnGalCam.className = "bg-slate-900 text-white text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition min-w-0";
+        btnGalFile.className = "bg-slate-100 text-slate-800 border border-slate-300 text-xs font-black py-2 rounded-lg flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition min-w-0";
 
         hotelCard.className = "classic-card p-4 space-y-2.5 w-full";
         hotelCard.innerHTML = `
-          <div class="flex items-center justify-between pb-2.5 border-b border-slate-100">
-            <div class="flex items-center gap-2">
+          <div class="flex items-center justify-between pb-2.5 border-b border-slate-100 gap-2">
+            <div class="flex items-center gap-2 min-w-0">
               <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center border border-emerald-200 shadow-inner flex-shrink-0">
                 <i data-lucide="hotel" class="w-4 h-4"></i>
               </div>
-              <div>
-                <span class="font-black text-sm text-slate-900 block">Bio Agriturismo Vojon</span>
-                <span class="text-[10px] text-amber-700 font-bold">★★★ Agriturismo כפרי</span>
+              <div class="min-w-0">
+                <span class="font-black text-sm text-slate-900 block truncate">Bio Agriturismo Vojon</span>
+                <span class="text-[10px] text-amber-700 font-bold block truncate">★★★ Agriturismo כפרי</span>
               </div>
             </div>
             <a href="https://apps.apple.com/il/app/booking-com-hotels-travel/id367003839" target="_blank" class="text-[10px] font-black bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1 rounded-full border border-slate-300 flex items-center gap-1 transition active:scale-95 flex-shrink-0">
@@ -1046,14 +1048,14 @@
             </div>
           </div>
           <div class="pt-2 border-t border-slate-100 grid grid-cols-3 gap-2 w-full">
-            <a href="tel:+393792027060" class="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95">
-              <i data-lucide="phone" class="w-3.5 h-3.5 text-slate-600"></i> חיוג
+            <a href="tel:+393792027060" class="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 min-w-0">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-slate-600 flex-shrink-0"></i> <span class="truncate">חיוג</span>
             </a>
-            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95">
-              <i data-lucide="navigation" class="w-3.5 h-3.5 text-blue-600"></i> Waze
+            <a href="https://waze.com/ul?q=Via+Del+Forte+6+Ponti+Sul+Mincio" target="_blank" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 min-w-0">
+              <i data-lucide="navigation" class="w-3.5 h-3.5 text-blue-600 flex-shrink-0"></i> <span class="truncate">Waze</span>
             </a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-600"></i> Maps
+            <a href="https://www.google.com/maps/search/?api=1&query=Via+Del+Forte+6+46040+Ponti+Sul+Mincio+Italy" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1 transition active:scale-95 min-w-0">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-600 flex-shrink-0"></i> <span class="truncate">Maps</span>
             </a>
           </div>
         `;
@@ -1088,13 +1090,13 @@
       outContainer.className = isModern ? "pro-glass p-4 border border-slate-300/80 space-y-2.5 shadow-md w-full" : "classic-card p-4 space-y-2.5 w-full";
       outContainer.innerHTML = `
         <div class="flex items-center justify-between pb-2.5 border-b ${isModern ? 'border-slate-200' : 'border-slate-100'} gap-2">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 min-w-0">
             <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-white text-slate-900 border border-slate-300 shadow-sm' : 'bg-slate-100 text-slate-700'} flex items-center justify-center flex-shrink-0">
               <i data-lucide="plane-takeoff" class="w-4 h-4"></i>
             </div>
-            <div>
-              <span class="font-black text-sm text-slate-900 block">טיסת הלוך (ישראייר 6H 357)</span>
-              <span class="text-[10px] text-slate-500 font-bold">30.09.2026 | יום רביעי</span>
+            <div class="min-w-0">
+              <span class="font-black text-sm text-slate-900 block truncate">טיסת הלוך (ישראייר 6H 357)</span>
+              <span class="text-[10px] text-slate-500 font-bold block truncate">30.09.2026 | יום רביעי</span>
             </div>
           </div>
           ${outSaved ? `
@@ -1143,13 +1145,13 @@
       inContainer.className = isModern ? "pro-glass p-4 border border-slate-300/80 space-y-2.5 shadow-md w-full" : "classic-card p-4 space-y-2.5 w-full";
       inContainer.innerHTML = `
         <div class="flex items-center justify-between pb-2.5 border-b ${isModern ? 'border-slate-200' : 'border-slate-100'} gap-2">
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 min-w-0">
             <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-white text-slate-900 border border-slate-300 shadow-sm' : 'bg-slate-100 text-slate-700'} flex items-center justify-center flex-shrink-0">
               <i data-lucide="plane-landing" class="w-4 h-4"></i>
             </div>
-            <div>
-              <span class="font-black text-sm text-slate-900 block">טיסת חזור (ישראייר 6H 352)</span>
-              <span class="text-[10px] text-slate-500 font-bold">06.10.2026 | יום שלישי</span>
+            <div class="min-w-0">
+              <span class="font-black text-sm text-slate-900 block truncate">טיסת חזור (ישראייר 6H 352)</span>
+              <span class="text-[10px] text-slate-500 font-bold block truncate">06.10.2026 | יום שלישי</span>
             </div>
           </div>
           ${inSaved ? `
@@ -1223,7 +1225,7 @@
                 </button>
               </div>
               <div class="pt-2 border-t ${isModern ? 'border-slate-200' : 'border-slate-100'} flex gap-2 w-full">
-                <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 ${isModern ? 'bg-slate-950 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md">
+                <button onclick="openTicketData('${saved.fileData}', '${saved.fileType}')" class="flex-1 ${isModern ? 'bg-slate-950 text-white' : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm">
                   <i data-lucide="eye" class="w-3.5 h-3.5"></i> הצג כרטיס (${isPdf ? 'מסמך PDF' : 'תמונה'})
                 </button>
               </div>
@@ -1234,7 +1236,7 @@
             <div class="${isModern ? 'pro-glass p-4 border border-slate-300/80 shadow-md' : 'classic-card p-4'} space-y-2.5 w-full">
               <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2 min-w-0">
-                  <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-white text-slate-700 border border-slate-300 shadow-sm' : 'bg-slate-100 text-slate-600'} flex items-center justify-center shadow-sm flex-shrink-0">
+                  <div class="w-8 h-8 rounded-xl ${isModern ? 'bg-white text-slate-700 border border-slate-200 shadow-sm' : 'bg-slate-100 text-slate-600'} flex items-center justify-center shadow-sm flex-shrink-0">
                     <i data-lucide="${slot.icon}" class="w-4 h-4"></i>
                   </div>
                   <div class="min-w-0">
@@ -1245,7 +1247,7 @@
                 <span class="text-[10px] font-bold bg-white text-slate-600 border border-slate-300 px-2 py-0.5 rounded-md shadow-sm flex-shrink-0">ממתין לקובץ</span>
               </div>
               <div class="pt-2 border-t ${isModern ? 'border-slate-200' : 'border-slate-100'} grid grid-cols-2 gap-2 w-full">
-                <button onclick="triggerSlotCamera('${slot.key}')" class="${isModern ? 'bg-slate-950 text-white' : 'bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md min-w-0">
+                <button onclick="triggerSlotCamera('${slot.key}')" class="${isModern ? 'bg-slate-950 text-white' : 'bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm min-w-0">
                   <i data-lucide="camera" class="w-3.5 h-3.5 flex-shrink-0"></i> <span class="truncate">צלם כרטיס</span>
                 </button>
                 <button onclick="triggerSlotFile('${slot.key}')" class="${isModern ? 'bg-white text-slate-900 border border-slate-300' : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'} text-xs font-black py-2 rounded-xl flex items-center justify-center gap-1.5 transition active:scale-95 shadow-sm min-w-0">
@@ -1383,18 +1385,18 @@
         } else {
           btn.className = isModern 
             ? 'px-3 py-1 rounded-lg font-bold bg-white text-slate-700 border border-slate-300 flex-shrink-0'
-            : 'px-3 py-1 rounded-lg font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
+            : 'px-3.5 py-1.5 rounded-lg font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
         }
       }
       const allBtn = document.getElementById('gfilter-all');
       if (day === 'all') {
         allBtn.className = isModern
-          ? 'px-3 py-1 rounded-lg font-black bg-slate-950 text-white shadow-sm flex-shrink-0'
-          : 'px-3 py-1 rounded-lg font-black bg-blue-600 text-white shadow-sm flex-shrink-0';
+          ? 'px-3.5 py-1 rounded-lg font-black bg-slate-950 text-white shadow-sm flex-shrink-0'
+          : 'px-3.5 py-1 rounded-lg font-black bg-blue-600 text-white shadow-sm flex-shrink-0';
       } else {
         allBtn.className = isModern 
-          ? 'px-3 py-1 rounded-lg font-bold bg-white text-slate-700 border border-slate-300 flex-shrink-0'
-          : 'px-3 py-1 rounded-lg font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
+          ? 'px-3.5 py-1 rounded-lg font-bold bg-white text-slate-700 border border-slate-300 flex-shrink-0'
+          : 'px-3.5 py-1 rounded-lg font-bold bg-white text-slate-600 border border-slate-200 flex-shrink-0';
       }
       renderGallery();
     }
