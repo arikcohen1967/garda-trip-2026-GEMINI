@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Flights Edition" name="application-name"/>
+<meta content="Garda Trip Insurance Edition" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -148,7 +148,7 @@ button, input, select { font: inherit; }
   border-radius: 16px; padding: 18px; box-shadow: var(--shadow);
 }
 .stop-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.time { font-size: 11px; font-weight: 700; color: var(--text); background: var(--bg); padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line-dark); }
+.time { font-size: 11px; font-weight: 700; color: var(--text); background: var(--bg); padding: 5px 10px; border-radius: 8px; border: 1.5px solid var(--line-dark); }
 .stop-title { font-size: 16px; font-weight: 700; margin: 0; color: var(--text); letter-spacing: -0.01em; }
 .stop-desc { font-size: 13px; color: var(--muted); margin: 6px 0 14px; line-height: 1.4; font-weight: 400; }
 
@@ -164,7 +164,7 @@ button, input, select { font: inherit; }
 .food-waze-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
 .stop-links {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line-dark);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1.5px solid var(--line-dark);
 }
 .nav-btn {
   font-size: 13px; font-weight: 700; color: #1d1d1f; background: #ffffff;
@@ -208,7 +208,7 @@ button, input, select { font: inherit; }
 .wallet-main-btn:hover { opacity: 0.92; transform: translateY(-1px); }
 
 .ticket-upload-box {
-  background-color: #f2f2f7; padding: 20px; border-radius: 18px; border: 1px solid var(--line-dark);
+  background-color: #f2f2f7; padding: 20px; border-radius: 18px; border: 1.5px solid var(--line-dark);
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 14px;
 }
 .ticket-upload-box label { font-size: 12px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 4px; }
@@ -219,7 +219,7 @@ button, input, select { font: inherit; }
 .upload-options-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
 .upload-opt-btn {
   width: 100%; padding: 14px; border-radius: 12px; background: #ffffff; color: var(--text);
-  border: 1px solid var(--line-dark); font-weight: 700; cursor: pointer; font-size: 14px;
+  border: 1.5px solid var(--line-dark); font-weight: 700; cursor: pointer; font-size: 14px;
   display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);
   transition: all 0.2s ease;
 }
@@ -318,7 +318,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow); }
 </style>
 </head>
-<body data-garda-version="V103-IsrairIntegration">
+<body data-garda-version="V104-InsuranceIntegration">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -560,7 +560,7 @@ function openAroundModal() {
 function openTicketsModal() {
   document.getElementById('ticketsModal').classList.add('open');
   openTicketDb().then(async () => { 
-    await ensureDefaultFlightsTicket();
+    await ensureDefaultTickets();
     renderTicketFolders(); 
     renderTicketFiles(); 
   });
@@ -600,25 +600,47 @@ function openTicketDb() {
   });
 }
 
-// הוספת כרטיס טיסה ברירת מחדל מנתוני ישראייר
-async function ensureDefaultFlightsTicket() {
-  const files = await getTicketFiles('✈️ טיסות ורכב');
-  if (files.length > 0) return;
+// הוספת כרטיסי טיסה וביטוח אוטומטית לתקיות המתאימות
+async function ensureDefaultTickets() {
   const db = await openTicketDb();
-  return new Promise((resolve) => {
-    const tx = db.transaction('files', 'readwrite');
-    tx.objectStore('files').add({
-      folder: '✈️ טיסות ורכב',
-      title: 'הזמנת ישראייר (4623652)',
-      name: 'Israir Flight Booking',
-      type: 'text/flight-info',
-      size: 15400,
-      created: Date.now(),
-      isFlightInfo: true,
-      details: 'הלוך: 30.09.2026 13:15 (TLV -> VRN) | טיסה 6H 357\nחזור: 06.10.2026 21:35 (VRN -> TLV) | טיסה 6H 352\nנוסעים: אריק כהן, עמית כהן, יולי כהן, ליאן כהן, הראל וילנאי כהן'
+  
+  // בדיקה והוספת טיסות
+  const flightFiles = await getTicketFiles('✈️ טיסות ורכב');
+  const hasFlight = flightFiles.some(f => f.isFlightInfo);
+  if (!hasFlight) {
+    await new Promise((resolve) => {
+      const tx = db.transaction('files', 'readwrite');
+      tx.objectStore('files').add({
+        folder: '✈️ טיסות ורכב',
+        title: 'הזמנת ישראייר (4623652)',
+        name: 'Israir Flight Booking',
+        type: 'text/flight-info',
+        size: 15400,
+        created: Date.now(),
+        isFlightInfo: true
+      });
+      tx.oncomplete = resolve;
     });
-    tx.oncomplete = resolve;
-  });
+  }
+
+  // בדיקה והוספת ביטוח נסיעות AIG
+  const insFiles = await getTicketFiles('✈️ טיסות ורכב');
+  const hasIns = insFiles.some(f => f.isInsuranceInfo);
+  if (!hasIns) {
+    await new Promise((resolve) => {
+      const tx = db.transaction('files', 'readwrite');
+      tx.objectStore('files').add({
+        folder: '✈️ טיסות ורכב',
+        title: 'ביטוח נסיעות AIG (170270213826)',
+        name: 'AIG Insurance Policy',
+        type: 'text/insurance-info',
+        size: 12000,
+        created: Date.now() - 1000,
+        isInsuranceInfo: true
+      });
+      tx.oncomplete = resolve;
+    });
+  }
 }
 
 function showTicketUpload() {
@@ -685,11 +707,11 @@ async function renderTicketFiles() {
   list.innerHTML = `<div class="ticket-grid-container">` + files.map(x => `
     <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ כפולה לפתיחה מלאה">
       <div class="ticket-thumb">
-        ${x.isFlightInfo ? '✈️' : ((x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄')}
+        ${x.isFlightInfo ? '✈️' : (x.isInsuranceInfo ? '🛡️' : ((x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'))}
       </div>
       <div class="ticket-info">
         <b>${x.title || x.name}</b>
-        <small>${x.isFlightInfo ? 'הזמנה 4623652 · ישראייר' : `${Math.round(x.size/1024)} KB · לחיצה כפולה`}</small>
+        <small>${x.isFlightInfo ? 'הזמנה 4623652 · ישראייר' : (x.isInsuranceInfo ? 'פוליסה 170270213826 · AIG' : `${Math.round(x.size/1024)} KB · לחיצה כפולה`)}</small>
         <button class="delete-ticket-btn" onclick="event.stopPropagation(); deleteTicketFile(${x.id})">מחק</button>
       </div>
     </div>
@@ -703,6 +725,7 @@ async function openFullViewer(id) {
     const x = req.result; if (!x) return;
     const body = document.getElementById('fullViewerBody');
     document.getElementById('fullViewerTitle').textContent = x.title || x.name;
+    
     if (x.isFlightInfo) {
       body.innerHTML = `<div style="text-align:right; padding:20px; font-size:14px; line-height:1.6;">
         <h3 style="color:var(--accent); margin-top:0;">✈️ פרטי טיסה – ישראייר (הזמנה: 4623652)[cite: 1]</h3>
@@ -716,6 +739,23 @@ async function openFullViewer(id) {
           <li>Yuly Cohen (01/07/2014)[cite: 1]</li>
           <li>Lian Cohen (14/10/2015)[cite: 1]</li>
           <li>Harel Vilnai Cohen (04/09/1997)[cite: 1]</li>
+        </ul>
+      </div>`;
+    } else if (x.isInsuranceInfo) {
+      body.innerHTML = `<div style="text-align:right; padding:20px; font-size:14px; line-height:1.6;">
+        <h3 style="color:var(--accent); margin-top:0;">🛡️ ביטוח נסיעות לחו"ל – AIG (פוליסה: 170270213826)[cite: 2]</h3>
+        <p><b>מוקד חירום רפואי 24/7 (עברית):</b></p>
+        <ul style="padding-right:20px; margin:5px 0;">
+          <li>הודעות WhatsApp: <a href="https://wa.me/972549940911" target="_blank" style="color:var(--accent)">+972-54-9940911</a>[cite: 2]</li>
+          <li>מוקד טלפוני ישיר: <a href="tel:+97239191155" style="color:var(--accent)">+972-3-9191155</a>[cite: 2]</li>
+          <li>דוא"ל מוקד רפואי: Aig.medical@ima-mc.com[cite: 2]</li>
+        </ul>
+        <hr style="border:0; border-top:1px solid var(--line-dark); margin:15px 0;">
+        <p><b>שירותים דיגיטליים:</b></p>
+        <ul style="padding-right:20px; margin:5px 0;">
+          <li>אפליקציית Safe Travel לאיתור רופא, הגשת תביעה והחזר מהיר: <a href="http://aig.co.il/t/1vdihFNt8K" target="_blank" style="color:var(--accent)">קישור לאפליקציה</a>[cite: 2]</li>
+          <li>אזור אישי להורדת מסמכי הפוליסה: <a href="https://www.aig.co.il/t/6b66x6" target="_blank" style="color:var(--accent)">כניסה לאזור האישי</a>[cite: 2]</li>
+          <li>ספר הפוליסה המלא ותנאי הביטוח: <a href="https://www.aig.co.il/t/9BU1a8" target="_blank" style="color:var(--accent)">צפייה בפוליסה</a>[cite: 2]</li>
         </ul>
       </div>`;
     } else if ((x.type||'').startsWith('image/')) {
