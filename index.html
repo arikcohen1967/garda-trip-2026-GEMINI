@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Insurance Edition" name="application-name"/>
+<meta content="Garda Trip CleanText Edition" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -318,7 +318,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow); }
 </style>
 </head>
-<body data-garda-version="V104-InsuranceIntegration">
+<body data-garda-version="V105-CleanTextFixed">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -600,11 +600,9 @@ function openTicketDb() {
   });
 }
 
-// הוספת כרטיסי טיסה וביטוח אוטומטית לתקיות המתאימות
 async function ensureDefaultTickets() {
   const db = await openTicketDb();
   
-  // בדיקה והוספת טיסות
   const flightFiles = await getTicketFiles('✈️ טיסות ורכב');
   const hasFlight = flightFiles.some(f => f.isFlightInfo);
   if (!hasFlight) {
@@ -623,7 +621,6 @@ async function ensureDefaultTickets() {
     });
   }
 
-  // בדיקה והוספת ביטוח נסיעות AIG
   const insFiles = await getTicketFiles('✈️ טיסות ורכב');
   const hasIns = insFiles.some(f => f.isInsuranceInfo);
   if (!hasIns) {
@@ -727,10 +724,15 @@ async function openFullViewer(id) {
     document.getElementById('fullViewerTitle').textContent = x.title || x.name;
     
     if (x.isFlightInfo) {
-      body.innerHTML = `<div style="text-align:right; padding:20px; font-size:14px; line-height:1.6;">
-        <h3 style="color:var(--accent); margin-top:0;">✈️ פרטי טיסה – ישראייר (הזמנה: 4623652)[cite: 1]</h3>
-        <p><b>הלוך (30.09.2026):</b> 13:15 מת"א (טרמינל 1) -> 16:05 בוורונה (טיסה 6H 357)[cite: 1]</p>
-        <p><b>חזור (06.10.2026):</b> 21:35 מוורונה -> 02:05 בת"א (טיסה 6H 352)[cite: 1]</p>
+      body.innerHTML = `<div dir="rtl" style="text-align:right; padding:20px; font-size:14px; line-height:1.8;">
+        <h3 style="color:var(--accent); margin-top:0;">✈️ פרטי טיסה – ישראייר</h3>
+        <p><b>מספר הזמנה (Docket):</b> <span dir="ltr" style="display:inline-block">4623652</span>[cite: 1]</p>
+        <p><b>טיסת הלוך (30.09.2026):</b><br>
+        שעה: <span dir="ltr" style="display:inline-block">13:15</span> מתל אביב (טרמינל 1) -> <span dir="ltr" style="display:inline-block">16:05</span> בוורונה<br>
+        טיסה: <span dir="ltr" style="display:inline-block">6H 357</span> (מחלקת Q, Economy)[cite: 1]</p>
+        <p><b>טיסת חזור (06.10.2026):</b><br>
+        שעה: <span dir="ltr" style="display:inline-block">21:35</span> מוורונה -> <span dir="ltr" style="display:inline-block">02:05</span> בתל אביב (07.10)<br>
+        טיסה: <span dir="ltr" style="display:inline-block">6H 352</span> (מחלקת Q, Economy)[cite: 1]</p>
         <hr style="border:0; border-top:1px solid var(--line-dark); margin:15px 0;">
         <b>נוסעים בהזמנה[cite: 1]:</b>
         <ul style="padding-right:20px; margin:5px 0;">
@@ -742,18 +744,19 @@ async function openFullViewer(id) {
         </ul>
       </div>`;
     } else if (x.isInsuranceInfo) {
-      body.innerHTML = `<div style="text-align:right; padding:20px; font-size:14px; line-height:1.6;">
-        <h3 style="color:var(--accent); margin-top:0;">🛡️ ביטוח נסיעות לחו"ל – AIG (פוליסה: 170270213826)[cite: 2]</h3>
-        <p><b>מוקד חירום רפואי 24/7 (עברית):</b></p>
+      body.innerHTML = `<div dir="rtl" style="text-align:right; padding:20px; font-size:14px; line-height:1.8;">
+        <h3 style="color:var(--accent); margin-top:0;">🛡️ ביטוח נסיעות לחו"ל – AIG</h3>
+        <p><b>מספר פוליסה:</b> <span dir="ltr" style="display:inline-block">170270213826</span>[cite: 2]</p>
+        <p><b>מוקד חירום רפואי 24/7 (עברית)[cite: 2]:</b></p>
         <ul style="padding-right:20px; margin:5px 0;">
-          <li>הודעות WhatsApp: <a href="https://wa.me/972549940911" target="_blank" style="color:var(--accent)">+972-54-9940911</a>[cite: 2]</li>
-          <li>מוקד טלפוני ישיר: <a href="tel:+97239191155" style="color:var(--accent)">+972-3-9191155</a>[cite: 2]</li>
+          <li>הודעות WhatsApp: <a href="https://wa.me/972549940911" target="_blank" style="color:var(--accent)" dir="ltr">+972-54-9940911</a>[cite: 2]</li>
+          <li>מוקד טלפוני ישיר: <a href="tel:+97239191155" style="color:var(--accent)" dir="ltr">+972-3-9191155</a>[cite: 2]</li>
           <li>דוא"ל מוקד רפואי: Aig.medical@ima-mc.com[cite: 2]</li>
         </ul>
         <hr style="border:0; border-top:1px solid var(--line-dark); margin:15px 0;">
-        <p><b>שירותים דיגיטליים:</b></p>
+        <p><b>שירותים דיגיטליים[cite: 2]:</b></p>
         <ul style="padding-right:20px; margin:5px 0;">
-          <li>אפליקציית Safe Travel לאיתור רופא, הגשת תביעה והחזר מהיר: <a href="http://aig.co.il/t/1vdihFNt8K" target="_blank" style="color:var(--accent)">קישור לאפליקציה</a>[cite: 2]</li>
+          <li>אפליקציית Safe Travel לאיתור רופא והגשת תביעה: <a href="http://aig.co.il/t/1vdihFNt8K" target="_blank" style="color:var(--accent)">קישור לאפליקציה</a>[cite: 2]</li>
           <li>אזור אישי להורדת מסמכי הפוליסה: <a href="https://www.aig.co.il/t/6b66x6" target="_blank" style="color:var(--accent)">כניסה לאזור האישי</a>[cite: 2]</li>
           <li>ספר הפוליסה המלא ותנאי הביטוח: <a href="https://www.aig.co.il/t/9BU1a8" target="_blank" style="color:var(--accent)">צפייה בפוליסה</a>[cite: 2]</li>
         </ul>
