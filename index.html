@@ -1,88 +1,83 @@
 import React, { useState } from 'react';
-import { 
-  MapPin, Calendar, Clock, Navigation, Compass, 
-  Camera, Coffee, Utensils, Hotel, Sparkles, ChevronRight, Layers, LayoutGrid, Globe 
-} from 'lucide-react';
+import { MapPin, Calendar, Clock, Navigation, Compass, Camera, Coffee, Utensils, Hotel, Sparkles } from 'lucide-react';
 
-// ==========================================
-// גרסה 2: מפה חיה וכרטיסיות סיפור (העיצוב החדש)
-// ==========================================
-function GardaTripV2() {
+export default function GardaTripV2() {
   const [activeDay, setActiveDay] = useState(1);
 
   const tripData = {
     title: "Garda Odyssey 2026",
-    subtitle: "מסע משפחתי לאגם גארדה והסביבה",
+    subtitle: "משפחה מצאתיה לאגם גארדה והסביבה",
     dates: "30.09.2026 - 06.10.2026",
     days: [
       {
         day: 1,
-        date: "30.09 (רביעי)",
-        title: "נחיתה והתמקמות בדרום האגם",
-        summary: "הגעות, איסוף רכב ונסיעה לכיוון סירמיונה.",
+        date: "30.09",
+        title: "הגעה, אוטומוביל וידם והתיישבות",
+        summary: "יום הגעה, איסוף רכב וקבלת מפתח למלון.",
         highlights: [
-          { time: "14:00", title: "נחיתה באיטליה ואיסוף הרכב", icon: Navigation, desc: "יוצאים לדרך לכיוון אגם גארדה." },
-          { time: "17:00", title: "צ'ק-אין במלון והתרעננות", icon: Hotel, desc: "התארגנות בבסיס שלנו לדרום האגם." },
-          { time: "19:30", title: "ארוחת ערב ראשונה וגלידה בסירמיונה", icon: Utensils, desc: "שיטוט סביב הטירה העתיקה ואווירה איטלקית." }
+          { time: "14:00", title: "נחיתה באיטליה ואיסוף הרכב", icon: Navigation, desc: "איסוף הרכב ויציאה לכיוון אגם גארדה" },
+          { time: "17:00", title: "צ'ק אין במלון והתרעננות", icon: Hotel, desc: "ארוחת ערב ראשונה וסיור בסביבה הקרובה" },
+          { time: "19:30", title: "ארוחת ערב ראשונה באזור", icon: Utensils, desc: "טעמים ראשונים של המטבח האיטלקי" }
         ]
       },
       {
         day: 2,
-        date: "01.10 (חמישי)",
-        title: "הקסם של סירמיונה ודרום האגם",
-        summary: "יום שכולו סמטאות עתיקות, נופים פנורמיים וטירות.",
+        date: "01.10",
+        title: "נוף, כפרים ציוריים ורכבל פרידרי",
+        summary: "יום טיול בכפרים הציוריים סביב האגם.",
         highlights: [
-          { time: "09:30", title: "סיור בטירת סקאליג'רו", icon: Camera, desc: "הטירה המפורסמת הבנויה ממש בתוך המים." },
-          { time: "13:00", title: "ארוחת צהריים מול המים", icon: Utensils, desc: "פסטה טרייה עם נוף פתוח לאגם." },
-          { time: "16:00", title: "שקיעה ב-Grottoes of Catullus", icon: Sparkles, desc: "שרידים רומיים עתיקים בקצה חצי האי." }
+          { time: "09:30", title: "עלייה לרכבל פרידרי", icon: Sparkles, desc: "תצפית מרהיבה מגבוה על כל האגם" },
+          { time: "13:00", title: "צהריים בטירת דל גארדה", icon: Utensils, desc: "עצירה לקפה ונוף מדהים" },
+          { time: "16:00", title: "סיור ספוטים ב-Sirmione", icon: Sparkles, desc: "שיטוט ברחובות העתיקים וחצי האי הקסום" }
         ]
       },
       {
         day: 3,
-        date: "02.10 (שישי)",
-        title: "העיירות הציוריות במערב האגם",
-        summary: "סאלו, גארדנה וטראסות הלימון.",
+        date: "02.10",
+        title: "פארקים, אטרקציות וכיף משפחתי",
+        summary: "יום של חוויות, פארקים והרפתקאות.",
         highlights: [
-          { time: "10:00", title: "ביקור בעיירה סאלו (Salò)", icon: Compass, desc: "טיילת אלגנטית ובתי קפה קלאסיים." },
-          { time: "13:30", title: "גארדנה ריביירה", icon: Coffee, desc: "עצירות צילום וקפה בסמטאות הצרות." }
+          { time: "10:00", title: "ביקור בפארק שעשועים (GardaLand)", icon: Sparkles, desc: "חוויות ואטרקציות לכל המשפחה" },
+          { time: "13:30", title: "הפסקת צהריים קלה", icon: Coffee, desc: "מנוחה ושתיית קפה איטלקי אותנטי" }
         ]
       },
       {
         day: 4,
-        date: "03.10 (שבת)",
-        title: "פארק שעשועים / טבע",
-        summary: "יום כיף דינמי שמתאים בול לבנות.",
+        date: "03.10",
+        title: "טבע מרהיב ומפלים",
+        summary: "טיול טבע עוצר נשימה.",
         highlights: [
-          { time: "10:00", title: "גארדלנד (Gardaland) או פיראטים", icon: Sparkles, desc: "חוויות, מתקנים ואדרנלין." }
+          { time: "10:00", title: "ביקור בשמורת מפל ורונה", icon: Camera, desc: "צפייה במפל המרשים בתוך הנקיק הסודי" },
+          { time: "14:00", title: "סיור בעיירה Riva del Garda", icon: Sparkles, desc: "נופים פתוחים וטיילת מדהימה לצד המים" }
         ]
       },
       {
         day: 5,
-        date: "04.10 (ראשון)",
-        title: "צפון האגם: ריבה דל גארדה ומה שביניהם",
-        summary: "הרים פראיים, מים צלולים ונופים עוצרי נשימה.",
+        date: "04.10",
+        title: "שווקים, קניות וזמן פנוי",
+        summary: "יום רגוע יותר המשלב שווקים מקומיים.",
         highlights: [
-          { time: "10:00", title: "ריבה דל גארדה (Riva del Garda)", icon: Camera, desc: "הצד ההררי והדרמטי של האגם." },
-          { time: "14:00", title: "מפלי בארונה (Cascate del Varone)", icon: Sparkles, desc: "מפלים נסתרים בתוך נקיק עמוק בהר." }
+          { time: "10:00", title: "שוק מקומי עתיק", icon: Compass, desc: "חטיפים, מזכרות וגבינות מקומיות" },
+          { time: "13:30", title: "המשך טיול בעיירות הצפוניות", icon: Navigation, desc: "ארוחת צהריים מול הנוף" }
         ]
       },
       {
         day: 6,
-        date: "05.10 (שני)",
-        title: "שופינג, השלמות ופינוקים אחרונים",
-        summary: "קניות, מתנות וזמן רגוע על שפת המים.",
+        date: "05.10",
+        title: "פינות סודיות וחוויה קולינרית",
+        summary: "גילוי מקומות נסתרים וטעימות.",
         highlights: [
-          { time: "11:00", title: "מרכז קניות / אאוטלט בסביבה", icon: Compass, desc: "סיבוב שופינג והצטיידות לקראת החזרה." },
-          { time: "20:00", title: "ארוחת פפרדלה סיום חגיגית", icon: Utensils, desc: "סוגרים את הטיול בסטייל איטלקי." }
+          { time: "11:00", title: "תצפית פנורמית ויקב מקומי", icon: Compass, desc: "טעימות יין והתרשמות מהאזור" },
+          { time: "20:00", title: "ארוחת ערב חגיגית לסיום הטיול", icon: Utensils, desc: "חגיגה קולינרית במסעדה נבחרת" }
         ]
       },
       {
         day: 7,
-        date: "06.10 (שלישי)",
-        title: "פרידה מאגם גארדה וטיסה חזרה",
-        summary: "נסיעה לשדה התעופה וחוזרים הביתה.",
+        date: "06.10",
+        title: "חזרה הביתה",
+        summary: "פרידה מאגם גארדה ונסיעה לשדה התעופה.",
         highlights: [
-          { time: "10:00", title: "צ'ק-אאוט ונסיעה לשדה", icon: Navigation, desc: "עצירות אחרונות בדרך לשדה התעופה." }
+          { time: "10:00", title: "נסיעה לשדה התעופה וטיסה חזרה", icon: Navigation, desc: "עצירות אחרונות בדרך לטיסה" }
         ]
       }
     ]
@@ -91,165 +86,74 @@ function GardaTripV2() {
   const currentDayData = tripData.days.find(d => d.day === activeDay);
 
   return (
-    <div className="space-y-6">
-      <header className="bg-gradient-to-r from-indigo-900/40 via-purple-900/30 to-slate-900 border border-indigo-500/20 p-6 rounded-3xl backdrop-blur-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <div className="flex items-center gap-2 text-indigo-400 text-sm font-medium mb-1">
-            <Sparkles className="w-4 h-4" />
-            <span>עיצוב חדש (מפה חיה וכרטיסיות סיפור)</span>
+    <div dir="rtl" className="min-h-screen bg-slate-50 text-slate-800 p-4 font-sans">
+      <div className="max-w-md mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
+        
+        {/* Header */}
+        <div className="bg-gradient-to-l from-indigo-600 to-purple-600 p-6 text-white">
+          <h1 className="text-2xl font-bold flex items-center gap-2">
+            <Sparkles className="w-6 h-6" />
+            {tripData.title}
+          </h1>
+          <p className="text-indigo-100 text-sm mt-1">{tripData.subtitle}</p>
+          <div className="flex items-center gap-2 mt-4 text-xs bg-white/10 w-fit px-3 py-1 rounded-full">
+            <Calendar className="w-3.5 h-3.5" />
+            <span>{tripData.dates}</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white">{tripData.title}</h1>
-          <p className="text-slate-400 text-sm mt-1">{tripData.subtitle} • {tripData.dates}</p>
         </div>
-        <div className="flex items-center gap-3 bg-slate-900/80 border border-slate-800 px-4 py-2 rounded-2xl">
-          <Calendar className="w-5 h-5 text-indigo-400" />
-          <span className="text-sm font-semibold">7 ימים של הרפתקה</span>
-        </div>
-      </header>
 
-      <div className="overflow-x-auto pb-2 scrollbar-none">
-        <div className="flex gap-3 min-w-max">
+        {/* Days Navigation Tabs */}
+        <div className="flex overflow-x-auto p-3 gap-2 bg-slate-100/70 border-b border-slate-200 no-scrollbar">
           {tripData.days.map((d) => (
             <button
               key={d.day}
               onClick={() => setActiveDay(d.day)}
-              className={`px-5 py-3 rounded-2xl font-medium text-sm transition-all duration-300 flex flex-col items-start gap-1 border ${
+              className={`flex-shrink-0 px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 activeDay === d.day
-                  ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white border-indigo-400 shadow-lg shadow-indigo-500/25 scale-105'
-                  : 'bg-slate-900/60 text-slate-400 border-slate-800/80 hover:bg-slate-800/60 hover:text-slate-200'
+                  ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200 scale-105'
+                  : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
               }`}
             >
-              <span className="text-xs opacity-80">יום {d.day}</span>
-              <span className="font-bold">{d.date.split(' ')[0]}</span>
+              יום {d.day} ({d.date})
             </button>
           ))}
         </div>
-      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <section className="lg:col-span-7 bg-slate-900/50 border border-slate-800/80 rounded-3xl p-6 backdrop-blur-md">
-          <div className="border-b border-slate-800 pb-4 mb-6">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-400">יום {currentDayData.day} | {currentDayData.date}</span>
-            <h2 className="text-2xl font-bold mt-1 text-white">{currentDayData.title}</h2>
-            <p className="text-slate-400 text-sm mt-1">{currentDayData.summary}</p>
-          </div>
-
-          <div className="space-y-4">
-            {currentDayData.highlights.map((item, idx) => {
-              const IconComp = item.icon;
-              return (
-                <div key={idx} className="group relative bg-slate-950/60 border border-slate-800/60 hover:border-indigo-500/40 p-4 rounded-2xl transition-all flex items-start gap-4">
-                  <div className="bg-indigo-950/80 border border-indigo-500/30 p-3 rounded-xl text-indigo-400 shrink-0">
-                    <IconComp className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1">
-                    <span className="text-xs font-bold text-indigo-400 bg-indigo-950/60 px-2.5 py-1 rounded-full border border-indigo-500/20">{item.time}</span>
-                    <h3 className="font-bold text-base mt-2 text-slate-100 group-hover:text-indigo-300 transition-colors">{item.title}</h3>
-                    <p className="text-slate-400 text-sm mt-1">{item.desc}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="lg:col-span-5 flex flex-col gap-6">
-          <div className="bg-gradient-to-br from-indigo-950/30 via-slate-900/60 to-purple-950/30 border border-indigo-500/20 rounded-3xl p-6 backdrop-blur-md flex flex-col justify-between relative overflow-hidden min-h-[320px]">
-            <div className="relative z-10">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
-                  <Compass className="w-4 h-4" /> מפה חיה אקטיבית
-                </span>
-                <span className="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full font-medium">מוכן לניווט</span>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">אגם גארדה - מיקוד יום {activeDay}</h3>
-              <p className="text-slate-400 text-sm">הנקודות החמות והיעדים להיום פרוסים ומסונכרנים עם הלו"ז.</p>
+        {/* Day Content */}
+        {currentDayData && (
+          <div className="p-6 space-y-6">
+            <div>
+              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-indigo-600" />
+                יום {currentDayData.day}: {currentDayData.title}
+              </h2>
+              <p className="text-slate-600 text-sm mt-1">{currentDayData.summary}</p>
             </div>
 
-            <div className="relative z-10 mt-6 pt-6 border-t border-slate-800/80 flex flex-col gap-3">
-              <div className="flex items-center justify-between text-sm bg-slate-950/60 p-3 rounded-2xl border border-slate-800">
-                <span className="text-slate-400 flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-indigo-400" /> מיקום נוכחי ביעד
-                </span>
-                <span className="font-bold text-indigo-300">אזור גארדה דרום / צפון</span>
-              </div>
-              <a 
-                href="https://waze.com" 
-                target="_blank" 
-                rel="noreferrer"
-                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-4 rounded-2xl transition-all shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 text-sm"
-              >
-                <Navigation className="w-4 h-4" /> פתח ניווט מהיר ב-Waze
-              </a>
+            <div className="space-y-4">
+              {currentDayData.highlights.map((item, idx) => {
+                const IconComponent = item.icon || Clock;
+                return (
+                  <div key={idx} className="flex gap-4 p-4 rounded-xl bg-slate-50 border border-slate-100 hover:border-indigo-100 transition-all">
+                    <div className="bg-indigo-50 text-indigo-600 p-3 rounded-xl h-fit">
+                      <IconComponent className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">
+                          {item.time}
+                        </span>
+                      </div>
+                      <h3 className="font-semibold text-slate-900 mt-1">{item.title}</h3>
+                      <p className="text-sm text-slate-600 mt-0.5">{item.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
-        </section>
-      </div>
-    </div>
-  );
-}
+        )}
 
-// ==========================================
-// גרסה 1: הגרסה המקורית שלך (לשמירת כל האפשרויות)
-// ==========================================
-function GardaTripV1() {
-  return (
-    <div className="space-y-6">
-      <header className="bg-slate-900/50 border border-slate-800 p-6 rounded-3xl backdrop-blur-xl">
-        <h1 className="text-3xl font-extrabold tracking-tight text-white">הגרסה המקורית (v1)</h1>
-        <p className="text-slate-400 text-sm mt-1">התצוגה הקלאסית שעליה עבדת בהתחלה.</p>
-      </header>
-      <div className="bg-slate-900/40 border border-slate-800/80 rounded-3xl p-8 text-center">
-        <p className="text-slate-300 text-lg mb-4">כאן מוצגת הגרסה הקודמת שלך בצורה נקייה ובטוחה.</p>
-        <div className="inline-block bg-slate-800 px-6 py-3 rounded-2xl text-indigo-400 font-semibold text-sm">
-          הכל שמור ומוגן בשטח האפשרויות שלך!
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ==========================================
-// מעטפת ראשית המנהלת את הבחירה בין הגרסאות
-// ==========================================
-export default function GardaTripAppSwitcher() {
-  const [currentVersion, setCurrentVersion] = useState('v2');
-
-  return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans p-4 md:p-8 rtl" dir="rtl">
-      {/* סרגל עליון לבחירת גרסה (שטח האפשרויות) */}
-      <div className="max-w-6xl mx-auto mb-6 flex flex-col sm:flex-row items-center justify-between bg-slate-900/90 border border-slate-800 p-3 rounded-2xl backdrop-blur-md gap-3">
-        <div className="flex items-center gap-2 px-2 text-xs font-semibold text-slate-400">
-          <Layers className="w-4 h-4 text-indigo-400" />
-          <span>שטח אפשרויות העיצוב:</span>
-        </div>
-        <div className="flex items-center gap-2 w-full sm:w-auto">
-          <button
-            onClick={() => setCurrentVersion('v1')}
-            className={`flex-1 sm:flex-initial px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-              currentVersion === 'v1'
-                ? 'bg-slate-800 text-white border border-slate-700 shadow-md'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
-          >
-            גרסה מקורית (v1)
-          </button>
-          <button
-            onClick={() => setCurrentVersion('v2')}
-            className={`flex-1 sm:flex-initial px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-              currentVersion === 'v2'
-                ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-600/20'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
-          >
-            גרסה חדשה - מפה חיה (v2)
-          </button>
-        </div>
-      </div>
-
-      {/* הצגת הגרסה הנבחרת */}
-      <div className="max-w-6xl mx-auto">
-        {currentVersion === 'v2' ? <GardaTripV2 /> : <GardaTripV1 />}
       </div>
     </div>
   );
