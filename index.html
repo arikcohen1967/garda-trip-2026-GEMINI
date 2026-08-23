@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Branded Icons Edition" name="application-name"/>
+<meta content="Garda Trip Perfect Emoji Icons" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -139,22 +139,21 @@ button, input, select { font: inherit; }
   display: flex; flex-direction: column; gap: 8px;
 }
 .food-waze-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: #ffffff; color: #000; font-weight: 700; font-size: 12px; padding: 6px 12px; border-radius: 10px; align-self: flex-start;
-  text-decoration: none; border: 1.5px solid #33ccff; box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #ffffff; color: #0077b6; font-weight: 700; font-size: 12px; padding: 6px 12px; border-radius: 10px; align-self: flex-start;
+  text-decoration: none; border: 1.5px solid #0099ff; box-shadow: 0 2px 6px rgba(0,153,255,0.15);
 }
-.food-waze-btn img { width: 20px; height: 20px; border-radius: 4px; object-fit: contain; }
 
-/* כפתורי ניווט עם אייקונים אמיתיים מעוצבים */
 .stop-links {
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1.5px solid var(--line);
 }
 .nav-btn {
-  font-size: 12px; font-weight: 700; color: #000; background: #ffffff;
-  padding: 8px 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; text-align: center; cursor: pointer;
+  font-size: 13px; font-weight: 700; color: #18181b; background: #ffffff;
+  padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; text-align: center; cursor: pointer;
   border: 1.5px solid var(--line-dark); box-shadow: var(--shadow); text-decoration: none;
 }
-.nav-btn img { width: 22px; height: 22px; border-radius: 5px; object-fit: contain; flex-shrink: 0; }
+.nav-btn.waze-btn { border-color: rgba(0,153,255,0.4); color: #0077b6; }
+.nav-btn.maps-btn { border-color: rgba(0,122,255,0.4); color: #0051a8; }
 
 /* Modals */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
@@ -199,7 +198,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V87-AppIconsEdition">
+<body data-garda-version="V88-CleanNavButtons">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -313,9 +312,6 @@ button, input, select { font: inherit; }
 </div>
 
 <script>
-const WAZE_ICON = "https://upload.wikimedia.org/wikipedia/commons/e/ec/Waze_logo_%282020-%2529.svg";
-const MAPS_ICON = "https://upload.wikimedia.org/wikipedia/commons/e/e4/Apple_Maps_icon_%282024%29.png";
-
 const tripDays = [
   {date:"2026-09-30", label:"רביעי · 30.09.2026", title:"נחיתה והגעה למלון", icon:"✈️", challenge:"לצלם את התמונה המשפחתית הראשונה באיטליה.", stops:[
     {time:"16:00", name:"נחיתה בנמל התעופה وרונה", dest:"Verona Villafranca Airport", note:"איסוף מזוודות ורכב שכור."},
@@ -376,16 +372,16 @@ function renderDays() {
               <div class="food-tip">
                 <span><b>המלצה קולינרית:</b> ${stop.food.name}</span>
                 <a class="food-waze-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.food.dest)}&navigate=yes">
-                  <img src="${WAZE_ICON}" alt="Waze"> נווט למסעדה ב-Waze
+                  🚙 Waze נווט למסעדה
                 </a>
               </div>
             ` : ''}
             <div class="stop-links">
-              <a class="nav-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">
-                <img src="${WAZE_ICON}" alt="Waze"> Waze
+              <a class="nav-btn waze-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">
+                🚙 Waze
               </a>
-              <a class="nav-btn" href="https://maps.apple.com/?q=${encodeURIComponent(stop.dest)}" target="_blank">
-                <img src="${MAPS_ICON}" alt="Maps"> Apple Maps
+              <a class="nav-btn maps-btn" href="https://maps.apple.com/?q=${encodeURIComponent(stop.dest)}" target="_blank">
+                🗺️ Apple Maps
               </a>
             </div>
           </div>
@@ -558,7 +554,7 @@ async function deleteTicketFile(id) {
   const db = await openTicketDb();
   const tx = db.transaction('files', 'readwrite');
   tx.objectStore('files').delete(id);
-  tx.oncomplete = () => renderTicketFiles();
+  tx.oncomplete = renderTicketFiles();
 }
 
 document.addEventListener('DOMContentLoaded', renderDays);
