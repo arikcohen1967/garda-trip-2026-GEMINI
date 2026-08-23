@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip NoBackdrop" name="application-name"/>
+<meta content="Garda Trip FullPage Clean" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -176,13 +176,13 @@ button, input, select { font: inherit; }
 .nav-btn.waze-btn { border-color: rgba(0,153,255,0.3); color: #0077b6; }
 .nav-btn.maps-btn { border-color: rgba(0,122,255,0.3); color: #0051a8; }
 
-/* Modals - No Backdrop, Solid White Background */
-.modal { position: fixed; inset: 0; background: #ffffff; z-index: 2000; display: none; align-items: flex-start; justify-content: center; padding: 0; overflow-y: auto; }
+/* Modals - Full Screen Solid White (No Backdrop / No Gray BG) */
+.modal { position: fixed; inset: 0; background: #ffffff; z-index: 2000; display: none; flex-direction: column; overflow-y: auto; padding: 0; }
 .modal.open { display: flex; }
 .modal-content {
   background: #ffffff; width: 100%; max-width: 600px; min-height: 100vh; border-radius: 0;
   padding: calc(20px + env(safe-area-inset-top)) 20px 40px; box-shadow: none; border: 0;
-  position: relative;
+  position: relative; margin: auto;
 }
 .modal-close { position: absolute; top: calc(16px + env(safe-area-inset-top)); left: 16px; border: 1px solid var(--line-dark); background: var(--bg); width: 36px; height: 36px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
 
@@ -339,7 +339,7 @@ button, input, select { font: inherit; }
 .hotel-waze-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 </style>
 </head>
-<body data-garda-version="V118-NoBackdrop">
+<body data-garda-version="V119-NoBackdropFinal">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -383,7 +383,7 @@ button, input, select { font: inherit; }
 </main>
 
 <!-- Modals -->
-<div class="modal" id="aroundModal" onclick="if(event.target===this)closeModal('aroundModal')">
+<div class="modal" id="aroundModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal('aroundModal')">✕</button>
     <h3 style="margin-top:0; font-size:20px; font-weight:700;">📍 Around Me</h3>
@@ -397,7 +397,7 @@ button, input, select { font: inherit; }
   </div>
 </div>
 
-<div class="modal" id="emergencyModal" onclick="if(event.target===this)closeModal('emergencyModal')">
+<div class="modal" id="emergencyModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal('emergencyModal')">✕</button>
     <h3 style="margin-top:0; font-size:20px; font-weight:700; color:var(--red);">🆘 מספרי חירום באיטליה</h3>
