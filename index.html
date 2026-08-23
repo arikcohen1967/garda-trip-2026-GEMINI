@@ -324,7 +324,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; box-shadow: var(--shadow); }
 </style>
 </head>
-<body data-garda-version="V112-CleanExact3">
+<body data-garda-version="V113-LTRPerfect">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -609,7 +609,6 @@ function openTicketDb() {
 async function ensureCleanDefaultTickets() {
   const db = await openTicketDb();
   
-  // ניקוי כפילויות ישנות מתיקיית טיסות ורכב ויצירה מחדש של 3 הכרטיסים הנקיים בלבד
   await new Promise((resolve) => {
     const tx = db.transaction('files', 'readwrite');
     const store = tx.objectStore('files');
@@ -617,19 +616,16 @@ async function ensureCleanDefaultTickets() {
     const req = index.getAll('✈️ טיסות ורכב');
     req.onsuccess = () => {
       const records = req.result;
-      // נמחק את כל הרשומות הישנות בתיקייה כדי לאפס לגמרי בלי בלאגן
       records.forEach(rec => store.delete(rec.id));
       tx.oncomplete = resolve;
     };
     req.onerror = () => resolve();
   });
 
-  // יצירת 3 הכרטיסים החיוניים בלבד בצורה נקייה ומסודרת
   await new Promise((resolve) => {
     const tx = db.transaction('files', 'readwrite');
     const store = tx.objectStore('files');
     
-    // 1. טיסה
     store.add({
       folder: '✈️ טיסות ורכב',
       title: 'הזמנת ישראייר (4623652)',
@@ -640,7 +636,6 @@ async function ensureCleanDefaultTickets() {
       isFlightInfo: true
     });
 
-    // 2. ביטוח
     store.add({
       folder: '✈️ טיסות ורכב',
       title: 'ביטוח נסיעות AIG (170270213826)',
@@ -651,7 +646,6 @@ async function ensureCleanDefaultTickets() {
       isInsuranceInfo: true
     });
 
-    // 3. שובר רכב מרוכז ונקי
     store.add({
       folder: '✈️ טיסות ורכב',
       title: 'שובר השכרת רכב (724715780)',
@@ -794,7 +788,7 @@ async function openFullViewer(id) {
         <p><b>רכב:</b> Intermediate SUV – Citroen C5 Aircross או דומה (אוטומטי, מיזוג)</p>
         <p><b>איסוף:</b> 30.09.2026 בשעה 17:30 – נמל התעופה ורונה קטולו (דלפק בטרמינל)</p>
         <p><b>החזרה:</b> 06.10.2026 בשעה 17:30 – נמל התעופה ורונה קטולו (דלפק בטרמינל)</p>
-        <p><b>נהג ראשי:</b> Cohen Arik (<span dir="ltr" style="display:inline-block">+972502022768</span>)</p>
+        <p><b>נהג ראשי:</b> <span dir="ltr" style="display:inline-block">Cohen Arik (+972502022768)</span></p>
         <p><b>ביטוח:</b> <span style="color:var(--green); font-weight:700;">הגנה מלאה כלולה (Full Protection)</span></p>
       </div>`;
     } else if ((x.type||'').startsWith('image/')) {
