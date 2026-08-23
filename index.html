@@ -3,472 +3,277 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="#071a2a" name="theme-color"/>
+<meta content="#07111c" name="theme-color"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip V57 Safe Compact UI" name="application-name"/>
-<meta content="V57-SAFE-COMPACT-UI-20260810" name="garda-build"/>
-<title>טיול בת מצווה – אגם גארדה וונציה 2026 · V57 Pro</title>
+<meta content="Garda Trip Ultimate Pro" name="application-name"/>
+<title>טיול בת מצווה – אגם גארדה וונציה 2026 · Ultimate Pro</title>
 <style>
 :root {
-  --bg:#07111c; --panel:#102235; --panel2:#152b42; --text:#f7fbff; --muted:#a9bdd0;
-  --accent:#6dd3ff; --green:#36d18b; --orange:#ffb15b; --red:#ff6b6b; --line:rgba(255,255,255,.09);
+  --bg: #07111c;
+  --panel: #102235;
+  --panel-hover: #173656;
+  --text: #f7fbff;
+  --muted: #a9bdd0;
+  --accent: #6dd3ff;
+  --green: #36d18b;
+  --orange: #ff9500;
+  --red: #ff3b30;
+  --line: rgba(255, 255, 255, 0.1);
+  --shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  --radius: 22px;
+  --radius-sm: 14px;
 }
-*{box-sizing:border-box}
+
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:"Segoe UI",Arial,"Noto Sans Hebrew","Helvetica Neue",sans-serif;background:
-radial-gradient(circle at top right,#123d5d 0,transparent 35%),var(--bg);color:var(--text);padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-a{color:inherit;text-decoration:none}
-button,input,select{font:inherit}
-.hero{padding:calc(24px + env(safe-area-inset-top)) 18px 24px;background:
-linear-gradient(160deg,rgba(30,115,160,.8),rgba(8,25,40,.96));border-bottom:1px solid var(--line)}
-.kicker{font-size:13px;color:#d8f2ff;letter-spacing:.4px}
-.hero h1{font-size:30px;line-height:1.1;margin:9px 0}
-.hero p{color:var(--muted);margin:0 0 18px}
-.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{padding:13px;border:1px solid var(--line);background:rgba(255,255,255,.07);border-radius:18px}
-.stat b{display:block;font-size:17px;margin-bottom:4px}
-.stat span{font-size:12px;color:#c7d8e6}
-.wrap{padding:16px;max-width:760px;margin:auto}
-.morning-card{
-  margin:0 0 18px;
-  padding:18px;
-  border-radius:24px;
-  background:
-    radial-gradient(circle at 15% 0%,rgba(255,255,255,.12),transparent 34%),
-    linear-gradient(145deg,#174967,#10283e 58%,#0d1d2d);
-  border:1px solid rgba(109,211,255,.22);
-  box-shadow:0 18px 45px rgba(0,0,0,.24);
-}
-.morning-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.morning-eyebrow{color:#bfeaff;font-size:12px;font-weight:900;letter-spacing:.3px}
-.morning-card h2{margin:5px 0 4px;font-size:24px}
-.morning-date{color:var(--muted);font-size:13px}
-.morning-icon{font-size:42px}
-.morning-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
-.morning-item{padding:12px;border-radius:16px;background:rgba(255,255,255,.065);border:1px solid var(--line)}
-.morning-item small{display:block;color:var(--muted);margin-bottom:5px}
-.morning-item b{font-size:14px;line-height:1.35}
-.morning-note{margin-top:11px;padding:12px;border-radius:15px;background:rgba(255,177,91,.10);border:1px solid rgba(255,177,91,.18);font-size:13px;line-height:1.55}
-.morning-quote{margin:11px 0 0;color:#d9f2ff;font-size:13px;font-style:italic;line-height:1.5}
-.morning-memory{display:none;margin-top:12px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:rgba(0,0,0,.20)}
-.morning-memory.show{display:block}
-.morning-memory img{width:100%;max-height:230px;object-fit:cover;display:block}
-.morning-memory span{display:block;padding:9px 11px;color:var(--muted);font-size:12px}
-.morning-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
-.morning-actions button,.morning-actions a{
-  border:0;border-radius:14px;padding:12px 9px;font:inherit;font-weight:900;
-  text-align:center;cursor:pointer;color:white;background:#1b4c6c;
-}
-.morning-actions .primary{background:var(--green);color:#06291d}
-@media(max-width:430px){
-  .morning-grid{grid-template-columns:1fr}
-}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-.quick a,.quick button{position:relative;z-index:2;touch-action:manipulation;-webkit-tap-highlight-color:rgba(255,255,255,.12);cursor:pointer;padding:15px;border-radius:18px;background:var(--panel);border:1px solid var(--line);font-weight:700;text-align:center;color:var(--text)}
-.day-card{background:linear-gradient(180deg,var(--panel),#0d1c2c);border:1px solid var(--line);
-border-radius:24px;margin:14px 0;padding:16px;box-shadow:0 15px 45px rgba(0,0,0,.18)}
-.day-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--line)}
-.day-head h2{margin:4px 0 0;font-size:21px}
-.date{font-size:12px;color:var(--accent)}
-.day-icon{font-size:34px}
-.challenge{margin-top:12px;background:rgba(255,177,91,.1);border:1px solid rgba(255,177,91,.2);padding:11px 12px;border-radius:15px;font-size:13px;line-height:1.5}
-.challenge-camera{
-  margin-top:10px;
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-.challenge-photo-btn,.challenge-delete-btn{
-  border:0;
-  border-radius:12px;
-  padding:10px 13px;
-  font:inherit;
-  font-weight:900;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-}
-.challenge-photo-btn{
-  background:#fff;
-  color:#111827;
-  box-shadow:0 8px 22px rgba(0,0,0,.18);
-}
-.challenge-delete-btn{
-  background:rgba(255,255,255,.08);
-  color:#ffd3d3;
-  border:1px solid rgba(255,255,255,.14);
-}
-.challenge-status{
-  width:100%;
-  color:var(--muted);
-  font-size:12px;
-  font-weight:800;
-}
-.challenge-preview{
-  width:100%;
-  margin-top:9px;
-  border-radius:15px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(0,0,0,.25);
-  display:none;
-}
-.challenge-preview.has-photo{display:block}
-.challenge-preview img{
-  display:block;
-  width:100%;
-  max-height:320px;
-  object-fit:cover;
-}
-.challenge-photo-meta{
-  padding:8px 10px;
-  color:var(--muted);
-  font-size:12px;
-  font-weight:800;
-}
-.challenge.completed{
-  border-color:rgba(76,217,100,.46);
-  background:rgba(76,217,100,.10);
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  padding-bottom: calc(100px + env(safe-area-inset-bottom));
+  -webkit-font-smoothing: antialiased;
 }
 
-.start-day{width:100%;margin:12px 0 0;padding:12px;border:0;border-radius:15px;background:#193e5b;color:white;font-weight:800}
-.stop{margin-top:13px;background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:14px}
-.stop.next{outline:2px solid var(--green);box-shadow:0 0 0 5px rgba(54,209,139,.09)}
-.stop-top{display:flex;justify-content:space-between;align-items:center}
-.time{font-size:12px;color:#d7e4ef;background:rgba(255,255,255,.08);padding:5px 8px;border-radius:999px}
-.stop h3{font-size:17px;margin:12px 0 5px}
-.stop p{font-size:13px;line-height:1.5;color:var(--muted);margin:0 0 12px}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.btn{display:block;padding:11px 8px;border-radius:14px;text-align:center;font-size:13px;font-weight:800}
-.waze{background:var(--green);color:#032418} .maps{background:#2f6fdf;color:white}
-.mini-check{display:flex;align-items:center;gap:7px;font-size:12px;color:#d7e4ef}
-.mini-check input,.checklist input{width:20px;height:20px;accent-color:var(--green)}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:16px;margin:14px 0}
-.panel h2{font-size:19px;margin:0 0 12px}
-.checklist label{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
-.checklist label:last-child{border-bottom:0}
-.hotel-card{background:linear-gradient(135deg,#164e63,#18334e);border-radius:22px;padding:17px;border:1px solid var(--line)}
-.hotel-card h3{margin:0 0 6px}
-.hotel-card p{margin:0 0 13px;color:#d1e3ef;font-size:13px}
-.emergency{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.emergency a{background:#551f2c;border:1px solid rgba(255,255,255,.12);padding:14px;border-radius:16px;text-align:center;font-weight:800}
-.bottom-nav{position:fixed!important;z-index:1000;inset:auto 0 0 0!important;margin:0!important;
-padding:5px 8px calc(5px + env(safe-area-inset-bottom));min-height:58px;
-background:rgba(7,17,28,.78);-webkit-backdrop-filter:blur(22px) saturate(150%);backdrop-filter:blur(22px) saturate(150%);
-border-top:1px solid rgba(255,255,255,.10);box-shadow:0 -8px 28px rgba(0,0,0,.22);
-display:grid;grid-template-columns:repeat(4,1fr);gap:3px;will-change:transform}
-.bottom-nav a{font-size:10px;line-height:1.1;text-align:center;padding:5px 3px 4px;border-radius:11px;color:#d8e6f0;min-width:0}
-.bottom-nav a:active{background:rgba(255,255,255,.09)}
-.bottom-nav b{display:block;font-size:18px;line-height:1;margin-bottom:3px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.66);z-index:50;display:none;align-items:flex-end}
-.modal.open{display:flex}
-.sheet{width:100%;max-height:88vh;overflow:auto;background:#0d1c2c;border-radius:26px 26px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
-.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.close{border:0;background:rgba(255,255,255,.08);color:white;border-radius:12px;padding:9px 12px}
-.next-box{margin-top:14px;background:#14384b;border:1px solid rgba(109,211,255,.25);border-radius:20px;padding:16px}
-.next-box h3{margin:6px 0}
-.day-progress{height:8px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;margin:12px 0}
-.day-progress span{display:block;height:100%;background:var(--green);width:0}
-.parking-status{font-size:13px;color:var(--muted);line-height:1.5}
-.small-btn{width:100%;padding:12px;border:0;border-radius:14px;background:#6d4aff;color:white;font-weight:800;margin-top:10px}
-.warning{font-size:12px;color:#f8d9a6;margin-top:8px}
-.around-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.around-grid button{border:0;border-radius:15px;padding:13px;background:#183a52;color:white;font-weight:800}
-.budget-form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.budget-form input,.budget-form select{width:100%;padding:11px;border-radius:12px;border:1px solid var(--line);background:#0b1c2a;color:white}
-.budget-form button{grid-column:1/-1;padding:12px;border:0;border-radius:13px;background:var(--green);color:#06291d;font-weight:900}
-.expense-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
-.expense-row:last-child{border-bottom:0}
-.total{font-size:24px;font-weight:900;margin:6px 0 14px}
-.clear{width:100%;margin-top:12px;padding:10px;border:1px solid rgba(255,255,255,.15);background:transparent;color:#ffb1b1;border-radius:12px}
-@media print {
- body{background:white;color:#111;padding:0} .bottom-nav,.quick,.start-day,.modal{display:none!important}
- .hero{background:white;color:#111;border-bottom:2px solid #222;padding:20px}
- .hero p,.stat span,.stop p,.date{color:#444} .stat,.day-card,.stop,.panel,.hotel-card{background:white;color:#111;box-shadow:none;border:1px solid #bbb;break-inside:avoid}
- .btn{border:1px solid #999;color:#111;background:white} .wrap{max-width:none}
+a { color: inherit; text-decoration: none; }
+button, input, select { font: inherit; }
+
+/* Top App Bar */
+.top-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: calc(16px + env(safe-area-inset-top)) 16px 12px;
+  background: rgba(7, 17, 28, 0.95);
+  position: sticky; top: 0; z-index: 900;
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.top-title { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; color: #fff; }
+.top-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.hotel-badge {
+  background: rgba(54, 209, 139, 0.15); color: var(--green); border: 1px solid rgba(54, 209, 139, 0.3);
+  padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;
+}
+.status-pill {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 4px 10px; border-radius: 20px;
+  background: rgba(54, 209, 139, 0.12); color: var(--green); border: 1px solid rgba(54, 209, 139, 0.25); font-weight: 600;
 }
 
-/* כרטיסיות פעילות ואנרקים מעודכנים */
-.flight-wallet-card{margin:0 0 16px;padding:16px;border-radius:22px;background:linear-gradient(145deg,#163b57,#10283e);border:1px solid var(--line);box-shadow:0 10px 26px rgba(0,0,0,.15)}
-.flight-wallet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
-.flight-wallet-title{display:flex;align-items:center;gap:10px}.flight-wallet-icon{font-size:34px}
-.flight-wallet-title h2{margin:0;font-size:18px}.flight-wallet-title small{display:block;color:var(--muted);margin-top:3px;font-size:12px}
-.flight-wallet-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.flight-wallet-actions button{min-height:44px!important;padding:8px 4px!important;border-radius:12px!important;background:#1b4c6c!important;color:#fff!important;border:1px solid rgba(255,255,255,.12)!important;font-size:11px!important;font-weight:800!important;cursor:pointer}
-.day-wallet-btn{width:100%;margin:9px 0 0;min-height:44px!important;border-radius:14px!important;background:#183a52!important;color:#fff!important;border:1px solid rgba(255,255,255,.12)!important;font-weight:800!important;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer}
-.activity-ticket-box{margin-top:12px;padding:11px;border-radius:15px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
-.activity-ticket-label{font-size:12px;font-weight:800;color:var(--muted);margin-bottom:8px}
-.activity-ticket-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
-.activity-ticket-actions button{min-height:38px!important;padding:6px 4px!important;border-radius:11px!important;background:#1b4c6c!important;color:#fff!important;border:1px solid rgba(255,255,255,.12)!important;font-size:10px!important;font-weight:800!important;cursor:pointer}
+.wrap { padding: 16px; max-width: 600px; margin: auto; }
 
-.tickets-sheet{background:#0d1c2c!important;color:#f7fbff!important;max-height:92dvh!important}
-.ticket-toolbar{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:13px 0}
-.ticket-toolbar button{min-height:44px!important;background:#1b4c6c;color:#fff;border:0;border-radius:12px;font-weight:800;cursor:pointer}
-.ticket-folder-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
-.ticket-folder{position:relative;text-align:right!important;min-height:70px!important;padding:12px!important;border-radius:15px!important;background:#152b42!important;color:#fff!important;border:1px solid var(--line)!important;cursor:pointer}
-.ticket-folder strong{display:block;font-size:13px;margin-bottom:4px}.ticket-folder small{color:var(--muted);font-size:11px}
-.ticket-folder.active{outline:2px solid var(--green)!important;background:#174967!important}
-.ticket-upload-box{padding:14px;border-radius:16px;background:rgba(0,0,0,.25);border:1px solid var(--line);margin:12px 0}
-.ticket-upload-box select,.ticket-upload-box input[type=text]{width:100%;padding:10px;border-radius:10px;margin:6px 0 10px;background:#07111c;color:#fff;border:1px solid var(--line)}
-.ticket-file{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:10px;padding:10px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line);margin-top:8px}
-.ticket-thumb{width:48px;height:48px;border-radius:10px;background:#102235;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.ticket-thumb img{width:100%;height:100%;object-fit:cover}
-.ticket-info b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ticket-info small{color:var(--muted);font-size:11px}
-.ticket-actions{display:flex;gap:5px}.ticket-actions button{min-height:36px!important;padding:0 10px!important;border-radius:10px!important;background:#1b4c6c;color:#fff;border:0;cursor:pointer}
+/* Weather Card */
+.weather-card {
+  margin-bottom: 16px; padding: 18px 20px; border-radius: var(--radius);
+  background: linear-gradient(135deg, #ff9500 0%, #ff6a00 100%); color: #fff;
+  display: flex; justify-content: space-between; align-items: center;
+  box-shadow: 0 10px 25px rgba(255, 149, 0, 0.3);
+}
+.weather-temp { font-size: 34px; font-weight: 800; line-height: 1; }
+.weather-city { font-size: 18px; font-weight: 700; margin-top: 4px; }
+.weather-desc { font-size: 12px; opacity: 0.9; margin-top: 2px; }
+.weather-icon { font-size: 40px; }
 
-/* V54/V55 PDF Viewer toolbar & modal fixes */
-#ticketViewerModal{z-index:3900!important;align-items:stretch!important;background:rgba(0,0,0,.85)!important}
-#ticketViewerModal.open{display:flex!important}
-.ticket-viewer-sheet{width:100%;height:100dvh;max-height:100dvh;padding:calc(8px + env(safe-area-inset-top)) 0 calc(8px + env(safe-area-inset-bottom));background:#0a0a0b!important;color:#fff!important;display:flex;flex-direction:column;overflow:hidden}
-.ticket-viewer-head{display:grid;grid-template-columns:52px 1fr 52px;align-items:center;gap:8px;padding:6px 12px 12px;border-bottom:1px solid rgba(255,255,255,.12)}
-.ticket-viewer-title{text-align:center;font-weight:800;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ticket-viewer-close,.ticket-viewer-share{width:40px!important;height:40px!important;border-radius:50%!important;background:#242428!important;color:#fff!important;border:1px solid rgba(255,255,255,.13)!important;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.ticket-viewer-body{flex:1;min-height:0;padding:10px;overflow:auto;background:#151517}
-.v54-pdf-toolbar{position:absolute;top:56px;left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:14px;background:rgba(20,20,22,.92);box-shadow:0 4px 18px rgba(0,0,0,.22)}
-.v54-pdf-toolbar button{width:38px;height:36px;border-radius:10px;background:#2b2b2f;color:#fff;border:1px solid rgba(255,255,255,.16);font-weight:800;cursor:pointer}
-.v54-pdf-pages{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;margin:0;padding:0}
-.v54-pdf-page{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.14);flex:0 0 auto}
-.v54-pdf-page canvas{display:block;width:100%!important;height:auto!important;background:#fff}
+/* Day Selector Tabs */
+.day-tabs {
+  display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 16px;
+  scrollbar-width: none;
+}
+.day-tabs::-webkit-scrollbar { display: none; }
+.day-tab {
+  flex: 0 0 auto; padding: 10px 16px; border-radius: 20px; background: var(--panel);
+  border: 1px solid var(--line); color: var(--muted); font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.day-tab.active { background: var(--accent); color: #07111c; border-color: var(--accent); }
+
+/* Day Cards & Stops */
+.day-card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  margin: 16px 0; padding: 18px; box-shadow: var(--shadow);
+}
+.day-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.day-head h2 { margin: 4px 0 0; font-size: 18px; color: #fff; }
+.date { font-size: 12px; font-weight: 600; color: var(--accent); }
+.day-icon { font-size: 28px; }
+
+.challenge {
+  margin-top: 12px; background: rgba(255, 177, 91, 0.1); border: 1px solid rgba(255, 177, 91, 0.2);
+  padding: 11px 12px; border-radius: var(--radius-sm); font-size: 12px; line-height: 1.4; color: #ffb15b;
+}
+
+.stop {
+  margin-top: 12px; background: var(--panel-hover); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 14px;
+}
+.stop.next { border-color: var(--green); box-shadow: 0 0 0 3px rgba(54, 209, 139, 0.15); }
+.stop-top { display: flex; justify-content: space-between; align-items: center; }
+.time { font-size: 11px; font-weight: 600; color: var(--muted); background: rgba(255,255,255,0.06); padding: 4px 8px; border-radius: 20px; }
+.stop h3 { font-size: 15px; margin: 8px 0 4px; font-weight: 700; color: #fff; }
+.stop p { font-size: 12px; line-height: 1.4; color: var(--muted); margin: 0 0 10px; }
+
+/* Grid כפתורים מוקפד בתחנות (צלם, העלה, מפות, וייז) */
+.stop-actions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 10px;
+}
+.stop-action-btn {
+  padding: 8px 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--line);
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+}
+.stop-action-btn:hover { background: rgba(255, 255, 255, 0.12); }
+
+/* Bottom Dock */
+.bottom-nav {
+  position: fixed !important; z-index: 1000; left: 14px !important; right: 14px !important; bottom: 10px !important;
+  max-width: 500px; margin: 0 auto !important; padding: 6px; min-height: 60px;
+  background: rgba(16, 34, 53, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+}
+.bottom-nav a {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--muted); padding: 4px; border-radius: 14px;
+}
+.bottom-nav a b { font-size: 18px; margin-bottom: 2px; }
+.bottom-nav a.active, .bottom-nav a:active { color: var(--accent); background: rgba(109,211,255,0.1); }
+
+/* Modals & Sheets */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; display: none; align-items: flex-end; backdrop-filter: blur(4px); }
+.modal.open { display: flex; }
+.sheet {
+  width: 100%; max-height: 85vh; overflow-y: auto; background: var(--panel);
+  border-radius: 28px 28px 0 0; padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line); box-shadow: 0 -10px 40px rgba(0,0,0,0.5); color: var(--text);
+}
+.sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
+.close { border: 0; background: rgba(255,255,255,0.1); color: #fff; border-radius: 50%; width: 36px; height: 36px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+/* Tickets Folder & Files */
+.ticket-folder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.ticket-folder {
+  text-align: right; padding: 12px; border-radius: var(--radius-sm); background: var(--panel-hover);
+  border: 1px solid var(--line); cursor: pointer; position: relative; color: var(--text);
+}
+.ticket-folder strong { display: block; font-size: 13px; margin-bottom: 2px; }
+.ticket-folder small { color: var(--muted); font-size: 11px; }
+.ticket-folder.active { background: var(--accent); color: #07111c; border-color: var(--accent); }
+
+.ticket-file { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 10px; padding: 10px; border-radius: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--line); margin-top: 8px; }
+.ticket-thumb { width: 48px; height: 48px; border-radius: 10px; background: #07111c; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.ticket-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.ticket-info b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
+.ticket-info small { color: var(--muted); font-size: 11px; }
 </style>
 </head>
-<body data-garda-build="20260810-v57-original" data-garda-version="V57">
-<header class="hero" id="home">
-<div class="kicker">משפחת כהן · טיול בת מצווה</div>
-<h1>אגם גארדה וונציה 2026</h1>
-<p>גרסה 57 המקורית המלאה · כל הימים, התחנות, ארנק הכרטיסים ותצוגת ה-PDF ללא שום שינוי בלוגיקה</p>
-<div class="hero-grid">
-<div class="stat"><b>7 ימים</b><span>פארקים, טבע, ערים ואגם</span></div>
-<div class="stat"><b>בסיס הטיול</b><span>Bio Agriturismo Vojon</span></div>
+<body data-garda-version="V63-Ultimate">
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div>
+    <div class="top-title">🇮🇹 גארדה וצפון איטליה</div>
+    <div class="top-meta">06.10.2026 - 30.09.2026</div>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span class="status-pill">● מחובר</span>
+    <a href="#hotel" class="hotel-badge">🏡 למלון</a>
+  </div>
 </div>
-</header>
 
 <main class="wrap">
-<section class="flight-wallet-card" id="flightTicketsWallet">
-  <div class="flight-wallet-head">
-    <div class="flight-wallet-title">
-      <span class="flight-wallet-icon">✈️</span>
-      <div><h2>כרטיסי הטיסה שלנו</h2><small>צילום, תמונה או PDF — הכול במקום אחד</small></div>
+  <!-- Weather Widget -->
+  <div class="weather-card">
+    <div>
+      <div class="weather-temp">22°C</div>
+      <div class="weather-city">Ponti sul (Mincio)</div>
+      <div class="weather-desc">נעים ומקומי · אגם גארדה</div>
     </div>
+    <div class="weather-icon">☀️</div>
   </div>
-  <div class="flight-wallet-actions">
-    <button type="button" onclick="openFlightTickets('camera')">📷 צלם</button>
-    <button type="button" onclick="openFlightTickets('upload')">📎 קובץ</button>
-    <button type="button" onclick="openNotesImport('flight')">📝 Notes</button>
-    <button type="button" class="flight-open" onclick="openFlightTickets('open')">🎟️ פתח</button>
+
+  <!-- Day Selector Tabs -->
+  <div class="day-tabs" id="dayTabs">
+    <div class="day-tab active" onclick="scrollToDay(0)">יום רביעי (30/09)</div>
+    <div class="day-tab" onclick="scrollToDay(1)">יום חמישי (01/10)</div>
+    <div class="day-tab" onclick="scrollToDay(2)">יום שישי (02/10)</div>
+    <div class="day-tab" onclick="scrollToDay(3)">שבת (03/10)</div>
+    <div class="day-tab" onclick="scrollToDay(4)">ראשון (04/10)</div>
+    <div class="day-tab" onclick="scrollToDay(5)">שני (05/10)</div>
+    <div class="day-tab" onclick="scrollToDay(6)">שלישי (06/10)</div>
   </div>
-</section>
 
-<section aria-live="polite" class="morning-card" id="morningDashboard">
-<div class="morning-top">
-<div>
-<div class="morning-eyebrow">המלווה האישי של הטיול</div>
-<h2 id="morningGreeting">בוקר טוב, משפחת כהן!</h2>
-<div class="morning-date" id="morningDate"></div>
-</div>
-<div class="morning-icon" id="morningIcon">🇮🇹</div>
-</div>
-<div class="morning-grid">
-<div class="morning-item"><small>📍 היעד הראשון</small><b id="morningDestination">טוען...</b></div>
-<div class="morning-item"><small>⏰ יציאה מומלצת</small><b id="morningDeparture">לפי תוכנית היום</b></div>
-<div class="morning-item"><small>🎒 מה חשוב לקחת</small><b id="morningPacking">טלפונים טעונים ומים</b></div>
-<div class="morning-item"><small>🌤️ מזג האוויר</small><b><button onclick="openWeatherSearch()" style="all:unset;cursor:pointer;text-decoration:underline" type="button">בדיקה לפי מיקום</button></b></div>
-</div>
-<div class="morning-note" id="morningNote"></div>
-<p class="morning-quote" id="morningQuote"></p>
-<div class="surprise-box" id="morningSurprise"></div>
-<div class="offline-pill" id="offlineStatus">🌐 מצב מקוון</div>
-<div class="morning-memory" id="morningMemory">
-<img alt="זיכרון מהיום הקודם" id="morningMemoryImage"/>
-<span id="morningMemoryText">📸 זיכרון מהיום הקודם</span>
-</div>
-<div class="morning-actions">
-<button class="primary" onclick="navigateMorningDestination()" type="button">🚗 נווט ליעד הראשון</button>
-<button onclick="openMorningMemories()" type="button">📸 זיכרונות</button>
-<button onclick="openFoodToday()" type="button">🍕 מה נאכל?</button>
-<a href="#emergency">🚨 חירום</a>
-</div>
-</section>
-
-<div class="quick" id="quickActions">
-<button id="quickToday" type="button">✨ היום שלי</button>
-<a href="#days" id="quickRoute">📅 כל המסלול</a>
-<button id="quickSaveParking" type="button">📍 שמור חניה</button>
-<button id="quickOpenParking" type="button">🚘 איפה חנינו?</button>
-<button id="quickAround" type="button">📍 Around Me</button>
-<button id="quickTickets" onclick="openTickets()" type="button">🎟️ כרטיסים וכניסות</button>
-</div>
-
-<section class="hotel-card" id="hotel">
-<h3>🏡 Bio Agriturismo Vojon</h3>
-<p>Via del Forte 6, 46040 Ponti sul Mincio MN, Italy</p>
-<div class="actions">
-<a class="btn waze" href="https://www.waze.com/ul?q=Via%20del%20Forte%206%2C%2046040%20Ponti%20sul%20Mincio%20MN%2C%20Italy&amp;navigate=yes">נווט למלון</a>
-<a class="btn maps" href="https://www.google.com/maps/search/?api=1&amp;query=Via%20del%20Forte%206%2C%2046040%20Ponti%20sul%20Mincio%20MN%2C%20Italy">פתח במפות</a>
-</div>
-</section>
-
-<!-- רשימת כל הימים המלאה שחולצה מהקוד שלך -->
-<div id="days"></div>
-
-<section class="panel" id="budget">
-<h2>💶 מעקב תקציב</h2>
-<div class="total">€<span id="budgetTotal">0.00</span></div>
-<div class="budget-form">
-<select id="expenseCategory">
-<option>אוכל</option><option>דלק</option><option>אטרקציות</option><option>חניה</option><option>קניות</option><option>אחר</option>
-</select>
-<input id="expenseAmount" inputmode="decimal" min="0" placeholder="סכום באירו" step="0.01" type="number"/>
-<input id="expenseNote" placeholder="הערה קצרה" type="text"/>
-<button onclick="addExpense()" type="button">הוסף הוצאה</button>
-</div>
-<div id="expenseList"></div>
-<button class="clear" onclick="clearExpenses()" type="button">מחיקת כל ההוצאות</button>
-</section>
-
-<section class="panel checklist" id="gear">
-<h2>🎒 צ'קליסט לפני היציאה</h2>
-<label><input data-key="gear-passports" type="checkbox"/>דרכונים וכרטיסי טיסה</label>
-<label><input data-key="gear-car" type="checkbox"/>רישיון נהיגה ואישור רכב שכור</label>
-<label><input data-key="gear-insurance" type="checkbox"/>ביטוח נסיעות</label>
-<label><input data-key="gear-tickets" type="checkbox"/>כרטיסים לפארקים ולמופעים</label>
-<label><input data-key="gear-power" type="checkbox"/>מטענים וסוללה ניידת</label>
-<label><input data-key="gear-warm" type="checkbox"/>בגד חם למונטה באלדו</label>
-<label><input data-key="gear-rafting" type="checkbox"/>בגדים ונעליים להחלפה לראפטינג</label>
-</section>
-
-<section class="panel" id="emergency">
-<h2>🆘 מספרי חירום באיטליה</h2>
-<div class="emergency">
-<a href="tel:112">112<br/><small>חירום כללי</small></a>
-<a href="tel:118">118<br/><small>אמבולנס</small></a>
-<a href="tel:115">115<br/><small>כבאות</small></a>
-<a href="tel:113">113<br/><small>משטרה</small></a>
-</div>
-</section>
+  <!-- Full Days Container with all stops and tickets -->
+  <div id="days"></div>
 </main>
 
+<!-- Bottom Navigation Bar -->
 <nav class="bottom-nav">
-<a href="#home"><b>🏠</b>בית</a>
-<a href="#days"><b>📅</b>ימים</a>
-<a href="#hotel"><b>🚗</b>מלון</a>
-<a href="#emergency"><b>🆘</b>חירום</a>
+  <a href="#home" class="active"><b>📅</b>מסלול</a>
+  <a href="#" onclick="openMemoriesModal()"><b>📷</b>גלריה</a>
+  <a href="#" onclick="openAround()"><b>📍</b>סביבי</a>
+  <a href="#" onclick="openTickets()"><b>🎟️</b>כרטיסים</a>
 </nav>
 
 <!-- Modals -->
-<div class="modal" id="dayModal" onclick="closeOnBackdrop(event)">
-<div class="sheet">
-<div class="sheet-head">
-<div><small id="modalDate"></small><h2 id="modalTitle" style="margin:4px 0 0"></h2></div>
-<button class="close" onclick="closeDayMode()" type="button">סגור</button>
-</div>
-<div class="day-progress"><span id="progressBar"></span></div>
-<div class="next-box">
-<small>התחנה הבאה</small>
-<h3 id="nextName"></h3>
-<p id="nextNote" style="color:var(--muted)"></p>
-<div class="actions">
-<a class="btn waze" id="nextWaze">פתח ב-Waze</a>
-<a class="btn maps" id="nextMaps">Google Maps</a>
-</div>
-<button class="small-btn" onclick="markCurrentDone()" type="button">סמן כבוצע ועבור לתחנה הבאה</button>
-</div>
-</div>
-</div>
-
-<div class="modal" id="parkingModal" onclick="closeParkingBackdrop(event)">
-<div class="sheet">
-<div class="sheet-head">
-<h2 style="margin:0">🚘 מיקום החניה</h2>
-<button class="close" onclick="closeParking()" type="button">סגור</button>
-</div>
-<div class="next-box">
-<p class="parking-status" id="parkingStatus">עדיין לא נשמר מיקום חניה.</p>
-<div class="actions">
-<a class="btn waze" id="parkingWaze" style="display:none">נווט לרכב</a>
-<a class="btn maps" id="parkingMaps" style="display:none">פתח במפות</a>
-</div>
-<button class="small-btn" onclick="saveParking()" type="button">שמור את המיקום הנוכחי</button>
-<button class="small-btn clear" id="clearParkingBtn" onclick="clearParking()" style="display:none" type="button">🗑️ מחק מיקום חניה</button>
-</div>
-</div>
-</div>
-
-<div class="modal" id="aroundModal" onclick="closeAroundBackdrop(event)">
-<div class="sheet">
-<div class="sheet-head">
-<h2 style="margin:0">📍 Around Me</h2>
-<button class="close" onclick="closeAround()" type="button">סגור</button>
-</div>
-<div class="around-grid">
-<button class="around-supermarket" onclick="searchNearby('supermarket')">🛒 סופרמרקטים</button>
-<button onclick="searchNearby('restaurants')">🍝 מסעדות</button>
-<button onclick="searchNearby('gelato')">🍦 גלידריות</button>
-<button onclick="searchNearby('pharmacy')">💊 בתי מרקחת</button>
-</div>
-</div>
-</div>
-
 <div class="modal" id="ticketsModal" onclick="closeTicketsBackdrop(event)">
-<div class="sheet tickets-sheet">
-<div class="sheet-head">
-<div><small>הארנק המשפחתי של הטיול</small><h2 style="margin:4px 0 0">🎟️ כרטיסים וכניסות</h2></div>
-<button class="close" onclick="closeTickets()" type="button">סגור</button>
-</div>
-<div class="ticket-toolbar">
-<button onclick="showTicketUpload()" type="button">➕ הוסף כרטיס</button>
-<button onclick="addTicketFolder()" type="button">📁 תקייה חדשה</button>
-</div>
-<div class="ticket-upload-box" id="ticketUploadBox" style="display:none">
-<div class="ticket-selected-banner" id="ticketSelectedBanner"></div>
-<label><b>לאיזה אתר?</b></label>
-<select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)"></select>
-<label><b>שם קצר לכרטיס</b></label>
-<input id="ticketTitle" placeholder="לדוגמה: כרטיס משפחתי" type="text"/>
-<input accept="image/*" capture="environment" id="ticketCameraInput" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
-<input accept="image/*,application/pdf" id="ticketUploadInput" multiple="" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
-<button onclick="document.getElementById('ticketCameraInput').click()" type="button" style="padding:10px;border-radius:10px;background:#1b4c6c;color:#fff;border:0;cursor:pointer">📷 צלם</button>
-<button onclick="document.getElementById('ticketUploadInput').click()" type="button" style="padding:10px;border-radius:10px;background:#1b4c6c;color:#fff;border:0;cursor:pointer">📎 העלה קובץ</button>
-</div>
-</div>
-<h3 style="margin:16px 0 8px">תקיות לפי אתר</h3>
-<div class="ticket-folder-grid" id="ticketFolderGrid"></div>
-<div id="ticketCurrentTitle" style="font-weight:800;margin-top:16px"></div>
-<div id="ticketFileList"></div>
-</div>
-</div>
-
-<div class="modal" id="ticketViewerModal" onclick="closeTicketViewerBackdrop(event)">
-  <div class="ticket-viewer-sheet" role="dialog" aria-modal="true">
-    <div class="ticket-viewer-head">
-      <button class="ticket-viewer-close" onclick="closeTicketViewer()" type="button">✕</button>
-      <div class="ticket-viewer-title" id="ticketViewerTitle">קובץ</div>
-      <button class="ticket-viewer-share" onclick="shareCurrentTicketFile()" type="button">↗</button>
+  <div class="sheet" style="max-height:92vh">
+    <div class="sheet-head">
+      <div><small style="color:var(--muted)">הארנק המשפחתי</small><h2 style="margin:2px 0 0; color:#fff">🎟️ כרטיסים וכניסות</h2></div>
+      <button class="close" onclick="closeTickets()" type="button">✕</button>
     </div>
-    <div class="ticket-viewer-body" id="ticketViewerBody"></div>
-    <div class="ticket-viewer-foot" id="ticketViewerMeta"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+      <button onclick="showTicketUpload()" style="padding:12px;border-radius:var(--radius-sm);background:var(--accent);color:#07111c;font-weight:700;cursor:pointer;border:0">➕ הוסף כרטיס</button>
+      <button onclick="addTicketFolder()" style="padding:12px;border-radius:var(--radius-sm);background:var(--panel-hover);color:#fff;font-weight:600;cursor:pointer;border:1px solid var(--line)">📁 תקייה חדשה</button>
+    </div>
+    <div id="ticketUploadBox" style="display:none;background:rgba(0,0,0,0.25);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--line);margin-bottom:14px">
+      <label style="font-size:12px;font-weight:600">בחר תקייה:</label>
+      <select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)" style="width:100%;padding:10px;border-radius:10px;margin:4px 0 10px;background:#07111c;color:#fff;border:1px solid var(--line)"></select>
+      <label style="font-size:12px;font-weight:600">שם הכרטיס:</label>
+      <input id="ticketTitle" placeholder="לדוגמה: כרטיס כניסה" type="text" style="width:100%;padding:10px;border-radius:10px;margin:4px 0 10px;background:#07111c;color:#fff;border:1px solid var(--line)"/>
+      <input accept="image/*" capture="environment" id="ticketCameraInput" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
+      <input accept="image/*,application/pdf" id="ticketUploadInput" multiple="" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <button onclick="document.getElementById('ticketCameraInput').click()" style="padding:10px;border-radius:10px;background:var(--panel-hover);color:#fff;border:1px solid var(--line);cursor:pointer">📷 צלם</button>
+        <button onclick="document.getElementById('ticketUploadInput').click()" style="padding:10px;border-radius:10px;background:var(--panel-hover);color:#fff;border:1px solid var(--line);cursor:pointer">📎 העלה קובץ</button>
+      </div>
+    </div>
+    <h3 style="font-size:15px;margin:12px 0 6px; color:#fff">תקיות שמורות</h3>
+    <div class="ticket-folder-grid" id="ticketFolderGrid"></div>
+    <div id="ticketCurrentTitle" style="font-weight:700;margin-top:16px;font-size:14px; color:#fff"></div>
+    <div id="ticketFileList"></div>
   </div>
 </div>
 
-<input accept="image/*" capture="environment" hidden="" id="challengeCameraInput" type="file"/>
+<div class="modal" id="aroundModal" onclick="closeAroundBackdrop(event)">
+  <div class="sheet">
+    <div class="sheet-head">
+      <h2 style="margin:0; color:#fff">📍 Around Me</h2>
+      <button class="close" onclick="closeAround()" type="button">✕</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button onclick="searchNearby('supermarket')" style="padding:14px;border-radius:var(--radius-sm);background:var(--accent);color:#07111c;font-weight:700;border:0;cursor:pointer">🛒 סופרמרקט</button>
+      <button onclick="searchNearby('restaurants')" style="padding:14px;border-radius:var(--radius-sm);background:var(--panel-hover);color:#fff;font-weight:600;border:1px solid var(--line);cursor:pointer">🍝 מסעדות</button>
+      <button onclick="searchNearby('gelato')" style="padding:14px;border-radius:var(--radius-sm);background:var(--panel-hover);color:#fff;font-weight:600;border:1px solid var(--line);cursor:pointer">🍦 גלידריה</button>
+      <button onclick="searchNearby('pharmacy')" style="padding:14px;border-radius:var(--radius-sm);background:var(--panel-hover);color:#fff;font-weight:600;border:1px solid var(--line);cursor:pointer">💊 בית מרקחת</button>
+    </div>
+  </div>
+</div>
 
 <script>
 const tripDays = [{"date":"2026-09-30","label":"רביעי · 30.09.2026","title":"נחיתה והגעה למלון","icon":"✈️","challenge":"לצלם את התמונה המשפחתית הראשונה באיטליה.","stops":[{"time":"16:00","name":"נחיתה בנמל התעופה وרונה","dest":"Verona Villafranca Airport","note":"איסוף מזוודות ורכב שכור."},{"time":"18:00","name":"נסיעה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"צ׳ק-אין, התארגנות וארוחת ערב רגועה באזור."}]},{"date":"2026-10-01","label":"חמישי · 01.10.2026","title":"Gardaland – יום פארק מלא","icon":"🎢","challenge":"לבחור יחד את שלושת המתקנים הכי טובים של היום.","stops":[{"time":"08:30","name":"יציאה מהמלון ל-Gardaland","dest":"Gardaland Resort, Via Derna 4, Castelnuovo del Garda","note":"לצאת מוקדם ולהגיע בנחת לפני הכניסה."},{"time":"09:00","name":"חניה וכניסה ל-Gardaland","dest":"Gardaland Parking, Castelnuovo del Garda","note":"לשמור באפליקציה את מיקום הרכב ולצלם את אזור החניה."},{"time":"בוקר","name":"מתקני הדגל – סבב ראשון","dest":"Gardaland Resort","note":"להתחיל במתקנים המבוקשים ביותר לפני שהתורים מתארכים."},{"time":"13:00","name":"ארוחת צהריים והפסקה","dest":"Gardaland Resort","note":"הפסקה קצרה, מים וטעינת טלפונים אם צריך."},{"time":"אחה״צ","name":"המשך Gardaland","dest":"Gardaland Resort","note":"מופעים, מתקנים נוספים וחזרה למועדפים לפי התורים."},{"time":"ערב","name":"חזרה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"ניווט ישיר למלון ומנוחה."}]},{"date":"2026-10-02","label":"שישי · 02.10.2026","title":"סובב אגם גארדה + ראפטינג","icon":"🚣","challenge":"לצלם תמונה משפחתית אחת עם האגם ואחת מהראפטינג.","stops":[{"time":"08:00","name":"יציאה צפונה לאורך החוף המזרחי","dest":"Malcesine, Italy","note":"נסיעה נופית לאורך האגם. עצירת קפה קצרה אם מתחשק."},{"time":"09:15","name":"מלצ׳סינה – טיילת והעיר העתיקה","dest":"Malcesine Centro, Italy","note":"טיול קצר בעיר העתיקה ובטיילת; לא עולים היום למונטה באלדו כדי לשמור זמן לראפטינג."},{"time":"10:30","name":"המשך צפונה לריבה דל גארדה","dest":"Riva del Garda, Italy","note":"עצירה על שפת האגם, תמונות וסיבוב קצר במרכז."},{"time":"12:00","name":"נסיעה דרך החוף המערבי","dest":"Limone sul Garda, Italy","note":"עוברים לצד המערבי ועוצרים בלימונה לארוחת צהריים קלה."},{"time":"14:30","name":"יציאה לראפטינג ב-Valdadige","dest":"Visit Valdadige, Via San Martino, Volargne, Italy","note":"ראפטינג משפחתי על נהר האדיג׳ה. הפעילות מפורסמת כזמינה מרץ–נובמבר; יש להזמין מראש ולאשר שעה ל-2/10."},{"time":"לפי ההזמנה","name":"ראפטינג – קניון Ceraino","dest":"Visit Valdadige, Volargne, Italy","note":"כ-10 ק״מ על הנהר עם מדריך. להביא בגדים ונעליים להחלפה ומגבות."},{"time":"ערב","name":"חזרה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"מקלחת, ארוחת ערב ומנוחה."}]},{"date":"2026-10-03","label":"שבת · 03.10.2026","title":"Movieland + Medieval Times","icon":"🎬","challenge":"לצלם סלפי משפחתי שנראה כמו פוסטר של סרט.","stops":[{"time":"בוקר","name":"יציאה ל-Movieland","dest":"Movieland The Hollywood Park, Via Fossalta 58, Lazise","note":"להגיע לקראת הפתיחה ולהתחיל במתקנים המרכזיים."},{"time":"בוקר–אחה״צ","name":"Movieland – יום סרטים ואקשן","dest":"Movieland The Hollywood Park, Via Fossalta 58, Lazise","note":"לשלב מתקנים ומופעים ולהשאיר זמן למנוחה לפני האבירים."},{"time":"אחה״צ","name":"הפסקה והתארגנות למופע","dest":"Medieval Times, Via Fossalta 58, Lazise","note":"הפארק והמופע באותו מתחם; לבדוק באותו יום את שעת הכניסה המדויקת."},{"time":"לפי הכרטיס","name":"Medieval Times – מופע האבירים","dest":"Medieval Times, Via Fossalta 58, Lazise","note":"מופע ערב וארוחה. לשמור את הכרטיסים גם כצילום מסך."},{"time":"ערב","name":"חזרה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"חזרה ישירה אחרי המופע."}]},{"date":"2026-10-04","label":"ראשון · 04.10.2026","title":"ונציה – יום מלא","icon":"🛶","challenge":"למצוא גשר קטן ויפה מחוץ למסלול הראשי ולצלם עליו תמונה משפחתית.","stops":[{"time":"07:30","name":"יציאה מוקדמת מהמלון לוונציה","dest":"Venezia Tronchetto Parking, Isola Nova del Tronchetto, Venezia","note":"יום ארוך – עדיף לצאת מוקדם. לשמור צילום של מיקום הרכב והקומה."},{"time":"09:30","name":"Tronchetto – חניה ומעבר למרכז","dest":"Venezia Tronchetto Parking","note":"משם Vaporetto/People Mover לכיוון המרכז. אין כניסה עם הרכב לעיר עצמה."},{"time":"10:15","name":"כיכר סן מרקו","dest":"Piazza San Marco, Venezia","note":"כיכר סן מרקו, הבזיליקה מבחוץ/מבפנים לפי התור, ארמון הדוג׳ה וגשר האנחות."},{"time":"12:30","name":"ארוחת צהריים וסמטאות ונציה","dest":"Campo Santa Maria Formosa, Venezia","note":"להתרחק מעט מסן מרקו, לאכול וליהנות מהסמטאות והכיכרות הקטנות."},{"time":"14:00","name":"גשר ריאלטו והשוק","dest":"Ponte di Rialto, Venezia","note":"הליכה לריאלטו, תצפית על התעלה הגדולה וזמן לגלידה וקניות קטנות."},{"time":"15:30","name":"שיט Vaporetto על התעלה הגדולה","dest":"Rialto, Venezia","note":"לשלב שיט כחלק מהחוויה ולא רק כאמצעי תחבורה."},{"time":"17:00","name":"זמן חופשי בוונציה","dest":"Dorsoduro, Venezia","note":"שיטוט רגוע באזור פחות עמוס; אפשר לוותר אם עייפים."},{"time":"18:30","name":"חזרה ל-Tronchetto","dest":"Venezia Tronchetto Parking","note":"לחזור לרכב לפני שמחשיך מדי ולבדוק שכולם זוכרים איפה חנינו."},{"time":"19:00","name":"נסיעה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"חזרה למלון וארוחת ערב."}]},{"date":"2026-10-05","label":"שני · 05.10.2026","title":"Borghetto sul Mincio + Valeggio","icon":"🏘️","challenge":"למצוא את הפינה הכי יפה בין טחנות המים ולצלם תמונת בת מצווה מיוחדת.","stops":[{"time":"09:30","name":"יציאה ל-Borghetto sul Mincio","dest":"Borghetto sul Mincio, Valeggio sul Mincio, Italy","note":"יום רגוע וקרוב יחסית למלון."},{"time":"10:00","name":"Borghetto – הכפר והטחנות","dest":"Borghetto sul Mincio, Italy","note":"טיול רגלי בין הנהר, הגשרים וטחנות המים של הכפר."},{"time":"11:30","name":"Ponte Visconteo ותצפיות","dest":"Ponte Visconteo, Valeggio sul Mincio, Italy","note":"נקודת צילום נהדרת של הכפר והנהר."},{"time":"12:30","name":"ארוחת צהריים – Tortellini di Valeggio","dest":"Valeggio sul Mincio, Italy","note":"לטעום את הטורטליני המקומיים המכונים Nodo d’Amore – קשר האהבה."},{"time":"14:00","name":"Parco Giardino Sigurtà","dest":"Parco Giardino Sigurtà, Valeggio sul Mincio, Italy","note":"אם פתוח ומזג האוויר נעים – כמה שעות של גנים, מרחבים ותמונות. אם לא, ממשיכים למרכז Valeggio."},{"time":"17:00","name":"Valeggio sul Mincio","dest":"Valeggio sul Mincio Centro, Italy","note":"קפה/גלידה וסיבוב קצר לפני החזרה."},{"time":"18:00","name":"חזרה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"ערב רגוע ואריזת מזוודות לקראת הטיסה."}]},{"date":"2026-10-06","label":"שלישי · 06.10.2026","title":"ורונה + הטיסה הביתה","icon":"❤️","challenge":"לבחור יחד את רגע השיא של כל הטיול.","stops":[{"time":"09:00","name":"צ׳ק-אאוט ויציאה לוורונה","dest":"Parcheggio Cittadella, Piazza Cittadella, Verona","note":"המזוודות נשארות ברכב – לא להשאיר חפצים גלויים."},{"time":"10:00","name":"Piazza Bra וה-Arena","dest":"Arena di Verona, Piazza Bra, Verona","note":"פתיחה קלאסית של وרונה: הכיכר והאמפיתיאטרון הרומי."},{"time":"11:00","name":"Via Mazzini","dest":"Via Giuseppe Mazzini, Verona","note":"מדרחוב יפה בדרך אל לב העיר."},{"time":"11:30","name":"הבית והמרפסת של יוליה","dest":"Casa di Giulietta, Via Cappello 23, Verona","note":"החצר והמרפסת המפורסמת של יוליה. אם רוצים להיכנס לבית – לבדוק כרטיסים מראש."},{"time":"12:15","name":"Piazza delle Erbe","dest":"Piazza delle Erbe, Verona","note":"אחת הכיכרות היפות בעיר; זמן לקפה, תמונות ושוק."},{"time":"13:00","name":"ארוחת צהריים במרכז وרונה","dest":"Piazza dei Signori, Verona","note":"ארוחה אחרונה באיטליה בלי להתרחק מדי מהחניה."},{"time":"15:00","name":"חזרה לרכב","dest":"Parcheggio Cittadella, Piazza Cittadella, Verona","note":"להתאים את השעה בפועל לשעת הטיסה ולתנאי החזרת הרכב."},{"time":"18:30","name":"החזרת הרכב בשדה התעופה","dest":"Verona Villafranca Airport","note":"להשאיר זמן לתדלוק, החזרת הרכב, בידוק וביטחון."}]}];
 
-const morningConfig = [
-  {packing:"דרכונים, רישיון נהיגה, מטענים ומסמכי הרכב",note:"✈️ נחיתה, רכב וצ׳ק-אין. מתחילים רגוע.",quote:"היום מתחיל סיפור משפחתי שתזכרו עוד שנים.",departure:"לאחר איסוף הרכב"},
-  {packing:"כרטיסים, מים, כובעים וסוללה ניידת",note:"🎢 יום Gardaland מלא. שמרו צילום מסך של הכרטיסים ומיקום החניה.",quote:"היום הולכים על המתקנים שעושים הכי הרבה חיוכים.",departure:"08:30"},
-  {packing:"בגדים ונעליים להחלפה, מגבות, מים ושכבה חמה",note:"🚣 סובב אגם + ראפטינג. חובה לאשר מראש את שעת הראפטינג ל-2/10.",quote:"אגם, כבישים יפים וקצת אדרנלין – יום מגוון במיוחד.",departure:"08:00"},
-  {packing:"כרטיסים, שכבה דקה לערב וטלפונים טעונים",note:"🎬 Movieland ביום ו-Medieval Times בערב.",quote:"המצלמה מוכנה? היום כל תמונה יכולה להפוך לסצנה מסרט.",departure:"לפי שעת פתיחת הפארק"},
-  {packing:"נעליים נוחות, סוללה ניידת וצילום מיקום הרכב",note:"🛶 ונציה: Tronchetto, סן מרקו, ריאלטו ושיט בתעלה הגדולה.",quote:"בוונציה מותר קצת ללכת לאיבוד – אבל לא את הרכב.",departure:"07:30"},
-  {packing:"נעליים נוחות, מים ומצלמה",note:"🏘️ יום רגוע ב-Borghetto, Valeggio ו-Sigurtà אם פתוח.",quote:"היום מחפשים את איטליה של הגשרים, המים והכפרים.",departure:"09:30"},
-  {packing:"מזוודות מסודרות, מסמכי טיסה ודלק להחזרת הרכב",note:"❤️ وרונה לפני הטיסה: Arena, יוליה, Piazza delle Erbe וארוחה אחרונה.",quote:"מסיימים את הטיול בעיר של רומאו ויוליה.",departure:"09:00"}
-];
-
-// בניית כל ימי הטיול והתחנות ישירות לתוך ה-DOM במדויק כמו בגרסתך
 function renderFullTripDays() {
   const container = document.getElementById('days');
   if (!container) return;
@@ -479,29 +284,22 @@ function renderFullTripDays() {
         <div class="day-icon">${day.icon}</div>
       </div>
       <div class="challenge">🎯 <b>אתגר היום:</b> ${day.challenge}</div>
-      <button class="start-day" onclick="openDayMode(${di})" type="button">התחל את היום הזה</button>
-      <button class="day-wallet-btn" onclick="openTicketsForDay(${di})" type="button">🎟️ ארנק הכרטיסים של היום</button>
       <div class="stops">
         ${day.stops.map((stop, si) => `
           <article class="stop" data-day="${di}" data-stop="${si}">
             <div class="stop-top">
               <span class="time">${stop.time}</span>
-              <label class="mini-check"><input data-key="day${di}-stop${si}" type="checkbox"/><span>בוצע</span></label>
+              <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
+                <input data-key="day${di}-stop${si}" type="checkbox" style="accent-color:var(--green);width:16px;height:16px"/><span>בוצע</span>
+              </label>
             </div>
             <h3>${stop.name}</h3>
             <p>${stop.note}</p>
-            <div class="actions">
-              <a class="btn waze" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">פתח ב-Waze</a>
-              <a class="btn maps" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}">Google Maps</a>
-            </div>
-            <div class="activity-ticket-box">
-              <div class="activity-ticket-label">🎟️ כרטיסים לפעילות הזו</div>
-              <div class="activity-ticket-actions">
-                <button onclick="openTicketsForActivity(${di},${si},'camera')" type="button">📷 צלם</button>
-                <button onclick="openTicketsForActivity(${di},${si},'upload')" type="button">📎 קובץ</button>
-                <button onclick="openNotesImport('activity',${di},${si})" type="button">📝 Notes</button>
-                <button onclick="openTicketsForActivity(${di},${si},'open')" type="button">🎟️ פתח</button>
-              </div>
+            <div class="stop-actions-grid">
+              <button class="stop-action-btn" onclick="openTicketsForActivity(${di},${si},'camera')">📷 צלם כרטיס</button>
+              <button class="stop-action-btn" onclick="openTicketsForActivity(${di},${si},'upload')">📁 העלה קובץ</button>
+              <a class="stop-action-btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}">📍 Maps</a>
+              <a class="stop-action-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">🚗 Waze</a>
             </div>
           </article>
         `).join('')}
@@ -510,112 +308,24 @@ function renderFullTripDays() {
   `).join('');
 }
 
+function scrollToDay(index) {
+  document.querySelectorAll('.day-tab').forEach((tab, i) => {
+    tab.classList.toggle('active', i === index);
+  });
+  const target = document.getElementById(`day-${index}`);
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderFullTripDays();
-  renderMorningDashboard();
-  updateOfflineStatus();
-  refreshHighlights();
-  renderExpenses();
 });
-
-let morningDayIndex = 0;
-function resolveMorningDayIndex() {
-  const today = new Date();
-  const iso = [today.getFullYear(), String(today.getMonth()+1).padStart(2,'0'), String(today.getDate()).padStart(2,'0')].join('-');
-  const exact = tripDays.findIndex(day => day.date === iso);
-  return exact >= 0 ? exact : 0;
-}
-
-function renderMorningDashboard() {
-  morningDayIndex = resolveMorningDayIndex();
-  const day = tripDays[morningDayIndex];
-  const config = morningConfig[morningDayIndex] || morningConfig[0];
-  const firstStop = day.stops[0];
-
-  document.getElementById('morningGreeting').textContent = 'בוקר טוב, משפחת כהן!';
-  document.getElementById('morningDate').textContent = `יום ${morningDayIndex + 1} מתוך ${tripDays.length} · ${day.label} · ${day.title}`;
-  document.getElementById('morningIcon').textContent = day.icon;
-  document.getElementById('morningDestination').textContent = firstStop.name;
-  document.getElementById('morningDeparture').textContent = config.departure || firstStop.time || 'לפי תוכנית היום';
-  document.getElementById('morningPacking').textContent = config.packing;
-  document.getElementById('morningNote').textContent = config.note;
-  document.getElementById('morningQuote').textContent = `“${config.quote}”`;
-}
-
-function updateOfflineStatus() {
-  const el = document.getElementById('offlineStatus');
-  if (el) el.textContent = navigator.onLine ? '🌐 מצב מקוון' : '📴 מצב אופליין — המידע השמור זמין';
-}
-
-document.addEventListener('change', e => {
-  if (e.target.matches('input[type="checkbox"][data-key]')) {
-    localStorage.setItem('garda-' + e.target.dataset.key, e.target.checked ? '1' : '0');
-    refreshHighlights();
-  }
-});
-
-function isDone(day, stop) { return localStorage.getItem(`garda-day${day}-stop${stop}`) === '1'; }
-function firstIncomplete(day) {
-  const stops = tripDays[day].stops;
-  for (let i = 0; i < stops.length; i++) if (!isDone(day, i)) return i;
-  return stops.length - 1;
-}
-function refreshHighlights() {
-  document.querySelectorAll('.stop').forEach(el => el.classList.remove('next'));
-  tripDays.forEach((day, di) => {
-    const si = firstIncomplete(di);
-    const el = document.querySelector(`.stop[data-day="${di}"][data-stop="${si}"]`);
-    if (el && !isDone(di, si)) el.classList.add('next');
-  });
-}
-
-document.getElementById('quickToday')?.addEventListener('click', () => openDayMode(morningDayIndex));
-document.getElementById('quickSaveParking')?.addEventListener('click', saveParking);
-document.getElementById('quickOpenParking')?.addEventListener('click', openParking);
-document.getElementById('quickAround')?.addEventListener('click', openAround);
-
-function getExpenses() { try { return JSON.parse(localStorage.getItem('garda-expenses') || '[]'); } catch { return []; } }
-function saveExpenses(items) { localStorage.setItem('garda-expenses', JSON.stringify(items)); renderExpenses(); }
-function addExpense() {
-  const amount = parseFloat(document.getElementById('expenseAmount').value);
-  const category = document.getElementById('expenseCategory').value;
-  const note = document.getElementById('expenseNote').value.trim();
-  if (!amount || amount <= 0) return alert('יש להזין סכום תקין.');
-  const items = getExpenses();
-  items.unshift({amount, category, note, time: new Date().toISOString()});
-  saveExpenses(items);
-  document.getElementById('expenseAmount').value = '';
-  document.getElementById('expenseNote').value = '';
-}
-function renderExpenses() {
-  const items = getExpenses();
-  document.getElementById('budgetTotal').textContent = items.reduce((s, x) => s + x.amount, 0).toFixed(2);
-  document.getElementById('expenseList').innerHTML = items.map(x =>
-    `<div class="expense-row"><span>${x.category}${x.note ? ' · '+x.note : ''}</span><b>€${x.amount.toFixed(2)}</b></div>`
-  ).join('');
-}
-function clearExpenses() { if (confirm('למחוק את כל ההוצאות שנשמרו?')) saveExpenses([]); }
-
-function openParking() { document.getElementById('parkingModal').classList.add('open'); }
-function closeParking() { document.getElementById('parkingModal').classList.remove('open'); }
-function closeParkingBackdrop(e) { if (e.target.id === 'parkingModal') closeParking(); }
 
 function openAround() { document.getElementById('aroundModal').classList.add('open'); }
 function closeAround() { document.getElementById('aroundModal').classList.remove('open'); }
 function closeAroundBackdrop(e) { if (e.target.id === 'aroundModal') closeAround(); }
-
 function searchNearby(term) {
   closeAround();
   window.location.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(term + ' near me');
-}
-
-function saveParking() {
-  if (!navigator.geolocation) return alert('מיקום אינו נתמך בדפדפן');
-  navigator.geolocation.getCurrentPosition(pos => {
-    localStorage.setItem('garda-parking', JSON.stringify({ lat: pos.coords.latitude, lng: pos.coords.longitude, time: new Date().toISOString() }));
-    document.getElementById('parkingStatus').textContent = 'החניה נשמרה בהצלחה!';
-    openParking();
-  }, () => alert('לא ניתן לקבל מיקום GPS.'));
 }
 
 // Tickets IndexedDB Wallet
@@ -713,31 +423,20 @@ async function renderTicketFiles() {
     <div class="ticket-file">
       <div class="ticket-thumb">${(x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'}</div>
       <div class="ticket-info"><b>${x.title || x.name}</b><small>${Math.round(x.size/1024)} KB</small></div>
-      <div class="ticket-actions">
-        <button onclick="window.open(URL.createObjectURL(x.blob), '_blank')">פתח</button>
-        <button onclick="deleteTicketFile(${x.id})">מחק</button>
+      <div style="display:flex;gap:4px">
+        <button onclick="window.open(URL.createObjectURL(x.blob), '_blank')" style="background:var(--accent);color:#07111c;border:0;padding:6px 12px;border-radius:8px;font-weight:700;cursor:pointer">פתח</button>
       </div>
     </div>
   `).join('');
 }
 
-async function deleteTicketFile(id) {
-  if (!confirm('למחוק כרטיס זה?')) return;
-  const db = await openTicketDb();
-  const tx = db.transaction('files', 'readwrite');
-  tx.objectStore('files').delete(id);
-  tx.oncomplete = () => renderTicketFiles();
+function openFlightTickets(mode) {
+  ticketActiveFolder = '✈️ טיסות ורכב';
+  openTickets();
+  if (mode === 'camera') setTimeout(() => document.getElementById('ticketCameraInput')?.click(), 100);
+  if (mode === 'upload') setTimeout(() => document.getElementById('ticketUploadInput')?.click(), 100);
 }
 
-function openFlightTickets() { ticketActiveFolder = '✈️ טיסות ורכב'; openTickets(); }
-function openTicketsForDay(di) {
-  const day = tripDays[di];
-  const folder = `🗓️ ${day.label} · ${day.title}`;
-  const folders = ticketFolders();
-  if (!folders.includes(folder)) { folders.unshift(folder); saveTicketFolders(folders); }
-  ticketActiveFolder = folder;
-  openTickets();
-}
 function openTicketsForActivity(di, si, mode) {
   const day = tripDays[di];
   const stop = day.stops[si];
@@ -749,42 +448,11 @@ function openTicketsForActivity(di, si, mode) {
   if (mode === 'camera') setTimeout(() => document.getElementById('ticketCameraInput')?.click(), 100);
   if (mode === 'upload') setTimeout(() => document.getElementById('ticketUploadInput')?.click(), 100);
 }
-function openNotesImport() { openTickets(); alert('באייפון: בחר שיתוף מתוך Notes ושמור בקבצים.'); }
 
-let activeModalDay = 0, activeModalStop = 0;
-function openDayMode(dayIndex) {
-  activeModalDay = dayIndex;
-  activeModalStop = firstIncomplete(dayIndex);
-  updateDayModal();
-  document.getElementById('dayModal').classList.add('open');
+function openMemoriesModal() {
+  alert('גלריית הזיכרונות והאתגרים תפתח כאן.');
 }
-function updateDayModal() {
-  const day = tripDays[activeModalDay];
-  const stop = day.stops[activeModalStop];
-  document.getElementById('modalDate').textContent = day.label;
-  document.getElementById('modalTitle').textContent = day.icon + ' ' + day.title;
-  document.getElementById('nextName').textContent = stop.name;
-  document.getElementById('nextNote').textContent = stop.note;
-  document.getElementById('nextWaze').href = 'https://www.waze.com/ul?q=' + encodeURIComponent(stop.dest) + '&navigate=yes';
-  document.getElementById('nextMaps').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(stop.dest);
-}
-function markCurrentDone() {
-  localStorage.setItem(`garda-day${activeModalDay}-stop${activeModalStop}`, '1');
-  const cb = document.querySelector(`input[data-key="day${activeModalDay}-stop${activeModalStop}"]`);
-  if (cb) cb.checked = true;
-  activeModalStop = firstIncomplete(activeModalDay);
-  updateDayModal();
-  refreshHighlights();
-}
-function closeDayMode() { document.getElementById('dayModal').classList.remove('open'); }
-function closeOnBackdrop(e) { if (e.target.id === 'dayModal') closeDayMode(); }
-
-function navigateMorningDestination() {
-  const stop = tripDays[morningDayIndex].stops[0];
-  window.location.href = 'https://www.waze.com/ul?q=' + encodeURIComponent(stop.dest) + '&navigate=yes';
-}
-function openWeatherSearch() { window.location.href = 'https://www.google.com/search?q=weather+near+me'; }
-function openFoodToday() { openAround(); }
 </script>
+
 </body>
 </html>
