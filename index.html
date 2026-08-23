@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Rectangular Wallet" name="application-name"/>
+<meta content="Garda Trip Flights Edition" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -195,7 +195,7 @@ button, input, select { font: inherit; }
 .modal-btn:hover { background: var(--bg); }
 .emergency-btn { background: rgba(255,59,48,0.06); color: var(--red); border-color: rgba(255,59,48,0.25); }
 
-/* --- ארנק כרטיסים מעוצב מחדש (הכל מלבני, טורים מקבילים, כרטיסים בסגנון Booking) --- */
+/* --- Wallet Styles --- */
 .wallet-container { display: flex; flex-direction: column; gap: 18px; }
 .wallet-header-box { border-bottom: 1px solid var(--line-dark); padding-bottom: 14px; }
 .wallet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -207,7 +207,6 @@ button, input, select { font: inherit; }
 .wallet-main-btn.secondary { background: var(--surface); color: var(--text); }
 .wallet-main-btn:hover { opacity: 0.92; transform: translateY(-1px); }
 
-/* תיבת העלאה מלבנית יוקרתית */
 .ticket-upload-box {
   background-color: #f2f2f7; padding: 20px; border-radius: 18px; border: 1px solid var(--line-dark);
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 14px;
@@ -219,25 +218,13 @@ button, input, select { font: inherit; }
 }
 .upload-options-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
 .upload-opt-btn {
-  width: 100%;
-  padding: 14px;
-  border-radius: 12px;
-  background: #ffffff;
-  color: var(--text);
-  border: 1px solid var(--line-dark);
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  width: 100%; padding: 14px; border-radius: 12px; background: #ffffff; color: var(--text);
+  border: 1px solid var(--line-dark); font-weight: 700; cursor: pointer; font-size: 14px;
+  display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);
   transition: all 0.2s ease;
 }
 .upload-opt-btn:hover { background: var(--surface-hover); border-color: var(--accent); }
 
-/* תקיות בעיצוב מלבני נקי */
 .ticket-folder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .ticket-folder {
   text-align: right; padding: 16px 18px; border-radius: 16px; background: var(--surface);
@@ -251,7 +238,7 @@ button, input, select { font: inherit; }
 .ticket-folder.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
 .ticket-folder.active small { color: rgba(255,255,255,0.75); }
 
-/* רשת טורים מקבילים לכרטיסים בפנים התקייה (סגנון Booking מדויק) */
+/* Booking style cards layout */
 .ticket-grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -261,7 +248,7 @@ button, input, select { font: inherit; }
 
 .ticket-file {
   display: flex;
-  flex-direction: row-reverse; /* תמונה משמאל, טקסט מימין */
+  flex-direction: row-reverse;
   align-items: center;
   gap: 14px;
   padding: 14px;
@@ -331,7 +318,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow); }
 </style>
 </head>
-<body data-garda-version="V102-RectangularBooking">
+<body data-garda-version="V103-IsrairIntegration">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -572,7 +559,11 @@ function openAroundModal() {
 
 function openTicketsModal() {
   document.getElementById('ticketsModal').classList.add('open');
-  openTicketDb().then(() => { renderTicketFolders(); renderTicketFiles(); });
+  openTicketDb().then(async () => { 
+    await ensureDefaultFlightsTicket();
+    renderTicketFolders(); 
+    renderTicketFiles(); 
+  });
 }
 
 function openEmergencyModal() {
@@ -586,7 +577,7 @@ function searchNearbyMaps(term) {
 
 // Tickets IndexedDB Wallet Logic
 const TICKET_DEFAULT_FOLDERS = ['✈️ טיסות ורכב', '🏡 מלון', '🎢 Gardaland', '🚣 ראפטינג', '🎬 Movieland', '🏰 Medieval Times', '🚤 ונציה'];
-let ticketDb = null, ticketActiveFolder = '🎢 Gardaland';
+let ticketDb = null, ticketActiveFolder = '✈️ טיסות ורכב';
 
 function ticketFolders() {
   try { const x = JSON.parse(localStorage.getItem('garda-ticket-folders') || 'null'); return Array.isArray(x) && x.length ? x : TICKET_DEFAULT_FOLDERS.slice(); } catch { return TICKET_DEFAULT_FOLDERS.slice(); }
@@ -606,6 +597,27 @@ function openTicketDb() {
     };
     req.onsuccess = () => { ticketDb = req.result; resolve(ticketDb); };
     req.onerror = () => reject(req.error);
+  });
+}
+
+// הוספת כרטיס טיסה ברירת מחדל מנתוני ישראייר
+async function ensureDefaultFlightsTicket() {
+  const files = await getTicketFiles('✈️ טיסות ורכב');
+  if (files.length > 0) return;
+  const db = await openTicketDb();
+  return new Promise((resolve) => {
+    const tx = db.transaction('files', 'readwrite');
+    tx.objectStore('files').add({
+      folder: '✈️ טיסות ורכב',
+      title: 'הזמנת ישראייר (4623652)',
+      name: 'Israir Flight Booking',
+      type: 'text/flight-info',
+      size: 15400,
+      created: Date.now(),
+      isFlightInfo: true,
+      details: 'הלוך: 30.09.2026 13:15 (TLV -> VRN) | טיסה 6H 357\nחזור: 06.10.2026 21:35 (VRN -> TLV) | טיסה 6H 352\nנוסעים: אריק כהן, עמית כהן, יולי כהן, ליאן כהן, הראל וילנאי כהן'
+    });
+    tx.oncomplete = resolve;
   });
 }
 
@@ -672,10 +684,12 @@ async function renderTicketFiles() {
   
   list.innerHTML = `<div class="ticket-grid-container">` + files.map(x => `
     <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ כפולה לפתיחה מלאה">
-      <div class="ticket-thumb">${(x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'}</div>
+      <div class="ticket-thumb">
+        ${x.isFlightInfo ? '✈️' : ((x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄')}
+      </div>
       <div class="ticket-info">
         <b>${x.title || x.name}</b>
-        <small>${Math.round(x.size/1024)} KB · לחיצה כפולה</small>
+        <small>${x.isFlightInfo ? 'הזמנה 4623652 · ישראייר' : `${Math.round(x.size/1024)} KB · לחיצה כפולה`}</small>
         <button class="delete-ticket-btn" onclick="event.stopPropagation(); deleteTicketFile(${x.id})">מחק</button>
       </div>
     </div>
@@ -687,12 +701,28 @@ async function openFullViewer(id) {
   const req = db.transaction('files', 'readonly').objectStore('files').get(id);
   req.onsuccess = () => {
     const x = req.result; if (!x) return;
-    const url = URL.createObjectURL(x.blob);
-    document.getElementById('fullViewerTitle').textContent = x.title || x.name;
     const body = document.getElementById('fullViewerBody');
-    if ((x.type||'').startsWith('image/')) {
+    document.getElementById('fullViewerTitle').textContent = x.title || x.name;
+    if (x.isFlightInfo) {
+      body.innerHTML = `<div style="text-align:right; padding:20px; font-size:14px; line-height:1.6;">
+        <h3 style="color:var(--accent); margin-top:0;">✈️ פרטי טיסה – ישראייר (הזמנה: 4623652)[cite: 1]</h3>
+        <p><b>הלוך (30.09.2026):</b> 13:15 מת"א (טרמינל 1) -> 16:05 בוורונה (טיסה 6H 357)[cite: 1]</p>
+        <p><b>חזור (06.10.2026):</b> 21:35 מוורונה -> 02:05 בת"א (טיסה 6H 352)[cite: 1]</p>
+        <hr style="border:0; border-top:1px solid var(--line-dark); margin:15px 0;">
+        <b>נוסעים בהזמנה[cite: 1]:</b>
+        <ul style="padding-right:20px; margin:5px 0;">
+          <li>Arik Cohen (28/12/1967)[cite: 1]</li>
+          <li>Amit Cohen (01/07/2014)[cite: 1]</li>
+          <li>Yuly Cohen (01/07/2014)[cite: 1]</li>
+          <li>Lian Cohen (14/10/2015)[cite: 1]</li>
+          <li>Harel Vilnai Cohen (04/09/1997)[cite: 1]</li>
+        </ul>
+      </div>`;
+    } else if ((x.type||'').startsWith('image/')) {
+      const url = URL.createObjectURL(x.blob);
       body.innerHTML = `<img src="${url}" alt="כרטיס">`;
     } else {
+      const url = URL.createObjectURL(x.blob);
       body.innerHTML = `<iframe src="${url}" style="width:100%;height:100%;border:0;background:#fff"></iframe>`;
     }
     document.getElementById('fullViewerModal').classList.add('open');
