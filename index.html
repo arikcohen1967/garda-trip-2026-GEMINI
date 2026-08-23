@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Waze Branded Edition" name="application-name"/>
+<meta content="Garda Trip Right Sidebar" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -22,7 +22,7 @@
   --primary-text: #ffffff;
   --accent: #2563eb;
   --green: #34c759;
-  --waze: #0099ff; /* הצבע הרשמי של וואז */
+  --waze: #0099ff;
   --red: #ff3b30;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   --radius: 16px;
@@ -42,7 +42,7 @@ body {
 a { color: inherit; text-decoration: none; }
 button, input, select { font: inherit; }
 
-/* Minimalist Header */
+/* Minimalist Header עם כפתור תפריט צדדי מימין */
 .minimal-header {
   padding: calc(18px + env(safe-area-inset-top)) 16px 14px;
   background: var(--surface);
@@ -51,44 +51,46 @@ button, input, select { font: inherit; }
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-}
-.minimal-title h1 { font-size: 18px; font-weight: 700; margin: 0 0 2px; letter-spacing: -0.02em; }
-.minimal-title p { font-size: 12px; color: var(--muted); margin: 0; }
-.minimal-badge {
-  background: var(--surface-hover); border: 1px solid var(--line-dark);
-  padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--text);
-  white-space: nowrap; flex-shrink: 0;
-}
-
-/* Top Navigation Bar */
-.top-nav-bar {
-  background: var(--surface);
-  border-bottom: 1px solid var(--line-dark);
-  padding: 8px 16px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
   position: sticky;
   top: 0;
   z-index: 900;
   backdrop-filter: blur(12px);
 }
-.top-nav-bar button {
-  background: var(--surface-hover);
-  border: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 8px 4px;
-  border-radius: 10px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
+.minimal-title h1 { font-size: 17px; font-weight: 700; margin: 0 0 2px; letter-spacing: -0.02em; }
+.minimal-title p { font-size: 11px; color: var(--muted); margin: 0; }
+
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.menu-btn {
+  background: var(--surface-hover); border: 1px solid var(--line-dark);
+  padding: 8px 12px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; gap: 6px; color: var(--text);
 }
-.top-nav-bar button b { font-size: 14px; }
-.top-nav-bar button.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
+.minimal-badge {
+  background: var(--surface-hover); border: 1px solid var(--line-dark);
+  padding: 6px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--text);
+  white-space: nowrap; flex-shrink: 0;
+}
+
+/* Sidebar Drawer (תפריט צד מימין) */
+.sidebar-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2500; display: none; backdrop-filter: blur(4px);
+}
+.sidebar-overlay.open { display: block; }
+
+.sidebar {
+  position: fixed; top: 0; bottom: 0; right: -280px; width: 260px; background: var(--surface);
+  z-index: 2600; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: right 0.3s ease;
+  padding: calc(20px + env(safe-area-inset-top)) 20px 20px; display: flex; flex-direction: column; gap: 10px;
+  border-left: 1px solid var(--line-dark);
+}
+.sidebar.open { right: 0; }
+.sidebar h3 { font-size: 16px; margin: 0 0 10px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.sidebar-btn {
+  background: var(--surface-hover); border: 1px solid var(--line); padding: 12px 14px;
+  border-radius: 12px; font-weight: 700; font-size: 13px; text-align: right; cursor: pointer;
+  display: flex; align-items: center; gap: 10px; color: var(--text);
+}
+.sidebar-btn:hover { background: var(--line); }
 
 .wrap { padding: 16px; max-width: 600px; margin: auto; }
 
@@ -144,7 +146,7 @@ button, input, select { font: inherit; }
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line);
 }
 .stop-link {
-  font-size: 12px; font-weight: 700; color: #fff; background: var(--waze); /* Waze branded color */
+  font-size: 12px; font-weight: 700; color: #fff; background: var(--waze);
   padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center; cursor: pointer;
 }
 .stop-link.maps { background: #0066cc; }
@@ -190,24 +192,32 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V81-CulinaryWaze">
+<body data-garda-version="V82-RightSidebar">
 
-<!-- Minimalist Header -->
+<!-- Minimalist Header עם כפתור תפריט מימין -->
 <header class="minimal-header">
-  <div class="minimal-title">
+  <div class="header-actions">
+    <button class="menu-btn" onclick="toggleSidebar()">☰ תפריט</button>
+  </div>
+  <div class="minimal-title" style="text-align: left;">
     <h1>אגם גארדה וונציה</h1>
     <p>טיול בת מצווה · 30.09 - 06.10.2026</p>
   </div>
   <a href="#hotel" class="minimal-badge">🏡 Bio Vojon</a>
 </header>
 
-<!-- Top Navigation Bar -->
-<nav class="top-nav-bar">
-  <button class="active" id="btnRoute" onclick="showDay(0)"><b>📅</b>מסלול</button>
-  <button id="btnAround" onclick="openAroundModal()"><b>📍</b>סביבי</button>
-  <button id="btnTickets" onclick="openTicketsModal()"><b>🎟️</b>כרטיסים</button>
-  <button id="btnEmergency" onclick="openEmergencyModal()"><b>🆘</b>חירום</button>
-</nav>
+<!-- Sidebar Drawer (תפריט צד מימין) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+    <h3 style="margin:0;">ניווט מהיר</h3>
+    <button onclick="toggleSidebar()" style="border:0; background:var(--surface-hover); width:30px; height:30px; border-radius:50%; font-weight:700; cursor:pointer;">✕</button>
+  </div>
+  <button class="sidebar-btn" onclick="toggleSidebar(); showDay(0)"><b>📅</b> הצג מסלול ימים</button>
+  <button class="sidebar-btn" onclick="toggleSidebar(); openAroundModal()"><b>📍</b> סביבי (סופר, דלק, מסעדות)</button>
+  <button class="sidebar-btn" onclick="toggleSidebar(); openTicketsModal()"><b>🎟️</b> ארנק כרטיסים</button>
+  <button class="sidebar-btn" onclick="toggleSidebar(); openEmergencyModal()" style="color:var(--red);"><b>🆘</b> מספרי חירום</button>
+</aside>
 
 <main class="wrap">
   <!-- Day Selector Tabs -->
@@ -377,8 +387,12 @@ function showDay(index) {
   document.querySelectorAll('.day-card').forEach((card, i) => {
     card.classList.toggle('active-day', i === index);
   });
-  setActiveNav(0);
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
 }
 
 function closeModal(modalId) {
@@ -387,30 +401,15 @@ function closeModal(modalId) {
 
 function openAroundModal() {
   document.getElementById('aroundModal').classList.add('open');
-  setActiveNav(1);
 }
 
 function openTicketsModal() {
   document.getElementById('ticketsModal').classList.add('open');
-  setActiveNav(2);
   openTicketDb().then(() => { renderTicketFolders(); renderTicketFiles(); });
 }
 
 function openEmergencyModal() {
   document.getElementById('emergencyModal').classList.add('open');
-  setActiveNav(3);
-}
-
-function setActiveNav(activeIndex) {
-  const buttons = [
-    document.getElementById('btnRoute'),
-    document.getElementById('btnAround'),
-    document.getElementById('btnTickets'),
-    document.getElementById('btnEmergency')
-  ];
-  buttons.forEach((btn, i) => {
-    if (btn) btn.classList.toggle('active', i === activeIndex);
-  });
 }
 
 function searchNearby(term) {
@@ -482,7 +481,7 @@ async function saveTicketFiles(fileList) {
     tx.objectStore('files').add({ folder, title: title || file.name, name: file.name, type: file.type, size: file.size, created: Date.now(), blob: file });
     tx.oncomplete = resolve; tx.onerror = () => reject(tx.error);
   })));
-  document.getElementById('ticketTitle').value = ' ';
+  document.getElementById('ticketTitle').value = '';
   document.getElementById('ticketUploadBox').style.display = 'none';
   renderTicketFiles();
 }
