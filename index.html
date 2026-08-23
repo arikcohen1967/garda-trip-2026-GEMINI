@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Final Fix Perfect Dock" name="application-name"/>
+<meta content="Garda Trip Top Nav Final" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -24,7 +24,6 @@
   --green: #34c759;
   --red: #ff3b30;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.06);
   --radius: 16px;
 }
 
@@ -35,8 +34,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
-  /* מרווח תחתון עצום ובטוח שמונע מהסרגל לכסות כל תוכן שהוא */
-  padding-bottom: calc(140px + env(safe-area-inset-bottom)) !important;
+  padding-bottom: 40px;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -60,6 +58,36 @@ button, input, select { font: inherit; }
   padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--text);
   white-space: nowrap; flex-shrink: 0;
 }
+
+/* Top Navigation Bar - מעוגן למעלה תחת הכותרת, יציב לחלוטין ולעולם לא מסתיר תוכן */
+.top-nav-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line-dark);
+  padding: 8px 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  backdrop-filter: blur(12px);
+}
+.top-nav-bar button {
+  background: var(--surface-hover);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 8px 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.top-nav-bar button b { font-size: 14px; }
+.top-nav-bar button.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
 
 .wrap { padding: 16px; max-width: 600px; margin: auto; }
 
@@ -101,7 +129,6 @@ button, input, select { font: inherit; }
 .stop-title { font-size: 15px; font-weight: 700; margin: 0; color: var(--text); }
 .stop-desc { font-size: 12px; color: var(--muted); margin: 6px 0 12px; line-height: 1.4; }
 
-/* Grid כפתורים לתחנות (Waze ו-Maps מסודרים) */
 .stop-links {
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line);
 }
@@ -110,34 +137,6 @@ button, input, select { font: inherit; }
   padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center;
 }
 .stop-link.maps { background: #0066cc; }
-
-/* Bottom Navigation - Fixed Stable Dock נקי ויציב לחלוטין בתחתית */
-.bottom-nav {
-  position: fixed !important;
-  z-index: 1000 !important;
-  left: 16px !important;
-  right: 16px !important;
-  bottom: calc(12px + env(safe-area-inset-bottom)) !important;
-  max-width: 440px !important;
-  margin: 0 auto !important;
-  padding: 6px !important;
-  height: 56px !important;
-  background: rgba(255, 255, 255, 0.95) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  backdrop-filter: blur(16px) !important;
-  border: 1px solid var(--line-dark) !important;
-  border-radius: 18px !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 4px !important;
-}
-.bottom-nav a {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 600; color: var(--muted); padding: 2px; border-radius: 12px; cursor: pointer;
-}
-.bottom-nav a b { font-size: 16px; margin-bottom: 1px; }
-.bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: var(--surface-hover); }
 
 /* Modals */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
@@ -157,7 +156,7 @@ button, input, select { font: inherit; }
 .emergency-btn { background: rgba(255,59,48,0.08); color: var(--red); border-color: rgba(255,59,48,0.2); }
 </style>
 </head>
-<body data-garda-version="V77-FinalFixed">
+<body data-garda-version="V78-TopNavStable">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -167,6 +166,14 @@ button, input, select { font: inherit; }
   </div>
   <a href="#hotel" class="minimal-badge">🏡 Bio Vojon</a>
 </header>
+
+<!-- סרגל ניווט עליון יציב שיושב למעלה ותמיד זמין -->
+<nav class="top-nav-bar">
+  <button class="active" id="btnRoute" onclick="showDay(0)"><b>📅</b>מסלול</button>
+  <button id="btnAround" onclick="openAroundModal()"><b>📍</b>סביבי</button>
+  <button id="btnTickets" onclick="openTicketsModal()"><b>🎟️</b>כרטיסים</button>
+  <button id="btnEmergency" onclick="openEmergencyModal()"><b>🆘</b>חירום</button>
+</nav>
 
 <main class="wrap">
   <!-- Day Selector Tabs -->
@@ -183,14 +190,6 @@ button, input, select { font: inherit; }
   <!-- Days Container -->
   <div id="days"></div>
 </main>
-
-<!-- Bottom Navigation - מעוגן בצורה יציבה ואבסולוטית למטה -->
-<nav class="bottom-nav">
-  <a class="active" id="navRoute" onclick="showDay(0)"><b>📅</b>מסלול</a>
-  <a id="navAround" onclick="openAroundModal()"><b>📍</b>סביבי</a>
-  <a id="navTickets" onclick="openTicketsModal()"><b>🎟️</b>כרטיסים</a>
-  <a id="navEmergency" onclick="openEmergencyModal()"><b>🆘</b>חירום</a>
-</nav>
 
 <!-- Modals -->
 <div class="modal" id="aroundModal" onclick="if(event.target===this)closeModal('aroundModal')">
@@ -326,8 +325,14 @@ function openEmergencyModal() {
 }
 
 function setActiveNav(activeIndex) {
-  document.querySelectorAll('.bottom-nav a').forEach((a, i) => {
-    a.classList.toggle('active', i === activeIndex);
+  const buttons = [
+    document.getElementById('btnRoute'),
+    document.getElementById('btnAround'),
+    document.getElementById('btnTickets'),
+    document.getElementById('btnEmergency')
+  ];
+  buttons.forEach((btn, i) => {
+    if (btn) btn.classList.toggle('active', i === activeIndex);
   });
 }
 
