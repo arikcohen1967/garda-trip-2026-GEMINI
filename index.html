@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip AroundMe Edition" name="application-name"/>
+<meta content="Garda Trip AroundMe Maps Edition" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -200,7 +200,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V92-AroundMeWaze">
+<body data-garda-version="V93-AroundMeMaps">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -248,12 +248,12 @@ button, input, select { font: inherit; }
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal('aroundModal')">✕</button>
     <h3 style="margin-top:0; font-size:18px;">📍 Around Me</h3>
-    <p style="font-size:12px; color:var(--muted);">בחר קטגוריה לניווט מיידי עם Waze:</p>
+    <p style="font-size:12px; color:var(--muted);">בחר קטגוריה לצפייה במפה סביבך:</p>
     <div class="modal-grid">
-      <button class="modal-btn" onclick="searchNearbyWaze('supermarket')">🛒 <span>סופרמרקטים</span></button>
-      <button class="modal-btn" onclick="searchNearbyWaze('gas station')">⛽ <span>תחנות דלק</span></button>
-      <button class="modal-btn" onclick="searchNearbyWaze('restaurants')">🍝 <span>מסעדות</span></button>
-      <button class="modal-btn" onclick="searchNearbyWaze('pharmacy')">💊 <span>סופרפארם / בית מרקחת</span></button>
+      <button class="modal-btn" onclick="searchNearbyMaps('supermarket')">🛒 <span>סופרמרקטים</span></button>
+      <button class="modal-btn" onclick="searchNearbyMaps('gas station')">⛽ <span>תחנות דלק</span></button>
+      <button class="modal-btn" onclick="searchNearbyMaps('restaurants')">🍝 <span>מסעדות</span></button>
+      <button class="modal-btn" onclick="searchNearbyMaps('pharmacy')">💊 <span>סופרפארם / בית מרקחת</span></button>
     </div>
   </div>
 </div>
@@ -430,9 +430,9 @@ function openEmergencyModal() {
   document.getElementById('emergencyModal').classList.add('open');
 }
 
-function searchNearbyWaze(term) {
+function searchNearbyMaps(term) {
   closeModal('aroundModal');
-  window.location.href = 'https://www.waze.com/ul?q=' + encodeURIComponent(term) + '&navigate=yes';
+  window.location.href = 'https://maps.apple.com/?q=' + encodeURIComponent(term);
 }
 
 // Tickets IndexedDB Wallet Logic
