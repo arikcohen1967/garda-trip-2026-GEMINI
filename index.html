@@ -7,13 +7,13 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip AroundMe Maps Edition" name="application-name"/>
+<meta content="Garda Trip DoubleClick Fullscreen" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
   --bg: #f4f4f6;
   --surface: #ffffff;
-  --surface-hover: #ffffff;
+  --surface-hover: #fafafa;
   --text: #18181b;
   --muted: #71717a;
   --line: rgba(0, 0, 0, 0.08);
@@ -176,31 +176,63 @@ button, input, select { font: inherit; }
 .modal-btn:hover { background: var(--bg); }
 .emergency-btn { background: rgba(255,59,48,0.08); color: var(--red); border-color: rgba(255,59,48,0.3); }
 
-/* Tickets Wallet Styles */
-.ticket-folder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-.ticket-folder {
-  text-align: right; padding: 12px; border-radius: 12px; background: var(--surface);
-  border: 1.5px solid var(--line-dark); cursor: pointer; color: var(--text); box-shadow: var(--shadow);
+/* Tickets Wallet Pro Styles */
+.wallet-container { display: flex; flex-direction: column; gap: 16px; }
+.wallet-header-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--line-dark); padding-bottom: 12px; }
+.wallet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.wallet-main-btn {
+  padding: 12px; border-radius: 12px; font-weight: 700; font-size: 13px; cursor: pointer; border: 1.5px solid var(--line-dark);
+  display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: var(--shadow); transition: all 0.2s ease;
 }
-.ticket-folder strong { display: block; font-size: 13px; margin-bottom: 2px; }
-.ticket-folder small { color: var(--muted); font-size: 11px; }
-.ticket-folder.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
+.wallet-main-btn.primary { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
+.wallet-main-btn.secondary { background: var(--surface); color: var(--text); }
 
-.ticket-file { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 10px; padding: 10px; border-radius: 12px; background: var(--surface); border: 1.5px solid var(--line-dark); margin-top: 8px; cursor: pointer; box-shadow: var(--shadow); }
-.ticket-thumb { width: 48px; height: 48px; border-radius: 10px; background: #e5e5ea; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.ticket-upload-box {
+  background: var(--bg); padding: 18px; border-radius: 14px; border: 1.5px solid var(--line-dark);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); display: flex; flex-direction: column; gap: 10px;
+}
+.ticket-upload-box select, .ticket-upload-box input[type="text"] {
+  width: 100%; padding: 10px 12px; border-radius: 10px; background: #fff; color: var(--text);
+  border: 1.5px solid var(--line-dark); font-size: 13px; outline: none;
+}
+.upload-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+.upload-opt-btn {
+  padding: 10px; border-radius: 10px; background: var(--surface); color: var(--text);
+  border: 1.5px solid var(--line-dark); font-weight: 600; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+
+.ticket-folder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ticket-folder {
+  text-align: right; padding: 14px; border-radius: 14px; background: var(--surface);
+  border: 1.5px solid var(--line-dark); cursor: pointer; color: var(--text); box-shadow: var(--shadow);
+  transition: transform 0.1s ease, border-color 0.2s ease;
+}
+.ticket-folder:active { transform: scale(0.98); }
+.ticket-folder strong { display: block; font-size: 13px; margin-bottom: 4px; color: var(--text); }
+.ticket-folder small { color: var(--muted); font-size: 11px; font-weight: 500; }
+.ticket-folder.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
+.ticket-folder.active small { color: rgba(255,255,255,0.7); }
+
+.ticket-file {
+  display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 12px;
+  padding: 12px; border-radius: 14px; background: var(--surface); border: 1.5px solid var(--line-dark);
+  margin-top: 10px; cursor: pointer; box-shadow: var(--shadow); transition: background 0.2s ease;
+}
+.ticket-file:hover { background: var(--surface-hover); }
+.ticket-thumb { width: 52px; height: 52px; border-radius: 10px; background: #e5e5ea; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid var(--line); }
 .ticket-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.ticket-info b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+.ticket-info b { display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); margin-bottom: 2px; }
 .ticket-info small { color: var(--muted); font-size: 11px; }
 
 /* Full Screen Viewer */
 #fullViewerModal { z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
 .full-viewer-content { background: #ffffff; width: 100%; max-width: 800px; height: 85vh; border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1.5px solid var(--line-dark); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
-.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f1f1f3; color: #111; font-weight: 700; }
-.full-viewer-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 10px; background: #fafafa; }
-.full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #f1f1f3; color: #111; font-weight: 700; border-bottom: 1px solid var(--line-dark); }
+.full-viewer-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 12px; background: #fafafa; }
+.full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; }
 </style>
 </head>
-<body data-garda-version="V93-AroundMeMaps">
+<body data-garda-version="V95-DoubleClickFullscreen">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -272,33 +304,51 @@ button, input, select { font: inherit; }
   </div>
 </div>
 
-<!-- Tickets Wallet Modal -->
+<!-- Tickets Wallet Modal Pro -->
 <div class="modal" id="ticketsModal" onclick="if(event.target===this)closeModal('ticketsModal')">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal('ticketsModal')">✕</button>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-      <div><small style="color:var(--muted)">הארנק המשפחתי</small><h2 style="margin:2px 0 0; font-size:18px;">🎟️ כרטיסים וכניסות</h2></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
-      <button onclick="showTicketUpload()" style="padding:10px;border-radius:10px;background:var(--primary);color:var(--primary-text);font-weight:700;cursor:pointer;border:0;font-size:12px;box-shadow:var(--shadow);">➕ הוסף כרטיס</button>
-      <button onclick="addTicketFolder()" style="padding:10px;border-radius:10px;background:var(--surface);color:var(--text);font-weight:600;cursor:pointer;border:1.5px solid var(--line-dark);font-size:12px;box-shadow:var(--shadow);">📁 תקייה חדשה</button>
-    </div>
-    <div id="ticketUploadBox" style="display:none;background:var(--bg);padding:14px;border-radius:12px;border:1.5px solid var(--line-dark);margin-bottom:14px">
-      <label style="font-size:11px;font-weight:600">בחר תקייה:</label>
-      <select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)" style="width:100%;padding:8px;border-radius:8px;margin:4px 0 10px;background:#fff;color:#111;border:1.5px solid var(--line-dark);font-size:12px;"></select>
-      <label style="font-size:11px;font-weight:600">שם הכרטיס:</label>
-      <input id="ticketTitle" placeholder="לדוגמה: כרטיס כניסה" type="text" style="width:100%;padding:8px;border-radius:8px;margin:4px 0 10px;background:#fff;color:#111;border:1.5px solid var(--line-dark);font-size:12px;"/>
-      <input accept="image/*" capture="environment" id="ticketCameraInput" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
-      <input accept="image/*,application/pdf" id="ticketUploadInput" multiple="" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <button onclick="document.getElementById('ticketCameraInput').click()" style="padding:8px;border-radius:8px;background:var(--surface);color:var(--text);border:1.5px solid var(--line-dark);cursor:pointer;font-size:12px;">📷 צלם</button>
-        <button onclick="document.getElementById('ticketUploadInput').click()" style="padding:8px;border-radius:8px;background:var(--surface);color:var(--text);border:1.5px solid var(--line-dark);cursor:pointer;font-size:12px;">📎 העלה קובץ</button>
+    
+    <div class="wallet-container">
+      <div class="wallet-header-box">
+        <div>
+          <small style="color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">ארנק דיגיטלי</small>
+          <h2 style="margin:2px 0 0; font-size:20px; font-weight:700;">🎟️ כרטיסים ומסמכים</h2>
+        </div>
+      </div>
+
+      <div class="wallet-actions">
+        <button class="wallet-main-btn primary" onclick="showTicketUpload()">➕ הוסף כרטיס חדש</button>
+        <button class="wallet-main-btn secondary" onclick="addTicketFolder()">📁 תקייה חדשה</button>
+      </div>
+
+      <div id="ticketUploadBox" class="ticket-upload-box" style="display:none;">
+        <div>
+          <label style="font-size:11px; font-weight:700; color:var(--muted);">בחר תקייה לשמירה:</label>
+          <select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)" style="margin-top:4px;"></select>
+        </div>
+        <div>
+          <label style="font-size:11px; font-weight:700; color:var(--muted);">שם הכרטיס / מסמך:</label>
+          <input id="ticketTitle" placeholder="לדוגמה: כרטיס כניסה לפארק" type="text" style="margin-top:4px;"/>
+        </div>
+        <input accept="image/*" capture="environment" id="ticketCameraInput" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
+        <input accept="image/*,application/pdf" id="ticketUploadInput" multiple="" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
+        <div class="upload-options-grid">
+          <button class="upload-opt-btn" onclick="document.getElementById('ticketCameraInput').click()">📷 צלם במצלמה</button>
+          <button class="upload-opt-btn" onclick="document.getElementById('ticketUploadInput').click()">📎 בחר מהמכשיר</button>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="font-size:14px; margin:4px 0 8px; font-weight:700; color:var(--muted);">תקיות הטיול</h3>
+        <div class="ticket-folder-grid" id="ticketFolderGrid"></div>
+      </div>
+
+      <div>
+        <div id="ticketCurrentTitle" style="font-weight:700; margin-top:8px; font-size:14px; color:var(--text); border-bottom:1px solid var(--line); padding-bottom:6px;"></div>
+        <div id="ticketFileList"></div>
       </div>
     </div>
-    <h3 style="font-size:14px;margin:12px 0 6px;">תקיות שמורות</h3>
-    <div class="ticket-folder-grid" id="ticketFolderGrid"></div>
-    <div id="ticketCurrentTitle" style="font-weight:700;margin-top:16px;font-size:13px;"></div>
-    <div id="ticketFileList"></div>
   </div>
 </div>
 
@@ -306,8 +356,8 @@ button, input, select { font: inherit; }
 <div class="modal" id="fullViewerModal" onclick="closeFullViewer(event)">
   <div class="full-viewer-content">
     <div class="full-viewer-head">
-      <span id="fullViewerTitle">תצוגה מלאה</span>
-      <button class="close" onclick="document.getElementById('fullViewerModal').classList.remove('open')" style="border:0;background:#e5e5ea;width:28px;height:28px;border-radius:50%;cursor:pointer;font-weight:700;">✕</button>
+      <span id="fullViewerTitle" style="font-size:15px;">תצוגה מלאה</span>
+      <button class="close" onclick="document.getElementById('fullViewerModal').classList.remove('open')" style="border:0; background:#e5e5ea; width:30px; height:30px; border-radius:50%; cursor:pointer; font-weight:700; display:flex; align-items:center; justify-content:center;">✕</button>
     </div>
     <div class="full-viewer-body" id="fullViewerBody"></div>
   </div>
@@ -519,14 +569,14 @@ async function renderTicketFiles() {
   if (!title || !list) return;
   title.textContent = 'תיקייה: ' + ticketActiveFolder;
   const files = await getTicketFiles(ticketActiveFolder);
-  if (!files.length) { list.innerHTML = '<div style="color:var(--muted);text-align:center;padding:16px;font-size:12px">אין כרטיסים בתקייה זו.</div>'; return; }
+  if (!files.length) { list.innerHTML = '<div style="color:var(--muted);text-align:center;padding:20px;font-size:12px">אין עדיין כרטיסים בתקייה זו. (לחיצה כפולה על כרטיס תפתח אותו למסך מלא)</div>'; return; }
   
   list.innerHTML = files.map(x => `
-    <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ לפתיחה מלאה">
+    <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ כפולה לפתיחה מלאה">
       <div class="ticket-thumb">${(x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'}</div>
-      <div class="ticket-info"><b>${x.title || x.name}</b><small>${Math.round(x.size/1024)} KB · לחץ לפתיחה</small></div>
+      <div class="ticket-info"><b>${x.title || x.name}</b><small>${Math.round(x.size/1024)} KB · לחיצה כפולה למסך מלא</small></div>
       <div>
-        <button onclick="event.stopPropagation(); deleteTicketFile(${x.id})" style="background:rgba(255,59,48,0.1);color:var(--red);border:0;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px;">מחק</button>
+        <button onclick="event.stopPropagation(); deleteTicketFile(${x.id})" style="background:rgba(255,59,48,0.1); color:var(--red); border:0; padding:6px 12px; border-radius:8px; cursor:pointer; font-size:11px; font-weight:700;">מחק</button>
       </div>
     </div>
   `).join('');
@@ -556,7 +606,7 @@ function closeFullViewer(e) {
 }
 
 async function deleteTicketFile(id) {
-  if (!confirm('למחוק כרטיס זה?')) return;
+  if (!confirm('למחוק כרטיס זה לצמיתות?')) return;
   const db = await openTicketDb();
   const tx = db.transaction('files', 'readwrite');
   tx.objectStore('files').delete(id);
