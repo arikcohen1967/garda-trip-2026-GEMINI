@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Clean Light Final" name="application-name"/>
+<meta content="Garda Trip Perfect Fixed Dock" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -35,27 +35,30 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
-  padding-bottom: calc(120px + env(safe-area-inset-bottom));
+  /* מרווח תחתון עמוק שמונע מהסרגל לכסות תוכן */
+  padding-bottom: calc(140px + env(safe-area-inset-bottom)) !important;
   -webkit-font-smoothing: antialiased;
 }
 
 a { color: inherit; text-decoration: none; }
 button, input, select { font: inherit; }
 
-/* Minimalist Header */
+/* Minimalist Header סידור נקי ומושלם לכותרת ולמלון */
 .minimal-header {
-  padding: calc(20px + env(safe-area-inset-top)) 20px 16px;
+  padding: calc(20px + env(safe-area-inset-top)) 16px 16px;
   background: var(--surface);
   border-bottom: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
 }
-.minimal-title h1 { font-size: 19px; font-weight: 700; margin: 0 0 2px; letter-spacing: -0.02em; }
+.minimal-title h1 { font-size: 18px; font-weight: 700; margin: 0 0 2px; letter-spacing: -0.02em; }
 .minimal-title p { font-size: 12px; color: var(--muted); margin: 0; }
 .minimal-badge {
   background: var(--surface-hover); border: 1px solid var(--line-dark);
   padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--text);
+  white-space: nowrap; flex-shrink: 0;
 }
 
 .wrap { padding: 16px; max-width: 600px; margin: auto; }
@@ -84,17 +87,21 @@ button, input, select { font: inherit; }
 .day-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
 .day-head h2 { margin: 0; font-size: 17px; font-weight: 700; }
 
-/* Stop Item */
-.stop-card {
-  background: var(--surface-hover); border: 1px solid var(--line); border-radius: 12px;
-  padding: 14px; margin-bottom: 12px; transition: transform 0.1s ease, box-shadow 0.1s ease;
+.challenge {
+  margin-top: 12px; background: rgba(52, 199, 89, 0.08); border: 1px solid rgba(52, 199, 89, 0.2);
+  padding: 11px 12px; border-radius: var(--radius-sm); font-size: 12px; line-height: 1.4; color: #1b5e20;
+}
+
+.stop {
+  margin-top: 12px; background: var(--surface-subtle); border: 1px solid var(--line);
+  border-radius: var(--radius-sm); padding: 14px;
 }
 .stop-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 .stop-time { font-size: 11px; font-weight: 600; color: var(--muted); background: var(--surface); padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line); }
 .stop-title { font-size: 14px; font-weight: 700; margin: 0 0 4px; color: var(--text); }
 .stop-desc { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.4; }
 
-/* Action Links inside Stops */
+/* Grid כפתורים לתחנות */
 .stop-links {
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);
 }
@@ -104,23 +111,23 @@ button, input, select { font: inherit; }
 }
 .stop-link.maps { background: #0066cc; }
 
-/* Bottom Navigation - Fixed Stable Dock */
+/* Bottom Navigation - מעוגן בצורה מושלמת בתחתית שמעבר לתוכן */
 .bottom-nav {
   position: fixed !important;
   z-index: 1000 !important;
   left: 16px !important;
   right: 16px !important;
-  bottom: 14px !important;
+  bottom: 16px !important;
   max-width: 440px !important;
   margin: 0 auto !important;
   padding: 6px !important;
-  height: 60px !important;
+  height: 56px !important;
   background: rgba(255, 255, 255, 0.95) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   backdrop-filter: blur(16px) !important;
   border: 1px solid var(--line-dark) !important;
   border-radius: 18px !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 4px !important;
@@ -129,7 +136,7 @@ button, input, select { font: inherit; }
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   font-size: 10px; font-weight: 600; color: var(--muted); padding: 2px; border-radius: 12px; cursor: pointer;
 }
-.bottom-nav a b { font-size: 16px; margin-bottom: 1px; }
+.bottom-nav a b { font-size: 15px; margin-bottom: 1px; }
 .bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: var(--surface-hover); }
 
 /* Modals */
@@ -150,15 +157,15 @@ button, input, select { font: inherit; }
 .emergency-btn { background: rgba(255,59,48,0.08); color: var(--red); border-color: rgba(255,59,48,0.2); }
 </style>
 </head>
-<body data-garda-version="V74-CleanFinal">
+<body data-garda-version="V75-FixedHeaderAndDock">
 
-<!-- Minimalist Header -->
+<!-- Minimalist Header מסודר ונקי עם כפתור מלון -->
 <header class="minimal-header">
   <div class="minimal-title">
     <h1>אגם גארדה וונציה</h1>
-    <p>טיול בת מצווה · 30.09 - 06.10.2026</p>
+    <p>טיול בת מצווה · 30.09 - 06.10.2026[cite: 1]</p>
   </div>
-  <div class="minimal-badge">Bio Agriturismo Vojon</div>
+  <a href="#hotel" class="minimal-badge">🏡 Bio Vojon[cite: 1]</a>
 </header>
 
 <main class="wrap">
@@ -177,7 +184,7 @@ button, input, select { font: inherit; }
   <div id="days"></div>
 </main>
 
-<!-- Bottom Navigation -->
+<!-- Bottom Navigation נעול יציב בתחתית מבלי להסתיר כלום -->
 <nav class="bottom-nav">
   <a class="active" id="navRoute" onclick="showDay(0)"><b>📅</b>מסלול</a>
   <a id="navAround" onclick="openAroundModal()"><b>📍</b>סביבי</a>
@@ -320,12 +327,8 @@ function openEmergencyModal() {
 
 function setActiveNav(activeIndex) {
   document.querySelectorAll('.bottom-nav a').forEach((a, i) => {
-    a.classList.toggle('active', i === indexToActive(i, activeIndex));
+    a.classList.toggle('active', i === activeIndex);
   });
-}
-
-function indexToActive(i, activeIndex) {
-  return i === activeIndex;
 }
 
 function searchNearby(term) {
