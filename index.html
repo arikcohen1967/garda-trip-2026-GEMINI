@@ -324,7 +324,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; box-shadow: var(--shadow); }
 </style>
 </head>
-<body data-garda-version="V107-LTRFixed">
+<body data-garda-version="V108-CleanFixed">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -732,39 +732,39 @@ async function openFullViewer(id) {
     if (x.isFlightInfo) {
       body.innerHTML = `<div dir="rtl" style="text-align:right; padding:15px; font-size:14px; line-height:1.8;">
         <h3 style="color:var(--accent); margin-top:0;">✈️ פרטי טיסה – ישראייר</h3>
-        <p><b>מספר הזמנה (Docket):</b> <span dir="ltr" style="display:inline-block">4623652</span>[cite: 1]</p>
+        <p><b>מספר הזמנה (Docket):</b> <span dir="ltr" style="display:inline-block">4623652</span></p>
         <p><b>טיסת הלוך (30.09.2026):</b><br>
         שעה: <span dir="ltr" style="display:inline-block">13:15</span> מתל אביב (טרמינל 1) -> <span dir="ltr" style="display:inline-block">16:05</span> בוורונה<br>
-        טיסה: <span dir="ltr" style="display:inline-block">6H 357</span> (מחלקת Q, Economy)[cite: 1]</p>
+        טיסה: <span dir="ltr" style="display:inline-block">6H 357</span> (מחלקת Q, Economy)</p>
         <p><b>טיסת חזור (06.10.2026):</b><br>
         שעה: <span dir="ltr" style="display:inline-block">21:35</span> מוורונה -> <span dir="ltr" style="display:inline-block">02:05</span> בתל אביב (07.10)<br>
-        טיסה: <span dir="ltr" style="display:inline-block">6H 352</span> (מחלקת Q, Economy)[cite: 1]</p>
+        טיסה: <span dir="ltr" style="display:inline-block">6H 352</span> (מחלקת Q, Economy)</p>
         <hr style="border:0; border-top:1px solid var(--line-dark); margin:15px 0;">
-        <b>נוסעים בהזמנה[cite: 1]:</b>
+        <b>נוסעים בהזמנה:</b>
         <ul style="padding-right:20px; margin:5px 0;">
-          <li>Arik Cohen (28/12/1967)[cite: 1]</li>
-          <li>Amit Cohen (01/07/2014)[cite: 1]</li>
-          <li>Yuly Cohen (01/07/2014)[cite: 1]</li>
-          <li>Lian Cohen (14/10/2015)[cite: 1]</li>
-          <li>Harel Vilnai Cohen (04/09/1997)[cite: 1]</li>
+          <li>Arik Cohen (28/12/1967)</li>
+          <li>Amit Cohen (01/07/2014)</li>
+          <li>Yuly Cohen (01/07/2014)</li>
+          <li>Lian Cohen (14/10/2015)</li>
+          <li>Harel Vilnai Cohen (04/09/1997)</li>
         </ul>
       </div>`;
     } else if (x.isInsuranceInfo) {
       body.innerHTML = `<div dir="rtl" style="text-align:right; padding:15px; font-size:14px; line-height:1.8;">
         <h3 style="color:var(--accent); margin-top:0;">🛡️ ביטוח נסיעות לחו"ל – AIG</h3>
-        <p><b>מספר פוליסה:</b> <span dir="ltr" style="display:inline-block">170270213826</span>[cite: 2]</p>
-        <p><b>מוקד חירום רפואי 24/7 (עברית)[cite: 2]:</b></p>
+        <p><b>מספר פוליסה:</b> <span dir="ltr" style="display:inline-block">170270213826</span></p>
+        <p><b>מוקד חירום רפואי 24/7 (עברית):</b></p>
         <ul style="padding-right:20px; margin:5px 0;">
-          <li>הודעות WhatsApp: <a href="https://wa.me/972549940911" target="_blank" style="color:var(--accent)" dir="ltr">+972-54-9940911</a>[cite: 2]</li>
-          <li>מוקד טלפוני ישיר: <a href="tel:+97239191155" style="color:var(--accent)" dir="ltr">+972-3-9191155</a>[cite: 2]</li>
-          <li>דוא"ל מוקד רפואי: Aig.medical@ima-mc.com[cite: 2]</li>
+          <li>הודעות WhatsApp: <a href="https://wa.me/972549940911" target="_blank" style="color:var(--accent)" dir="ltr">+972-54-9940911</a></li>
+          <li>מוקד טלפוני ישיר: <a href="tel:+97239191155" style="color:var(--accent)" dir="ltr">+972-3-9191155</a></li>
+          <li>דוא"ל מוקד רפואי: <span dir="ltr" style="unicode-bidi: embed;">Aig.medical@ima-mc.com</span></li>
         </ul>
         <hr style="border:0; border-top:1px solid var(--line-dark); margin:15px 0;">
-        <p><b>שירותים דיגיטליים[cite: 2]:</b></p>
+        <p><b>שירותים דיגיטליים:</b></p>
         <ul style="padding-right:20px; margin:5px 0;">
-          <li>אפליקציית Safe Travel לאיתור רופא והגשת תביעה: <a href="http://aig.co.il/t/1vdihFNt8K" target="_blank" style="color:var(--accent)">קישור לאפליקציה</a>[cite: 2]</li>
-          <li>אזור אישי להורדת מסמכי הפוליסה: <a href="https://www.aig.co.il/t/6b66x6" target="_blank" style="color:var(--accent)">כניסה לאזור האישי</a>[cite: 2]</li>
-          <li>ספר הפוליסה המלא ותנאי הביטוח: <a href="https://www.aig.co.il/t/9BU1a8" target="_blank" style="color:var(--accent)">צפייה בפוליסה</a>[cite: 2]</li>
+          <li>אפליקציית Safe Travel לאיתור רופא והגשת תביעה: <a href="http://aig.co.il/t/1vdihFNt8K" target="_blank" style="color:var(--accent)">קישור לאפליקציה</a></li>
+          <li>אזור אישי להורדת מסמכי הפוליסה: <a href="https://www.aig.co.il/t/6b66x6" target="_blank" style="color:var(--accent)">כניסה לאזור האישי</a></li>
+          <li>ספר הפוליסה המלא ותנאי הביטוח: <a href="https://www.aig.co.il/t/9BU1a8" target="_blank" style="color:var(--accent)">צפייה בפוליסה</a></li>
         </ul>
       </div>`;
     } else if ((x.type||'').startsWith('image/')) {
