@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Minimalist Pro" name="application-name"/>
+<meta content="Garda Trip Minimalist Pro Waze" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026 · Minimalist Pro</title>
 <style>
 :root {
@@ -102,9 +102,10 @@ button, input, select { font: inherit; }
   display: flex; gap: 8px; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line);
 }
 .stop-link {
-  font-size: 11px; font-weight: 600; color: var(--accent); background: var(--surface);
-  padding: 4px 10px; border-radius: 6px; border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700; color: #fff; background: #34c759;
+  padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 4px;
 }
+.stop-link.maps { background: #0066cc; }
 
 /* Bottom Navigation */
 .bottom-nav {
@@ -133,15 +134,15 @@ button, input, select { font: inherit; }
 .modal-close { position: absolute; top: 16px; left: 16px; border: 0; background: var(--surface-hover); width: 32px; height: 32px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
-<body data-garda-version="V70-MinimalistPro">
+<body data-garda-version="V71-WazeReady">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
   <div class="minimal-title">
     <h1>אגם גארדה וונציה</h1>
-    <p>טיול בת מצווה · 30.09 - 06.10.2026</p>
+    <p>טיול בת מצווה · 30.09 - 06.10.2026[cite: 1]</p>
   </div>
-  <div class="minimal-badge">Bio Agriturismo Vojon</div>
+  <div class="minimal-badge">Bio Agriturismo Vojon[cite: 1]</div>
 </header>
 
 <main class="wrap">
@@ -178,24 +179,24 @@ button, input, select { font: inherit; }
 <script>
 const tripDays = [
   {date:"2026-09-30", label:"רביעי · 30.09.2026", title:"נחיתה והגעה למלון", icon:"✈️", challenge:"לצלם את התמונה המשפחתית הראשונה באיטליה.", stops:[
-    {time:"16:00", name:"נחיתה בנמל התעופה وרונה", dest:"Verona Villafranca Airport", note:"איסוף מזוודות ורכב שכור."},
+    {time:"16:00", name:"נחיתה בנמל התעופה ורונה", dest:"Verona Villafranca Airport", note:"איסוף מזוודות ורכב שכור."},
     {time:"18:00", name:"נסיעה למלון", dest:"Bio Agriturismo Vojon, Ponti sul Mincio, Italy", note:"צ׳ק-אין, התארגנות וארוחת ערב רגועה באזור."}
   ]},
   {date:"2026-10-01", label:"חמישי · 01.10.2026", title:"Gardaland – יום פארק מלא", icon:"🎢", challenge:"לבחור יחד את שלושת המתקנים הכי טובים של היום.", stops:[
-    {time:"08:30", name:"יציאה מהמלון ל-Gardaland", dest:"Gardaland Resort", note:"לצאת מוקדם ולהגיע בנחת לפני הכניסה."},
-    {time:"09:00", name:"חניה וכניסה ל-Gardaland", dest:"Gardaland Parking", note:"לשמור באפליקציה את מיקום הרכב."},
+    {time:"08:30", name:"יציאה מהמלון ל-Gardaland", dest:"Gardaland Resort, Via Derna 4, Castelnuovo del Garda", note:"לצאת מוקדם ולהגיע בנחת לפני הכניסה."},
+    {time:"09:00", name:"חניה וכניסה ל-Gardaland", dest:"Gardaland Parking, Castelnuovo del Garda", note:"לשמור באפליקציה את מיקום הרכב."},
     {time:"13:00", name:"ארוחת צהריים והפסקה", dest:"Gardaland Resort", note:"הפסקה קצרה, מים וטעינת טלפונים."}
   ]},
   {date:"2026-10-02", label:"שישי · 02.10.2026", title:"סובב אגם גארדה + ראפטינג", icon:"🚣", challenge:"לצלם תמונה משפחתית אחת עם האגם ואחת מהראפטינג.", stops:[
     {time:"08:00", name:"יציאה צפונה לאורך החוף המזרחי", dest:"Malcesine, Italy", note:"נסיעה נופית לאורך האגם."},
-    {time:"14:30", name:"יציאה לראפטינג ב-Valdadige", dest:"Visit Valdadige, Volargne, Italy", note:"ראפטינג משפחתי על נהר האדיג׳ה."}
+    {time:"14:30", name:"יציאה לראפטינג ב-Valdadige", dest:"Visit Valdadige, Via San Martino, Volargne, Italy", note:"ראפטינג משפחתי על נהר האדיג׳ה."}
   ]},
   {date:"2026-10-03", label:"שבת · 03.10.2026", title:"Movieland + Medieval Times", icon:"🎬", challenge:"לצלם סלפי משפחתי שנראה כמו פוסטר של סרט.", stops:[
-    {time:"09:00", name:"יציאה ל-Movieland", dest:"Movieland The Hollywood Park", note:"יום סרטים ואקשן."},
-    {time:"20:00", name:"Medieval Times – מופע האבירים", dest:"Medieval Times Lazise", note:"מופע ערב וארוחה."}
+    {time:"09:00", name:"יציאה ל-Movieland", dest:"Movieland The Hollywood Park, Via Fossalta 58, Lazise", note:"יום סרטים ואקשן."},
+    {time:"20:00", name:"Medieval Times – מופע האבירים", dest:"Medieval Times, Via Fossalta 58, Lazise", note:"מופע ערב וארוחה."}
   ]},
   {date:"2026-10-04", label:"ראשון · 04.10.2026", title:"ונציה – יום מלא", icon:"🛶", challenge:"למצוא גשר קטן ויפה מחוץ למסלול הראשי.", stops:[
-    {time:"07:30", name:"יציאה מוקדמת מהמלון לוונציה", dest:"Venezia Tronchetto Parking", note:"חניית טרונקטו ומעבר למרכז."},
+    {time:"07:30", name:"יציאה מוקדמת מהמלון לוונציה", dest:"Venezia Tronchetto Parking, Isola Nova del Tronchetto, Venezia", note:"חניית טרונקטו ומעבר למרכז."},
     {time:"10:15", name:"כיכר סן מרקו", dest:"Piazza San Marco, Venezia", note:"סיור בכיכר ובסביבתה."}
   ]},
   {date:"2026-10-05", label:"שני · 05.10.2026", title:"Borghetto sul Mincio + Valeggio", icon:"🏘️", challenge:"לצלם תמונת בת מצווה מיוחדת בין טחנות המים.", stops:[
@@ -203,7 +204,7 @@ const tripDays = [
     {time:"12:30", name:"ארוחת צהריים – Tortellini", dest:"Valeggio sul Mincio, Italy", note:"טעימת הטורטליני המקומי."}
   ]},
   {date:"2026-10-06", label:"שלישי · 06.10.2026", title:"ורונה + הטיסה הביתה", icon:"❤️", challenge:"לבחור יחד את רגע השיא של כל הטיול.", stops:[
-    {time:"09:00", name:"צ׳ק-אאוט ויציאה לוורונה", dest:"Parcheggio Cittadella Verona", note:"סיור קצר בוורונה והבית של יוליה."},
+    {time:"09:00", name:"צ׳ק-אאוט ויציאה לוורונה", dest:"Parcheggio Cittadella, Piazza Cittadella, Verona", note:"סיור קצר בוורונה והבית של יוליה."},
     {time:"18:30", name:"החזרת הרכב בשדה התעופה", dest:"Verona Villafranca Airport", note:"טיסה חזרה הביתה."}
   ]}
 ];
@@ -230,8 +231,8 @@ function renderDays() {
             </div>
             <p class="stop-desc">${stop.note}</p>
             <div class="stop-links">
-              <a class="stop-link" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes" onclick="event.stopPropagation()">🚗 Waze</a>
-              <a class="stop-link" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}" onclick="event.stopPropagation()" target="_blank">📍 Maps</a>
+              <a class="stop-link" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes" onclick="event.stopPropagation()">🚗 Waze מוכן</a>
+              <a class="stop-link maps" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}" onclick="event.stopPropagation()" target="_blank">📍 Maps</a>
             </div>
           </div>
         `).join('')}
@@ -255,9 +256,9 @@ function openDetail(name, note, dest) {
   document.getElementById('modalBody').innerHTML = `
     <h3 style="margin-top:0; font-size:18px;">${name}</h3>
     <p style="color:var(--muted); font-size:14px; line-height:1.5;">${note}</p>
-    <p style="font-size:13px; font-weight:600; margin-top:16px;">יעד לניווט: ${dest}</p>
+    <p style="font-size:13px; font-weight:600; margin-top:16px;">יעד מדויק: ${dest}</p>
     <div style="display:flex; gap:10px; margin-top:20px;">
-      <a href="https://www.waze.com/ul?q=${encodeURIComponent(dest)}&navigate=yes" style="flex:1; padding:12px; background:var(--primary); color:#fff; text-align:center; border-radius:8px; font-weight:700; font-size:13px;">נווט ב-Waze</a>
+      <a href="https://www.waze.com/ul?q=${encodeURIComponent(dest)}&navigate=yes" style="flex:1; padding:12px; background:#34c759; color:#fff; text-align:center; border-radius:8px; font-weight:700; font-size:13px;">🚗 נווט ישירות ב-Waze</a>
       <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dest)}" target="_blank" style="flex:1; padding:12px; background:var(--surface-hover); color:var(--text); text-align:center; border-radius:8px; font-weight:700; font-size:13px; border:1px solid var(--line-dark);">פתח במפות</a>
     </div>
   `;
@@ -269,11 +270,11 @@ function closeDetailModal() {
 }
 
 function openTicketsModal() {
-  alert('ארנק הכרטיסים ייפתח כאן.');
+  alert('ארנק הכרטיסים יופיע כאן.');
 }
 
 function openEmergencyModal() {
-  alert('מספרי חירום: 112');
+  alert('מספרי חירום: חירום כללי באיטליה - 112');
 }
 
 document.addEventListener('DOMContentLoaded', renderDays);
