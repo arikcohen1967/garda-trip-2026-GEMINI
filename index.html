@@ -7,8 +7,8 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Locked Bottom Nav" name="application-name"/>
-<title>טיול בת מצווה – אגם גארדה וונציה 2026 · Minimalist Pro</title>
+<meta content="Garda Trip Clean Light Final" name="application-name"/>
+<title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
   --bg: #fafafa;
@@ -21,7 +21,8 @@
   --primary: #18181b;
   --primary-text: #ffffff;
   --accent: #2563eb;
-  --green: #16a34a;
+  --green: #34c759;
+  --red: #ff3b30;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.06);
   --radius: 16px;
@@ -34,8 +35,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
-  /* מרווח תחתון מובטח כדי ששום תוכן לא יוסתר מאחורי הסרגל הקבוע */
-  padding-bottom: calc(120px + env(safe-area-inset-bottom)) !important;
+  padding-bottom: calc(120px + env(safe-area-inset-bottom));
   -webkit-font-smoothing: antialiased;
 }
 
@@ -44,25 +44,25 @@ button, input, select { font: inherit; }
 
 /* Minimalist Header */
 .minimal-header {
-  padding: calc(24px + env(safe-area-inset-top)) 20px 16px;
+  padding: calc(20px + env(safe-area-inset-top)) 20px 16px;
   background: var(--surface);
   border-bottom: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
-.minimal-title h1 { font-size: 20px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.02em; }
-.minimal-title p { font-size: 13px; color: var(--muted); margin: 0; }
+.minimal-title h1 { font-size: 19px; font-weight: 700; margin: 0 0 2px; letter-spacing: -0.02em; }
+.minimal-title p { font-size: 12px; color: var(--muted); margin: 0; }
 .minimal-badge {
   background: var(--surface-hover); border: 1px solid var(--line-dark);
   padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--text);
 }
 
-.wrap { padding: 20px; max-width: 600px; margin: auto; }
+.wrap { padding: 16px; max-width: 600px; margin: auto; }
 
 /* Clean Day Tabs */
 .day-tabs {
-  display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 20px;
+  display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 16px;
   scrollbar-width: none;
 }
 .day-tabs::-webkit-scrollbar { display: none; }
@@ -76,44 +76,41 @@ button, input, select { font: inherit; }
 /* Day Card & Stops */
 .day-card {
   background: var(--surface); border: 1px solid var(--line-dark); border-radius: var(--radius);
-  margin-bottom: 20px; padding: 20px; box-shadow: var(--shadow);
+  margin-bottom: 20px; padding: 18px; box-shadow: var(--shadow);
   display: none;
 }
 .day-card.active-day { display: block; }
 
-.day-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.day-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
 .day-head h2 { margin: 0; font-size: 17px; font-weight: 700; }
 
 /* Stop Item */
 .stop-card {
   background: var(--surface-hover); border: 1px solid var(--line); border-radius: 12px;
-  padding: 14px; margin-bottom: 12px; cursor: pointer; transition: transform 0.1s ease, box-shadow 0.1s ease;
-  user-select: none;
+  padding: 14px; margin-bottom: 12px; transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
-.stop-card:hover { border-color: var(--line-dark); box-shadow: var(--shadow-hover); }
-.stop-card:active { transform: scale(0.99); }
-
 .stop-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 .stop-time { font-size: 11px; font-weight: 600; color: var(--muted); background: var(--surface); padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line); }
 .stop-title { font-size: 14px; font-weight: 700; margin: 0 0 4px; color: var(--text); }
 .stop-desc { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.4; }
 
+/* Action Links inside Stops */
 .stop-links {
-  display: flex; gap: 8px; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);
 }
 .stop-link {
-  font-size: 11px; font-weight: 700; color: #fff; background: #34c759;
-  padding: 6px 12px; border-radius: 8px; display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; font-weight: 700; color: #fff; background: #34c759;
+  padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center;
 }
 .stop-link.maps { background: #0066cc; }
 
-/* Bottom Navigation - נעול יציב בתחתית המסך במסגרת ה-Safe Area */
+/* Bottom Navigation - Fixed Stable Dock */
 .bottom-nav {
   position: fixed !important;
   z-index: 1000 !important;
   left: 16px !important;
   right: 16px !important;
-  bottom: max(16px, env(safe-area-inset-bottom)) !important;
+  bottom: 14px !important;
   max-width: 440px !important;
   margin: 0 auto !important;
   padding: 6px !important;
@@ -127,7 +124,6 @@ button, input, select { font: inherit; }
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 4px !important;
-  will-change: transform !important;
 }
 .bottom-nav a {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -137,35 +133,32 @@ button, input, select { font: inherit; }
 .bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: var(--surface-hover); }
 
 /* Modals */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
 .modal.open { display: flex; }
 .modal-content {
   background: var(--surface); width: 100%; max-width: 440px; border-radius: var(--radius);
   padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid var(--line-dark);
-  position: relative; animation: scaleUp 0.2s ease;
+  position: relative;
 }
-@keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .modal-close { position: absolute; top: 16px; left: 16px; border: 0; background: var(--surface-hover); width: 32px; height: 32px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-/* Modal Grids */
 .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
 .modal-btn {
   padding: 14px; border-radius: 12px; background: var(--surface-hover); border: 1px solid var(--line-dark);
   font-weight: 700; font-size: 13px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text);
 }
-.modal-btn:hover { background: var(--line); }
 .emergency-btn { background: rgba(255,59,48,0.08); color: var(--red); border-color: rgba(255,59,48,0.2); }
 </style>
 </head>
-<body data-garda-version="V73-LockedNav">
+<body data-garda-version="V74-CleanFinal">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
   <div class="minimal-title">
     <h1>אגם גארדה וונציה</h1>
-    <p>טיול בת מצווה · 30.09 - 06.10.2026[cite: 1]</p>
+    <p>טיול בת מצווה · 30.09 - 06.10.2026</p>
   </div>
-  <div class="minimal-badge">Bio Agriturismo Vojon[cite: 1]</div>
+  <div class="minimal-badge">Bio Agriturismo Vojon</div>
 </header>
 
 <main class="wrap">
@@ -184,7 +177,7 @@ button, input, select { font: inherit; }
   <div id="days"></div>
 </main>
 
-<!-- Bottom Navigation (נעול למטה בצורה מושלמת) -->
+<!-- Bottom Navigation -->
 <nav class="bottom-nav">
   <a class="active" id="navRoute" onclick="showDay(0)"><b>📅</b>מסלול</a>
   <a id="navAround" onclick="openAroundModal()"><b>📍</b>סביבי</a>
@@ -193,13 +186,6 @@ button, input, select { font: inherit; }
 </nav>
 
 <!-- Modals -->
-<div class="modal" id="detailModal" onclick="if(event.target===this)closeModal('detailModal')">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
-    <div id="modalBody"></div>
-  </div>
-</div>
-
 <div class="modal" id="aroundModal" onclick="if(event.target===this)closeModal('aroundModal')">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal('aroundModal')">✕</button>
@@ -279,20 +265,20 @@ function renderDays() {
           <h2>${day.icon} ${day.title}</h2>
         </div>
       </div>
-      <div style="font-size:12px; color:var(--muted); margin-bottom:12px; background:var(--surface-hover); padding:8px 12px; border-radius:8px;">
+      <div class="challenge">
         <b>אתגר:</b> ${day.challenge}
       </div>
       <div>
         ${day.stops.map((stop, si) => `
-          <div class="stop-card" ondblclick="openDetail('${stop.name}', '${stop.note}', '${stop.dest}')" title="לחץ כפולה לפרטים">
+          <div class="stop-card">
             <div class="stop-top">
               <h3 class="stop-title">${stop.name}</h3>
               <span class="stop-time">${stop.time}</span>
             </div>
             <p class="stop-desc">${stop.note}</p>
             <div class="stop-links">
-              <a class="stop-link" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes" onclick="event.stopPropagation()">🚗 Waze מוכן</a>
-              <a class="stop-link maps" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}" onclick="event.stopPropagation()" target="_blank">📍 Maps</a>
+              <a class="stop-link" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">🚗 Waze מוכן</a>
+              <a class="stop-link maps" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}" target="_blank">📍 Maps</a>
             </div>
           </div>
         `).join('')}
@@ -311,19 +297,6 @@ function showDay(index) {
   });
   setActiveNav(0);
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function openDetail(name, note, dest) {
-  document.getElementById('modalBody').innerHTML = `
-    <h3 style="margin-top:0; font-size:18px;">${name}</h3>
-    <p style="color:var(--muted); font-size:14px; line-height:1.5;">${note}</p>
-    <p style="font-size:13px; font-weight:600; margin-top:16px;">יעד מדויק: ${dest}</p>
-    <div style="display:flex; gap:10px; margin-top:20px;">
-      <a href="https://www.waze.com/ul?q=${encodeURIComponent(dest)}&navigate=yes" style="flex:1; padding:12px; background:#34c759; color:#fff; text-align:center; border-radius:8px; font-weight:700; font-size:13px;">🚗 נווט ב-Waze</a>
-      <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dest)}" target="_blank" style="flex:1; padding:12px; background:var(--surface-hover); color:var(--text); text-align:center; border-radius:8px; font-weight:700; font-size:13px; border:1px solid var(--line-dark);">פתח במפות</a>
-    </div>
-  `;
-  document.getElementById('detailModal').classList.add('open');
 }
 
 function closeModal(modalId) {
@@ -347,8 +320,12 @@ function openEmergencyModal() {
 
 function setActiveNav(activeIndex) {
   document.querySelectorAll('.bottom-nav a').forEach((a, i) => {
-    a.classList.toggle('active', i === activeIndex);
+    a.classList.toggle('active', i === indexToActive(i, activeIndex));
   });
+}
+
+function indexToActive(i, activeIndex) {
+  return i === activeIndex;
 }
 
 function searchNearby(term) {
