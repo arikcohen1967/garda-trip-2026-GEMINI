@@ -7,8 +7,8 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Culinary Edition" name="application-name"/>
-<title>טיול בת מצווה – אגם גארדה וונציה 2026 · עם המלצות קולינריות</title>
+<meta content="Garda Trip Waze Branded Edition" name="application-name"/>
+<title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
   --bg: #fafafa;
@@ -22,6 +22,7 @@
   --primary-text: #ffffff;
   --accent: #2563eb;
   --green: #34c759;
+  --waze: #0099ff; /* הצבע הרשמי של וואז */
   --red: #ff3b30;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   --radius: 16px;
@@ -122,23 +123,28 @@ button, input, select { font: inherit; }
 
 .stop {
   margin-top: 14px; background: var(--surface-hover); border: 1px solid var(--line);
-  border-radius: 12px; padding: 14px; cursor: pointer; transition: transform 0.1s ease;
+  border-radius: 12px; padding: 14px;
 }
-.stop:active { transform: scale(0.99); }
 .stop-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .time { font-size: 11px; font-weight: 700; color: var(--text); background: var(--surface); padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); }
 .stop-title { font-size: 15px; font-weight: 700; margin: 0; color: var(--text); }
-.stop-desc { font-size: 12px; color: var(--muted); margin: 6px 0 12px; line-height: 1.4; }
+.stop-desc { font-size: 12px; color: var(--muted); margin: 6px 0 10px; line-height: 1.4; }
 
 .food-tip {
-  font-size: 11px; background: rgba(255, 149, 0, 0.1); color: #b45309; padding: 6px 10px; border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255, 149, 0, 0.2);
+  font-size: 12px; background: rgba(255, 149, 0, 0.1); color: #b45309; padding: 10px; border-radius: 10px; margin-bottom: 12px; border: 1px solid rgba(255, 149, 0, 0.2);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.food-waze-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  background: var(--waze); color: #fff; font-weight: 700; font-size: 11px; padding: 6px 12px; border-radius: 8px; align-self: flex-start;
+  text-decoration: none;
 }
 
 .stop-links {
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line);
 }
 .stop-link {
-  font-size: 12px; font-weight: 700; color: #fff; background: #34c759;
+  font-size: 12px; font-weight: 700; color: #fff; background: var(--waze); /* Waze branded color */
   padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center; cursor: pointer;
 }
 .stop-link.maps { background: #0066cc; }
@@ -184,7 +190,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V80-CulinaryEdition">
+<body data-garda-version="V81-CulinaryWaze">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -293,34 +299,34 @@ button, input, select { font: inherit; }
 const tripDays = [
   {date:"2026-09-30", label:"רביעי · 30.09.2026", title:"נחיתה והגעה למלון", icon:"✈️", challenge:"לצלם את התמונה המשפחתית הראשונה באיטליה.", stops:[
     {time:"16:00", name:"נחיתה בנמל התעופה وרונה", dest:"Verona Villafranca Airport", note:"איסוף מזוודות ורכב שכור."},
-    {time:"18:00", name:"נסיעה למלון וארוחת ערב", dest:"Bio Agriturismo Vojon, Ponti sul Mincio, Italy", note:"צ׳ק-אין, התארגנות וארוחת ערב פיצה/פסטה משפחתית במסעדה מקומית סמוכה (כמו Pizzeria Trattoria al Sole) + גלידה ראשונה בפסקיירה.", food:"🍕 המלצה: פיצה מהטאבון + גלידת פיסטוק בפסקיירה."}
+    {time:"18:00", name:"נסיעה למלון וארוחת ערב", dest:"Bio Agriturismo Vojon, Ponti sul Mincio, Italy", note:"צ׳ק-אין, התארגנות וארוחת ערב פיצה/פסטה משפחתית במסעדה מקומית סמוכה + גלידה ראשונה בפסקיירה.", food:{name:"🍕 פיצריה מקומית + גלידה בפסקיירה", dest:"Peschiera del Garda, Italy"}}
   ]},
   {date:"2026-10-01", label:"חמישי · 01.10.2026", title:"Gardaland – יום פארק מלא", icon:"🎢", challenge:"לבחור יחד את שלושת המתקנים הכי טובים של היום.", stops:[
     {time:"08:30", name:"יציאה מהמלון ל-Gardaland", dest:"Gardaland Resort, Via Derna 4, Castelnuovo del Garda", note:"לצאת מוקדם ולהגיע בנחת לפני הכניסה."},
     {time:"09:00", name:"חניה וכניסה ל-Gardaland", dest:"Gardaland Parking, Castelnuovo del Garda", note:"לשמור באפליקציה את מיקום הרכב."},
-    {time:"13:00", name:"ארוחת צהריים בפארק", dest:"Gardaland Resort", note:"אוכל מהיר, פיצות והמבורגרים בתוך הפארק (Aladino Pizza & Burger).", food:"🍔 המלצה: ארוחת צהריים מהירה בתוך הפארק."},
-    {time:"19:00", name:"ארוחת ערב", dest:"Osteria Sottoportego, Peschiera del Garda", note:"פסטות מעולות ואווירה על המים בפסקיירה דל גארדה.", food:"🍝 המלצה: פסטה טרייה על המים בעיר העתיקה."}
+    {time:"13:00", name:"ארוחת צהריים בפארק", dest:"Gardaland Resort", note:"אוכל מהיר, פיצות והמבורגרים בתוך הפארק.", food:{name:"🍔 Aladino Pizza & Burger (בתוך הפארק)", dest:"Gardaland Resort"}},
+    {time:"19:00", name:"ארוחת ערב", dest:"Osteria Sottoportego, Peschiera del Garda", note:"פסטות מעולות ואווירה על המים בפסקיירה דל גארדה.", food:{name:"🍝 Osteria Sottoportego", dest:"Osteria Sottoportego, Peschiera del Garda"}}
   ]},
   {date:"2026-10-02", label:"שישי · 02.10.2026", title:"סובב אגם גארדה + ראפטינג", icon:"🚣", challenge:"לצלם תמונה משפחתית אחת עם האגם ואחת מהראפטינג.", stops:[
     {time:"08:00", name:"יציאה צפונה לאורך החוף המזרחי", dest:"Malcesine, Italy", note:"נסיעה נופית ועצירה במלצ׳סינה."},
-    {time:"12:00", name:"ארוחת צהריים בלימונה", dest:"Limone sul Garda, Italy", note:"עצירה בלימונה לספוג נוף ואוכל טוב.", food:"🍕 המלצה: פיצה קריספית מול האגם במסעדת La Terrazza + גלידת לימון מקומית."},
+    {time:"12:00", name:"ארוחת צהריים בלימונה", dest:"Limone sul Garda, Italy", note:"עצירה בלימונה לספוג נוף ואוכל טוב.", food:{name:"🍕 Ristorante Pizzeria La Terrazza + גלידת לימון", dest:"Limone sul Garda, Italy"}},
     {time:"14:30", name:"יציאה לראפטינג ב-Valdadige", dest:"Visit Valdadige, Via San Martino, Volargne, Italy", note:"ראפטינג משפחתי על נהר האדיג׳ה."}
   ]},
   {date:"2026-10-03", label:"שבת · 03.10.2026", title:"Movieland + Medieval Times", icon:"🎬", challenge:"לצלם סלפי משפחתי שנראה כמו פוסטר של סרט.", stops:[
     {time:"09:00", name:"יציאה ל-Movieland", dest:"Movieland The Hollywood Park, Via Fossalta 58, Lazise", note:"יום סרטים ואקשן."},
-    {time:"20:00", name:"Medieval Times – מופע האבירים", dest:"Medieval Times, Via Fossalta 58, Lazise", note:"מופע ערב וארוחה שחיתות בלי סכו״ם (עם הידיים!).", food:"🍗 המלצה: חוויית אכילה באצבעות במופע האבירים (הבנות יעופו על זה!)."}
+    {time:"20:00", name:"Medieval Times – מופע האבירים", dest:"Medieval Times, Via Fossalta 58, Lazise", note:"מופע ערב וארוחה שחיתות בלי סכו״ם (עם הידיים!).", food:{name:"🍗 Medieval Times (אכילה בידיים!)", dest:"Medieval Times, Via Fossalta 58, Lazise"}}
   ]},
   {date:"2026-10-04", label:"ראשון · 04.10.2026", title:"ונציה – יום מלא", icon:"🛶", challenge:"למצוא גשר קטן ויפה מחוץ למסלול הראשי.", stops:[
     {time:"07:30", name:"יציאה מוקדמת מהמלון לוונציה", dest:"Venezia Tronchetto Parking, Isola Nova del Tronchetto, Venezia", note:"חניית טרונקטו ומעבר למרכז."},
-    {time:"12:30", name:"ארוחת צהריים בוונציה", dest:"Pizzeria L'Anfora, Venezia", note:"פיצרייה שכונתית מעולה הרחק מההמונים של סן מרקו.", food:"🍕 המלצה: פיצה משפחתית אמיתית + עצירת גלידה חובה ב-Suso Gelatoteca!"}
+    {time:"12:30", name:"ארוחת צהריים בוונציה", dest:"Pizzeria L'Anfora, Venezia", note:"פיצרייה שכונתית מעולה הרחק מההמונים של סן מרקו.", food:{name:"🍕 Pizzeria L'Anfora + גלידת Suso", dest:"Calle Larga dei Bari, 1223, Venezia"}}
   ]},
   {date:"2026-10-05", label:"שני · 05.10.2026", title:"Borghetto sul Mincio + Valeggio", icon:"🏘️", challenge:"לצלם תמונת בת מצווה מיוחדת בין טחנות המים.", stops:[
     {time:"10:00", name:"Borghetto – הכפר והטחנות", dest:"Borghetto sul Mincio, Italy", note:"טיול רגלי בין הנהר והגשרים."},
-    {time:"12:30", name:"ארוחת צהריים – הטורטליני המפורסם", dest:"Ristorante Alla Borsa, Valeggio sul Mincio, Italy", note:"הבית המקורי של כיסוני הטורטליני המכונים 'קשר האהבה'.", food:"🍝 המלצה: פסטה טורטליני ביתית מסורתית + גלידה בטיילת הנהר."}
+    {time:"12:30", name:"ארוחת צהריים – הטורטליני המפורסם", dest:"Ristorante Alla Borsa, Valeggio sul Mincio, Italy", note:"הבית המקורי של כיסוני הטורטליני המכונים 'קשר האהבה'.", food:{name:"🍝 Ristorante Alla Borsa (טורטליני מקורי)", dest:"Ristorante Alla Borsa, Valeggio sul Mincio"}}
   ]},
   {date:"2026-10-06", label:"שלישי · 06.10.2026", title:"ורונה + הטיסה הביתה", icon:"❤️", challenge:"לבחור יחד את רגע השיא של כל הטיול.", stops:[
     {time:"09:00", name:"צ׳ק-אאוט ויציאה לוורונה", dest:"Parcheggio Cittadella, Piazza Cittadella, Verona", note:"סיור קצר בוורונה והבית של יוליה."},
-    {time:"13:00", name:"ארוחת צהריים מסכמת בוורונה", dest:"Pizzeria Saporè Downtown, Verona", note:"ארוחת פרידה מעולה מאיטליה עם פיצות גורמה ופסטות.", food:"🍕 המלצה: פיצה גורמה אחרונה וגלידה ב-Grom לפני השדה."},
+    {time:"13:00", name:"ארוחת צהריים מסכמת בוורונה", dest:"Pizzeria Saporè Downtown, Verona", note:"ארוחת פרידה מעולה מאיטליה עם פיצות גורמה ופסטות.", food:{name:"🍕 Pizzeria Saporè Downtown", dest:"Pizzeria Saporè, Verona"}},
     {time:"18:30", name:"החזרת הרכב בשדה התעופה", dest:"Verona Villafranca Airport", note:"טיסה חזרה הביתה."}
   ]}
 ];
@@ -346,7 +352,12 @@ function renderDays() {
               <h3 class="stop-title">${stop.name}</h3>
             </div>
             <p class="stop-desc">${stop.note}</p>
-            ${stop.food ? `<div class="food-tip">${stop.food}</div>` : ''}
+            ${stop.food ? `
+              <div class="food-tip">
+                <span><b>המלצה קולינרית:</b> ${stop.food.name}</span>
+                <a class="food-waze-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.food.dest)}&navigate=yes">🚗 נווט למסעדה ב-Waze</a>
+              </div>
+            ` : ''}
             <div class="stop-links">
               <a class="stop-link" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">🚗 Waze מוכן</a>
               <a class="stop-link maps" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}" target="_blank">📍 Maps</a>
@@ -471,7 +482,7 @@ async function saveTicketFiles(fileList) {
     tx.objectStore('files').add({ folder, title: title || file.name, name: file.name, type: file.type, size: file.size, created: Date.now(), blob: file });
     tx.oncomplete = resolve; tx.onerror = () => reject(tx.error);
   })));
-  document.getElementById('ticketTitle').value = '';
+  document.getElementById('ticketTitle').value = ' ';
   document.getElementById('ticketUploadBox').style.display = 'none';
   renderTicketFiles();
 }
