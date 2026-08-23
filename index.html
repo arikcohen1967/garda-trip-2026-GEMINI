@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Ultra Pro Edition" name="application-name"/>
+<meta content="Garda Trip Booking Style Edition" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -23,7 +23,7 @@
   --accent: #0071e3;
   --green: #34c759;
   --red: #ff3b30;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
   --radius: 20px;
 }
 
@@ -73,7 +73,7 @@ button, input, select { font: inherit; }
   white-space: nowrap; flex-shrink: 0; box-shadow: var(--shadow);
 }
 
-/* --- תפריט צד מודרני (Sidebar Pro) --- */
+/* Sidebar Pro */
 .sidebar-overlay {
   position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); z-index: 2500; display: none; backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px); transition: opacity 0.3s ease;
@@ -180,7 +180,7 @@ button, input, select { font: inherit; }
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(6px); padding: 20px; }
 .modal.open { display: flex; }
 .modal-content {
-  background: var(--surface); width: 100%; max-width: 500px; max-height: 90vh; overflow-y: auto; border-radius: var(--radius);
+  background: var(--surface); width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; border-radius: var(--radius);
   padding: 26px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); border: 1px solid var(--line-dark);
   position: relative;
 }
@@ -195,7 +195,7 @@ button, input, select { font: inherit; }
 .modal-btn:hover { background: var(--bg); }
 .emergency-btn { background: rgba(255,59,48,0.06); color: var(--red); border-color: rgba(255,59,48,0.25); }
 
-/* --- ארנק כרטיסים מעוצב ברמה הגבוהה ביותר (Tickets Wallet Ultra Pro) --- */
+/* --- ארנק כרטיסים בסגנון Booking מודרני (2 טורים מקבילים) --- */
 .wallet-container { display: flex; flex-direction: column; gap: 18px; }
 .wallet-header-box { border-bottom: 1px solid var(--line-dark); padding-bottom: 14px; }
 .wallet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -207,10 +207,9 @@ button, input, select { font: inherit; }
 .wallet-main-btn.secondary { background: var(--surface); color: var(--text); }
 .wallet-main-btn:hover { opacity: 0.92; transform: translateY(-1px); }
 
-/* כרטיס הוספה מעוצב בסגנון Apple */
+/* אזור העלאת כרטיסים מעוצב */
 .ticket-upload-box {
-  background: linear-gradient(135deg, #f8f8fa 0%, #eeeeih 100%); background-color: #f2f2f7;
-  padding: 20px; border-radius: 18px; border: 1px solid var(--line-dark);
+  background-color: #f2f2f7; padding: 20px; border-radius: 18px; border: 1px solid var(--line-dark);
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 12px;
 }
 .ticket-upload-box label { font-size: 12px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 4px; }
@@ -238,16 +237,78 @@ button, input, select { font: inherit; }
 .ticket-folder.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
 .ticket-folder.active small { color: rgba(255,255,255,0.75); }
 
-.ticket-file {
-  display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 14px;
-  padding: 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line-dark);
-  margin-top: 10px; cursor: pointer; box-shadow: var(--shadow); transition: all 0.2s ease;
+/* רשת טורים מקבילים (2 טורים) לכרטיסים בסגנון Booking */
+.ticket-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
 }
-.ticket-file:hover { background: var(--surface-hover); border-color: var(--accent); }
-.ticket-thumb { width: 56px; height: 56px; border-radius: 12px; background: #e5e5ea; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 24px; border: 1px solid var(--line); }
+
+.ticket-file {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--line-dark);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+  position: relative;
+}
+.ticket-file:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+.ticket-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ticket-thumb {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  background: #e5e5ea;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+}
 .ticket-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.ticket-info b { display: block; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); margin-bottom: 3px; font-weight: 700; }
-.ticket-info small { color: var(--muted); font-size: 12px; font-weight: 500; }
+
+.ticket-info {
+  overflow: hidden;
+}
+.ticket-info b {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+.ticket-info small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.ticket-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  font-size: 11px;
+  color: var(--muted);
+}
 
 /* Full Screen Viewer */
 #fullViewerModal { z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
@@ -257,7 +318,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow); }
 </style>
 </head>
-<body data-garda-version="V97-UltraPro">
+<body data-garda-version="V98-BookingCards">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -271,7 +332,7 @@ button, input, select { font: inherit; }
   <a href="#hotel" class="minimal-badge">🏡 Bio Vojon</a>
 </header>
 
-<!-- Sidebar Drawer Ultra Pro -->
+<!-- Sidebar Drawer -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
@@ -329,9 +390,9 @@ button, input, select { font: inherit; }
   </div>
 </div>
 
-<!-- Tickets Wallet Modal Ultra Pro -->
+<!-- Tickets Wallet Modal Booking Style -->
 <div class="modal" id="ticketsModal" onclick="if(event.target===this)closeModal('ticketsModal')">
-  <div class="modal-content">
+  <div class="modal-content" style="max-width: 580px;">
     <button class="modal-close" onclick="closeModal('ticketsModal')">✕</button>
     
     <div class="wallet-container">
@@ -594,15 +655,21 @@ async function renderTicketFiles() {
   const files = await getTicketFiles(ticketActiveFolder);
   if (!files.length) { list.innerHTML = '<div style="color:var(--muted);text-align:center;padding:24px;font-size:13px">אין עדיין כרטיסים בתקייה זו.<br><small style="opacity:0.8;">(לחיצה כפולה על כרטיס תפתח אותו למסך מלא)</small></div>'; return; }
   
-  list.innerHTML = files.map(x => `
+  list.innerHTML = `<div class="ticket-grid-container">` + files.map(x => `
     <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ כפולה לפתיחה מלאה">
-      <div class="ticket-thumb">${(x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'}</div>
-      <div class="ticket-info"><b>${x.title || x.name}</b><small>${Math.round(x.size/1024)} KB · לחץ כפולה למסך מלא</small></div>
-      <div>
-        <button onclick="event.stopPropagation(); deleteTicketFile(${x.id})" style="background:rgba(255,59,48,0.1); color:var(--red); border:0; padding:7px 12px; border-radius:10px; cursor:pointer; font-size:12px; font-weight:700;">מחק</button>
+      <div class="ticket-card-top">
+        <div class="ticket-thumb">${(x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'}</div>
+        <div class="ticket-info">
+          <b>${x.title || x.name}</b>
+          <small>${Math.round(x.size/1024)} KB · לחיצה כפולה</small>
+        </div>
+      </div>
+      <div class="ticket-card-footer">
+        <span>הצג מסמך</span>
+        <button onclick="event.stopPropagation(); deleteTicketFile(${x.id})" style="background:rgba(255,59,48,0.08); color:var(--red); border:0; padding:4px 8px; border-radius:6px; cursor:pointer; font-size:11px; font-weight:700;">מחק</button>
       </div>
     </div>
-  `).join('');
+  `).join('') + `</div>`;
 }
 
 async function openFullViewer(id) {
