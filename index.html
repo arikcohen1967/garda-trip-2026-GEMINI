@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Enhanced Borders" name="application-name"/>
+<meta content="Garda Trip Waze Icon Edition" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -22,7 +22,8 @@
   --primary-text: #ffffff;
   --accent: #2563eb;
   --green: #34c759;
-  --waze: #0099ff;
+  --waze-blue: #33ccff; /* התכלת המאפיין את Waze */
+  --maps-blue: #007aff;
   --red: #ff3b30;
   --shadow: 0 4px 16px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
   --radius: 16px;
@@ -46,7 +47,7 @@ button, input, select { font: inherit; }
 .minimal-header {
   padding: calc(18px + env(safe-area-inset-top)) 16px 14px;
   background: var(--surface);
-  border-bottom: 1px solid var(--line-dark);
+  border-bottom: 1.5px solid var(--line-dark);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -62,13 +63,13 @@ button, input, select { font: inherit; }
 
 .header-actions { display: flex; align-items: center; gap: 8px; }
 .menu-btn {
-  background: var(--surface); border: 1px solid var(--line-dark);
+  background: var(--surface); border: 1.5px solid var(--line-dark);
   width: 42px; height: 42px; border-radius: 12px; font-size: 20px; font-weight: 700; cursor: pointer;
   display: flex; align-items: center; justify-content: center; color: var(--text);
   box-shadow: var(--shadow);
 }
 .minimal-badge {
-  background: var(--surface); border: 1px solid var(--line-dark);
+  background: var(--surface); border: 1.5px solid var(--line-dark);
   padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--text);
   white-space: nowrap; flex-shrink: 0;
   box-shadow: var(--shadow);
@@ -84,16 +85,16 @@ button, input, select { font: inherit; }
   position: fixed; top: 0; bottom: 0; right: -280px; width: 260px; background: var(--surface);
   z-index: 2600; box-shadow: -10px 0 30px rgba(0,0,0,0.15); transition: right 0.3s ease;
   padding: calc(20px + env(safe-area-inset-top)) 20px 20px; display: flex; flex-direction: column; gap: 10px;
-  border-left: 1px solid var(--line-dark);
+  border-left: 1.5px solid var(--line-dark);
 }
 .sidebar.open { right: 0; }
-.sidebar h3 { font-size: 16px; margin: 0 0 10px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+.sidebar h3 { font-size: 16px; margin: 0 0 10px; border-bottom: 1px solid var(--line-dark); padding-bottom: 10px; }
 .sidebar-btn {
-  background: var(--surface); border: 1px solid var(--line-dark); padding: 12px 14px;
+  background: var(--surface); border: 1.5px solid var(--line-dark); padding: 12px 14px;
   border-radius: 12px; font-weight: 700; font-size: 13px; text-align: right; cursor: pointer;
   display: flex; align-items: center; gap: 10px; color: var(--text); box-shadow: var(--shadow);
 }
-.sidebar-btn:hover { background: var(--surface-hover); }
+.sidebar-btn:hover { background: var(--bg); }
 
 .wrap { padding: 16px; max-width: 600px; margin: auto; }
 
@@ -105,12 +106,12 @@ button, input, select { font: inherit; }
 .day-tabs::-webkit-scrollbar { display: none; }
 .day-tab {
   flex: 0 0 auto; padding: 9px 16px; border-radius: 12px; background: var(--surface);
-  border: 1px solid var(--line-dark); color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer;
+  border: 1.5px solid var(--line-dark); color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer;
   transition: all 0.2s ease; box-shadow: var(--shadow);
 }
 .day-tab.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 
-/* Day Card & Stops מובלטים ומקצועיים */
+/* Day Card & Stops */
 .day-card {
   background: var(--surface); border: 1.5px solid var(--line-dark); border-radius: var(--radius);
   margin-bottom: 20px; padding: 20px; box-shadow: var(--shadow);
@@ -118,11 +119,11 @@ button, input, select { font: inherit; }
 }
 .day-card.active-day { display: block; }
 
-.day-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line-dark); }
+.day-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1.5px solid var(--line-dark); }
 .day-head h2 { margin: 0; font-size: 17px; font-weight: 700; }
 
 .challenge {
-  margin-top: 12px; background: rgba(52, 199, 89, 0.08); border: 1px solid rgba(52, 199, 89, 0.3);
+  margin-top: 12px; background: rgba(52, 199, 89, 0.08); border: 1.5px solid rgba(52, 199, 89, 0.3);
   padding: 12px 14px; border-radius: 12px; font-size: 12px; line-height: 1.4; color: #1b5e20;
 }
 
@@ -131,29 +132,29 @@ button, input, select { font: inherit; }
   border-radius: 14px; padding: 16px; box-shadow: var(--shadow);
 }
 .stop-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.time { font-size: 11px; font-weight: 700; color: var(--text); background: var(--bg); padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line-dark); }
+.time { font-size: 11px; font-weight: 700; color: var(--text); background: var(--bg); padding: 4px 10px; border-radius: 8px; border: 1.5px solid var(--line-dark); }
 .stop-title { font-size: 15px; font-weight: 700; margin: 0; color: var(--text); }
 .stop-desc { font-size: 12px; color: var(--muted); margin: 6px 0 12px; line-height: 1.4; }
 
 .food-tip {
-  font-size: 12px; background: rgba(255, 149, 0, 0.08); color: #b45309; padding: 12px; border-radius: 12px; margin-bottom: 12px; border: 1px solid rgba(255, 149, 0, 0.25);
+  font-size: 12px; background: rgba(255, 149, 0, 0.08); color: #b45309; padding: 12px; border-radius: 12px; margin-bottom: 12px; border: 1.5px solid rgba(255, 149, 0, 0.25);
   display: flex; flex-direction: column; gap: 8px;
 }
 .food-waze-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-  background: var(--waze); color: #fff; font-weight: 700; font-size: 11px; padding: 8px 14px; border-radius: 8px; align-self: flex-start;
-  text-decoration: none; box-shadow: 0 2px 6px rgba(0,153,255,0.25);
+  background: #0077b6; color: #fff; font-weight: 700; font-size: 11px; padding: 8px 14px; border-radius: 8px; align-self: flex-start;
+  text-decoration: none; box-shadow: 0 2px 6px rgba(0,119,182,0.25);
 }
 
 .stop-links {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1.5px solid var(--line);
 }
 .stop-link {
-  font-size: 12px; font-weight: 700; color: #fff; background: var(--waze);
+  font-size: 12px; font-weight: 700; color: #fff; background: #0077b6;
   padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center; cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,153,255,0.25);
+  box-shadow: 0 2px 6px rgba(0,119,182,0.25);
 }
-.stop-link.maps { background: #0066cc; box-shadow: 0 2px 6px rgba(0,102,204,0.25); }
+.stop-link.maps { background: var(--maps-blue); box-shadow: 0 2px 6px rgba(0,122,255,0.25); }
 
 /* Modals */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
@@ -163,7 +164,7 @@ button, input, select { font: inherit; }
   padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1.5px solid var(--line-dark);
   position: relative;
 }
-.modal-close { position: absolute; top: 16px; left: 16px; border: 0; background: var(--bg); width: 32px; height: 32px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-dark); }
+.modal-close { position: absolute; top: 16px; left: 16px; border: 0; background: var(--bg); width: 32px; height: 32px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--line-dark); }
 
 .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
 .modal-btn {
@@ -198,7 +199,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V84-EnhancedBorders">
+<body data-garda-version="V86-WazeIcon">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -217,7 +218,7 @@ button, input, select { font: inherit; }
 <aside class="sidebar" id="sidebar">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
     <h3 style="margin:0;">ניווט מהיר</h3>
-    <button onclick="toggleSidebar()" style="border:0; background:var(--bg); width:30px; height:30px; border-radius:50%; font-weight:700; cursor:pointer; border:1px solid var(--line-dark);">✕</button>
+    <button onclick="toggleSidebar()" style="border:0; background:var(--bg); width:30px; height:30px; border-radius:50%; font-weight:700; cursor:pointer; border:1.5px solid var(--line-dark);">✕</button>
   </div>
   <button class="sidebar-btn" onclick="toggleSidebar(); showDay(0)"><b>📅</b> הצג מסלול ימים</button>
   <button class="sidebar-btn" onclick="toggleSidebar(); openAroundModal()"><b>📍</b> סביבי (סופר, דלק, מסעדות)</button>
@@ -283,14 +284,14 @@ button, input, select { font: inherit; }
     </div>
     <div id="ticketUploadBox" style="display:none;background:var(--bg);padding:14px;border-radius:12px;border:1.5px solid var(--line-dark);margin-bottom:14px">
       <label style="font-size:11px;font-weight:600">בחר תקייה:</label>
-      <select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)" style="width:100%;padding:8px;border-radius:8px;margin:4px 0 10px;background:#fff;color:#111;border:1px solid var(--line-dark);font-size:12px;"></select>
+      <select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)" style="width:100%;padding:8px;border-radius:8px;margin:4px 0 10px;background:#fff;color:#111;border:1.5px solid var(--line-dark);font-size:12px;"></select>
       <label style="font-size:11px;font-weight:600">שם הכרטיס:</label>
-      <input id="ticketTitle" placeholder="לדוגמה: כרטיס כניסה" type="text" style="width:100%;padding:8px;border-radius:8px;margin:4px 0 10px;background:#fff;color:#111;border:1px solid var(--line-dark);font-size:12px;"/>
+      <input id="ticketTitle" placeholder="לדוגמה: כרטיס כניסה" type="text" style="width:100%;padding:8px;border-radius:8px;margin:4px 0 10px;background:#fff;color:#111;border:1.5px solid var(--line-dark);font-size:12px;"/>
       <input accept="image/*" capture="environment" id="ticketCameraInput" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
       <input accept="image/*,application/pdf" id="ticketUploadInput" multiple="" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <button onclick="document.getElementById('ticketCameraInput').click()" style="padding:8px;border-radius:8px;background:var(--surface);color:var(--text);border:1px solid var(--line-dark);cursor:pointer;font-size:12px;">📷 צלם</button>
-        <button onclick="document.getElementById('ticketUploadInput').click()" style="padding:8px;border-radius:8px;background:var(--surface);color:var(--text);border:1px solid var(--line-dark);cursor:pointer;font-size:12px;">📎 העלה קובץ</button>
+        <button onclick="document.getElementById('ticketCameraInput').click()" style="padding:8px;border-radius:8px;background:var(--surface);color:var(--text);border:1.5px solid var(--line-dark);cursor:pointer;font-size:12px;">📷 צלם</button>
+        <button onclick="document.getElementById('ticketUploadInput').click()" style="padding:8px;border-radius:8px;background:var(--surface);color:var(--text);border:1.5px solid var(--line-dark);cursor:pointer;font-size:12px;">📎 העלה קובץ</button>
       </div>
     </div>
     <h3 style="font-size:14px;margin:12px 0 6px;">תקיות שמורות</h3>
@@ -371,12 +372,12 @@ function renderDays() {
             ${stop.food ? `
               <div class="food-tip">
                 <span><b>המלצה קולינרית:</b> ${stop.food.name}</span>
-                <a class="food-waze-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.food.dest)}&navigate=yes">🚗 נווט למסעדה ב-Waze</a>
+                <a class="food-waze-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.food.dest)}&navigate=yes">🚗 Waze</a>
               </div>
             ` : ''}
             <div class="stop-links">
-              <a class="stop-link" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">🚗 Waze מוכן</a>
-              <a class="stop-link maps" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}" target="_blank">📍 Maps</a>
+              <a class="stop-link" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">🚗 Waze</a>
+              <a class="stop-link maps" href="https://maps.apple.com/?q=${encodeURIComponent(stop.dest)}" target="_blank">🗺️ Apple Maps</a>
             </div>
           </div>
         `).join('')}
@@ -420,7 +421,7 @@ function openEmergencyModal() {
 
 function searchNearby(term) {
   closeModal('aroundModal');
-  window.location.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(term + ' near me');
+  window.location.href = 'https://maps.apple.com/?q=' + encodeURIComponent(term);
 }
 
 // Tickets IndexedDB Wallet Logic
