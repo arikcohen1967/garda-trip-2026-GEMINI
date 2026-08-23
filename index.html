@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Minimalist Pro Waze" name="application-name"/>
+<meta content="Garda Trip Minimalist Pro Final" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026 · Minimalist Pro</title>
 <style>
 :root {
@@ -82,9 +82,8 @@ button, input, select { font: inherit; }
 
 .day-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
 .day-head h2 { margin: 0; font-size: 17px; font-weight: 700; }
-.day-date { font-size: 12px; font-weight: 600; color: var(--accent); }
 
-/* Stop Item - Double Clickable */
+/* Stop Item */
 .stop-card {
   background: var(--surface-hover); border: 1px solid var(--line); border-radius: 12px;
   padding: 14px; margin-bottom: 12px; cursor: pointer; transition: transform 0.1s ease, box-shadow 0.1s ease;
@@ -107,13 +106,13 @@ button, input, select { font: inherit; }
 }
 .stop-link.maps { background: #0066cc; }
 
-/* Bottom Navigation */
+/* Bottom Navigation (4 טאבים מעודכנים) */
 .bottom-nav {
   position: fixed !important; z-index: 1000; left: 16px !important; right: 16px !important; bottom: calc(16px + env(safe-area-inset-from-bottom, 0px)) !important;
   max-width: 440px; margin: 0 auto !important; padding: 6px; min-height: 54px;
-  background: rgba(255, 255, 255, 0.9); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.92); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
   border: 1px solid var(--line-dark); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
 }
 .bottom-nav a {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -122,19 +121,28 @@ button, input, select { font: inherit; }
 .bottom-nav a b { font-size: 16px; margin-bottom: 2px; }
 .bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: var(--surface-hover); }
 
-/* Full Screen Modal for Double Click */
+/* Modals */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
 .modal.open { display: flex; }
 .modal-content {
-  background: var(--surface); width: 100%; max-width: 500px; border-radius: var(--radius);
+  background: var(--surface); width: 100%; max-width: 440px; border-radius: var(--radius);
   padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid var(--line-dark);
   position: relative; animation: scaleUp 0.2s ease;
 }
 @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .modal-close { position: absolute; top: 16px; left: 16px; border: 0; background: var(--surface-hover); width: 32px; height: 32px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+/* Around Me & Emergency Grids inside Modals */
+.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+.modal-btn {
+  padding: 14px; border-radius: 12px; background: var(--surface-hover); border: 1px solid var(--line-dark);
+  font-weight: 700; font-size: 13px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text);
+}
+.modal-btn:hover { background: var(--line); }
+.emergency-btn { background: rgba(255,59,48,0.08); color: var(--red); border-color: rgba(255,59,48,0.2); }
 </style>
 </head>
-<body data-garda-version="V71-WazeReady">
+<body data-garda-version="V72-AroundAndEmergency">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -161,25 +169,62 @@ button, input, select { font: inherit; }
   <div id="days"></div>
 </main>
 
-<!-- Bottom Navigation -->
+<!-- Bottom Navigation (4 Tabs) -->
 <nav class="bottom-nav">
-  <a class="active" onclick="showDay(0)"><b>📅</b>מסלול</a>
-  <a onclick="openTicketsModal()"><b>🎟️</b>כרטיסים</a>
-  <a onclick="openEmergencyModal()"><b>🆘</b>חירום</a>
+  <a class="active" id="navRoute" onclick="switchNav(0)"><b>📅</b>מסלול</a>
+  <a id="navAround" onclick="openAroundModal()"><b>📍</b>סביבי</a>
+  <a id="navTickets" onclick="openTicketsModal()"><b>🎟️</b>כרטיסים</a>
+  <a id="navEmergency" onclick="openEmergencyModal()"><b>🆘</b>חירום</a>
 </nav>
 
-<!-- Double Click Detail Modal -->
-<div class="modal" id="detailModal" onclick="if(event.target===this)closeDetailModal()">
+<!-- Modals -->
+<div class="modal" id="detailModal" onclick="if(event.target===this)closeModal('detailModal')">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeDetailModal()">✕</button>
+    <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
     <div id="modalBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="aroundModal" onclick="if(event.target===this)closeModal('aroundModal')">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('aroundModal')">✕</button>
+    <h3 style="margin-top:0; font-size:18px;">📍 סביבי (חיפוש מהיר)</h3>
+    <p style="font-size:12px; color:var(--muted);">בחר קטגוריה לחיפוש מיידי במפות:</p>
+    <div class="modal-grid">
+      <button class="modal-btn" onclick="searchNearby('supermarket')">🛒 <span>סופרמרקטים</span></button>
+      <button class="modal-btn" onclick="searchNearby('gas station')">⛽ <span>תחנות דלק</span></button>
+      <button class="modal-btn" onclick="searchNearby('restaurants')">🍝 <span>מסעדות</span></button>
+      <button class="modal-btn" onclick="searchNearby('pharmacy')">💊 <span>סופרפארם / בית מרקחת</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="emergencyModal" onclick="if(event.target===this)closeModal('emergencyModal')">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('emergencyModal')">✕</button>
+    <h3 style="margin-top:0; font-size:18px; color:var(--red);">🆘 מספרי חירום באיטליה</h3>
+    <p style="font-size:12px; color:var(--muted);">לחץ לחיוג מהיר:</p>
+    <div class="modal-grid">
+      <a href="tel:112" class="modal-btn emergency-btn">🚨 <span>חירום כללי<br><b>112</b></span></a>
+      <a href="tel:118" class="modal-btn emergency-btn">🚑 <span>אמבולנס<br><b>118</b></span></a>
+      <a href="tel:115" class="modal-btn emergency-btn">🚒 <span>כבאות<br><b>115</b></span></a>
+      <a href="tel:113" class="modal-btn emergency-btn">👮 <span>משטרה<br><b>113</b></span></a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="ticketsModal" onclick="if(event.target===this)closeModal('ticketsModal')">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('ticketsModal')">✕</button>
+    <h3 style="margin-top:0; font-size:18px;">🎟️ ארנק כרטיסים</h3>
+    <p style="font-size:13px; color:var(--muted);">כאן יופיעו כרטיסי הטיסה והכניסות שלך.</p>
   </div>
 </div>
 
 <script>
 const tripDays = [
   {date:"2026-09-30", label:"רביעי · 30.09.2026", title:"נחיתה והגעה למלון", icon:"✈️", challenge:"לצלם את התמונה המשפחתית הראשונה באיטליה.", stops:[
-    {time:"16:00", name:"נחיתה בנמל התעופה ורונה", dest:"Verona Villafranca Airport", note:"איסוף מזוודות ורכב שכור."},
+    {time:"16:00", name:"נחיתה בנמל התעופה وרונה", dest:"Verona Villafranca Airport", note:"איסוף מזוודות ורכב שכור."},
     {time:"18:00", name:"נסיעה למלון", dest:"Bio Agriturismo Vojon, Ponti sul Mincio, Italy", note:"צ׳ק-אין, התארגנות וארוחת ערב רגועה באזור."}
   ]},
   {date:"2026-10-01", label:"חמישי · 01.10.2026", title:"Gardaland – יום פארק מלא", icon:"🎢", challenge:"לבחור יחד את שלושת המתקנים הכי טובים של היום.", stops:[
@@ -215,7 +260,7 @@ function renderDays() {
     <section class="day-card" id="day-${di}">
       <div class="day-head">
         <div>
-          <span class="day-date">${day.label}</span>
+          <span style="font-size:12px; font-weight:600; color:var(--accent);">${day.label}</span>
           <h2>${day.icon} ${day.title}</h2>
         </div>
       </div>
@@ -224,7 +269,7 @@ function renderDays() {
       </div>
       <div>
         ${day.stops.map((stop, si) => `
-          <div class="stop-card" ondblclick="openDetail('${stop.name}', '${stop.note}', '${stop.dest}')" title="לחץ כפולה לפרטים מלאים">
+          <div class="stop-card" ondblclick="openDetail('${stop.name}', '${stop.note}', '${stop.dest}')" title="לחץ כפולה לפרטים">
             <div class="stop-top">
               <h3 class="stop-title">${stop.name}</h3>
               <span class="stop-time">${stop.time}</span>
@@ -249,7 +294,14 @@ function showDay(index) {
   document.querySelectorAll('.day-card').forEach((card, i) => {
     card.classList.toggle('active-day', i === index);
   });
+  document.querySelectorAll('.bottom-nav a').forEach((a, i) => {
+    a.classList.toggle('active', i === 0);
+  });
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function switchNav(index) {
+  showDay(0);
 }
 
 function openDetail(name, note, dest) {
@@ -258,23 +310,41 @@ function openDetail(name, note, dest) {
     <p style="color:var(--muted); font-size:14px; line-height:1.5;">${note}</p>
     <p style="font-size:13px; font-weight:600; margin-top:16px;">יעד מדויק: ${dest}</p>
     <div style="display:flex; gap:10px; margin-top:20px;">
-      <a href="https://www.waze.com/ul?q=${encodeURIComponent(dest)}&navigate=yes" style="flex:1; padding:12px; background:#34c759; color:#fff; text-align:center; border-radius:8px; font-weight:700; font-size:13px;">🚗 נווט ישירות ב-Waze</a>
+      <a href="https://www.waze.com/ul?q=${encodeURIComponent(dest)}&navigate=yes" style="flex:1; padding:12px; background:#34c759; color:#fff; text-align:center; border-radius:8px; font-weight:700; font-size:13px;">🚗 נווט ב-Waze</a>
       <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dest)}" target="_blank" style="flex:1; padding:12px; background:var(--surface-hover); color:var(--text); text-align:center; border-radius:8px; font-weight:700; font-size:13px; border:1px solid var(--line-dark);">פתח במפות</a>
     </div>
   `;
   document.getElementById('detailModal').classList.add('open');
 }
 
-function closeDetailModal() {
-  document.getElementById('detailModal').classList.remove('open');
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('open');
+}
+
+function openAroundModal() {
+  document.getElementById('aroundModal').classList.add('open');
+  setActiveNav(1);
 }
 
 function openTicketsModal() {
-  alert('ארנק הכרטיסים יופיע כאן.');
+  document.getElementById('ticketsModal').classList.add('open');
+  setActiveNav(2);
 }
 
 function openEmergencyModal() {
-  alert('מספרי חירום: חירום כללי באיטליה - 112');
+  document.getElementById('emergencyModal').classList.add('open');
+  setActiveNav(3);
+}
+
+function setActiveNav(activeIndex) {
+  document.querySelectorAll('.bottom-nav a').forEach((a, i) => {
+    a.classList.toggle('active', i === activeIndex);
+  });
+}
+
+function searchNearby(term) {
+  closeModal('aroundModal');
+  window.location.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(term + ' near me');
 }
 
 document.addEventListener('DOMContentLoaded', renderDays);
