@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Perfect Emoji Icons" name="application-name"/>
+<meta content="Garda Trip Exact Icons Edition" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -139,11 +139,13 @@ button, input, select { font: inherit; }
   display: flex; flex-direction: column; gap: 8px;
 }
 .food-waze-btn {
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 8px;
   background: #ffffff; color: #0077b6; font-weight: 700; font-size: 12px; padding: 6px 12px; border-radius: 10px; align-self: flex-start;
-  text-decoration: none; border: 1.5px solid #0099ff; box-shadow: 0 2px 6px rgba(0,153,255,0.15);
+  text-decoration: none; border: 1.5px solid #33ccff; box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
+.food-waze-btn img { width: 22px; height: 22px; border-radius: 6px; object-fit: contain; }
 
+/* כפתורי ניווט עם הלוגואים שסופקו */
 .stop-links {
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1.5px solid var(--line);
 }
@@ -152,6 +154,7 @@ button, input, select { font: inherit; }
   padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; text-align: center; cursor: pointer;
   border: 1.5px solid var(--line-dark); box-shadow: var(--shadow); text-decoration: none;
 }
+.nav-btn img { width: 24px; height: 24px; border-radius: 6px; object-fit: contain; flex-shrink: 0; }
 .nav-btn.waze-btn { border-color: rgba(0,153,255,0.4); color: #0077b6; }
 .nav-btn.maps-btn { border-color: rgba(0,122,255,0.4); color: #0051a8; }
 
@@ -198,7 +201,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V88-CleanNavButtons">
+<body data-garda-version="V90-ExactLogos">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -312,6 +315,12 @@ button, input, select { font: inherit; }
 </div>
 
 <script>
+// שימוש בלוגואים המדויקים שסיפקת
+const WAZE_LOGO = "https://raw.githubusercontent.com/walkermatt/leaflet-subdomains/master/images/waze.png"; 
+// לחלופין שימוש בתמונה המדויקת מהצילום:
+const WAZE_EXACT = "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/71/34/45/713445cd-2651-789a-6415-3ce367acfa00/AppIcon-0-0-1x_U007emarketing-0-7-0-sRGB-85-220.png/512x512bb.jpg";
+const MAPS_EXACT = "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e5/22/02/e5220268-0df2-e9c5-faea-6825c8cc08fc/AppIcon-0-0-1x_U007emarketing-0-7-0-sRGB-85-220.png/512x512bb.jpg";
+
 const tripDays = [
   {date:"2026-09-30", label:"רביעי · 30.09.2026", title:"נחיתה והגעה למלון", icon:"✈️", challenge:"לצלם את התמונה המשפחתית הראשונה באיטליה.", stops:[
     {time:"16:00", name:"נחיתה בנמל התעופה وרונה", dest:"Verona Villafranca Airport", note:"איסוף מזוודות ורכב שכור."},
@@ -372,16 +381,16 @@ function renderDays() {
               <div class="food-tip">
                 <span><b>המלצה קולינרית:</b> ${stop.food.name}</span>
                 <a class="food-waze-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.food.dest)}&navigate=yes">
-                  🚙 Waze נווט למסעדה
+                  <img src="${WAZE_EXACT}" alt="Waze"> נווט למסעדה ב-Waze
                 </a>
               </div>
             ` : ''}
             <div class="stop-links">
               <a class="nav-btn waze-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">
-                🚙 Waze
+                <img src="${WAZE_EXACT}" alt="Waze"> Waze
               </a>
               <a class="nav-btn maps-btn" href="https://maps.apple.com/?q=${encodeURIComponent(stop.dest)}" target="_blank">
-                🗺️ Apple Maps
+                <img src="${MAPS_EXACT}" alt="Maps"> Maps
               </a>
             </div>
           </div>
@@ -554,7 +563,7 @@ async function deleteTicketFile(id) {
   const db = await openTicketDb();
   const tx = db.transaction('files', 'readwrite');
   tx.objectStore('files').delete(id);
-  tx.oncomplete = renderTicketFiles();
+  tx.oncomplete = () => renderTicketFiles();
 }
 
 document.addEventListener('DOMContentLoaded', renderDays);
