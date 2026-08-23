@@ -3,26 +3,29 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="#07111c" name="theme-color"/>
+<meta content="#f5f5f7" name="theme-color"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Strict Single Day" name="application-name"/>
-<title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
+<meta content="Garda Trip Clean Light V66" name="application-name"/>
+<title>טיול בת מצווה – אגם גארדה וונציה 2026 · Clean Light</title>
 <style>
 :root {
-  --bg: #07111c;
-  --panel: #102235;
-  --panel-hover: #173656;
-  --text: #f7fbff;
-  --muted: #a9bdd0;
-  --accent: #6dd3ff;
-  --green: #36d18b;
+  --bg: #f5f5f7;
+  --surface: #ffffff;
+  --surface-subtle: #f1f1f3;
+  --text: #111111;
+  --muted: #6e6e73;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-strong: rgba(0, 0, 0, 0.14);
+  --primary: #111111;
+  --primary-text: #ffffff;
+  --accent: #0066cc;
+  --green: #34c759;
   --orange: #ff9500;
   --red: #ff3b30;
-  --line: rgba(255, 255, 255, 0.1);
-  --shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-  --radius: 22px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  --radius: 20px;
   --radius-sm: 14px;
 }
 
@@ -44,20 +47,20 @@ button, input, select { font: inherit; }
 .top-bar {
   display: flex; justify-content: space-between; align-items: center;
   padding: calc(16px + env(safe-area-inset-top)) 16px 12px;
-  background: rgba(7, 17, 28, 0.95);
+  background: rgba(255, 255, 255, 0.9);
   position: sticky; top: 0; z-index: 900;
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
 }
-.top-title { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; color: #fff; }
+.top-title { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; color: var(--text); }
 .top-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
 .hotel-badge {
-  background: rgba(54, 209, 139, 0.15); color: var(--green); border: 1px solid rgba(54, 209, 139, 0.3);
+  background: rgba(52, 199, 89, 0.12); color: #1b5e20; border: 1px solid rgba(52, 199, 89, 0.3);
   padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;
 }
 .status-pill {
   display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 4px 10px; border-radius: 20px;
-  background: rgba(54, 209, 139, 0.12); color: var(--green); border: 1px solid rgba(54, 209, 139, 0.25); font-weight: 600;
+  background: rgba(52, 199, 89, 0.1); color: #1b5e20; border: 1px solid rgba(52, 199, 89, 0.2); font-weight: 600;
 }
 
 .wrap { padding: 16px; max-width: 600px; margin: auto; }
@@ -65,13 +68,13 @@ button, input, select { font: inherit; }
 /* Weather Card */
 .weather-card {
   margin-bottom: 16px; padding: 18px 20px; border-radius: var(--radius);
-  background: linear-gradient(135deg, #ff9500 0%, #ff6a00 100%); color: #fff;
+  background: linear-gradient(135deg, #ff9500 0%, #ff7700 100%); color: #fff;
   display: flex; justify-content: space-between; align-items: center;
-  box-shadow: 0 10px 25px rgba(255, 149, 0, 0.3);
+  box-shadow: 0 10px 25px rgba(255, 149, 0, 0.25);
 }
 .weather-temp { font-size: 34px; font-weight: 800; line-height: 1; }
 .weather-city { font-size: 18px; font-weight: 700; margin-top: 4px; }
-.weather-desc { font-size: 12px; opacity: 0.9; margin-top: 2px; }
+.weather-desc { font-size: 12px; opacity: 0.95; margin-top: 2px; }
 .weather-icon { font-size: 40px; }
 
 /* Day Selector Tabs */
@@ -81,36 +84,37 @@ button, input, select { font: inherit; }
 }
 .day-tabs::-webkit-scrollbar { display: none; }
 .day-tab {
-  flex: 0 0 auto; padding: 10px 16px; border-radius: 20px; background: var(--panel);
+  flex: 0 0 auto; padding: 10px 16px; border-radius: 20px; background: var(--surface);
   border: 1px solid var(--line); color: var(--muted); font-size: 12px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
-.day-tab.active { background: var(--accent); color: #07111c; border-color: var(--accent); }
+.day-tab.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
 
 /* Day Cards & Stops - מוסתרים כברירת מחדל, מוצגים רק לפי בחירת הטאב */
 .day-card {
-  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   margin: 16px 0; padding: 18px; box-shadow: var(--shadow);
   display: none;
 }
 .day-card.active-day { display: block; }
 
 .day-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-.day-head h2 { margin: 4px 0 0; font-size: 18px; color: #fff; }
+.day-head h2 { margin: 4px 0 0; font-size: 18px; color: var(--text); }
 .date { font-size: 12px; font-weight: 600; color: var(--accent); }
 .day-icon { font-size: 28px; }
 
 .challenge {
-  margin-top: 12px; background: rgba(255, 177, 91, 0.1); border: 1px solid rgba(255, 177, 91, 0.2);
-  padding: 11px 12px; border-radius: var(--radius-sm); font-size: 12px; line-height: 1.4; color: #ffb15b;
+  margin-top: 12px; background: rgba(52, 199, 89, 0.08); border: 1px solid rgba(52, 199, 89, 0.2);
+  padding: 11px 12px; border-radius: var(--radius-sm); font-size: 12px; line-height: 1.4; color: #1b5e20;
 }
 
 .stop {
-  margin-top: 12px; background: var(--panel-hover); border: 1px solid var(--line);
+  margin-top: 12px; background: var(--surface-subtle); border: 1px solid var(--line);
   border-radius: var(--radius-sm); padding: 14px;
 }
 .stop-top { display: flex; justify-content: space-between; align-items: center; }
-.time { font-size: 11px; font-weight: 600; color: var(--muted); background: rgba(255,255,255,0.06); padding: 4px 8px; border-radius: 20px; }
-.stop h3 { font-size: 15px; margin: 8px 0 4px; font-weight: 700; color: #fff; }
+.time { font-size: 11px; font-weight: 600; color: var(--muted); background: var(--surface); padding: 4px 8px; border-radius: 20px; border: 1px solid var(--line); }
+.stop h3 { font-size: 15px; margin: 8px 0 4px; font-weight: 700; color: var(--text); }
 .stop p { font-size: 12px; line-height: 1.4; color: var(--muted); margin: 0 0 10px; }
 
 /* Grid כפתורים לתחנות */
@@ -123,7 +127,7 @@ button, input, select { font: inherit; }
 .stop-action-btn {
   padding: 8px 6px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--surface);
   border: 1px solid var(--line);
   color: var(--text);
   font-size: 11px;
@@ -134,15 +138,16 @@ button, input, select { font: inherit; }
   justify-content: center;
   gap: 4px;
   text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
 }
-.stop-action-btn:hover { background: rgba(255, 255, 255, 0.12); }
+.stop-action-btn:hover { background: #eaeaed; }
 
 /* Bottom Dock */
 .bottom-nav {
   position: fixed !important; z-index: 1000; left: 14px !important; right: 14px !important; bottom: 10px !important;
   max-width: 500px; margin: 0 auto !important; padding: 6px; min-height: 60px;
-  background: rgba(16, 34, 53, 0.95); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.12); border-radius: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  background: rgba(255, 255, 255, 0.9); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
+  border: 1px solid var(--line-strong); border-radius: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.12);
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
 }
 .bottom-nav a {
@@ -150,44 +155,44 @@ button, input, select { font: inherit; }
   font-size: 11px; font-weight: 700; color: var(--muted); padding: 4px; border-radius: 14px; cursor: pointer;
 }
 .bottom-nav a b { font-size: 18px; margin-bottom: 2px; }
-.bottom-nav a.active, .bottom-nav a:active { color: var(--accent); background: rgba(109,211,255,0.1); }
+.bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: rgba(0,0,0,0.06); }
 
 /* Modals & Sheets */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2000; display: none; align-items: flex-end; backdrop-filter: blur(4px); }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: flex-end; backdrop-filter: blur(4px); }
 .modal.open { display: flex; }
 .sheet {
-  width: 100%; max-height: 85vh; overflow-y: auto; background: var(--panel);
+  width: 100%; max-height: 85vh; overflow-y: auto; background: var(--surface);
   border-radius: 28px 28px 0 0; padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
-  border-top: 1px solid var(--line); box-shadow: 0 -10px 40px rgba(0,0,0,0.5); color: var(--text);
+  border-top: 1px solid var(--line); box-shadow: 0 -10px 40px rgba(0,0,0,0.15); color: var(--text);
 }
 .sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
-.close { border: 0; background: rgba(255,255,255,0.1); color: #fff; border-radius: 50%; width: 36px; height: 36px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.close { border: 0; background: var(--surface-subtle); color: var(--text); border-radius: 50%; width: 36px; height: 36px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
 /* Tickets Folder & Files */
 .ticket-folder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
 .ticket-folder {
-  text-align: right; padding: 12px; border-radius: var(--radius-sm); background: var(--panel-hover);
+  text-align: right; padding: 12px; border-radius: var(--radius-sm); background: var(--surface-subtle);
   border: 1px solid var(--line); cursor: pointer; position: relative; color: var(--text);
 }
 .ticket-folder strong { display: block; font-size: 13px; margin-bottom: 2px; }
 .ticket-folder small { color: var(--muted); font-size: 11px; }
-.ticket-folder.active { background: var(--accent); color: #07111c; border-color: var(--accent); }
+.ticket-folder.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
 
-.ticket-file { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 10px; padding: 10px; border-radius: 12px; background: rgba(0,0,0,0.2); border: 1px solid var(--line); margin-top: 8px; cursor: pointer; }
-.ticket-thumb { width: 48px; height: 48px; border-radius: 10px; background: #07111c; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.ticket-file { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 10px; padding: 10px; border-radius: 12px; background: var(--surface-subtle); border: 1px solid var(--line); margin-top: 8px; cursor: pointer; }
+.ticket-thumb { width: 48px; height: 48px; border-radius: 10px; background: #e5e5ea; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 20px; }
 .ticket-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.ticket-info b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
+.ticket-info b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
 .ticket-info small { color: var(--muted); font-size: 11px; }
 
 /* Full Screen Viewer */
 #fullViewerModal { z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
-.full-viewer-content { background: #151517; width: 100%; max-width: 800px; height: 85vh; border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); }
-.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #202024; color: #fff; font-weight: 700; }
-.full-viewer-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 10px; }
+.full-viewer-content { background: #ffffff; width: 100%; max-width: 800px; height: 85vh; border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f1f1f3; color: #111; font-weight: 700; }
+.full-viewer-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 10px; background: #fafafa; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V65-StrictSingleDay">
+<body data-garda-version="V66-CleanLight">
 
 <!-- Top Bar -->
 <div class="top-bar">
@@ -239,28 +244,28 @@ button, input, select { font: inherit; }
 <div class="modal" id="ticketsModal" onclick="closeTicketsBackdrop(event)">
   <div class="sheet" style="max-height:92vh">
     <div class="sheet-head">
-      <div><small style="color:var(--muted)">הארנק המשפחתי</small><h2 style="margin:2px 0 0; color:#fff">🎟️ כרטיסים וכניסות</h2></div>
+      <div><small style="color:var(--muted)">הארנק המשפחתי</small><h2 style="margin:2px 0 0; color:var(--text)">🎟️ כרטיסים וכניסות</h2></div>
       <button class="close" onclick="closeTickets()" type="button">✕</button>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
-      <button onclick="showTicketUpload()" style="padding:12px;border-radius:var(--radius-sm);background:var(--accent);color:#07111c;font-weight:700;cursor:pointer;border:0">➕ הוסף כרטיס</button>
-      <button onclick="addTicketFolder()" style="padding:12px;border-radius:var(--radius-sm);background:var(--panel-hover);color:#fff;font-weight:600;cursor:pointer;border:1px solid var(--line)">📁 תקייה חדשה</button>
+      <button onclick="showTicketUpload()" style="padding:12px;border-radius:var(--radius-sm);background:var(--primary);color:var(--primary-text);font-weight:700;cursor:pointer;border:0">➕ הוסף כרטיס</button>
+      <button onclick="addTicketFolder()" style="padding:12px;border-radius:var(--radius-sm);background:var(--surface-subtle);color:var(--text);font-weight:600;cursor:pointer;border:1px solid var(--line)">📁 תקייה חדשה</button>
     </div>
-    <div id="ticketUploadBox" style="display:none;background:rgba(0,0,0,0.25);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--line);margin-bottom:14px">
+    <div id="ticketUploadBox" style="display:none;background:var(--surface-subtle);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--line);margin-bottom:14px">
       <label style="font-size:12px;font-weight:600">בחר תקייה:</label>
-      <select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)" style="width:100%;padding:10px;border-radius:10px;margin:4px 0 10px;background:#07111c;color:#fff;border:1px solid var(--line)"></select>
+      <select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)" style="width:100%;padding:10px;border-radius:10px;margin:4px 0 10px;background:#fff;color:#111;border:1px solid var(--line)"></select>
       <label style="font-size:12px;font-weight:600">שם הכרטיס:</label>
-      <input id="ticketTitle" placeholder="לדוגמה: כרטיס כניסה" type="text" style="width:100%;padding:10px;border-radius:10px;margin:4px 0 10px;background:#07111c;color:#fff;border:1px solid var(--line)"/>
+      <input id="ticketTitle" placeholder="לדוגמה: כרטיס כניסה" type="text" style="width:100%;padding:10px;border-radius:10px;margin:4px 0 10px;background:#fff;color:#111;border:1px solid var(--line)"/>
       <input accept="image/*" capture="environment" id="ticketCameraInput" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
       <input accept="image/*,application/pdf" id="ticketUploadInput" multiple="" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <button onclick="document.getElementById('ticketCameraInput').click()" style="padding:10px;border-radius:10px;background:var(--panel-hover);color:#fff;border:1px solid var(--line);cursor:pointer">📷 צלם</button>
-        <button onclick="document.getElementById('ticketUploadInput').click()" style="padding:10px;border-radius:10px;background:var(--panel-hover);color:#fff;border:1px solid var(--line);cursor:pointer">📎 העלה קובץ</button>
+        <button onclick="document.getElementById('ticketCameraInput').click()" style="padding:10px;border-radius:10px;background:var(--surface);color:var(--text);border:1px solid var(--line);cursor:pointer">📷 צלם</button>
+        <button onclick="document.getElementById('ticketUploadInput').click()" style="padding:10px;border-radius:10px;background:var(--surface);color:var(--text);border:1px solid var(--line);cursor:pointer">📎 העלה קובץ</button>
       </div>
     </div>
-    <h3 style="font-size:15px;margin:12px 0 6px; color:#fff">תקיות שמורות</h3>
+    <h3 style="font-size:15px;margin:12px 0 6px; color:var(--text)">תקיות שמורות</h3>
     <div class="ticket-folder-grid" id="ticketFolderGrid"></div>
-    <div id="ticketCurrentTitle" style="font-weight:700;margin-top:16px;font-size:14px; color:#fff"></div>
+    <div id="ticketCurrentTitle" style="font-weight:700;margin-top:16px;font-size:14px; color:var(--text)"></div>
     <div id="ticketFileList"></div>
   </div>
 </div>
@@ -278,14 +283,14 @@ button, input, select { font: inherit; }
 <div class="modal" id="aroundModal" onclick="closeAroundBackdrop(event)">
   <div class="sheet">
     <div class="sheet-head">
-      <h2 style="margin:0; color:#fff">📍 Around Me</h2>
+      <h2 style="margin:0; color:var(--text)">📍 Around Me</h2>
       <button class="close" onclick="closeAround()" type="button">✕</button>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-      <button onclick="searchNearby('supermarket')" style="padding:14px;border-radius:var(--radius-sm);background:var(--accent);color:#07111c;font-weight:700;border:0;cursor:pointer">🛒 סופרמרקט</button>
-      <button onclick="searchNearby('restaurants')" style="padding:14px;border-radius:var(--radius-sm);background:var(--panel-hover);color:#fff;font-weight:600;border:1px solid var(--line);cursor:pointer">🍝 מסעדות</button>
-      <button onclick="searchNearby('gelato')" style="padding:14px;border-radius:var(--radius-sm);background:var(--panel-hover);color:#fff;font-weight:600;border:1px solid var(--line);cursor:pointer">🍦 גלידריה</button>
-      <button onclick="searchNearby('pharmacy')" style="padding:14px;border-radius:var(--radius-sm);background:var(--panel-hover);color:#fff;font-weight:600;border:1px solid var(--line);cursor:pointer">💊 בית מרקחת</button>
+      <button onclick="searchNearby('supermarket')" style="padding:14px;border-radius:var(--radius-sm);background:var(--primary);color:var(--primary-text);font-weight:700;border:0;cursor:pointer">🛒 סופרמרקט</button>
+      <button onclick="searchNearby('restaurants')" style="padding:14px;border-radius:var(--radius-sm);background:var(--surface-subtle);color:var(--text);font-weight:600;border:1px solid var(--line);cursor:pointer">🍝 מסעדות</button>
+      <button onclick="searchNearby('gelato')" style="padding:14px;border-radius:var(--radius-sm);background:var(--surface-subtle);color:var(--text);font-weight:600;border:1px solid var(--line);cursor:pointer">🍦 גלידריה</button>
+      <button onclick="searchNearby('pharmacy')" style="padding:14px;border-radius:var(--radius-sm);background:var(--surface-subtle);color:var(--text);font-weight:600;border:1px solid var(--line);cursor:pointer">💊 בית מרקחת</button>
     </div>
   </div>
 </div>
@@ -309,7 +314,7 @@ function renderFullTripDays() {
             <div class="stop-top">
               <span class="time">${stop.time}</span>
               <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
-                <input data-key="day${di}-stop${si}" type="checkbox" style="accent-color:var(--green);width:16px;height:16px"/><span>בוצע</span>
+                <input data-key="day${di}-stop${si}" type="checkbox" style="accent-color:var(--primary);width:16px;height:16px"/><span>בוצע</span>
               </label>
             </div>
             <h3>${stop.name}</h3>
@@ -325,7 +330,7 @@ function renderFullTripDays() {
       </div>
     </section>
   `).join('');
-  showDay(0); // הצג רק את היום הראשון בהתחלה
+  showDay(0);
 }
 
 function showDay(index) {
@@ -447,7 +452,7 @@ async function renderTicketFiles() {
       <div class="ticket-thumb">${(x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'}</div>
       <div class="ticket-info"><b>${x.title || x.name}</b><small>${Math.round(x.size/1024)} KB · לחץ לפתיחה</small></div>
       <div style="display:flex;gap:4px">
-        <button onclick="event.stopPropagation(); deleteTicketFile(${x.id})" style="background:rgba(255,59,48,0.2);color:var(--red);border:0;padding:6px 10px;border-radius:8px;cursor:pointer">מחק</button>
+        <button onclick="event.stopPropagation(); deleteTicketFile(${x.id})" style="background:rgba(255,59,48,0.15);color:var(--red);border:0;padding:6px 10px;border-radius:8px;cursor:pointer">מחק</button>
       </div>
     </div>
   `).join('');
