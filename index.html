@@ -3,30 +3,28 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="#f5f5f7" name="theme-color"/>
+<meta content="#fafafa" name="theme-color"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Final Dock Fix" name="application-name"/>
-<title>טיול בת מצווה – אגם גארדה וונציה 2026 · Clean Light</title>
+<meta content="Garda Trip Minimalist Pro" name="application-name"/>
+<title>טיול בת מצווה – אגם גארדה וונציה 2026 · Minimalist Pro</title>
 <style>
 :root {
-  --bg: #f5f5f7;
+  --bg: #fafafa;
   --surface: #ffffff;
-  --surface-subtle: #f1f1f3;
-  --text: #111111;
-  --muted: #6e6e73;
-  --line: rgba(0, 0, 0, 0.08);
-  --line-strong: rgba(0, 0, 0, 0.14);
-  --primary: #111111;
+  --surface-hover: #f4f4f5;
+  --text: #18181b;
+  --muted: #71717a;
+  --line: rgba(0, 0, 0, 0.06);
+  --line-dark: rgba(0, 0, 0, 0.12);
+  --primary: #18181b;
   --primary-text: #ffffff;
-  --accent: #0066cc;
-  --green: #34c759;
-  --orange: #ff9500;
-  --red: #ff3b30;
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  --radius: 20px;
-  --radius-sm: 14px;
+  --accent: #2563eb;
+  --green: #16a34a;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.06);
+  --radius: 16px;
 }
 
 *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
@@ -34,299 +32,208 @@ html{scroll-behavior:smooth}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: var(--bg) !important;
-  color: var(--text) !important;
-  /* מרווח תחתון גדול ומדויק שמונע מהתפריט להסתיר כל תוכן שהוא */
-  padding-bottom: calc(110px + env(safe-area-inset-bottom)) !important;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: calc(110px + env(safe-area-inset-bottom));
   -webkit-font-smoothing: antialiased;
 }
 
 a { color: inherit; text-decoration: none; }
 button, input, select { font: inherit; }
 
-/* Top App Bar */
-.top-bar {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: calc(16px + env(safe-area-inset-top)) 16px 12px;
-  background: rgba(255, 255, 255, 0.9);
-  position: sticky; top: 0; z-index: 900;
+/* Minimalist Header */
+.minimal-header {
+  padding: calc(24px + env(safe-area-inset-top)) 20px 16px;
+  background: var(--surface);
   border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
-.top-title { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; color: var(--text); }
-.top-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
-.hotel-badge {
-  background: rgba(52, 199, 89, 0.12); color: #1b5e20; border: 1px solid rgba(52, 199, 89, 0.3);
-  padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;
-}
-.status-pill {
-  display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 4px 10px; border-radius: 20px;
-  background: rgba(52, 199, 89, 0.1); color: #1b5e20; border: 1px solid rgba(52, 199, 89, 0.2); font-weight: 600;
+.minimal-title h1 { font-size: 20px; font-weight: 700; margin: 0 0 4px; letter-spacing: -0.02em; }
+.minimal-title p { font-size: 13px; color: var(--muted); margin: 0; }
+.minimal-badge {
+  background: var(--surface-hover); border: 1px solid var(--line-dark);
+  padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; color: var(--text);
 }
 
-.wrap { padding: 16px; max-width: 600px; margin: auto; }
+.wrap { padding: 20px; max-width: 600px; margin: auto; }
 
-/* Weather Card */
-.weather-card {
-  margin-bottom: 16px; padding: 18px 20px; border-radius: var(--radius);
-  background: linear-gradient(135deg, #ff9500 0%, #ff7700 100%); color: #fff;
-  display: flex; justify-content: space-between; align-items: center;
-  box-shadow: 0 10px 25px rgba(255, 149, 0, 0.25);
-}
-.weather-temp { font-size: 34px; font-weight: 800; line-height: 1; }
-.weather-city { font-size: 18px; font-weight: 700; margin-top: 4px; }
-.weather-desc { font-size: 12px; opacity: 0.95; margin-top: 2px; }
-.weather-icon { font-size: 40px; }
-
-/* Day Selector Tabs */
+/* Clean Day Tabs */
 .day-tabs {
-  display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 16px;
+  display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 20px;
   scrollbar-width: none;
 }
 .day-tabs::-webkit-scrollbar { display: none; }
 .day-tab {
-  flex: 0 0 auto; padding: 10px 16px; border-radius: 20px; background: var(--surface);
-  border: 1px solid var(--line); color: var(--muted); font-size: 12px; font-weight: 700; cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  flex: 0 0 auto; padding: 8px 14px; border-radius: 12px; background: var(--surface);
+  border: 1px solid var(--line-dark); color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s ease;
 }
-.day-tab.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
+.day-tab.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); box-shadow: var(--shadow); }
 
-/* Day Cards & Stops */
+/* Day Card & Stops */
 .day-card {
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  margin: 16px 0; padding: 18px; box-shadow: var(--shadow);
+  background: var(--surface); border: 1px solid var(--line-dark); border-radius: var(--radius);
+  margin-bottom: 20px; padding: 20px; box-shadow: var(--shadow);
   display: none;
 }
 .day-card.active-day { display: block; }
 
-.day-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
-.day-head h2 { margin: 4px 0 0; font-size: 18px; color: var(--text); }
-.date { font-size: 12px; font-weight: 600; color: var(--accent); }
-.day-icon { font-size: 28px; }
+.day-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.day-head h2 { margin: 0; font-size: 17px; font-weight: 700; }
+.day-date { font-size: 12px; font-weight: 600; color: var(--accent); }
 
-.challenge {
-  margin-top: 12px; background: rgba(52, 199, 89, 0.08); border: 1px solid rgba(52, 199, 89, 0.2);
-  padding: 11px 12px; border-radius: var(--radius-sm); font-size: 12px; line-height: 1.4; color: #1b5e20;
+/* Stop Item - Double Clickable */
+.stop-card {
+  background: var(--surface-hover); border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px; margin-bottom: 12px; cursor: pointer; transition: transform 0.1s ease, box-shadow 0.1s ease;
+  user-select: none;
+}
+.stop-card:hover { border-color: var(--line-dark); box-shadow: var(--shadow-hover); }
+.stop-card:active { transform: scale(0.99); }
+
+.stop-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.stop-time { font-size: 11px; font-weight: 600; color: var(--muted); background: var(--surface); padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line); }
+.stop-title { font-size: 14px; font-weight: 700; margin: 0 0 4px; color: var(--text); }
+.stop-desc { font-size: 12px; color: var(--muted); margin: 0; line-height: 1.4; }
+
+.stop-links {
+  display: flex; gap: 8px; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line);
+}
+.stop-link {
+  font-size: 11px; font-weight: 600; color: var(--accent); background: var(--surface);
+  padding: 4px 10px; border-radius: 6px; border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 4px;
 }
 
-.stop {
-  margin-top: 12px; background: var(--surface-subtle); border: 1px solid var(--line);
-  border-radius: var(--radius-sm); padding: 14px;
-}
-.stop-top { display: flex; justify-content: space-between; align-items: center; }
-.time { font-size: 11px; font-weight: 600; color: var(--muted); background: var(--surface); padding: 4px 8px; border-radius: 20px; border: 1px solid var(--line); }
-.stop h3 { font-size: 15px; margin: 8px 0 4px; font-weight: 700; color: var(--text); }
-.stop p { font-size: 12px; line-height: 1.4; color: var(--muted); margin: 0 0 10px; }
-
-/* Grid כפתורים לתחנות */
-.stop-actions-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-top: 10px;
-}
-.stop-action-btn {
-  padding: 8px 6px;
-  border-radius: 10px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  color: var(--text);
-  font-size: 11px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-}
-.stop-action-btn:hover { background: #eaeaed; }
-
-/* Bottom Dock - מעוגן בצורה יציבה ובטוחה כמו במקור */
+/* Bottom Navigation */
 .bottom-nav {
-  position: fixed !important;
-  z-index: 1000;
-  inset: auto 0 0 0 !important;
-  margin: 0 !important;
-  padding: 8px 12px calc(8px + env(safe-area-inset-bottom)) !important;
-  min-height: 60px;
-  background: rgba(255, 255, 255, 0.92);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-top: 1px solid var(--line-strong);
-  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
+  position: fixed !important; z-index: 1000; left: 16px !important; right: 16px !important; bottom: calc(16px + env(safe-area-inset-from-bottom, 0px)) !important;
+  max-width: 440px; margin: 0 auto !important; padding: 6px; min-height: 54px;
+  background: rgba(255, 255, 255, 0.9); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border: 1px solid var(--line-dark); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
 }
 .bottom-nav a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--muted);
-  padding: 4px;
-  border-radius: 12px;
-  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 600; color: var(--muted); padding: 4px; border-radius: 12px; cursor: pointer;
 }
-.bottom-nav a b { font-size: 18px; margin-bottom: 2px; }
-.bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: rgba(0, 0, 0, 0.06); }
+.bottom-nav a b { font-size: 16px; margin-bottom: 2px; }
+.bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: var(--surface-hover); }
 
-/* Modals & Sheets */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: flex-end; backdrop-filter: blur(4px); }
+/* Full Screen Modal for Double Click */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
 .modal.open { display: flex; }
-.sheet {
-  width: 100%; max-height: 85vh; overflow-y: auto; background: var(--surface);
-  border-radius: 28px 28px 0 0; padding: 20px 16px calc(30px + env(safe-area-inset-bottom));
-  border-top: 1px solid var(--line); box-shadow: 0 -10px 40px rgba(0,0,0,0.15); color: var(--text);
+.modal-content {
+  background: var(--surface); width: 100%; max-width: 500px; border-radius: var(--radius);
+  padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid var(--line-dark);
+  position: relative; animation: scaleUp 0.2s ease;
 }
-.sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
-.close { border: 0; background: var(--surface-subtle); color: var(--text); border-radius: 50%; width: 36px; height: 36px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-
-/* Tickets Folder & Files */
-.ticket-folder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-.ticket-folder {
-  text-align: right; padding: 12px; border-radius: var(--radius-sm); background: var(--surface-subtle);
-  border: 1px solid var(--line); cursor: pointer; position: relative; color: var(--text);
-}
-.ticket-folder strong { display: block; font-size: 13px; margin-bottom: 2px; }
-.ticket-folder small { color: var(--muted); font-size: 11px; }
-.ticket-folder.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
-
-.ticket-file { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 10px; padding: 10px; border-radius: 12px; background: var(--surface-subtle); border: 1px solid var(--line); margin-top: 8px; cursor: pointer; }
-.ticket-thumb { width: 48px; height: 48px; border-radius: 10px; background: #e5e5ea; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-.ticket-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.ticket-info b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
-.ticket-info small { color: var(--muted); font-size: 11px; }
+@keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.modal-close { position: absolute; top: 16px; left: 16px; border: 0; background: var(--surface-hover); width: 32px; height: 32px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 </style>
 </head>
-<body data-garda-version="V69-StableDock">
+<body data-garda-version="V70-MinimalistPro">
 
-<!-- Top Bar -->
-<div class="top-bar">
-  <div>
-    <div class="top-title">🇮🇹 גארדה וצפון איטליה</div>
-    <div class="top-meta">06.10.2026 - 30.09.2026</div>
+<!-- Minimalist Header -->
+<header class="minimal-header">
+  <div class="minimal-title">
+    <h1>אגם גארדה וונציה</h1>
+    <p>טיול בת מצווה · 30.09 - 06.10.2026</p>
   </div>
-  <div style="display:flex;align-items:center;gap:8px">
-    <span class="status-pill">● מחובר</span>
-    <a href="#hotel" class="hotel-badge">🏡 למלון</a>
-  </div>
-</div>
+  <div class="minimal-badge">Bio Agriturismo Vojon</div>
+</header>
 
 <main class="wrap">
-  <!-- Weather Widget -->
-  <div class="weather-card">
-    <div>
-      <div class="weather-temp">22°C</div>
-      <div class="weather-city">Ponti sul (Mincio)</div>
-      <div class="weather-desc">נעים ומקומי · אגם גארדה</div>
-    </div>
-    <div class="weather-icon">☀️</div>
-  </div>
-
   <!-- Day Selector Tabs -->
   <div class="day-tabs" id="dayTabs">
-    <div class="day-tab active" onclick="showDay(0)">יום רביעי (30/09)</div>
-    <div class="day-tab" onclick="showDay(1)">יום חמישי (01/10)</div>
-    <div class="day-tab" onclick="showDay(2)">יום שישי (02/10)</div>
-    <div class="day-tab" onclick="showDay(3)">שבת (03/10)</div>
-    <div class="day-tab" onclick="showDay(4)">ראשון (04/10)</div>
-    <div class="day-tab" onclick="showDay(5)">שני (05/10)</div>
-    <div class="day-tab" onclick="showDay(6)">שלישי (06/10)</div>
+    <div class="day-tab active" onclick="showDay(0)">יום 1 · 30/09</div>
+    <div class="day-tab" onclick="showDay(1)">יום 2 · 01/10</div>
+    <div class="day-tab" onclick="showDay(2)">יום 3 · 02/10</div>
+    <div class="day-tab" onclick="showDay(3)">יום 4 · 03/10</div>
+    <div class="day-tab" onclick="showDay(4)">יום 5 · 04/10</div>
+    <div class="day-tab" onclick="showDay(5)">יום 6 · 05/10</div>
+    <div class="day-tab" onclick="showDay(6)">יום 7 · 06/10</div>
   </div>
 
-  <!-- Days Container (Strictly one day at a time) -->
+  <!-- Days Container -->
   <div id="days"></div>
 </main>
 
-<!-- Bottom Navigation Bar - FIXED -->
+<!-- Bottom Navigation -->
 <nav class="bottom-nav">
   <a class="active" onclick="showDay(0)"><b>📅</b>מסלול</a>
-  <a onclick="openMemoriesModal()"><b>📷</b>גלריה</a>
-  <a onclick="openAround()"><b>📍</b>סביבי</a>
-  <a onclick="openTickets()"><b>🎟️</b>כרטיסים</a>
+  <a onclick="openTicketsModal()"><b>🎟️</b>כרטיסים</a>
+  <a onclick="openEmergencyModal()"><b>🆘</b>חירום</a>
 </nav>
 
-<!-- Modals -->
-<div class="modal" id="ticketsModal" onclick="closeTicketsBackdrop(event)">
-  <div class="sheet">
-    <div class="sheet-head">
-      <div><small style="color:var(--muted)">הארנק המשפחתי</small><h2 style="margin:2px 0 0; color:var(--text)">🎟️ כרטיסים וכניסות</h2></div>
-      <button class="close" onclick="closeTickets()" type="button">✕</button>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
-      <button onclick="showTicketUpload()" style="padding:12px;border-radius:var(--radius-sm);background:var(--primary);color:var(--primary-text);font-weight:700;cursor:pointer;border:0">➕ הוסף כרטיס</button>
-      <button onclick="addTicketFolder()" style="padding:12px;border-radius:var(--radius-sm);background:var(--surface-subtle);color:var(--text);font-weight:600;cursor:pointer;border:1px solid var(--line)">📁 תקייה חדשה</button>
-    </div>
-    <div id="ticketUploadBox" style="display:none;background:var(--surface-subtle);padding:14px;border-radius:var(--radius-sm);border:1px solid var(--line);margin-bottom:14px">
-      <label style="font-size:12px;font-weight:600">בחר תקייה:</label>
-      <select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)" style="width:100%;padding:10px;border-radius:10px;margin:4px 0 10px;background:#fff;color:#111;border:1px solid var(--line)"></select>
-      <label style="font-size:12px;font-weight:600">שם הכרטיס:</label>
-      <input id="ticketTitle" placeholder="לדוגמה: כרטיס כניסה" type="text" style="width:100%;padding:10px;border-radius:10px;margin:4px 0 10px;background:#fff;color:#111;border:1px solid var(--line)"/>
-      <input accept="image/*" capture="environment" id="ticketCameraInput" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
-      <input accept="image/*,application/pdf" id="ticketUploadInput" multiple="" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <button onclick="document.getElementById('ticketCameraInput').click()" style="padding:10px;border-radius:10px;background:var(--surface);color:var(--text);border:1px solid var(--line);cursor:pointer">📷 צלם</button>
-        <button onclick="document.getElementById('ticketUploadInput').click()" style="padding:10px;border-radius:10px;background:var(--surface);color:var(--text);border:1px solid var(--line);cursor:pointer">📎 העלה קובץ</button>
-      </div>
-    </div>
-    <h3 style="font-size:15px;margin:12px 0 6px; color:var(--text)">תקיות שמורות</h3>
-    <div class="ticket-folder-grid" id="ticketFolderGrid"></div>
-    <div id="ticketCurrentTitle" style="font-weight:700;margin-top:16px;font-size:14px; color:var(--text)"></div>
-    <div id="ticketFileList"></div>
-  </div>
-</div>
-
-<div class="modal" id="aroundModal" onclick="closeAroundBackdrop(event)">
-  <div class="sheet">
-    <div class="sheet-head">
-      <h2 style="margin:0; color:var(--text)">📍 Around Me</h2>
-      <button class="close" onclick="closeAround()" type="button">✕</button>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-      <button onclick="searchNearby('supermarket')" style="padding:14px;border-radius:var(--radius-sm);background:var(--primary);color:var(--primary-text);font-weight:700;border:0;cursor:pointer">🛒 סופרמרקט</button>
-      <button onclick="searchNearby('restaurants')" style="padding:14px;border-radius:var(--radius-sm);background:var(--surface-subtle);color:var(--text);font-weight:600;border:1px solid var(--line);cursor:pointer">🍝 מסעדות</button>
-      <button onclick="searchNearby('gelato')" style="padding:14px;border-radius:var(--radius-sm);background:var(--surface-subtle);color:var(--text);font-weight:600;border:1px solid var(--line);cursor:pointer">🍦 גלידריה</button>
-      <button onclick="searchNearby('pharmacy')" style="padding:14px;border-radius:var(--radius-sm);background:var(--surface-subtle);color:var(--text);font-weight:600;border:1px solid var(--line);cursor:pointer">💊 בית מרקחת</button>
-    </div>
+<!-- Double Click Detail Modal -->
+<div class="modal" id="detailModal" onclick="if(event.target===this)closeDetailModal()">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeDetailModal()">✕</button>
+    <div id="modalBody"></div>
   </div>
 </div>
 
 <script>
-const tripDays = [{"date":"2026-09-30","label":"רביעי · 30.09.2026","title":"נחיתה והגעה למלון","icon":"✈️","challenge":"לצלם את התמונה המשפחתית הראשונה באיטליה.","stops":[{"time":"16:00","name":"נחיתה בנמל התעופה وרונה","dest":"Verona Villafranca Airport","note":"איסוף מזוודות ורכב שכור."},{"time":"18:00","name":"נסיעה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"צ׳ק-אין, התארגנות וארוחת ערב רגועה באזור."}]},{"date":"2026-10-01","label":"חמישי · 01.10.2026","title":"Gardaland – יום פארק מלא","icon":"🎢","challenge":"לבחור יחד את שלושת המתקנים הכי טובים של היום.","stops":[{"time":"08:30","name":"יציאה מהמלון ל-Gardaland","dest":"Gardaland Resort, Via Derna 4, Castelnuovo del Garda","note":"לצאת מוקדם ולהגיע בנחת לפני הכניסה."},{"time":"09:00","name":"חניה וכניסה ל-Gardaland","dest":"Gardaland Parking, Castelnuovo del Garda","note":"לשמור באפליקציה את מיקום הרכב ולצלם את אזור החניה."},{"time":"בוקר","name":"מתקני הדגל – סבב ראשון","dest":"Gardaland Resort","note":"להתחיל במתקנים המבוקשים ביותר לפני שהתורים מתארכים."},{"time":"13:00","name":"ארוחת צהריים והפסקה","dest":"Gardaland Resort","note":"הפסקה קצרה, מים וטעינת טלפונים אם צריך."},{"time":"אחה״צ","name":"המשך Gardaland","dest":"Gardaland Resort","note":"מופעים, מתקנים נוספים וחזרה למועדפים לפי התורים."},{"time":"ערב","name":"חזרה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"ניווט ישיר למלון ומנוחה."}]},{"date":"2026-10-02","label":"שישי · 02.10.2026","title":"סובב אגם גארדה + ראפטינג","icon":"🚣","challenge":"לצלם תמונה משפחתית אחת עם האגם ואחת מהראפטינג.","stops":[{"time":"08:00","name":"יציאה צפונה לאורך החוף המזרחי","dest":"Malcesine, Italy","note":"נסיעה נופית לאורך האגם. עצירת קפה קצרה אם מתחשק."},{"time":"09:15","name":"מלצ׳סינה – טיילת והעיר העתיקה","dest":"Malcesine Centro, Italy","note":"טיול קצר בעיר העתיקה ובטיילת; לא עולים היום למונטה באלדו כדי לשמור זמן לראפטינג."},{"time":"10:30","name":"המשך צפונה לריבה דל גארדה","dest":"Riva del Garda, Italy","note":"עצירה על שפת האגם, תמונות וסיבוב קצר במרכז."},{"time":"12:00","name":"נסיעה דרך החוף המערבי","dest":"Limone sul Garda, Italy","note":"עוברים לצד המערבי ועוצרים בלימונה לארוחת צהריים קלה."},{"time":"14:30","name":"יציאה לראפטינג ב-Valdadige","dest":"Visit Valdadige, Via San Martino, Volargne, Italy","note":"ראפטינג משפחתי על נהר האדיג׳ה. הפעילות מפורסמת כזמינה מרץ–נובמבר; יש להזמין מראש ולאשר שעה ל-2/10."},{"time":"לפי ההזמנה","name":"ראפטינג – קניון Ceraino","dest":"Visit Valdadige, Volargne, Italy","note":"כ-10 ק״מ על הנהר עם מדריך. להביא בגדים ונעליים להחלפה ומגבות."},{"time":"ערב","name":"חזרה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"מקלחת, ארוחת ערב ומנוחה."}]},{"date":"2026-10-03","label":"שבת · 03.10.2026","title":"Movieland + Medieval Times","icon":"🎬","challenge":"לצלם סלפי משפחתי שנראה כמו פוסטר של סרט.","stops":[{"time":"בוקר","name":"יציאה ל-Movieland","dest":"Movieland The Hollywood Park, Via Fossalta 58, Lazise","note":"להגיע לקראת הפתיחה ולהתחיל במתקנים המרכזיים."},{"time":"בוקר–אחה״צ","name":"Movieland – יום סרטים ואקשן","dest":"Movieland The Hollywood Park, Via Fossalta 58, Lazise","note":"לשלב מתקנים ומופעים ולהשאיר זמן למנוחה לפני האבירים."},{"time":"אחה״צ","name":"הפסקה והתארגנות למופע","dest":"Medieval Times, Via Fossalta 58, Lazise","note":"הפארק והמופע באותו מתחם; לבדוק באותו יום את שעת הכניסה המדויקת."},{"time":"לפי הכרטיס","name":"Medieval Times – מופע האבירים","dest":"Medieval Times, Via Fossalta 58, Lazise","note":"מופע ערב וארוחה. לשמור את הכרטיסים גם כצילום מסך."},{"time":"ערב","name":"חזרה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"חזרה ישירה אחרי המופע."}]},{"date":"2026-10-04","label":"ראשון · 04.10.2026","title":"ונציה – יום מלא","icon":"🛶","challenge":"למצוא גשר קטן ויפה מחוץ למסלול הראשי ולצלם עליו תמונה משפחתית.","stops":[{"time":"07:30","name":"יציאה מוקדמת מהמלון לוונציה","dest":"Venezia Tronchetto Parking, Isola Nova del Tronchetto, Venezia","note":"יום ארוך – עדיף לצאת מוקדם. לשמור צילום של מיקום הרכב והקומה."},{"time":"09:30","name":"Tronchetto – חניה ומעבר למרכז","dest":"Venezia Tronchetto Parking","note":"משם Vaporetto/People Mover לכיוון המרכז. אין כניסה עם הרכב לעיר עצמה."},{"time":"10:15","name":"כיכר סן מרקו","dest":"Piazza San Marco, Venezia","note":"כיכר סן מרקו, הבזיליקה מבחוץ/מבפנים לפי התור, ארמון הדוג׳ה וגשר האנחות."},{"time":"12:30","name":"ארוחת צהריים וסמטאות ונציה","dest":"Campo Santa Maria Formosa, Venezia","note":"להתרחק מעט מסן מרקו, לאכול וליהנות מהסמטאות והכיכרות הקטנות."},{"time":"14:00","name":"גשר ריאלטו והשוק","dest":"Ponte di Rialto, Venezia","note":"הליכה לריאלטו, תצפית על התעלה הגדולה וזמן לגלידה וקניות קטנות."},{"time":"15:30","name":"שיט Vaporetto על התעלה הגדולה","dest":"Rialto, Venezia","note":"לשלב שיט כחלק מהחוויה ולא רק כאמצעי תחבורה."},{"time":"17:00","name":"זמן חופשי בוונציה","dest":"Dorsoduro, Venezia","note":"שיטוט רגוע באזור פחות עמוס; אפשר לוותר אם עייפים."},{"time":"18:30","name":"חזרה ל-Tronchetto","dest":"Venezia Tronchetto Parking","note":"לחזור לרכב לפני שמחשיך מדי ולבדוק שכולם זוכרים איפה חנינו."},{"time":"19:00","name":"נסיעה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"חזרה למלון וארוחת ערב."}]},{"date":"2026-10-05","label":"שני · 05.10.2026","title":"Borghetto sul Mincio + Valeggio","icon":"🏘️","challenge":"למצוא את הפינה הכי יפה בין טחנות המים ולצלם תמונת בת מצווה מיוחדת.","stops":[{"time":"09:30","name":"יציאה ל-Borghetto sul Mincio","dest":"Borghetto sul Mincio, Valeggio sul Mincio, Italy","note":"יום רגוע וקרוב יחסית למלון."},{"time":"10:00","name":"Borghetto – הכפר והטחנות","dest":"Borghetto sul Mincio, Italy","note":"טיול רגלי בין הנהר, הגשרים וטחנות המים של הכפר."},{"time":"11:30","name":"Ponte Visconteo ותצפיות","dest":"Ponte Visconteo, Valeggio sul Mincio, Italy","note":"נקודת צילום נהדרת של הכפר והנהר."},{"time":"12:30","name":"ארוחת צהריים – Tortellini di Valeggio","dest":"Valeggio sul Mincio, Italy","note":"לטעום את הטורטליני המקומיים המכונים Nodo d’Amore – קשר האהבה."},{"time":"14:00","name":"Parco Giardino Sigurtà","dest":"Parco Giardino Sigurtà, Valeggio sul Mincio, Italy","note":"אם פתוח ומזג האוויר נעים – כמה שעות של גנים, מרחבים ותמונות. אם לא, ממשיכים למרכז Valeggio."},{"time":"17:00","name":"Valeggio sul Mincio","dest":"Valeggio sul Mincio Centro, Italy","note":"קפה/גלידה וסיבוב קצר לפני החזרה."},{"time":"18:00","name":"חזרה למלון","dest":"Bio Agriturismo Vojon, Ponti sul Mincio, Italy","note":"ערב רגוע ואריזת מזוודות לקראת הטיסה."}]},{"date":"2026-10-06","label":"שלישי · 06.10.2026","title":"ורונה + הטיסה הביתה","icon":"❤️","challenge":"לבחור יחד את רגע השיא של כל הטיול.","stops":[{"time":"09:00","name":"צ׳ק-אאוט ויציאה לוורונה","dest":"Parcheggio Cittadella, Piazza Cittadella, Verona","note":"המזוודות נשארות ברכב – לא להשאיר חפצים גלויים."},{"time":"10:00","name":"Piazza Bra וה-Arena","dest":"Arena di Verona, Piazza Bra, Verona","note":"פתיחה קלאסית של وרונה: הכיכר והאמפיתיאטרון הרומי."},{"time":"11:00","name":"Via Mazzini","dest":"Via Giuseppe Mazzini, Verona","note":"מדרחוב יפה בדרך אל לב העיר."},{"time":"11:30","name":"הבית והמרפסת של יוליה","dest":"Casa di Giulietta, Via Cappello 23, Verona","note":"החצר והמרפסת המפורסמת של יוליה. אם רוצים להיכנס לבית – לבדוק כרטיסים מראש."},{"time":"12:15","name":"Piazza delle Erbe","dest":"Piazza delle Erbe, Verona","note":"אחת הכיכרות היפות בעיר; זמן לקפה, תמונות ושוק."},{"time":"13:00","name":"ארוחת צהריים במרכז وרונה","dest":"Piazza dei Signori, Verona","note":"ארוחה אחרונה באיטליה בלי להתרחק מדי מהחניה."},{"time":"15:00","name":"חזרה לרכב","dest":"Parcheggio Cittadella, Piazza Cittadella, Verona","note":"להתאים את השעה בפועל לשעת הטיסה ולתנאי החזרת הרכב."},{"time":"18:30","name":"החזרת הרכב בשדה התעופה","dest":"Verona Villafranca Airport","note":"להשאיר זמן לתדלוק, החזרת הרכב, בידוק וביטחון."}]}];
+const tripDays = [
+  {date:"2026-09-30", label:"רביעי · 30.09.2026", title:"נחיתה והגעה למלון", icon:"✈️", challenge:"לצלם את התמונה המשפחתית הראשונה באיטליה.", stops:[
+    {time:"16:00", name:"נחיתה בנמל התעופה وרונה", dest:"Verona Villafranca Airport", note:"איסוף מזוודות ורכב שכור."},
+    {time:"18:00", name:"נסיעה למלון", dest:"Bio Agriturismo Vojon, Ponti sul Mincio, Italy", note:"צ׳ק-אין, התארגנות וארוחת ערב רגועה באזור."}
+  ]},
+  {date:"2026-10-01", label:"חמישי · 01.10.2026", title:"Gardaland – יום פארק מלא", icon:"🎢", challenge:"לבחור יחד את שלושת המתקנים הכי טובים של היום.", stops:[
+    {time:"08:30", name:"יציאה מהמלון ל-Gardaland", dest:"Gardaland Resort", note:"לצאת מוקדם ולהגיע בנחת לפני הכניסה."},
+    {time:"09:00", name:"חניה וכניסה ל-Gardaland", dest:"Gardaland Parking", note:"לשמור באפליקציה את מיקום הרכב."},
+    {time:"13:00", name:"ארוחת צהריים והפסקה", dest:"Gardaland Resort", note:"הפסקה קצרה, מים וטעינת טלפונים."}
+  ]},
+  {date:"2026-10-02", label:"שישי · 02.10.2026", title:"סובב אגם גארדה + ראפטינג", icon:"🚣", challenge:"לצלם תמונה משפחתית אחת עם האגם ואחת מהראפטינג.", stops:[
+    {time:"08:00", name:"יציאה צפונה לאורך החוף המזרחי", dest:"Malcesine, Italy", note:"נסיעה נופית לאורך האגם."},
+    {time:"14:30", name:"יציאה לראפטינג ב-Valdadige", dest:"Visit Valdadige, Volargne, Italy", note:"ראפטינג משפחתי על נהר האדיג׳ה."}
+  ]},
+  {date:"2026-10-03", label:"שבת · 03.10.2026", title:"Movieland + Medieval Times", icon:"🎬", challenge:"לצלם סלפי משפחתי שנראה כמו פוסטר של סרט.", stops:[
+    {time:"09:00", name:"יציאה ל-Movieland", dest:"Movieland The Hollywood Park", note:"יום סרטים ואקשן."},
+    {time:"20:00", name:"Medieval Times – מופע האבירים", dest:"Medieval Times Lazise", note:"מופע ערב וארוחה."}
+  ]},
+  {date:"2026-10-04", label:"ראשון · 04.10.2026", title:"ונציה – יום מלא", icon:"🛶", challenge:"למצוא גשר קטן ויפה מחוץ למסלול הראשי.", stops:[
+    {time:"07:30", name:"יציאה מוקדמת מהמלון לוונציה", dest:"Venezia Tronchetto Parking", note:"חניית טרונקטו ומעבר למרכז."},
+    {time:"10:15", name:"כיכר סן מרקו", dest:"Piazza San Marco, Venezia", note:"סיור בכיכר ובסביבתה."}
+  ]},
+  {date:"2026-10-05", label:"שני · 05.10.2026", title:"Borghetto sul Mincio + Valeggio", icon:"🏘️", challenge:"לצלם תמונת בת מצווה מיוחדת בין טחנות המים.", stops:[
+    {time:"10:00", name:"Borghetto – הכפר והטחנות", dest:"Borghetto sul Mincio, Italy", note:"טיול רגלי בין הנהר והגשרים."},
+    {time:"12:30", name:"ארוחת צהריים – Tortellini", dest:"Valeggio sul Mincio, Italy", note:"טעימת הטורטליני המקומי."}
+  ]},
+  {date:"2026-10-06", label:"שלישי · 06.10.2026", title:"ורונה + הטיסה הביתה", icon:"❤️", challenge:"לבחור יחד את רגע השיא של כל הטיול.", stops:[
+    {time:"09:00", name:"צ׳ק-אאוט ויציאה לוורונה", dest:"Parcheggio Cittadella Verona", note:"סיור קצר בוורונה והבית של יוליה."},
+    {time:"18:30", name:"החזרת הרכב בשדה התעופה", dest:"Verona Villafranca Airport", note:"טיסה חזרה הביתה."}
+  ]}
+];
 
-function renderFullTripDays() {
+function renderDays() {
   const container = document.getElementById('days');
-  if (!container) return;
   container.innerHTML = tripDays.map((day, di) => `
-    <section class="day-card" data-date="${day.date}" id="day-${di}">
+    <section class="day-card" id="day-${di}">
       <div class="day-head">
-        <div><span class="date">${day.label}</span><h2>${day.title}</h2></div>
-        <div class="day-icon">${day.icon}</div>
+        <div>
+          <span class="day-date">${day.label}</span>
+          <h2>${day.icon} ${day.title}</h2>
+        </div>
       </div>
-      <div class="challenge">🎯 <b>אתגר היום:</b> ${day.challenge}</div>
-      <div class="stops">
+      <div style="font-size:12px; color:var(--muted); margin-bottom:12px; background:var(--surface-hover); padding:8px 12px; border-radius:8px;">
+        <b>אתגר:</b> ${day.challenge}
+      </div>
+      <div>
         ${day.stops.map((stop, si) => `
-          <article class="stop" data-day="${di}" data-stop="${si}">
+          <div class="stop-card" ondblclick="openDetail('${stop.name}', '${stop.note}', '${stop.dest}')" title="לחץ כפולה לפרטים מלאים">
             <div class="stop-top">
-              <span class="time">${stop.time}</span>
-              <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)">
-                <input data-key="day${di}-stop${si}" type="checkbox" style="accent-color:var(--primary);width:16px;height:16px"/><span>בוצע</span>
-              </label>
+              <h3 class="stop-title">${stop.name}</h3>
+              <span class="stop-time">${stop.time}</span>
             </div>
-            <h3>${stop.name}</h3>
-            <p>${stop.note}</p>
-            <div class="stop-actions-grid">
-              <button class="stop-action-btn" onclick="openTicketsForActivity(${di},${si},'camera')">📷 צלם כרטיס</button>
-              <button class="stop-action-btn" onclick="openTicketsForActivity(${di},${si},'upload')">📁 העלה קובץ</button>
-              <a class="stop-action-btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}">📍 Maps</a>
-              <a class="stop-action-btn" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes">🚗 Waze</a>
+            <p class="stop-desc">${stop.note}</p>
+            <div class="stop-links">
+              <a class="stop-link" href="https://www.waze.com/ul?q=${encodeURIComponent(stop.dest)}&navigate=yes" onclick="event.stopPropagation()">🚗 Waze</a>
+              <a class="stop-link" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stop.dest)}" onclick="event.stopPropagation()" target="_blank">📍 Maps</a>
             </div>
-          </article>
+          </div>
         `).join('')}
       </div>
     </section>
@@ -344,118 +251,32 @@ function showDay(index) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderFullTripDays();
-});
-
-function openAround() { document.getElementById('aroundModal').classList.add('open'); }
-function closeAround() { document.getElementById('aroundModal').classList.remove('open'); }
-function closeAroundBackdrop(e) { if (e.target.id === 'aroundModal') closeAround(); }
-function searchNearby(term) {
-  closeAround();
-  window.location.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(term + ' near me');
-}
-
-// Tickets IndexedDB Wallet
-const TICKET_DEFAULT_FOLDERS = ['✈️ טיסות ורכב', '🏡 מלון', '🎢 Gardaland', '🚣 ראפטינג', '🎬 Movieland', '🏰 Medieval Times', '🚤 ונציה'];
-let ticketDb = null, ticketActiveFolder = '🎢 Gardaland';
-
-function ticketFolders() {
-  try { const x = JSON.parse(localStorage.getItem('garda-ticket-folders') || 'null'); return Array.isArray(x) && x.length ? x : TICKET_DEFAULT_FOLDERS.slice(); } catch { return TICKET_DEFAULT_FOLDERS.slice(); }
-}
-function saveTicketFolders(x) { localStorage.setItem('garda-ticket-folders', JSON.stringify(x)); }
-
-function openTicketDb() {
-  return new Promise((resolve, reject) => {
-    if (ticketDb) return resolve(ticketDb);
-    const req = indexedDB.open('gardaTicketsDB', 1);
-    req.onupgradeneeded = () => {
-      const db = req.result;
-      if (!db.objectStoreNames.contains('files')) {
-        const st = db.createObjectStore('files', { keyPath: 'id', autoIncrement: true });
-        st.createIndex('folder', 'folder', { unique: false });
-      }
-    };
-    req.onsuccess = () => { ticketDb = req.result; resolve(ticketDb); };
-    req.onerror = () => reject(req.error);
-  });
-}
-
-async function openTickets() {
-  document.getElementById('ticketsModal').classList.add('open');
-  await openTicketDb();
-  renderTicketFolders();
-  renderTicketFiles();
-}
-function closeTickets() { document.getElementById('ticketsModal').classList.remove('open'); }
-function closeTicketsBackdrop(e) { if (e.target.id === 'ticketsModal') closeTickets(); }
-
-function showTicketUpload() {
-  const box = document.getElementById('ticketUploadBox');
-  box.style.display = box.style.display === 'none' ? 'block' : 'none';
-  document.getElementById('ticketFolderSelect').innerHTML = ticketFolders().map(f => `<option ${f===ticketActiveFolder?'selected':''}>${f}</option>`).join('');
-}
-function addTicketFolder() {
-  const name = prompt('שם התקייה החדשה:');
-  if (!name || !name.trim()) return;
-  const f = ticketFolders();
-  const clean = '📁 ' + name.trim();
-  if (!f.includes(clean)) f.push(clean);
-  saveTicketFolders(f);
-  ticketActiveFolder = clean;
-  renderTicketFolders();
-  renderTicketFiles();
-}
-function selectTicketFolder(f) { ticketActiveFolder = f; renderTicketFolders(); renderTicketFiles(); }
-function renderTicketFolders() {
-  document.getElementById('ticketFolderGrid').innerHTML = ticketFolders().map(f => `
-    <div class="ticket-folder ${f===ticketActiveFolder?'active':''}" onclick="selectTicketFolder('${f}')">
-      <strong>${f}</strong><small>הצג קבצים</small>
+function openDetail(name, note, dest) {
+  document.getElementById('modalBody').innerHTML = `
+    <h3 style="margin-top:0; font-size:18px;">${name}</h3>
+    <p style="color:var(--muted); font-size:14px; line-height:1.5;">${note}</p>
+    <p style="font-size:13px; font-weight:600; margin-top:16px;">יעד לניווט: ${dest}</p>
+    <div style="display:flex; gap:10px; margin-top:20px;">
+      <a href="https://www.waze.com/ul?q=${encodeURIComponent(dest)}&navigate=yes" style="flex:1; padding:12px; background:var(--primary); color:#fff; text-align:center; border-radius:8px; font-weight:700; font-size:13px;">נווט ב-Waze</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dest)}" target="_blank" style="flex:1; padding:12px; background:var(--surface-hover); color:var(--text); text-align:center; border-radius:8px; font-weight:700; font-size:13px; border:1px solid var(--line-dark);">פתח במפות</a>
     </div>
-  `).join('');
-  document.getElementById('ticketFolderSelect').innerHTML = ticketFolders().map(f => `<option ${f===ticketActiveFolder?'selected':''}>${f}</option>`).join('');
+  `;
+  document.getElementById('detailModal').classList.add('open');
 }
 
-async function saveTicketFiles(fileList) {
-  const files = [...fileList]; if (!files.length) return;
-  const folder = document.getElementById('ticketFolderSelect').value || ticketActiveFolder;
-  const title = document.getElementById('ticketTitle').value.trim();
-  const db = await openTicketDb();
-  await Promise.all(files.map((file, i) => new Promise((resolve, reject) => {
-    const tx = db.transaction('files', 'readwrite');
-    tx.objectStore('files').add({ folder, title: title || file.name, name: file.name, type: file.type, size: file.size, created: Date.now(), blob: file });
-    tx.oncomplete = resolve; tx.onerror = () => reject(tx.error);
-  })))
-  document.getElementById('ticketTitle').value = '';
-  document.getElementById('ticketUploadBox').style.display = 'none';
-  renderTicketFiles();
+function closeDetailModal() {
+  document.getElementById('detailModal').classList.remove('open');
 }
 
-async function getTicketFiles(folder) {
-  const db = await openTicketDb();
-  return new Promise((resolve, reject) => {
-    const tx = db.transaction('files', 'readonly');
-    const req = tx.objectStore('files').index('folder').getAll(folder);
-    req.onsuccess = () => resolve(req.result.sort((a,b) => b.created - a.created));
-    req.onerror = () => reject(req.error);
-  });
+function openTicketsModal() {
+  alert('ארנק הכרטיסים ייפתח כאן.');
 }
 
-async function openTicketsForActivity(di, si, mode) {
-  const day = tripDays[di];
-  const stop = day.stops[si];
-  const folder = `🎟️ ${day.date} · ${stop.name}`;
-  const folders = ticketFolders();
-  if (!folders.includes(folder)) { folders.unshift(folder); saveTicketFolders(folders); }
-  ticketActiveFolder = folder;
-  openTickets();
-  if (mode === 'camera') setTimeout(() => document.getElementById('ticketCameraInput')?.click(), 100);
-  if (mode === 'upload') setTimeout(() => document.getElementById('ticketUploadInput')?.click(), 100);
+function openEmergencyModal() {
+  alert('מספרי חירום: 112');
 }
 
-function openMemoriesModal() {
-  alert('גלריית הזיכרונות והאתגרים תפתח כאן.');
-}
+document.addEventListener('DOMContentLoaded', renderDays);
 </script>
 
 </body>
