@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip CleanText Edition" name="application-name"/>
+<meta content="Garda Trip Perfect Cards" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -177,14 +177,14 @@ button, input, select { font: inherit; }
 .nav-btn.maps-btn { border-color: rgba(0,122,255,0.3); color: #0051a8; }
 
 /* Modals */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(6px); padding: 20px; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(6px); padding: 16px; }
 .modal.open { display: flex; }
 .modal-content {
-  background: var(--surface); width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; border-radius: var(--radius);
-  padding: 26px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); border: 1px solid var(--line-dark);
+  background: var(--surface); width: 100%; max-width: 480px; max-height: 88vh; overflow-y: auto; border-radius: var(--radius);
+  padding: 22px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); border: 1px solid var(--line-dark);
   position: relative;
 }
-.modal-close { position: absolute; top: 18px; left: 18px; border: 0; background: var(--bg); width: 34px; height: 34px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-dark); color: var(--muted); }
+.modal-close { position: absolute; top: 16px; left: 16px; border: 0; background: var(--bg); width: 32px; height: 32px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-dark); color: var(--muted); }
 
 .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
 .modal-btn {
@@ -196,11 +196,11 @@ button, input, select { font: inherit; }
 .emergency-btn { background: rgba(255,59,48,0.06); color: var(--red); border-color: rgba(255,59,48,0.25); }
 
 /* --- Wallet Styles --- */
-.wallet-container { display: flex; flex-direction: column; gap: 18px; }
-.wallet-header-box { border-bottom: 1px solid var(--line-dark); padding-bottom: 14px; }
+.wallet-container { display: flex; flex-direction: column; gap: 16px; }
+.wallet-header-box { border-bottom: 1px solid var(--line-dark); padding-bottom: 12px; }
 .wallet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .wallet-main-btn {
-  padding: 14px; border-radius: 14px; font-weight: 700; font-size: 14px; cursor: pointer; border: 1px solid var(--line-dark);
+  padding: 13px; border-radius: 14px; font-weight: 700; font-size: 13px; cursor: pointer; border: 1px solid var(--line-dark);
   display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: var(--shadow); transition: all 0.2s ease;
 }
 .wallet-main-btn.primary { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
@@ -208,69 +208,71 @@ button, input, select { font: inherit; }
 .wallet-main-btn:hover { opacity: 0.92; transform: translateY(-1px); }
 
 .ticket-upload-box {
-  background-color: #f2f2f7; padding: 20px; border-radius: 18px; border: 1.5px solid var(--line-dark);
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 14px;
+  background-color: #f2f2f7; padding: 18px; border-radius: 16px; border: 1.5px solid var(--line-dark);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.03); display: flex; flex-direction: column; gap: 12px;
 }
 .ticket-upload-box label { font-size: 12px; font-weight: 700; color: var(--muted); display: block; margin-bottom: 4px; }
 .ticket-upload-box select, .ticket-upload-box input[type="text"] {
-  width: 100%; padding: 12px 14px; border-radius: 12px; background: #fff; color: var(--text);
-  border: 1px solid var(--line-dark); font-size: 14px; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+  width: 100%; padding: 11px 12px; border-radius: 12px; background: #fff; color: var(--text);
+  border: 1px solid var(--line-dark); font-size: 13px; outline: none; box-shadow: 0 1px 2px rgba(0,0,0,0.02);
 }
-.upload-options-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.upload-options-grid { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
 .upload-opt-btn {
-  width: 100%; padding: 14px; border-radius: 12px; background: #ffffff; color: var(--text);
-  border: 1.5px solid var(--line-dark); font-weight: 700; cursor: pointer; font-size: 14px;
-  display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  width: 100%; padding: 13px; border-radius: 12px; background: #ffffff; color: var(--text);
+  border: 1px solid var(--line-dark); font-weight: 700; cursor: pointer; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);
   transition: all 0.2s ease;
 }
 .upload-opt-btn:hover { background: var(--surface-hover); border-color: var(--accent); }
 
-.ticket-folder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ticket-folder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .ticket-folder {
-  text-align: right; padding: 16px 18px; border-radius: 16px; background: var(--surface);
+  text-align: right; padding: 14px 16px; border-radius: 14px; background: var(--surface);
   border: 1.5px solid var(--line-dark); cursor: pointer; color: var(--text); box-shadow: var(--shadow);
-  display: flex; flex-direction: column; justify-content: center; min-height: 75px;
+  display: flex; flex-direction: column; justify-content: center; min-height: 70px;
   transition: transform 0.1s ease, border-color 0.2s ease;
 }
 .ticket-folder:active { transform: scale(0.98); }
-.ticket-folder strong { display: block; font-size: 14px; margin-bottom: 4px; color: var(--text); font-weight: 700; }
-.ticket-folder small { color: var(--muted); font-size: 12px; font-weight: 500; }
-.ticket-folder.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+.ticket-folder strong { display: block; font-size: 13px; margin-bottom: 3px; color: var(--text); font-weight: 700; }
+.ticket-folder small { color: var(--muted); font-size: 11px; font-weight: 500; }
+.ticket-folder.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
 .ticket-folder.active small { color: rgba(255,255,255,0.75); }
 
-/* Booking style cards layout */
+/* Booking style cards layout - FIXED width & padding */
 .ticket-grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
   margin-top: 10px;
+  width: 100%;
 }
 
 .ticket-file {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  gap: 14px;
-  padding: 14px;
-  border-radius: 16px;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 14px;
   background: var(--surface);
   border: 1.5px solid var(--line-dark);
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: all 0.2s ease;
+  overflow: hidden;
 }
 .ticket-file:hover { border-color: var(--accent); transform: translateY(-2px); }
 
 .ticket-thumb {
-  width: 68px;
-  height: 68px;
-  border-radius: 12px;
+  width: 58px;
+  height: 58px;
+  border-radius: 10px;
   background: #e5e5ea;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  font-size: 24px;
   flex-shrink: 0;
   border: 1px solid var(--line);
 }
@@ -280,45 +282,49 @@ button, input, select { font: inherit; }
   overflow: hidden;
   flex: 1;
   text-align: right;
+  min-width: 0;
 }
 .ticket-info b {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 .ticket-info small {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 500;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .delete-ticket-btn {
   background: rgba(255,59,48,0.08);
   color: var(--red);
   border: 0;
-  padding: 4px 8px;
+  padding: 3px 7px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
 }
 
 /* Full Screen Viewer */
-#fullViewerModal { z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
-.full-viewer-content { background: #ffffff; width: 100%; max-width: 850px; height: 88vh; border-radius: 24px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line-dark); box-shadow: 0 30px 60px rgba(0,0,0,0.25); }
-.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: #f5f5f7; color: #1d1d1f; font-weight: 700; border-bottom: 1px solid var(--line-dark); }
-.full-viewer-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 16px; background: #fbfbfd; }
-.full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow); }
+#fullViewerModal { z-index: 3000; align-items: center; justify-content: center; padding: 16px; }
+.full-viewer-content { background: #ffffff; width: 100%; max-width: 800px; height: 85vh; border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line-dark); box-shadow: 0 30px 60px rgba(0,0,0,0.25); }
+.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #f5f5f7; color: #1d1d1f; font-weight: 700; border-bottom: 1px solid var(--line-dark); }
+.full-viewer-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 14px; background: #fbfbfd; }
+.full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; box-shadow: var(--shadow); }
 </style>
 </head>
-<body data-garda-version="V105-CleanTextFixed">
+<body data-garda-version="V106-OverflowFixed">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -724,7 +730,7 @@ async function openFullViewer(id) {
     document.getElementById('fullViewerTitle').textContent = x.title || x.name;
     
     if (x.isFlightInfo) {
-      body.innerHTML = `<div dir="rtl" style="text-align:right; padding:20px; font-size:14px; line-height:1.8;">
+      body.innerHTML = `<div dir="rtl" style="text-align:right; padding:15px; font-size:14px; line-height:1.8;">
         <h3 style="color:var(--accent); margin-top:0;">✈️ פרטי טיסה – ישראייר</h3>
         <p><b>מספר הזמנה (Docket):</b> <span dir="ltr" style="display:inline-block">4623652</span>[cite: 1]</p>
         <p><b>טיסת הלוך (30.09.2026):</b><br>
@@ -744,7 +750,7 @@ async function openFullViewer(id) {
         </ul>
       </div>`;
     } else if (x.isInsuranceInfo) {
-      body.innerHTML = `<div dir="rtl" style="text-align:right; padding:20px; font-size:14px; line-height:1.8;">
+      body.innerHTML = `<div dir="rtl" style="text-align:right; padding:15px; font-size:14px; line-height:1.8;">
         <h3 style="color:var(--accent); margin-top:0;">🛡️ ביטוח נסיעות לחו"ל – AIG</h3>
         <p><b>מספר פוליסה:</b> <span dir="ltr" style="display:inline-block">170270213826</span>[cite: 2]</p>
         <p><b>מוקד חירום רפואי 24/7 (עברית)[cite: 2]:</b></p>
