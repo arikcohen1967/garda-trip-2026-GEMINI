@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Clean Light V66" name="application-name"/>
+<meta content="Garda Trip Perfect Dock V67" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026 · Clean Light</title>
 <style>
 :root {
@@ -36,7 +36,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg) !important;
   color: var(--text) !important;
-  padding-bottom: calc(100px + env(safe-area-inset-bottom));
+  /* מרווח תחתון מוגדל כדי ששום תוכן לא יוסתר תחת התפריט הצף */
+  padding-bottom: calc(130px + env(safe-area-inset-bottom)) !important;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -90,7 +91,7 @@ button, input, select { font: inherit; }
 }
 .day-tab.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
 
-/* Day Cards & Stops - מוסתרים כברירת מחדל, מוצגים רק לפי בחירת הטאב */
+/* Day Cards & Stops */
 .day-card {
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   margin: 16px 0; padding: 18px; box-shadow: var(--shadow);
@@ -142,20 +143,41 @@ button, input, select { font: inherit; }
 }
 .stop-action-btn:hover { background: #eaeaed; }
 
-/* Bottom Dock */
+/* Bottom Dock - מתוקן, צף ונמוך מבלי להסתיר כלום */
 .bottom-nav {
-  position: fixed !important; z-index: 1000; left: 14px !important; right: 14px !important; bottom: 10px !important;
-  max-width: 500px; margin: 0 auto !important; padding: 6px; min-height: 60px;
-  background: rgba(255, 255, 255, 0.9); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
-  border: 1px solid var(--line-strong); border-radius: 22px; box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;
+  position: fixed !important;
+  z-index: 1000;
+  left: 16px !important;
+  right: 16px !important;
+  bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+  max-width: 480px;
+  margin: 0 auto !important;
+  padding: 6px;
+  min-height: 56px;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--line-strong);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
 }
 .bottom-nav a {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 700; color: var(--muted); padding: 4px; border-radius: 14px; cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--muted);
+  padding: 4px;
+  border-radius: 12px;
+  cursor: pointer;
 }
-.bottom-nav a b { font-size: 18px; margin-bottom: 2px; }
-.bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: rgba(0,0,0,0.06); }
+.bottom-nav a b { font-size: 16px; margin-bottom: 2px; }
+.bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: rgba(0, 0, 0, 0.06); }
 
 /* Modals & Sheets */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: flex-end; backdrop-filter: blur(4px); }
@@ -192,7 +214,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V66-CleanLight">
+<body data-garda-version="V67-PerfectDock">
 
 <!-- Top Bar -->
 <div class="top-bar">
@@ -232,7 +254,7 @@ button, input, select { font: inherit; }
   <div id="days"></div>
 </main>
 
-<!-- Bottom Navigation Bar -->
+<!-- Bottom Navigation Bar - FIXED & CLEAN -->
 <nav class="bottom-nav">
   <a class="active" onclick="showDay(0)"><b>📅</b>מסלול</a>
   <a onclick="openMemoriesModal()"><b>📷</b>גלריה</a>
