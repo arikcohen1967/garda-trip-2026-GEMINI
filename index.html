@@ -324,7 +324,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; box-shadow: var(--shadow); }
 </style>
 </head>
-<body data-garda-version="V111-CarImagesOnly">
+<body data-garda-version="V112-CleanExact3">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -566,7 +566,7 @@ function openAroundModal() {
 function openTicketsModal() {
   document.getElementById('ticketsModal').classList.add('open');
   openTicketDb().then(async () => { 
-    await ensureDefaultTickets();
+    await ensureCleanDefaultTickets();
     renderTicketFolders(); 
     renderTicketFiles(); 
   });
@@ -606,74 +606,64 @@ function openTicketDb() {
   });
 }
 
-async function ensureDefaultTickets() {
+async function ensureCleanDefaultTickets() {
   const db = await openTicketDb();
   
-  const flightFiles = await getTicketFiles('✈️ טיסות ורכב');
-  const hasFlight = flightFiles.some(f => f.isFlightInfo);
-  if (!hasFlight) {
-    await new Promise((resolve) => {
-      const tx = db.transaction('files', 'readwrite');
-      tx.objectStore('files').add({
-        folder: '✈️ טיסות ורכב',
-        title: 'הזמנת ישראייר (4623652)',
-        name: 'Israir Flight Booking',
-        type: 'text/flight-info',
-        size: 15400,
-        created: Date.now(),
-        isFlightInfo: true
-      });
+  // ניקוי כפילויות ישנות מתיקיית טיסות ורכב ויצירה מחדש של 3 הכרטיסים הנקיים בלבד
+  await new Promise((resolve) => {
+    const tx = db.transaction('files', 'readwrite');
+    const store = tx.objectStore('files');
+    const index = store.index('folder');
+    const req = index.getAll('✈️ טיסות ורכב');
+    req.onsuccess = () => {
+      const records = req.result;
+      // נמחק את כל הרשומות הישנות בתיקייה כדי לאפס לגמרי בלי בלאגן
+      records.forEach(rec => store.delete(rec.id));
       tx.oncomplete = resolve;
+    };
+    req.onerror = () => resolve();
+  });
+
+  // יצירת 3 הכרטיסים החיוניים בלבד בצורה נקייה ומסודרת
+  await new Promise((resolve) => {
+    const tx = db.transaction('files', 'readwrite');
+    const store = tx.objectStore('files');
+    
+    // 1. טיסה
+    store.add({
+      folder: '✈️ טיסות ורכב',
+      title: 'הזמנת ישראייר (4623652)',
+      name: 'Israir Flight Booking',
+      type: 'text/flight-info',
+      size: 15400,
+      created: Date.now(),
+      isFlightInfo: true
     });
-  }
 
-  const insFiles = await getTicketFiles('✈️ טיסות ורכב');
-  const hasIns = insFiles.some(f => f.isInsuranceInfo);
-  if (!hasIns) {
-    await new Promise((resolve) => {
-      const tx = db.transaction('files', 'readwrite');
-      tx.objectStore('files').add({
-        folder: '✈️ טיסות ורכב',
-        title: 'ביטוח נסיעות AIG (170270213826)',
-        name: 'AIG Insurance Policy',
-        type: 'text/insurance-info',
-        size: 12000,
-        created: Date.now() - 1000,
-        isInsuranceInfo: true
-      });
-      tx.oncomplete = resolve;
+    // 2. ביטוח
+    store.add({
+      folder: '✈️ טיסות ורכב',
+      title: 'ביטוח נסיעות AIG (170270213826)',
+      name: 'AIG Insurance Policy',
+      type: 'text/insurance-info',
+      size: 12000,
+      created: Date.now() - 1000,
+      isInsuranceInfo: true
     });
-  }
 
-  // הוספת 3 התמונות של השכרת הרכב מראש ככרטיסי תמונה נקיים
-  const carFiles = await getTicketFiles('✈️ טיסות ורכב');
-  const hasCarImgs = carFiles.some(f => f.isCarVoucherImg);
-  if (!hasCarImgs) {
-    const carImagesData = [
-      { title: 'שובר השכרת רכב – חלק 1 (Booking)', dataUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=' },
-      { title: 'שובר השכרת רכב – חלק 2 (Ecovia)', dataUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=' },
-      { title: 'שובר השכרת רכב – חלק 3 (נהג וביטוח)', dataUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=' }
-    ];
+    // 3. שובר רכב מרוכז ונקי
+    store.add({
+      folder: '✈️ טיסות ורכב',
+      title: 'שובר השכרת רכב (724715780)',
+      name: 'Car Rental Voucher',
+      type: 'text/car-voucher',
+      size: 14000,
+      created: Date.now() - 2000,
+      isCarVoucher: true
+    });
 
-    for (let i = 0; i < carImagesData.length; i++) {
-      const imgInfo = carImagesData[i];
-      // יצירת פריט לדוגמה שמשתמש בתצוגת תמונה נקייה
-      await new Promise((resolve) => {
-        const tx = db.transaction('files', 'readwrite');
-        // נשתמש בנתונים מהתמונות המקוריות ששלחת באמצעות מנוע המרה פנימי אם נדרש, או נציג תמונה ריקה עד להעלאה ידנית קלה
-        tx.objectStore('files').add({
-          folder: '✈️ טיסות ורכב',
-          title: imgInfo.title,
-          name: `car_voucher_${i+1}.png`,
-          type: 'image/png',
-          size: 45000,
-          created: Date.now() - (3000 + i*100),
-          isCarVoucherImg: true
-        });
-        tx.oncomplete = resolve;
-      });
-    }
-  }
+    tx.oncomplete = resolve;
+  });
 }
 
 function showTicketUpload() {
@@ -740,11 +730,11 @@ async function renderTicketFiles() {
   list.innerHTML = `<div class="ticket-grid-container">` + files.map(x => `
     <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ לפתיחה מלאה">
       <div class="ticket-thumb">
-        ${x.isFlightInfo ? '✈️' : (x.isInsuranceInfo ? '🛡️' : (x.blob ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '🚗'))}
+        ${x.isFlightInfo ? '✈️' : (x.isInsuranceInfo ? '🛡️' : (x.isCarVoucher ? '🚗' : ((x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄')))}
       </div>
       <div class="ticket-info">
         <b>${x.title || x.name}</b>
-        <small>${x.isFlightInfo ? 'הזמנה 4623652 · ישראייר' : (x.isInsuranceInfo ? 'פוליסה 170270213826 · AIG' : (x.isCarVoucherImg ? 'שובר רכב · Booking' : `${Math.round(x.size/1024)} KB`))}</small>
+        <small>${x.isFlightInfo ? 'הזמנה 4623652 · ישראייר' : (x.isInsuranceInfo ? 'פוליסה 170270213826 · AIG' : (x.isCarVoucher ? 'השכרה 724715780 · Ecovia' : `${Math.round(x.size/1024)} KB`))}</small>
         <button class="delete-ticket-btn" onclick="event.stopPropagation(); deleteTicketFile(${x.id})">מחק</button>
       </div>
     </div>
@@ -797,14 +787,22 @@ async function openFullViewer(id) {
           <li>ספר הפוליסה המלא ותנאי הביטוח: <a href="https://www.aig.co.il/t/9BU1a8" target="_blank" style="color:var(--accent)">צפייה בפוליסה</a></li>
         </ul>
       </div>`;
-    } else if (x.blob) {
+    } else if (x.isCarVoucher) {
+      body.innerHTML = `<div dir="rtl" style="text-align:right; padding:15px; font-size:14px; line-height:1.8;">
+        <h3 style="color:var(--accent); margin-top:0;">🚗 שובר השכרת רכב – Booking.com (Ecovia)</h3>
+        <p><b>מספר הזמנה:</b> <span dir="ltr" style="display:inline-block">724715780</span></p>
+        <p><b>רכב:</b> Intermediate SUV – Citroen C5 Aircross או דומה (אוטומטי, מיזוג)</p>
+        <p><b>איסוף:</b> 30.09.2026 בשעה 17:30 – נמל התעופה ורונה קטולו (דלפק בטרמינל)</p>
+        <p><b>החזרה:</b> 06.10.2026 בשעה 17:30 – נמל התעופה ורונה קטולו (דלפק בטרמינל)</p>
+        <p><b>נהג ראשי:</b> Cohen Arik (<span dir="ltr" style="display:inline-block">+972502022768</span>)</p>
+        <p><b>ביטוח:</b> <span style="color:var(--green); font-weight:700;">הגנה מלאה כלולה (Full Protection)</span></p>
+      </div>`;
+    } else if ((x.type||'').startsWith('image/')) {
       const url = URL.createObjectURL(x.blob);
       body.innerHTML = `<img src="${url}" alt="כרטיס">`;
     } else {
-      body.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text)">
-        <h3>🚗 שובר השכרת רכב</h3>
-        <p>לחץ על "הוסף כרטיס חדש" למעלה ובחר את תמונת השובר מהמכשיר כדי להציג אותה כאן במסך מלא.</p>
-      </div>`;
+      const url = URL.createObjectURL(x.blob);
+      body.innerHTML = `<iframe src="${url}" style="width:100%;height:100%;border:0;background:#fff"></iframe>`;
     }
     document.getElementById('fullViewerModal').classList.add('open');
   };
