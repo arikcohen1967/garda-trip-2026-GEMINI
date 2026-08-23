@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Vector Logos Edition" name="application-name"/>
+<meta content="Garda Trip AroundMe Edition" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -143,8 +143,8 @@ button, input, select { font: inherit; }
   background: #ffffff; color: #0077b6; font-weight: 700; font-size: 12px; padding: 6px 12px; border-radius: 10px; align-self: flex-start;
   text-decoration: none; border: 1.5px solid #33ccff; box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
+.food-waze-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 
-/* עיצוב כפתורי ניווט מושלמים עם סמלים מוטמעים מדויקים */
 .stop-links {
   display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1.5px solid var(--line);
 }
@@ -200,7 +200,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V91-EmbeddedVectorIcons">
+<body data-garda-version="V92-AroundMeWaze">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -222,7 +222,7 @@ button, input, select { font: inherit; }
     <button onclick="toggleSidebar()" style="border:0; background:var(--bg); width:30px; height:30px; border-radius:50%; font-weight:700; cursor:pointer; border:1.5px solid var(--line-dark);">✕</button>
   </div>
   <button class="sidebar-btn" onclick="toggleSidebar(); showDay(0)"><b>📅</b> הצג מסלול ימים</button>
-  <button class="sidebar-btn" onclick="toggleSidebar(); openAroundModal()"><b>📍</b> סביבי (סופר, דלק, מסעדות)</button>
+  <button class="sidebar-btn" onclick="toggleSidebar(); openAroundModal()"><b>📍</b> Around Me</button>
   <button class="sidebar-btn" onclick="toggleSidebar(); openTicketsModal()"><b>🎟️</b> ארנק כרטיסים</button>
   <button class="sidebar-btn" onclick="toggleSidebar(); openEmergencyModal()" style="color:var(--red);"><b>🆘</b> מספרי חירום</button>
 </aside>
@@ -247,13 +247,13 @@ button, input, select { font: inherit; }
 <div class="modal" id="aroundModal" onclick="if(event.target===this)closeModal('aroundModal')">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal('aroundModal')">✕</button>
-    <h3 style="margin-top:0; font-size:18px;">📍 סביבי (חיפוש מהיר)</h3>
-    <p style="font-size:12px; color:var(--muted);">בחר קטגוריה לחיפוש מיידי במפות:</p>
+    <h3 style="margin-top:0; font-size:18px;">📍 Around Me</h3>
+    <p style="font-size:12px; color:var(--muted);">בחר קטגוריה לניווט מיידי עם Waze:</p>
     <div class="modal-grid">
-      <button class="modal-btn" onclick="searchNearby('supermarket')">🛒 <span>סופרמרקטים</span></button>
-      <button class="modal-btn" onclick="searchNearby('gas station')">⛽ <span>תחנות דלק</span></button>
-      <button class="modal-btn" onclick="searchNearby('restaurants')">🍝 <span>מסעדות</span></button>
-      <button class="modal-btn" onclick="searchNearby('pharmacy')">💊 <span>סופרפארם / בית מרקחת</span></button>
+      <button class="modal-btn" onclick="searchNearbyWaze('supermarket')">🛒 <span>סופרמרקטים</span></button>
+      <button class="modal-btn" onclick="searchNearbyWaze('gas station')">⛽ <span>תחנות דלק</span></button>
+      <button class="modal-btn" onclick="searchNearbyWaze('restaurants')">🍝 <span>מסעדות</span></button>
+      <button class="modal-btn" onclick="searchNearbyWaze('pharmacy')">💊 <span>סופרפארם / בית מרקחת</span></button>
     </div>
   </div>
 </div>
@@ -314,10 +314,9 @@ button, input, select { font: inherit; }
 </div>
 
 <script>
-// איקונים וקטוריים מושלמים ומובנים שנטענים מיידית ובצורה מושלמת בכל מכשיר
-const WAZE_SVG = `<svg viewBox="0 0 512 512" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><rect width="512" height="512" rx="110" fill="#33ccff"/><path d="M375.4 233.5c-3.7-31.8-29.3-56.7-61.6-59.5-35.3-3.1-66.5 19.3-73.8 53.6-1.5 7-1.4 14.3.4 21.2-22.1 4.7-38.6 24.1-38.6 47.3 0 17.5 9.7 32.7 24.1 40.5l-10.7 33.3c-2.4 7.4 2.8 15 10.6 15 3.3 0 6.4-1.4 8.6-3.8l21.9-23.7c13.7 4.9 28.7 7.5 44.1 7.5 70.7 0 128-50.5 128-112.7 0-11.8-1.8-23.3-5.2-34.4zm-146 5.3c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm112 40c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20zm-56 22c-29.8 0-54-15.6-54-35 0-3.3 2.7-6 6-6h96c3.3 0 6 2.7 6 6 0 19.4-24.2 35-54 35z" fill="#fff"/><path d="M220.5 240c-1.2 5.5-6.2 9.5-12 9.5s-10.8-4-12-9.5c-2.8-12.7-14.2-22-27.5-22-15.5 0-28 12.5-28 28s12.5 28 28 28c4.4 0 8 3.6 8 8s-3.6 8-8 8c-24.3 0-44-19.7-44-44s19.7-44 44-44c21.2 0 39.1 14.7 43.5 34.5z" fill="#18181b"/><circle cx="178" cy="246" r="10" fill="#18181b"/><circle cx="282" cy="216" r="10" fill="#18181b"/><circle cx="338" cy="216" r="10" fill="#18181b"/></svg>`;
+const WAZE_SVG = `<svg viewBox="0 0 512 512" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><rect width="512" height="512" rx="110" fill="#33ccff"/><path d="M375.4 233.5c-3.7-31.8-29.3-56.7-61.6-59.5-35.3-3.1-66.5 19.3-73.8 53.6-1.5 7-1.4 14.3.4 21.2-22.1 4.7-38.6 24.1-38.6 47.3 0 17.5 9.7 32.7 24.1 40.5l-10.7 33.3c-2.4 7.4 2.8 15 10.6 15 3.3 0 6.4-1.4 8.6-3.8l21.9-23.7c13.7 4.9 28.7 7.5 44.1 7.5 70.7 0 128-50.5 128-112.7 0-11.8-1.8-23.3-5.2-34.4zm-146 5.3c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm112 40c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20zm-56 22c-29.8 0-54-15.6-54-35 0-3.3 2.7-6 6-6h96c3.3 0 6 2.7 6 6 0 19.4-24.2 35-54 35z" fill="#fff"/><path d="M220.5 240c-1.2 5.5-6.2 9.5-12 9.5s-10.8-4-12-9.5c-2.8-12.7-14.2-22-27.5-22-15.5 0-28 12.5-28 28s12.5 28 28 28c4.4 0 8 3.6 8 8s-3.6 8-8 8c-24.3 0-44-19.7-44-44s19.7-44 44-44c21.2 0 39.1 14.7 43.5 34.5z" fill="#18181b"/><circle cx="178" cy="246" r="10" fill="#18181b"/><circle cx="282" cy="216" r="10" fill="#18181b"/><circle cx="338" cy="216" r="10" fill="#18181b"/></svg>`;
 
-const MAPS_SVG = `<svg viewBox="0 0 512 512" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><rect width="512" height="512" rx="110" fill="#e2fbe5"/><path d="M120 392l80-160 160-80-80 160z" fill="#34c759"/><path d="M200 232l152-72-72 152-80-80z" fill="#007aff"/><circle cx="260" cy="260" r="50" fill="#fff"/><polygon points="260,225 240,290 260,275 280,290" fill="#007aff"/></svg>`;
+const MAPS_SVG = `<svg viewBox="0 0 512 512" width="22" height="22" xmlns="http://www.w3.org/2000/svg"><rect width="512" height="512" rx="110" fill="#e2fbe5"/><path d="M120 392l80-160 160-80-80 160z" fill="#34c759"/><path d="M200 232l152-72-72 152-80-80z" fill="#007aff"/><circle cx="260" cy="260" r="50" fill="#fff"/><polygon points="260,225 240,290 260,275 280,290" fill="#007aff"/></svg>`;
 
 const tripDays = [
   {date:"2026-09-30", label:"רביעי · 30.09.2026", title:"נחיתה והגעה למלון", icon:"✈️", challenge:"לצלם את התמונה המשפחתית הראשונה באיטליה.", stops:[
@@ -431,9 +430,9 @@ function openEmergencyModal() {
   document.getElementById('emergencyModal').classList.add('open');
 }
 
-function searchNearby(term) {
+function searchNearbyWaze(term) {
   closeModal('aroundModal');
-  window.location.href = 'https://maps.apple.com/?q=' + encodeURIComponent(term);
+  window.location.href = 'https://www.waze.com/ul?q=' + encodeURIComponent(term) + '&navigate=yes';
 }
 
 // Tickets IndexedDB Wallet Logic
