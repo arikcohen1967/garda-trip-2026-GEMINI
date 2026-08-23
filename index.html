@@ -324,7 +324,7 @@ button, input, select { font: inherit; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; box-shadow: var(--shadow); }
 </style>
 </head>
-<body data-garda-version="V108-CleanFixed">
+<body data-garda-version="V109-CarVoucherAdded">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -644,6 +644,24 @@ async function ensureDefaultTickets() {
       tx.oncomplete = resolve;
     });
   }
+
+  const carFiles = await getTicketFiles('✈️ טיסות ורכב');
+  const hasCar = carFiles.some(f => f.isCarInfo);
+  if (!hasCar) {
+    await new Promise((resolve) => {
+      const tx = db.transaction('files', 'readwrite');
+      tx.objectStore('files').add({
+        folder: '✈️ טיסות ורכב',
+        title: 'השכרת רכב Booking.com (724715780)',
+        name: 'Car Rental Voucher',
+        type: 'text/car-info',
+        size: 14000,
+        created: Date.now() - 2000,
+        isCarInfo: true
+      });
+      tx.oncomplete = resolve;
+    });
+  }
 }
 
 function showTicketUpload() {
@@ -710,11 +728,11 @@ async function renderTicketFiles() {
   list.innerHTML = `<div class="ticket-grid-container">` + files.map(x => `
     <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ כפולה לפתיחה מלאה">
       <div class="ticket-thumb">
-        ${x.isFlightInfo ? '✈️' : (x.isInsuranceInfo ? '🛡️' : ((x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'))}
+        ${x.isFlightInfo ? '✈️' : (x.isInsuranceInfo ? '🛡️' : (x.isCarInfo ? '🚗' : ((x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄')))}
       </div>
       <div class="ticket-info">
         <b>${x.title || x.name}</b>
-        <small>${x.isFlightInfo ? 'הזמנה 4623652 · ישראייר' : (x.isInsuranceInfo ? 'פוליסה 170270213826 · AIG' : `${Math.round(x.size/1024)} KB · לחיצה כפולה`)}</small>
+        <small>${x.isFlightInfo ? 'הזמנה 4623652 · ישראייר' : (x.isInsuranceInfo ? 'פוליסה 170270213826 · AIG' : (x.isCarInfo ? 'הזמנה 724715780 · Ecovia' : `${Math.round(x.size/1024)} KB · לחיצה כפולה`))}</small>
         <button class="delete-ticket-btn" onclick="event.stopPropagation(); deleteTicketFile(${x.id})">מחק</button>
       </div>
     </div>
@@ -766,6 +784,23 @@ async function openFullViewer(id) {
           <li>אזור אישי להורדת מסמכי הפוליסה: <a href="https://www.aig.co.il/t/6b66x6" target="_blank" style="color:var(--accent)">כניסה לאזור האישי</a></li>
           <li>ספר הפוליסה המלא ותנאי הביטוח: <a href="https://www.aig.co.il/t/9BU1a8" target="_blank" style="color:var(--accent)">צפייה בפוליסה</a></li>
         </ul>
+      </div>`;
+    } else if (x.isCarInfo) {
+      body.innerHTML = `<div dir="rtl" style="text-align:right; padding:15px; font-size:14px; line-height:1.8;">
+        <h3 style="color:var(--accent); margin-top:0;">🚗 השכרת רכב – Booking.com (Ecovia)</h3>
+        <p><b>מספר הזמנה:</b> <span dir="ltr" style="display:inline-block">724715780</span></p>
+        <p><b>סוג רכב:</b> Intermediate SUV – Citroen C5 Aircross או דומה (אוטומטי, 5 דלתות, 5 מושבים, מיזוג אוויר)</p>
+        <hr style="border:0; border-top:1px solid var(--line-dark); margin:15px 0;">
+        <p><b>איסוף והחזרה:</b><br>
+        📅 <b>איסוף:</b> 30.09.2026 בשעה 17:30 – נמל התעופה ורונה קטולו (Verona Villafranca Airport), דלפק בטרמינל.<br>
+        📅 <b>החזרה:</b> 06.10.2026 בשעה 17:30 – נמל התעופה ורונה קטולו (Verona Villafranca Airport), דלפק בטרמינל.</p>
+        <hr style="border:0; border-top:1px solid var(--line-dark); margin:15px 0;">
+        <p><b>פרטי הנהג הראשי:</b><br>
+        שם: Cohen Arik<br>
+        אימייל: <span dir="ltr" style="unicode-bidi: embed;">arikcohen1967@gmail.com</span><br>
+        טלפון: <span dir="ltr" style="display:inline-block">+972502022768</span></p>
+        <hr style="border:0; border-top:1px solid var(--line-dark); margin:15px 0;">
+        <p><b>כיסוי ביטוחי:</b> <span style="color:var(--green); font-weight:700;">הגנה מלאה כלולה (Full Protection)</span> – תקבלו החזר כספי מלא אם תחוייبو על דברים שההגנה המלאה מכסה.</p>
       </div>`;
     } else if ((x.type||'').startsWith('image/')) {
       const url = URL.createObjectURL(x.blob);
