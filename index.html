@@ -322,9 +322,16 @@ button, input, select { font: inherit; }
 .full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #f5f5f7; color: #1d1d1f; font-weight: 700; border-bottom: 1px solid var(--line-dark); }
 .full-viewer-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 14px; background: #fbfbfd; }
 .full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; box-shadow: var(--shadow); }
+
+.booking-app-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: #003580; color: #ffffff; font-weight: 700; font-size: 13px; padding: 12px 18px; border-radius: 12px;
+  text-decoration: none; margin-top: 15px; width: 100%; box-shadow: var(--shadow); transition: opacity 0.2s ease;
+}
+.booking-app-btn:hover { opacity: 0.9; }
 </style>
 </head>
-<body data-garda-version="V113-LTRPerfect">
+<body data-garda-version="V115-HotelComplete">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -609,55 +616,75 @@ function openTicketDb() {
 async function ensureCleanDefaultTickets() {
   const db = await openTicketDb();
   
-  await new Promise((resolve) => {
-    const tx = db.transaction('files', 'readwrite');
-    const store = tx.objectStore('files');
-    const index = store.index('folder');
-    const req = index.getAll('✈️ טיסות ורכב');
-    req.onsuccess = () => {
-      const records = req.result;
-      records.forEach(rec => store.delete(rec.id));
+  const flightFiles = await getTicketFiles('✈️ טיסות ורכב');
+  const hasFlight = flightFiles.some(f => f.isFlightInfo);
+  if (!hasFlight) {
+    await new Promise((resolve) => {
+      const tx = db.transaction('files', 'readwrite');
+      tx.objectStore('files').add({
+        folder: '✈️ טיסות ורכב',
+        title: 'הזמנת ישראייר (4623652)',
+        name: 'Israir Flight Booking',
+        type: 'text/flight-info',
+        size: 15400,
+        created: Date.now(),
+        isFlightInfo: true
+      });
       tx.oncomplete = resolve;
-    };
-    req.onerror = () => resolve();
-  });
-
-  await new Promise((resolve) => {
-    const tx = db.transaction('files', 'readwrite');
-    const store = tx.objectStore('files');
-    
-    store.add({
-      folder: '✈️ טיסות ורכב',
-      title: 'הזמנת ישראייר (4623652)',
-      name: 'Israir Flight Booking',
-      type: 'text/flight-info',
-      size: 15400,
-      created: Date.now(),
-      isFlightInfo: true
     });
+  }
 
-    store.add({
-      folder: '✈️ טיסות ורכב',
-      title: 'ביטוח נסיעות AIG (170270213826)',
-      name: 'AIG Insurance Policy',
-      type: 'text/insurance-info',
-      size: 12000,
-      created: Date.now() - 1000,
-      isInsuranceInfo: true
+  const hasIns = flightFiles.some(f => f.isInsuranceInfo);
+  if (!hasIns) {
+    await new Promise((resolve) => {
+      const tx = db.transaction('files', 'readwrite');
+      tx.objectStore('files').add({
+        folder: '✈️ טיסות ורכב',
+        title: 'ביטוח נסיעות AIG (170270213826)',
+        name: 'AIG Insurance Policy',
+        type: 'text/insurance-info',
+        size: 12000,
+        created: Date.now() - 1000,
+        isInsuranceInfo: true
+      });
+      tx.oncomplete = resolve;
     });
+  }
 
-    store.add({
-      folder: '✈️ טיסות ורכב',
-      title: 'שובר השכרת רכב (724715780)',
-      name: 'Car Rental Voucher',
-      type: 'text/car-voucher',
-      size: 14000,
-      created: Date.now() - 2000,
-      isCarVoucher: true
+  const hasCar = flightFiles.some(f => f.isCarVoucher);
+  if (!hasCar) {
+    await new Promise((resolve) => {
+      const tx = db.transaction('files', 'readwrite');
+      tx.objectStore('files').add({
+        folder: '✈️ טיסות ורכב',
+        title: 'שובר השכרת רכב (724715780)',
+        name: 'Car Rental Voucher',
+        type: 'text/car-voucher',
+        size: 14000,
+        created: Date.now() - 2000,
+        isCarVoucher: true
+      });
+      tx.oncomplete = resolve;
     });
+  }
 
-    tx.oncomplete = resolve;
-  });
+  const hotelFiles = await getTicketFiles('🏡 מלון');
+  const hasHotel = hotelFiles.some(f => f.isHotelInfo);
+  if (!hasHotel) {
+    await new Promise((resolve) => {
+      const tx = db.transaction('files', 'readwrite');
+      tx.objectStore('files').add({
+        folder: '🏡 מלון',
+        title: 'הזמנת Bio Agriturismo Vojon',
+        name: 'Hotel Booking Confirmation',
+        type: 'text/hotel-info',
+        size: 13000,
+        created: Date.now(),
+        isHotelInfo: true
+      });
+      tx.oncomplete = resolve;
+    });
+  }
 }
 
 function showTicketUpload() {
@@ -724,11 +751,11 @@ async function renderTicketFiles() {
   list.innerHTML = `<div class="ticket-grid-container">` + files.map(x => `
     <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ לפתיחה מלאה">
       <div class="ticket-thumb">
-        ${x.isFlightInfo ? '✈️' : (x.isInsuranceInfo ? '🛡️' : (x.isCarVoucher ? '🚗' : ((x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄')))}
+        ${x.isFlightInfo ? '✈️' : (x.isInsuranceInfo ? '🛡️' : (x.isCarVoucher ? '🚗' : (x.isHotelInfo ? '🏡' : ((x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'))))}
       </div>
       <div class="ticket-info">
         <b>${x.title || x.name}</b>
-        <small>${x.isFlightInfo ? 'הזמנה 4623652 · ישראייר' : (x.isInsuranceInfo ? 'פוליסה 170270213826 · AIG' : (x.isCarVoucher ? 'השכרה 724715780 · Ecovia' : `${Math.round(x.size/1024)} KB`))}</small>
+        <small>${x.isFlightInfo ? 'הזמנה 4623652 · ישראייר' : (x.isInsuranceInfo ? 'פוליסה 170270213826 · AIG' : (x.isCarVoucher ? 'השכרה 724715780 · Ecovia' : (x.isHotelInfo ? '30.09 - 06.10 · Booking' : `${Math.round(x.size/1024)} KB`)))}</small>
         <button class="delete-ticket-btn" onclick="event.stopPropagation(); deleteTicketFile(${x.id})">מחק</button>
       </div>
     </div>
@@ -790,6 +817,18 @@ async function openFullViewer(id) {
         <p><b>החזרה:</b> 06.10.2026 בשעה 17:30 – נמל התעופה ורונה קטולו (דלפק בטרמינל)</p>
         <p><b>נהג ראשי:</b> <span dir="ltr" style="display:inline-block">Cohen Arik (+972502022768)</span></p>
         <p><b>ביטוח:</b> <span style="color:var(--green); font-weight:700;">הגנה מלאה כלולה (Full Protection)</span></p>
+        <a href="booking://booking.com" onclick="setTimeout(function(){window.location.href='https://www.booking.com'}, 500);" class="booking-app-btn">📱 פתח באפליקציית Booking.com</a>
+      </div>`;
+    } else if (x.isHotelInfo) {
+      body.innerHTML = `<div dir="rtl" style="text-align:right; padding:15px; font-size:14px; line-height:1.8;">
+        <h3 style="color:var(--accent); margin-top:0;">🏡 הזמנת מלון – Bio Agriturismo Vojon</h3>
+        <p><b>סטטוס הזמנה:</b> <span style="color:var(--green); font-weight:700;">Confirmed (מאושר)</span></p>
+        <p><b>כתובת המלון:</b> <span dir="ltr" style="display:inline-block">Via Del Forte 6, 46040 Ponti Sul Mincio, Italy</span></p>
+        <p><b>תאריכי שהייה:</b> Wed, 30 Sep 2026 – Tue, 6 Oct 2026 (6 לילות)</p>
+        <p><b>חדר:</b> Large Double or Twin Room (1 חדר)</p>
+        <p><b>שעות צ'ק-אין:</b> 15:00 - 18:00 | <b>צ'ק-אאוט:</b> 7:00 - 11:00</p>
+        <p><b>טלפון במלון:</b> <a href="tel:+393792027060" style="color:var(--accent)" dir="ltr">+39 379 202 7060</a></p>
+        <a href="booking://booking.com" onclick="setTimeout(function(){window.location.href='https://www.booking.com'}, 500);" class="booking-app-btn">📱 פתח באפליקציית Booking.com</a>
       </div>`;
     } else if ((x.type||'').startsWith('image/')) {
       const url = URL.createObjectURL(x.blob);
