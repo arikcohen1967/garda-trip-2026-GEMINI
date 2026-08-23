@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Perfect Dock V67" name="application-name"/>
+<meta content="Garda Trip Final Clean Light" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026 · Clean Light</title>
 <style>
 :root {
@@ -36,8 +36,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: var(--bg) !important;
   color: var(--text) !important;
-  /* מרווח תחתון מוגדל כדי ששום תוכן לא יוסתר תחת התפריט הצף */
-  padding-bottom: calc(130px + env(safe-area-inset-bottom)) !important;
+  /* מרווח תחתון עצום כדי שהתפריט התחתון לא יסתיר כלום לעולם */
+  padding-bottom: calc(160px + env(safe-area-inset-bottom)) !important;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -91,7 +91,7 @@ button, input, select { font: inherit; }
 }
 .day-tab.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
 
-/* Day Cards & Stops */
+/* Day Cards & Stops - מוסתרים כברירת מחדל, מוצגים אך ורק לפי היום הנבחר */
 .day-card {
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
   margin: 16px 0; padding: 18px; box-shadow: var(--shadow);
@@ -118,7 +118,7 @@ button, input, select { font: inherit; }
 .stop h3 { font-size: 15px; margin: 8px 0 4px; font-weight: 700; color: var(--text); }
 .stop p { font-size: 12px; line-height: 1.4; color: var(--muted); margin: 0 0 10px; }
 
-/* Grid כפתורים לתחנות */
+/* Grid כפתורים מוקפד שלא נחתך ולא דורס אחד את השני */
 .stop-actions-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -126,40 +126,40 @@ button, input, select { font: inherit; }
   margin-top: 10px;
 }
 .stop-action-btn {
-  padding: 8px 6px;
+  padding: 10px 8px;
   border-radius: 10px;
   background: var(--surface);
   border: 1px solid var(--line);
   color: var(--text);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 6px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0,0,0,0.03);
 }
 .stop-action-btn:hover { background: #eaeaed; }
 
-/* Bottom Dock - מתוקן, צף ונמוך מבלי להסתיר כלום */
+/* Bottom Dock - מעוגן למטה באופן נקי ובטוח */
 .bottom-nav {
   position: fixed !important;
   z-index: 1000;
   left: 16px !important;
   right: 16px !important;
-  bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+  bottom: calc(14px + env(safe-area-inset-bottom)) !important;
   max-width: 480px;
   margin: 0 auto !important;
-  padding: 6px;
-  min-height: 56px;
-  background: rgba(255, 255, 255, 0.92);
+  padding: 8px;
+  min-height: 60px;
+  background: rgba(255, 255, 255, 0.95);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border: 1px solid var(--line-strong);
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 4px;
@@ -169,14 +169,14 @@ button, input, select { font: inherit; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--muted);
   padding: 4px;
   border-radius: 12px;
   cursor: pointer;
 }
-.bottom-nav a b { font-size: 16px; margin-bottom: 2px; }
+.bottom-nav a b { font-size: 18px; margin-bottom: 2px; }
 .bottom-nav a.active, .bottom-nav a:active { color: var(--text); background: rgba(0, 0, 0, 0.06); }
 
 /* Modals & Sheets */
@@ -184,7 +184,7 @@ button, input, select { font: inherit; }
 .modal.open { display: flex; }
 .sheet {
   width: 100%; max-height: 85vh; overflow-y: auto; background: var(--surface);
-  border-radius: 28px 28px 0 0; padding: 20px 16px calc(24px + env(safe-area-inset-bottom));
+  border-radius: 28px 28px 0 0; padding: 20px 16px calc(30px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--line); box-shadow: 0 -10px 40px rgba(0,0,0,0.15); color: var(--text);
 }
 .sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px; }
@@ -205,16 +205,9 @@ button, input, select { font: inherit; }
 .ticket-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .ticket-info b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
 .ticket-info small { color: var(--muted); font-size: 11px; }
-
-/* Full Screen Viewer */
-#fullViewerModal { z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
-.full-viewer-content { background: #ffffff; width: 100%; max-width: 800px; height: 85vh; border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
-.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f1f1f3; color: #111; font-weight: 700; }
-.full-viewer-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 10px; background: #fafafa; }
-.full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V67-PerfectDock">
+<body data-garda-version="V68-CleanLightStrict">
 
 <!-- Top Bar -->
 <div class="top-bar">
@@ -250,11 +243,11 @@ button, input, select { font: inherit; }
     <div class="day-tab" onclick="showDay(6)">שלישי (06/10)</div>
   </div>
 
-  <!-- Days Container (Only active day is shown) -->
+  <!-- Days Container (Strictly one day at a time) -->
   <div id="days"></div>
 </main>
 
-<!-- Bottom Navigation Bar - FIXED & CLEAN -->
+<!-- Bottom Navigation Bar -->
 <nav class="bottom-nav">
   <a class="active" onclick="showDay(0)"><b>📅</b>מסלול</a>
   <a onclick="openMemoriesModal()"><b>📷</b>גלריה</a>
@@ -264,7 +257,7 @@ button, input, select { font: inherit; }
 
 <!-- Modals -->
 <div class="modal" id="ticketsModal" onclick="closeTicketsBackdrop(event)">
-  <div class="sheet" style="max-height:92vh">
+  <div class="sheet">
     <div class="sheet-head">
       <div><small style="color:var(--muted)">הארנק המשפחתי</small><h2 style="margin:2px 0 0; color:var(--text)">🎟️ כרטיסים וכניסות</h2></div>
       <button class="close" onclick="closeTickets()" type="button">✕</button>
@@ -289,16 +282,6 @@ button, input, select { font: inherit; }
     <div class="ticket-folder-grid" id="ticketFolderGrid"></div>
     <div id="ticketCurrentTitle" style="font-weight:700;margin-top:16px;font-size:14px; color:var(--text)"></div>
     <div id="ticketFileList"></div>
-  </div>
-</div>
-
-<div class="modal" id="fullViewerModal" onclick="closeFullViewer(event)">
-  <div class="full-viewer-content">
-    <div class="full-viewer-head">
-      <span id="fullViewerTitle">תצוגה מלאה</span>
-      <button class="close" onclick="document.getElementById('fullViewerModal').classList.remove('open')">✕</button>
-    </div>
-    <div class="full-viewer-body" id="fullViewerBody"></div>
   </div>
 </div>
 
@@ -377,7 +360,7 @@ function searchNearby(term) {
   window.location.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(term + ' near me');
 }
 
-// Tickets IndexedDB Wallet with Double-Click Full Screen
+// Tickets IndexedDB Wallet
 const TICKET_DEFAULT_FOLDERS = ['✈️ טיסות ורכב', '🏡 מלון', '🎢 Gardaland', '🚣 ראפטינג', '🎬 Movieland', '🏰 Medieval Times', '🚤 ונציה'];
 let ticketDb = null, ticketActiveFolder = '🎢 Gardaland';
 
@@ -462,56 +445,7 @@ async function getTicketFiles(folder) {
   });
 }
 
-async function renderTicketFiles() {
-  const title = document.getElementById('ticketCurrentTitle'), list = document.getElementById('ticketFileList');
-  if (!title || !list) return;
-  title.textContent = 'תיקייה: ' + ticketActiveFolder;
-  const files = await getTicketFiles(ticketActiveFolder);
-  if (!files.length) { list.innerHTML = '<div style="color:var(--muted);text-align:center;padding:20px;font-size:13px">אין כרטיסים בתקייה זו.</div>'; return; }
-  
-  list.innerHTML = files.map(x => `
-    <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ לפתיחה מלאה">
-      <div class="ticket-thumb">${(x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'}</div>
-      <div class="ticket-info"><b>${x.title || x.name}</b><small>${Math.round(x.size/1024)} KB · לחץ לפתיחה</small></div>
-      <div style="display:flex;gap:4px">
-        <button onclick="event.stopPropagation(); deleteTicketFile(${x.id})" style="background:rgba(255,59,48,0.15);color:var(--red);border:0;padding:6px 10px;border-radius:8px;cursor:pointer">מחק</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-async function openFullViewer(id) {
-  const db = await openTicketDb();
-  const req = db.transaction('files', 'readonly').objectStore('files').get(id);
-  req.onsuccess = () => {
-    const x = req.result; if (!x) return;
-    const url = URL.createObjectURL(x.blob);
-    document.getElementById('fullViewerTitle').textContent = x.title || x.name;
-    const body = document.getElementById('fullViewerBody');
-    if ((x.type||'').startsWith('image/')) {
-      body.innerHTML = `<img src="${url}" alt="כרטיס">`;
-    } else {
-      body.innerHTML = `<iframe src="${url}" style="width:100%;height:100%;border:0;background:#fff"></iframe>`;
-    }
-    document.getElementById('fullViewerModal').classList.add('open');
-  };
-}
-
-function closeFullViewer(e) {
-  if (e.target.id === 'fullViewerModal') {
-    document.getElementById('fullViewerModal').classList.remove('open');
-  }
-}
-
-async function deleteTicketFile(id) {
-  if (!confirm('למחוק כרטיס זה?')) return;
-  const db = await openTicketDb();
-  const tx = db.transaction('files', 'readwrite');
-  tx.objectStore('files').delete(id);
-  tx.oncomplete = () => renderTicketFiles();
-}
-
-function openTicketsForActivity(di, si, mode) {
+async function openTicketsForActivity(di, si, mode) {
   const day = tripDays[di];
   const stop = day.stops[si];
   const folder = `🎟️ ${day.date} · ${stop.name}`;
