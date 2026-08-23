@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip FullPage Clean" name="application-name"/>
+<meta content="Garda Trip NoBackdrop" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -176,15 +176,15 @@ button, input, select { font: inherit; }
 .nav-btn.waze-btn { border-color: rgba(0,153,255,0.3); color: #0077b6; }
 .nav-btn.maps-btn { border-color: rgba(0,122,255,0.3); color: #0051a8; }
 
-/* Modals */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(6px); padding: 16px; }
+/* Modals - No Backdrop, Solid White Background */
+.modal { position: fixed; inset: 0; background: #ffffff; z-index: 2000; display: none; align-items: flex-start; justify-content: center; padding: 0; overflow-y: auto; }
 .modal.open { display: flex; }
 .modal-content {
-  background: var(--surface); width: 100%; max-width: 480px; max-height: 88vh; overflow-y: auto; border-radius: var(--radius);
-  padding: 22px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); border: 1px solid var(--line-dark);
+  background: #ffffff; width: 100%; max-width: 600px; min-height: 100vh; border-radius: 0;
+  padding: calc(20px + env(safe-area-inset-top)) 20px 40px; box-shadow: none; border: 0;
   position: relative;
 }
-.modal-close { position: absolute; top: 16px; left: 16px; border: 0; background: var(--bg); width: 32px; height: 32px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line-dark); color: var(--muted); }
+.modal-close { position: absolute; top: calc(16px + env(safe-area-inset-top)); left: 16px; border: 1px solid var(--line-dark); background: var(--bg); width: 36px; height: 36px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text); }
 
 .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
 .modal-btn {
@@ -196,7 +196,7 @@ button, input, select { font: inherit; }
 .emergency-btn { background: rgba(255,59,48,0.06); color: var(--red); border-color: rgba(255,59,48,0.25); }
 
 /* --- Wallet Styles --- */
-.wallet-container { display: flex; flex-direction: column; gap: 18px; }
+.wallet-container { display: flex; flex-direction: column; gap: 18px; margin-top: 20px; }
 .wallet-header-box { border-bottom: 1px solid var(--line-dark); padding-bottom: 14px; }
 .wallet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .wallet-main-btn {
@@ -316,10 +316,10 @@ button, input, select { font: inherit; }
   font-weight: 700;
 }
 
-/* Full Screen Full-Page Viewer (No Gray Background) */
+/* Full Screen Full-Page Viewer */
 #fullViewerModal { z-index: 3000; align-items: stretch; justify-content: center; padding: 0; background: #ffffff; }
-.full-viewer-content { background: #ffffff; width: 100%; max-width: 650px; height: 100vh; border-radius: 0; display: flex; flex-direction: column; overflow: hidden; border: 0; box-shadow: none; margin: auto; }
-.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: calc(16px + env(safe-area-inset-top)) 20px 16px; background: rgba(255,255,255,0.95); color: #1d1d1f; font-weight: 700; border-bottom: 1px solid var(--line-dark); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(20px); }
+.full-viewer-content { background: #ffffff; width: 100%; max-width: 600px; height: 100vh; border-radius: 0; display: flex; flex-direction: column; overflow: hidden; border: 0; box-shadow: none; margin: auto; }
+.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: calc(16px + env(safe-area-inset-top)) 20px 16px; background: #ffffff; color: #1d1d1f; font-weight: 700; border-bottom: 1px solid var(--line-dark); position: sticky; top: 0; z-index: 10; }
 .full-viewer-body { flex: 1; display: block; overflow-y: auto; padding: 24px 20px; background: #ffffff; }
 .full-viewer-body img { width: 100%; max-height: none; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow); }
 
@@ -339,7 +339,7 @@ button, input, select { font: inherit; }
 .hotel-waze-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 </style>
 </head>
-<body data-garda-version="V117-FullPageClean">
+<body data-garda-version="V118-NoBackdrop">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -412,8 +412,8 @@ button, input, select { font: inherit; }
 </div>
 
 <!-- Tickets Wallet Modal -->
-<div class="modal" id="ticketsModal" onclick="if(event.target===this)closeModal('ticketsModal')">
-  <div class="modal-content" style="max-width: 620px;">
+<div class="modal" id="ticketsModal">
+  <div class="modal-content">
     <button class="modal-close" onclick="closeModal('ticketsModal')">✕</button>
     
     <div class="wallet-container">
@@ -855,9 +855,7 @@ async function openFullViewer(id) {
 }
 
 function closeFullViewer(e) {
-  if (e.target.id === 'fullViewerModal') {
-    document.getElementById('fullViewerModal').classList.remove('open');
-  }
+  document.getElementById('fullViewerModal').classList.remove('open');
 }
 
 async function deleteTicketFile(id) {
