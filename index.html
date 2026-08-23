@@ -7,7 +7,7 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Garda 2026" name="apple-mobile-web-app-title"/>
-<meta content="Garda Trip Top Nav Final" name="application-name"/>
+<meta content="Garda Trip Full Tickets Wallet" name="application-name"/>
 <title>טיול בת מצווה – אגם גארדה וונציה 2026</title>
 <style>
 :root {
@@ -59,7 +59,7 @@ button, input, select { font: inherit; }
   white-space: nowrap; flex-shrink: 0;
 }
 
-/* Top Navigation Bar - מעוגן למעלה תחת הכותרת, יציב לחלוטין ולעולם לא מסתיר תוכן */
+/* Top Navigation Bar */
 .top-nav-bar {
   background: var(--surface);
   border-bottom: 1px solid var(--line-dark);
@@ -117,12 +117,12 @@ button, input, select { font: inherit; }
 
 .challenge {
   margin-top: 12px; background: rgba(52, 199, 89, 0.08); border: 1px solid rgba(52, 199, 89, 0.2);
-  padding: 11px 12px; border-radius: var(--radius-sm); font-size: 12px; line-height: 1.4; color: #1b5e20;
+  padding: 11px 12px; border-radius: 10px; font-size: 12px; line-height: 1.4; color: #1b5e20;
 }
 
 .stop {
-  margin-top: 14px; background: var(--surface-subtle); border: 1px solid var(--line);
-  border-radius: var(--radius-sm); padding: 14px;
+  margin-top: 14px; background: var(--surface-hover); border: 1px solid var(--line);
+  border-radius: 12px; padding: 14px;
 }
 .stop-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .time { font-size: 11px; font-weight: 700; color: var(--text); background: var(--surface); padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); }
@@ -134,7 +134,7 @@ button, input, select { font: inherit; }
 }
 .stop-link {
   font-size: 12px; font-weight: 700; color: #fff; background: #34c759;
-  padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center;
+  padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center; cursor: pointer;
 }
 .stop-link.maps { background: #0066cc; }
 
@@ -142,7 +142,7 @@ button, input, select { font: inherit; }
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 20px; }
 .modal.open { display: flex; }
 .modal-content {
-  background: var(--surface); width: 100%; max-width: 440px; border-radius: var(--radius);
+  background: var(--surface); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; border-radius: var(--radius);
   padding: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); border: 1px solid var(--line-dark);
   position: relative;
 }
@@ -154,9 +154,32 @@ button, input, select { font: inherit; }
   font-weight: 700; font-size: 13px; text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text);
 }
 .emergency-btn { background: rgba(255,59,48,0.08); color: var(--red); border-color: rgba(255,59,48,0.2); }
+
+/* Tickets Wallet Styles */
+.ticket-folder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.ticket-folder {
+  text-align: right; padding: 12px; border-radius: 12px; background: var(--surface-hover);
+  border: 1px solid var(--line); cursor: pointer; color: var(--text);
+}
+.ticket-folder strong { display: block; font-size: 13px; margin-bottom: 2px; }
+.ticket-folder small { color: var(--muted); font-size: 11px; }
+.ticket-folder.active { background: var(--primary); color: var(--primary-text); border-color: var(--primary); }
+
+.ticket-file { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 10px; padding: 10px; border-radius: 12px; background: var(--surface-hover); border: 1px solid var(--line); margin-top: 8px; cursor: pointer; }
+.ticket-thumb { width: 48px; height: 48px; border-radius: 10px; background: #e5e5ea; overflow: hidden; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.ticket-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.ticket-info b { display: block; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+.ticket-info small { color: var(--muted); font-size: 11px; }
+
+/* Full Screen Viewer */
+#fullViewerModal { z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
+.full-viewer-content { background: #ffffff; width: 100%; max-width: 800px; height: 85vh; border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+.full-viewer-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #f1f1f3; color: #111; font-weight: 700; }
+.full-viewer-body { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; padding: 10px; background: #fafafa; }
+.full-viewer-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
 </style>
 </head>
-<body data-garda-version="V78-TopNavStable">
+<body data-garda-version="V79-FullWallet">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -167,7 +190,7 @@ button, input, select { font: inherit; }
   <a href="#hotel" class="minimal-badge">🏡 Bio Vojon</a>
 </header>
 
-<!-- סרגל ניווט עליון יציב שיושב למעלה ותמיד זמין -->
+<!-- Top Navigation Bar -->
 <nav class="top-nav-bar">
   <button class="active" id="btnRoute" onclick="showDay(0)"><b>📅</b>מסלול</button>
   <button id="btnAround" onclick="openAroundModal()"><b>📍</b>סביבי</button>
@@ -220,11 +243,44 @@ button, input, select { font: inherit; }
   </div>
 </div>
 
+<!-- Tickets Wallet Modal -->
 <div class="modal" id="ticketsModal" onclick="if(event.target===this)closeModal('ticketsModal')">
   <div class="modal-content">
     <button class="modal-close" onclick="closeModal('ticketsModal')">✕</button>
-    <h3 style="margin-top:0; font-size:18px;">🎟️ ארנק כרטיסים</h3>
-    <p style="font-size:13px; color:var(--muted);">כאן יופיעו כרטיסי הטיסה והכניסות שלך.</p>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+      <div><small style="color:var(--muted)">הארנק המשפחתי</small><h2 style="margin:2px 0 0; font-size:18px;">🎟️ כרטיסים וכניסות</h2></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+      <button onclick="showTicketUpload()" style="padding:10px;border-radius:10px;background:var(--primary);color:var(--primary-text);font-weight:700;cursor:pointer;border:0;font-size:12px;">➕ הוסף כרטיס</button>
+      <button onclick="addTicketFolder()" style="padding:10px;border-radius:10px;background:var(--surface-hover);color:var(--text);font-weight:600;cursor:pointer;border:1px solid var(--line-dark);font-size:12px;">📁 תקייה חדשה</button>
+    </div>
+    <div id="ticketUploadBox" style="display:none;background:var(--surface-hover);padding:14px;border-radius:12px;border:1px solid var(--line);margin-bottom:14px">
+      <label style="font-size:11px;font-weight:600">בחר תקייה:</label>
+      <select id="ticketFolderSelect" onchange="selectTicketFolder(this.value)" style="width:100%;padding:8px;border-radius:8px;margin:4px 0 10px;background:#fff;color:#111;border:1px solid var(--line-dark);font-size:12px;"></select>
+      <label style="font-size:11px;font-weight:600">שם הכרטיס:</label>
+      <input id="ticketTitle" placeholder="לדוגמה: כרטיס כניסה" type="text" style="width:100%;padding:8px;border-radius:8px;margin:4px 0 10px;background:#fff;color:#111;border:1px solid var(--line-dark);font-size:12px;"/>
+      <input accept="image/*" capture="environment" id="ticketCameraInput" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
+      <input accept="image/*,application/pdf" id="ticketUploadInput" multiple="" onchange="saveTicketFiles(this.files)" style="display:none" type="file"/>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <button onclick="document.getElementById('ticketCameraInput').click()" style="padding:8px;border-radius:8px;background:var(--surface);color:var(--text);border:1px solid var(--line-dark);cursor:pointer;font-size:12px;">📷 צלם</button>
+        <button onclick="document.getElementById('ticketUploadInput').click()" style="padding:8px;border-radius:8px;background:var(--surface);color:var(--text);border:1px solid var(--line-dark);cursor:pointer;font-size:12px;">📎 העלה קובץ</button>
+      </div>
+    </div>
+    <h3 style="font-size:14px;margin:12px 0 6px;">תקיות שמורות</h3>
+    <div class="ticket-folder-grid" id="ticketFolderGrid"></div>
+    <div id="ticketCurrentTitle" style="font-weight:700;margin-top:16px;font-size:13px;"></div>
+    <div id="ticketFileList"></div>
+  </div>
+</div>
+
+<!-- Full Screen Viewer Modal -->
+<div class="modal" id="fullViewerModal" onclick="closeFullViewer(event)">
+  <div class="full-viewer-content">
+    <div class="full-viewer-head">
+      <span id="fullViewerTitle">תצוגה מלאה</span>
+      <button class="close" onclick="document.getElementById('fullViewerModal').classList.remove('open')" style="border:0;background:#e5e5ea;width:28px;height:28px;border-radius:50%;cursor:pointer;font-weight:700;">✕</button>
+    </div>
+    <div class="full-viewer-body" id="fullViewerBody"></div>
   </div>
 </div>
 
@@ -317,6 +373,7 @@ function openAroundModal() {
 function openTicketsModal() {
   document.getElementById('ticketsModal').classList.add('open');
   setActiveNav(2);
+  openTicketDb().then(() => { renderTicketFolders(); renderTicketFiles(); });
 }
 
 function openEmergencyModal() {
@@ -339,6 +396,134 @@ function setActiveNav(activeIndex) {
 function searchNearby(term) {
   closeModal('aroundModal');
   window.location.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(term + ' near me');
+}
+
+// Tickets IndexedDB Wallet Logic
+const TICKET_DEFAULT_FOLDERS = ['✈️ טיסות ורכב', '🏡 מלון', '🎢 Gardaland', '🚣 ראפטינג', '🎬 Movieland', '🏰 Medieval Times', '🚤 ונציה'];
+let ticketDb = null, ticketActiveFolder = '🎢 Gardaland';
+
+function ticketFolders() {
+  try { const x = JSON.parse(localStorage.getItem('garda-ticket-folders') || 'null'); return Array.isArray(x) && x.length ? x : TICKET_DEFAULT_FOLDERS.slice(); } catch { return TICKET_DEFAULT_FOLDERS.slice(); }
+}
+function saveTicketFolders(x) { localStorage.setItem('garda-ticket-folders', JSON.stringify(x)); }
+
+function openTicketDb() {
+  return new Promise((resolve, reject) => {
+    if (ticketDb) return resolve(ticketDb);
+    const req = indexedDB.open('gardaTicketsDB', 1);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains('files')) {
+        const st = db.createObjectStore('files', { keyPath: 'id', autoIncrement: true });
+        st.createIndex('folder', 'folder', { unique: false });
+      }
+    };
+    req.onsuccess = () => { ticketDb = req.result; resolve(ticketDb); };
+    req.onerror = () => reject(req.error);
+  });
+}
+
+function showTicketUpload() {
+  const box = document.getElementById('ticketUploadBox');
+  box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  document.getElementById('ticketFolderSelect').innerHTML = ticketFolders().map(f => `<option ${f===ticketActiveFolder?'selected':''}>${f}</option>`).join('');
+}
+
+function addTicketFolder() {
+  const name = prompt('שם התקייה החדשה:');
+  if (!name || !name.trim()) return;
+  const f = ticketFolders();
+  const clean = '📁 ' + name.trim();
+  if (!f.includes(clean)) f.push(clean);
+  saveTicketFolders(f);
+  ticketActiveFolder = clean;
+  renderTicketFolders();
+  renderTicketFiles();
+}
+
+function selectTicketFolder(f) { ticketActiveFolder = f; renderTicketFolders(); renderTicketFiles(); }
+
+function renderTicketFolders() {
+  document.getElementById('ticketFolderGrid').innerHTML = ticketFolders().map(f => `
+    <div class="ticket-folder ${f===ticketActiveFolder?'active':''}" onclick="selectTicketFolder('${f}')">
+      <strong>${f}</strong><small>הצג קבצים</small>
+    </div>
+  `).join('');
+  document.getElementById('ticketFolderSelect').innerHTML = ticketFolders().map(f => `<option ${f===ticketActiveFolder?'selected':''}>${f}</option>`).join('');
+}
+
+async function saveTicketFiles(fileList) {
+  const files = [...fileList]; if (!files.length) return;
+  const folder = document.getElementById('ticketFolderSelect').value || ticketActiveFolder;
+  const title = document.getElementById('ticketTitle').value.trim();
+  const db = await openTicketDb();
+  await Promise.all(files.map((file) => new Promise((resolve, reject) => {
+    const tx = db.transaction('files', 'readwrite');
+    tx.objectStore('files').add({ folder, title: title || file.name, name: file.name, type: file.type, size: file.size, created: Date.now(), blob: file });
+    tx.oncomplete = resolve; tx.onerror = () => reject(tx.error);
+  })));
+  document.getElementById('ticketTitle').value = '';
+  document.getElementById('ticketUploadBox').style.display = 'none';
+  renderTicketFiles();
+}
+
+async function getTicketFiles(folder) {
+  const db = await openTicketDb();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('files', 'readonly');
+    const req = tx.objectStore('files').index('folder').getAll(folder);
+    req.onsuccess = () => resolve(req.result.sort((a,b) => b.created - a.created));
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function renderTicketFiles() {
+  const title = document.getElementById('ticketCurrentTitle'), list = document.getElementById('ticketFileList');
+  if (!title || !list) return;
+  title.textContent = 'תיקייה: ' + ticketActiveFolder;
+  const files = await getTicketFiles(ticketActiveFolder);
+  if (!files.length) { list.innerHTML = '<div style="color:var(--muted);text-align:center;padding:16px;font-size:12px">אין כרטיסים בתקייה זו.</div>'; return; }
+  
+  list.innerHTML = files.map(x => `
+    <div class="ticket-file" ondblclick="openFullViewer(${x.id})" onclick="openFullViewer(${x.id})" title="לחץ לפתיחה מלאה">
+      <div class="ticket-thumb">${(x.type||'').startsWith('image/') ? `<img src="${URL.createObjectURL(x.blob)}" alt="">` : '📄'}</div>
+      <div class="ticket-info"><b>${x.title || x.name}</b><small>${Math.round(x.size/1024)} KB · לחץ לפתיחה</small></div>
+      <div>
+        <button onclick="event.stopPropagation(); deleteTicketFile(${x.id})" style="background:rgba(255,59,48,0.1);color:var(--red);border:0;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px;">מחק</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function openFullViewer(id) {
+  const db = await openTicketDb();
+  const req = db.transaction('files', 'readonly').objectStore('files').get(id);
+  req.onsuccess = () => {
+    const x = req.result; if (!x) return;
+    const url = URL.createObjectURL(x.blob);
+    document.getElementById('fullViewerTitle').textContent = x.title || x.name;
+    const body = document.getElementById('fullViewerBody');
+    if ((x.type||'').startsWith('image/')) {
+      body.innerHTML = `<img src="${url}" alt="כרטיס">`;
+    } else {
+      body.innerHTML = `<iframe src="${url}" style="width:100%;height:100%;border:0;background:#fff"></iframe>`;
+    }
+    document.getElementById('fullViewerModal').classList.add('open');
+  };
+}
+
+function closeFullViewer(e) {
+  if (e.target.id === 'fullViewerModal') {
+    document.getElementById('fullViewerModal').classList.remove('open');
+  }
+}
+
+async function deleteTicketFile(id) {
+  if (!confirm('למחוק כרטיס זה?')) return;
+  const db = await openTicketDb();
+  const tx = db.transaction('files', 'readwrite');
+  tx.objectStore('files').delete(id);
+  tx.oncomplete = () => renderTicketFiles();
 }
 
 document.addEventListener('DOMContentLoaded', renderDays);
