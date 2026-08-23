@@ -326,12 +326,20 @@ button, input, select { font: inherit; }
 .booking-app-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   background: #003580; color: #ffffff; font-weight: 700; font-size: 13px; padding: 12px 18px; border-radius: 12px;
-  text-decoration: none; margin-top: 15px; width: 100%; box-shadow: var(--shadow); transition: opacity 0.2s ease;
+  text-decoration: none; margin-top: 12px; width: 100%; box-shadow: var(--shadow); transition: opacity 0.2s ease;
 }
 .booking-app-btn:hover { opacity: 0.9; }
+
+.hotel-waze-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: #ffffff; color: #0077b6; font-weight: 700; font-size: 13px; padding: 12px 18px; border-radius: 12px;
+  text-decoration: none; margin-top: 10px; width: 100%; border: 1.5px solid #33ccff; box-shadow: var(--shadow); transition: background 0.2s ease;
+}
+.hotel-waze-btn:hover { background: var(--surface-hover); }
+.hotel-waze-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
 </style>
 </head>
-<body data-garda-version="V115-HotelComplete">
+<body data-garda-version="V116-HotelWazeAdded">
 
 <!-- Minimalist Header -->
 <header class="minimal-header">
@@ -828,6 +836,11 @@ async function openFullViewer(id) {
         <p><b>חדר:</b> Large Double or Twin Room (1 חדר)</p>
         <p><b>שעות צ'ק-אין:</b> 15:00 - 18:00 | <b>צ'ק-אאוט:</b> 7:00 - 11:00</p>
         <p><b>טלפון במלון:</b> <a href="tel:+393792027060" style="color:var(--accent)" dir="ltr">+39 379 202 7060</a></p>
+        
+        <a class="hotel-waze-btn" href="https://www.waze.com/ul?q=${encodeURIComponent('Bio Agriturismo Vojon, Ponti sul Mincio, Italy')}&navigate=yes">
+          ${WAZE_SVG} נווט למלון ב-Waze
+        </a>
+
         <a href="booking://booking.com" onclick="setTimeout(function(){window.location.href='https://www.booking.com'}, 500);" class="booking-app-btn">📱 פתח באפליקציית Booking.com</a>
       </div>`;
     } else if ((x.type||'').startsWith('image/')) {
